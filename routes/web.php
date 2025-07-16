@@ -13,4 +13,8 @@ Route::get('/culture', function () {
     return view('culture');
 });
 
+Route::get('/batak-songs', function () {
+    return view('batak-songs');
+});
+
 Route::get('/virtual', [VirtualTourController::class, 'index']);

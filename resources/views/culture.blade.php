@@ -12,7 +12,7 @@
     <body class="font-jua bg-black text-white">
         <section class="relative w-full h-[100dvh] max-h-[900px] overflow-hidden flex items-center justify-center">
             <!-- Background -->
-            <img src="{{ asset('images/culture/hero-section-bg.svg') }}" alt="Background"
+            <img src="{{ asset('img/culture/hero-section-bg.svg') }}" alt="Background"
                 class="absolute inset-0 w-full h-full object-cover -z-10 pointer-events-none select-none" />
 
             <div class="w-full max-w-[1440px] relative h-full">
@@ -48,7 +48,7 @@
                 </button>
             </div>
             <div class="w-full lg:w-1/2 flex justify-center lg:justify-end">
-                <img src="{{ asset('images/culture/tour-guide-section.svg') }}" alt="Tour Guide"
+                <img src="{{ asset('img/culture/tour-guide-section.svg') }}" alt="Tour Guide"
                     class="w-full max-w-md" />
             </div>
         </section>
@@ -56,9 +56,9 @@
         <section class="w-full max-w-[1440px] mx-auto px-6 sm:px-12 lg:px-28">
             <h3 class="text-[#E5D046] text-center my-3 text-sm sm:text-base">KHARISMA INDONESIA</h3>
             <h2 class="text-center text-2xl sm:text-3xl md:text-4xl">Temukan Keindahan Di Negara Indonesia</h2>
-            <div class="flex flex-col lg:flex-row w-full my-10 gap-10">
-                <div class="w-full lg:w-1/2 flex justify-center">
-                    <img src="{{ asset('images/culture/kharisma-indonesia-section.svg') }}" alt="Kharisma Indonesia"
+            <div class="flex flex-col lg:justify-between lg:flex-row w-full my-10 gap-10">
+                <div class="w-full lg:w-1/2 flex justify-center items-center">
+                    <img src="{{ asset('img/culture/kharisma-indonesia-section.svg') }}" alt="Kharisma Indonesia"
                         class="w-full max-w-md" />
                 </div>
                 <div class="w-full lg:w-1/2 flex flex-col justify-center gap-5">
@@ -79,7 +79,7 @@
         <section class="my-20 lg:my-28 px-6 sm:px-12 lg:px-28 w-full max-w-[1440px] mx-auto">
             <div class="w-full flex flex-col lg:flex-row bg-white text-black">
                 <div class="w-full lg:w-1/2">
-                    <img src="{{ asset('images/culture/footer-bg.svg') }}" alt="The Batak Culture" class="w-full" />
+                    <img src="{{ asset('img/culture/footer-bg.svg') }}" alt="The Batak Culture" class="w-full" />
                 </div>
                 <div class="w-full lg:w-1/2 flex items-center p-6 sm:p-10 lg:pl-16">
                     <p class="font-open-sans text-base sm:text-lg md:text-2xl lg:w-3/4">
