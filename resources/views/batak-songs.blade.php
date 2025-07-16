@@ -89,7 +89,7 @@
             <h2 class="font-bold text-3xl mt-4 mb-6">Batak Songs</h2>
             <hr class="mb-6" />
             <div class="relative">
-                <div id="scrollContainer"
+                <div id="songs-container"
                     class="scroll-container flex gap-6 overflow-x-auto pb-4 px-2 border-l border-r border-slate-900 shadow-sm rounded-md mx-0 sm:mx-6 md:mx-12">
                     <div class="flex-none space-y-5 w-[90vw] sm:w-[60vw] md:w-[33.3333%]">
                         <iframe src="https://www.boomplay.com/embed/210246210/MUSIC?colType=5&colID=112784463"
@@ -137,7 +137,7 @@
 
                 <!-- Arrows -->
                 <button id="scrollLeft"
-                    class="nav-button absolute right-16 sm:right-14 md:right-16 -bottom-10 w-8 h-8 flex items-center justify-center bg-[#1DBF9F] hover:brightness-[80%] transition-all duration-200 rounded-full shadow z-10 bg-gray-400 cursor-not-allowed">
+                    class="nav-button absolute right-16 sm:right-14 md:right-16 -bottom-10 w-8 h-8 flex items-center justify-center bg-[#1DBF9F] hover:brightness-[80%] transition-all duration-200 rounded-full shadow z-10 bg-gray-400 cursor-not-allowed" onclick="scrollSection('songs-container', -300, 'scrollLeft', 'scrollRight')">
                     <svg width="9" height="15" viewBox="0 0 9 15" fill="none"
                         xmlns="http://www.w3.org/2000/svg">
                         <path
@@ -147,7 +147,7 @@
                 </button>
 
                 <button id="scrollRight"
-                    class="nav-button absolute right-4 -bottom-10 w-8 h-8 flex items-center justify-center bg-[#1DBF9F] hover:brightness-[80%] transition-all duration-200 rounded-full shadow z-10">
+                    class="nav-button absolute right-4 -bottom-10 w-8 h-8 flex items-center justify-center bg-[#1DBF9F] hover:brightness-[80%] transition-all duration-200 rounded-full shadow z-10" onclick="scrollSection('songs-container', 300, 'scrollLeft', 'scrollRight')">
                     <!-- SVG right -->
                     <svg width="9" height="15" viewBox="0 0 9 15" fill="none"
                         xmlns="http://www.w3.org/2000/svg">
@@ -224,7 +224,7 @@
 
                 <!-- Artist arrows -->
                 <button id="left-arrow"
-                    class="absolute right-16 -bottom-10 w-8 h-8 flex items-center justify-center bg-[#1DBF9F] hover:brightness-[80%] transition-all duration-200 rounded-full shadow z-10 bg-gray-400 cursor-not-allowed">
+                    class="absolute right-16 -bottom-10 w-8 h-8 flex items-center justify-center bg-[#1DBF9F] hover:brightness-[80%] transition-all duration-200 rounded-full shadow z-10 bg-gray-400 cursor-not-allowed" onclick="scrollSection('artist-scroll', -300, 'left-arrow', 'right-arrow')">
                     <svg width="9" height="15" viewBox="0 0 9 15" fill="none"
                         xmlns="http://www.w3.org/2000/svg">
                         <path
@@ -234,7 +234,8 @@
                 </button>
 
                 <button id="right-arrow"
-                    class="absolute right-4 -bottom-10 w-8 h-8 flex items-center justify-center bg-[#1DBF9F] hover:brightness-[80%] transition-all duration-200 rounded-full shadow z-10">
+                    class="absolute right-4 -bottom-10 w-8 h-8 flex items-center justify-center bg-[#1DBF9F] hover:brightness-[80%] transition-all duration-200 rounded-full shadow z-10"
+                    onclick="scrollSection('artist-scroll', 300, 'left-arrow', 'right-arrow')">
                     <svg width="9" height="15" viewBox="0 0 9 15" fill="none"
                         xmlns="http://www.w3.org/2000/svg">
                         <path
@@ -256,7 +257,8 @@
                     <img src="{{ asset('img/songs/more-chart-1.svg') }}" alt="More Chart"
                         class="absolute inset-0 w-full h-full object-cover" />
                     <div class="z-50 text-sm sm:text-base">
-                        <h1 class="font-bold leading-[1.5rem] sm:leading-[3rem] md:leading-[4rem] text-xl sm:text-3xl md:text-5xl mb-4">Top
+                        <h1 class="font-bold leading-[2.5rem] sm:leading-[3rem] text-xl sm:text-3xl md:text-5xl mb-4">
+                            Top
                             200<br />Indonesia</h1>
                         <div class="flex flex-col sm:flex-row gap-4 sm:gap-10">
                             <div class="sm:w-4/5">
@@ -280,7 +282,9 @@
                     <img src="{{ asset('img/songs/more-chart-2.svg') }}" alt="More Chart"
                         class="absolute inset-0 w-full h-full object-cover" />
                     <div class="z-50 text-sm sm:text-base">
-                        <h1 class="font-bold leading-[1.5rem] sm:leading-[3rem] md:leading-[4rem] text-xl sm:text-3xl md:text-5xl mb-4">Top
+                        <h1
+                            class="font-bold leading-[3rem] sm:leading-[3rem] md:leading-[4rem] text-xl sm:text-3xl md:text-5xl mb-4">
+                            Top
                             50<br />New York City</h1>
                         <div class="flex flex-col sm:flex-row gap-4 sm:gap-10">
                             <div class="sm:w-4/5">
@@ -337,8 +341,8 @@
             }
 
             // --- Batak Songs Specific Logic ---
-            const songContainer = document.getElementById('scrollContainer');
-            const songIndicators = document.querySelectorAll('#scrollContainer + .flex.justify-center.gap-2 .indicator-dot');
+            const songContainer = document.getElementById('songs-container');
+            const songIndicators = document.querySelectorAll('#songs-container + .flex.justify-center.gap-2 .indicator-dot');
 
             let currentSongIndex = 0;
             // Total number of "pages" or scrollable sections for Batak Songs
@@ -368,7 +372,7 @@
                 });
                 currentSongIndex = index;
                 updateSongIndicators();
-                updateArrows('scrollContainer', 'scrollLeft', 'scrollRight'); // Use generic updateArrows
+                updateArrows('songs-container', 'scrollLeft', 'scrollRight'); // Use generic updateArrows
             }
 
             function updateSongIndicators() {
@@ -385,7 +389,7 @@
                 if (newIndex !== currentSongIndex) {
                     currentSongIndex = newIndex;
                     updateSongIndicators();
-                    updateArrows('scrollContainer', 'scrollLeft', 'scrollRight');
+                    updateArrows('songs-container', 'scrollLeft', 'scrollRight');
                 }
             });
 
@@ -400,7 +404,7 @@
             // Initial calls on load and resize
             window.addEventListener('load', () => {
                 // Initialize arrow states for both sections
-                updateArrows('scrollContainer', 'scrollLeft', 'scrollRight');
+                updateArrows('songs-container', 'scrollLeft', 'scrollRight');
                 updateArrows('artist-scroll', 'left-arrow', 'right-arrow');
                 // Initialize song indicators
                 updateSongIndicators();
@@ -410,7 +414,7 @@
             window.addEventListener('resize', () => {
                 // For Batak Songs, ensure we scroll to the current index's position relative to new width
                 scrollSongToIndex(currentSongIndex);
-                updateArrows('scrollContainer', 'scrollLeft', 'scrollRight');
+                updateArrows('songs-container', 'scrollLeft', 'scrollRight');
                 updateArrows('artist-scroll', 'left-arrow', 'right-arrow');
             });
         </script>
