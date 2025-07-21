@@ -51,7 +51,7 @@
             <div class="w-full max-w-[1440px] relative h-full">
                 <div
                     class="absolute left-4 bottom-6 sm:left-10 sm:bottom-10 md:left-20 md:bottom-12 lg:left-28 lg:bottom-16 xl:bottom-20">
-                    <h1 class="font-bold text-xl sm:text-3xl md:text-5xl md:text-6xl lg:text-7xl w-3/4">
+                    <h1 class="font-bold text-xl sm:text-3xl md:text-6xl lg:text-7xl w-3/4">
                         Traditional Music Collection:
                     </h1>
                     <p class="font-extralight w-full sm:w-5/6 md:w-3/4 text-sm sm:text-base">
@@ -137,7 +137,7 @@
 
                 <!-- Arrows -->
                 <button id="scrollLeft"
-                    class="nav-button absolute right-16 sm:right-14 md:right-16 -bottom-10 w-8 h-8 flex items-center justify-center bg-[#1DBF9F] hover:brightness-[80%] transition-all duration-200 rounded-full shadow z-10 bg-gray-400 cursor-not-allowed" onclick="scrollSection('songs-container', -300, 'scrollLeft', 'scrollRight')">
+                    class="nav-button absolute right-16 sm:right-14 md:right-16 -bottom-10 w-8 h-8 flex items-center justify-center hover:brightness-[80%] transition-all duration-200 rounded-full shadow z-10 bg-gray-400 cursor-not-allowed" onclick="scrollSection('songs-container', -300, 'scrollLeft', 'scrollRight')">
                     <svg width="9" height="15" viewBox="0 0 9 15" fill="none"
                         xmlns="http://www.w3.org/2000/svg">
                         <path
@@ -224,7 +224,7 @@
 
                 <!-- Artist arrows -->
                 <button id="left-arrow"
-                    class="absolute right-16 -bottom-10 w-8 h-8 flex items-center justify-center bg-[#1DBF9F] hover:brightness-[80%] transition-all duration-200 rounded-full shadow z-10 bg-gray-400 cursor-not-allowed" onclick="scrollSection('artist-scroll', -300, 'left-arrow', 'right-arrow')">
+                    class="absolute right-16 -bottom-10 w-8 h-8 flex items-center justify-center hover:brightness-[80%] transition-all duration-200 rounded-full shadow z-10 bg-gray-400 cursor-not-allowed" onclick="scrollSection('artist-scroll', -300, 'left-arrow', 'right-arrow')">
                     <svg width="9" height="15" viewBox="0 0 9 15" fill="none"
                         xmlns="http://www.w3.org/2000/svg">
                         <path
@@ -328,15 +328,19 @@
                 // Disable/enable left arrow
                 if (scrollLeft <= 0) {
                     leftArrow.classList.add('bg-gray-400', 'cursor-not-allowed');
+                    leftArrow.classList.remove('bg-[#1DBF9F]');
                 } else {
                     leftArrow.classList.remove('bg-gray-400', 'cursor-not-allowed');
+                    leftArrow.classList.add('bg-[#1DBF9F]');
                 }
 
                 // Disable/enable right arrow. A small tolerance is added due to potential sub-pixel rendering differences.
                 if (scrollLeft >= maxScrollLeft - 5) {
                     rightArrow.classList.add('bg-gray-400', 'cursor-not-allowed');
+                    rightArrow.classList.remove('bg-[#1DBF9F]');
                 } else {
                     rightArrow.classList.remove('bg-gray-400', 'cursor-not-allowed');
+                    rightArrow.classList.add('bg-[#1DBF9F]');
                 }
             }
 

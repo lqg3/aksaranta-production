@@ -17,4 +17,8 @@ Route::get('/batak-songs', function () {
     return view('batak-songs');
 });
 
+Route::get('/aksara-translator', function () {
+    return view('aksara-translator');
+});
+
 Route::get('/virtual', [VirtualTourController::class, 'index']);
