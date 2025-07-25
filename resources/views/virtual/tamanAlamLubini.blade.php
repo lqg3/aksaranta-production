@@ -1,0 +1,460 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Aksaranta</title>
+    <style>
+      * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #1a1a1a; /* Latar belakang gelap */
+  color: white; /* Teks berwarna putih */
+}
+
+@font-face {
+  src: url(font/Jua-Regular.ttf);
+  font-family: "jua";
+}
+
+@font-face {
+  src: url(font/OpenSansRegular.ttf);
+  font-family: "opensans";
+}
+
+.pembatas {
+  height: 150px;
+}
+
+.wisata {
+  width: 90%;
+  margin: 30px auto;
+}
+
+.wisata iframe {
+  width: 100%;
+  height: 600px;
+}
+
+.container-wisata {
+  width: 80%;
+  margin: 30px auto;
+}
+
+.flex-wisata {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 0 30px 0;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.flex-wisata img {
+  width: 50%;
+}
+
+.flex-kalimat-ampat {
+  width: 40%;
+}
+
+.flex-kalimat-ampat h3 {
+  font-size: 25px;
+  margin: 0 0 30px 0;
+  font-family: "jua";
+}
+
+.flex-kalimat-ampat p {
+  font-family: "opensans";
+}
+
+.daftar-pustaka {
+  width: 70%;
+  margin: 0 30px 0 30px;
+  border-left: 5px solid rgb(189, 219, 20);
+}
+
+.daftar-pustaka p {
+  margin: 0 0 0 20px;
+  font-family: "opensans";
+}
+
+@media (max-width: 800px) {
+  .flex-wisata img {
+    width: 100%;
+  }
+  .flex-kalimat-ampat {
+    width: 100%;
+  }
+  .flex-kalimat-ampat h3 {
+    text-align: center;
+    margin: 30px 0 30px 0;
+  }
+}
+
+/* FOOTER */
+footer {
+  width: 100%;
+  background-color: #3a394e;
+  display: flex;
+  justify-content: space-around;
+  padding: 15px;
+  box-sizing: border-box;
+}
+
+.footer-kiri {
+  margin: 30px 0 30px 0;
+  width: 40%;
+}
+
+.footer-kiri p {
+  font-size: 16px;
+  color: #fff;
+  font-family: "opensans";
+}
+
+.footer-kiri .foo {
+  font-size: 21px;
+  color: #fff;
+  font-weight: bold;
+  margin: 0 0 15px 0;
+  font-family: "opensans";
+}
+
+.footer-kanan {
+  margin: 30px 0 30px 0;
+  width: 40%;
+  display: flex;
+  justify-content: space-around;
+}
+
+.satu-footer h5 {
+  font-size: 21px;
+  color: #fff;
+  font-weight: bold;
+  font-family: "opensans";
+}
+
+.satu-footer p {
+  font-size: 16px;
+  color: #fff;
+  margin: 15px 0 0 0;
+  font-family: "opensans";
+}
+
+@media (max-width: 800px) {
+  footer {
+    flex-wrap: wrap;
+  }
+  .footer-kiri {
+    width: 100%;
+    text-align: center;
+  }
+  .footer-kanan {
+    width: 100%;
+  }
+}
+
+/* NAIK */
+.up {
+  width: 100%;
+  bottom: 0px;
+  padding: 20px;
+  box-sizing: border-box;
+  position: absolute;
+  margin: auto;
+  position: fixed;
+  margin: 0 0 15px 0;
+}
+
+.klik-up {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: #bab5ff;
+  display: flex;
+  float: right;
+  transition: 0.7s;
+  margin: 0 35px 0 0;
+}
+
+.klik-up img {
+  margin: auto;
+}
+
+.klik-up:hover {
+  background-color: antiquewhite;
+}
+
+@media (max-width: 800px) {
+  .up {
+    padding: 10px;
+    margin: 0 0 35px 0;
+  }
+  .klik-up {
+    margin: 0 1px 0 0;
+  }
+}
+
+.box-peta1 {
+  background-image: url('../img/lubini3.jpg');
+  width: 80%;
+  height: 450px;
+  background-size: cover; /* Mengatur agar gambar tidak pecah dan tetap menutupi elemen */
+  background-position: center; /* Menjaga gambar tetap berada di tengah */
+  background-repeat: no-repeat; /* Menghindari gambar diulang */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  color: white;
+  margin: 20px auto
+}
+
+
+
+.box-peta1 .content {
+  padding: 20px;
+  background-color: rgba(0, 0, 0, 0.5);
+  /* border-radius: 15px; */
+}
+
+.box-peta1 .content h1 {
+  font-size: 50px;
+  margin: 0 0 10px 30px;
+}
+
+.box-peta1 .content p {
+  margin: 0 0 0 30px;
+}
+/* --- Variabel CSS Global (Pastikan ini ada di bagian atas blok <style> Anda) --- */
+:root {
+    --bg-dark: #1a1a1a;
+    --card-bg-dark: #2c2c2c;
+    --highlight-bg: #3f3c3c;
+    --text-light: #f0f0f0;
+    --text-muted: #d0d0d0;
+    --accent-yellow: #ffee00;
+    --accent-yellow-hover: #ffda00;
+    --shadow-dark: rgba(0, 0, 0, 0.5);
+    --font-jua: 'Jua', cursive;
+    --font-opensans: 'Open Sans', sans-serif;
+}
+
+/* --- Gaya CSS untuk Header --- */
+.hero-header {
+    /* Ganti URL gambar banner Anda di sini. Sesuaikan path jika perlu. */
+    background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('../img/lubini3.jpg') no-repeat center center/cover;
+    color: var(--text-light);
+    text-align: center;
+    padding: 100px 20px;
+    margin-bottom: 60px; /* Jarak antara header dan konten selanjutnya */
+    position: relative;
+    overflow: hidden;
+    animation: fadeIn 1.5s ease-out; /* Animasi fade-in saat halaman dimuat */
+}
+
+.hero-header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.3); /* Overlay gelap pada gambar */
+    z-index: 1;
+}
+
+.hero-header-content {
+    position: relative;
+    z-index: 2;
+    transform: translateY(0);
+    transition: transform 0.5s ease-out; /* Untuk efek paralaks ringan */
+}
+
+.hero-header-content h1 {
+    font-family: var(--font-jua);
+    font-size: 4.5em;
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
+    animation: fadeInDown 1.2s ease-out; /* Animasi judul */
+    color: var(--text-light);
+}
+
+.hero-header-content p {
+    font-size: 1.3em;
+    max-width: 800px;
+    margin: 0 auto 30px;
+    color: var(--text-light);
+    animation: fadeInUp 1.2s ease-out 0.2s; /* Animasi paragraf */
+}
+
+.hero-header .button {
+    display: inline-block;
+    background-color: var(--accent-yellow);
+    color: #333;
+    padding: 12px 25px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    animation: fadeIn 1.2s ease-out 0.4s; /* Animasi tombol */
+}
+
+.hero-header .button:hover {
+    background-color: var(--accent-yellow-hover);
+    transform: translateY(-3px); /* Efek hover pada tombol */
+}
+
+/* --- Media Queries untuk Header (Responsive) --- */
+@media (max-width: 800px) {
+    .hero-header {
+        padding: 60px 20px;
+        margin-bottom: 40px;
+    }
+    .hero-header-content h1 {
+        font-size: 3em;
+    }
+    .hero-header-content p {
+        font-size: 1em;
+    }
+}
+
+/* --- Keyframe Animations (Pastikan ini juga ada di blok <style> Anda) --- */
+@keyframes fadeInDown {
+    from { opacity: 0; transform: translateY(-50px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+    </style>
+  </head>
+  <body>
+    <header class="hero-header" id="top">
+    <div class="hero-header-content">
+        <h1>Taman Alam Lubini</h1>
+        <p>
+             Taman Alam Lubini adalah sebuah destinasi wisata alam yang mempesona, terletak di tengah keindahan alam Indonesia yang masih terjaga
+        </p>
+        <a href="#detail-section" class="button">Lihat Lebih Lanjut</a>
+    </div>
+    </header>
+    <div class="wisata" id="detail-section">
+        <iframe src="https://www.google.com/maps/embed?pb=!4v1752649671207!6m8!1m7!1sCAoSFkNJSE0wb2dLRUlDQWdJQ0V2ODNfYWc.!2m2!1d3.196336320278986!2d98.54089946331375!3f82.58955562607983!4f8.355888686727724!5f0.7820865974627469" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+    {{-- <div class="box-peta1">
+        <div class="content">
+            <h1>Taman alam lubini</h1>
+            <p>360-Degree View Control: Users can rotate the view to explore all angles of <br> a space or scene, providing a more realistic experience.</p>
+        </div>
+    </div> --}}
+
+    {{-- <div class="pembatas"></div> --}}
+
+    <div class="up">
+      <a href=""
+        ><div class="klik-up">
+          <img src="img/top.png" width="30px" alt="" />
+        </div>
+      </a>
+    </div>
+
+
+
+    <div class="container-wisata">
+      <div class="flex-wisata">
+        <img src="../img/tamanalamlubini.jpg" alt="" />
+        <div class="flex-kalimat-ampat">
+          <h3>Taman Alam Lubini</h3>
+          <p>
+            Taman Alam Lubini adalah sebuah destinasi wisata alam yang mempesona, terletak di tengah keindahan alam Indonesia yang masih terjaga. Dikenal dengan suasana yang sejuk dan pemandangan alam yang memukau, taman ini menawarkan pengalaman yang tak terlupakan bagi para pengunjung. Dengan hutan tropis yang lebat, udara yang segar, dan flora serta fauna yang beragam, taman ini menjadi pilihan ideal bagi mereka yang mencari ketenangan dan kedamaian jauh dari hiruk-pikuk kota.
+
+
+            <br /><br />
+            Taman ini memiliki banyak jalur trekking yang mengajak pengunjung untuk menjelajahi keindahan alamnya secara lebih dekat. Salah satu jalur favorit adalah trekking menuju puncak bukit yang menawarkan panorama luar biasa, dengan hamparan pepohonan hijau yang tampak menghijau sepanjang mata memandang. Selama perjalanan, pengunjung dapat menikmati udara segar dan suara alam yang menenangkan, seperti kicauan burung dan gemericik air sungai kecil.Selain trekking, Taman Alam Lubini juga menawarkan berbagai kegiatan menarik lainnya. Pengunjung dapat menikmati aktivitas berkemah di area yang telah disediakan, menjadikannya tempat yang sempurna untuk melepas penat sambil menikmati keindahan alam di malam hari.
+
+          </p>
+        </div>
+      </div>
+
+      <p style="font-family: 'opensans'">Keberagaman flora dan fauna di Taman Alam Lubini menjadi daya tarik tersendiri bagi para pengunjung, terutama para pecinta alam dan peneliti. Taman ini menjadi rumah bagi berbagai jenis tumbuhan langka, serta berbagai satwa liar yang dapat ditemukan di sepanjang jalur trekking. Dari berbagai jenis burung yang terbang bebas hingga monyet yang bermain di pohon-pohon tinggi, Taman Alam Lubini memberikan pengalaman yang edukatif dan menyenangkan bagi setiap orang yang berkunjung.
+        <br />
+
+        Bagi mereka yang mencari tempat untuk bersantai sambil menikmati alam, Taman Alam Lubini adalah pilihan yang sempurna. Dengan fasilitas yang memadai dan keindahan alam yang tak tertandingi, taman ini berhasil menarik perhatian wisatawan lokal maupun mancanegara. Menyajikan keindahan alam yang masih alami dan suasana yang tenang, Taman Alam Lubini adalah destinasi yang wajib dikunjungi bagi siapa saja yang ingin merasakan kedamaian sejati di tengah alam.
+        <br /><br />
+
+
+        <br /><br />
+      </p>
+
+      <div class="daftar-pustaka">
+        <p style="font-family: 'opensans'">
+          <span style="color: rgb(189, 219, 20); font-weight: bold">REFERENSI </span> <br />
+          <br />
+         Kumparan. (2023, 15 Juni). Taman Alam Lumbini: Lokasi, Daya Tarik, Jam Buka, Harga Tiket, dan Cara ke Sana.
+          <a style="color: #456cc2"
+            href="https://kumparan.com/jendela-dunia/taman-alam-lumbini-lokasi-daya-tarik-jam-buka-harga-tiket-dan-cara-ke-sana-21z29bzcUjZ"
+            >
+            https://kumparan.com/jendela-dunia/taman-alam-lumbini-lokasi-daya-tarik-jam-buka-harga-tiket-dan-cara-ke-sana-21z29bzcUjZ</a
+          >
+        </p>
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+      <div class="footer-kiri">
+        <p class="foo">Geulify</p>
+        <p>Nikmati keseruan setiap detik nya.</p>
+      </div>
+
+      <div class="footer-kanan">
+        <div class="satu-footer">
+          <h5>Gunung</h5>
+          <p>Keindahan</p>
+          <p>Natural</p>
+        </div>
+
+        <div class="satu-footer">
+          <h5>Pantai</h5>
+          <p>Suasana</p>
+          <p>Sejuk</p>
+        </div>
+
+        <div class="satu-footer">
+          <h5>Kuliner</h5>
+          <p>Kenikmatan</p>
+          <p>Khas</p>
+        </div>
+      </div>
+    </footer>
+    <!-- FOOTER -->
+    <script>
+        // --- Bagian JavaScript untuk Header ---
+// Tempatkan kode ini di dalam tag <script> di bagian bawah file HTML Anda,
+// atau di dalam document.addEventListener('DOMContentLoaded', function() { ... });
+
+const heroHeader = document.querySelector('.hero-header');
+if (heroHeader) {
+    window.addEventListener('scroll', function() {
+        const scrollPosition = window.pageYOffset;
+        // Efek paralaks ringan pada gambar latar belakang header
+        heroHeader.style.backgroundPositionY = -scrollPosition * 0.3 + 'px';
+    });
+}
+    </script>
+  </body>
+</html>
