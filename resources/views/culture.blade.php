@@ -37,13 +37,13 @@
                     <span class="text-[#1DBF9F]">Indon</span><span class="text-[#E5D046]">esian</span> Destinasi Wisata
                     Indonesia
                 </h3>
-                <p class="font-open-sans text-sm sm:text-base md:text-lg lg:w-3/4">
+                <p class="font-opensans text-sm sm:text-base md:text-lg lg:w-3/4">
                     Jelajahi kekayaan warisan budaya Batak, mulai dari musik, tarian, hingga
                     bahasa memikat. Nikmati pengalaman interaktif yang menghadirkan tradisi dan cerita Batak secara
                     langsung ke perangkatmu.
                 </p>
                 <button
-                    class="w-full rounded-full bg-[#1DBF9F] shadow shadow-[#E5D046] h-11 font-open-sans font-semibold text-sm sm:text-base">
+                    class="w-full rounded-full bg-[#1DBF9F] shadow shadow-[#E5D046] h-11 font-opensans font-semibold text-sm sm:text-base">
                     Info Lebih Lanjut
                 </button>
             </div>
@@ -66,7 +66,7 @@
                     <h2 class="text-2xl sm:text-3xl md:text-4xl leading-snug tracking-wide">
                         Keberagaman budaya yang bisa anda nikmati hanya di Indonesia!
                     </h2>
-                    <p class="font-open-sans text-sm sm:text-base">
+                    <p class="font-opensans text-sm sm:text-base">
                         Beragam budaya bisa kalian temukan di Indonesia. Mulai dari Bahasa Daerah,
                         Tari Tradisional, Senjata Traditional, Baju Daerah dan Lagu Daerah yang bisa kalian nikmati di
                         Indonesia yang kaya akan budaya dan keberagamanya.
@@ -82,7 +82,7 @@
                     <img src="{{ asset('img/culture/footer-bg.svg') }}" alt="The Batak Culture" class="w-full" />
                 </div>
                 <div class="w-full lg:w-1/2 flex items-center p-6 sm:p-10 lg:pl-16">
-                    <p class="font-open-sans text-base sm:text-lg md:text-2xl lg:w-3/4">
+                    <p class="font-opensans text-base sm:text-lg md:text-2xl lg:w-3/4">
                         Batak is the third biggest ethnic group in Indonesia.
                         <sup class="underline">[s]</sup> This name is used to identify multiple ethnicities originating
                         from
