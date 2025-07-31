@@ -52,3 +52,121 @@ Route::get('/about/history', [AboutController::class, 'history']);
 Route::get('/about/kamus', [AboutController::class, 'kamus']);
 Route::get('/about/kamusAksara', [AboutController::class, 'kamusAksara']);
 
+Route::get('/learn', function() {
+
+    $courseData = [
+        ["courseName" => "Aksara Batak",
+        "courseDescription" => "Pelajari Script Batak",
+        "courseImageURL" => "https://www.endangeredalphabets.net/wp-content/uploads/2018/12/Batak-Carving.jpg",
+        "courseID" => 1,
+        "slug" => "one"],
+        ["courseName" => "Aksara Batak",
+        "courseDescription" => "Pelajari Script Batak",
+        "courseImageURL" => "https://www.endangeredalphabets.net/wp-content/uploads/2018/12/Batak-Carving.jpg",
+        "courseID" => 1,
+        "slug" => "one"],
+        ["courseName" => "Aksara Batak",
+        "courseDescription" => "Pelajari Script Batak",
+        "courseImageURL" => "https://www.endangeredalphabets.net/wp-content/uploads/2018/12/Batak-Carving.jpg",
+        "courseID" => 1,
+        "slug" => "one"],
+        
+    ];
+
+    return view('learn.index', compact('courseData'));
+});
+
+Route::get('/learn/{slug}', function($slug){
+    $course = [
+        "courseName" => "Aksara Batak",
+        "courseDescription" => "Pelajari Script Batak",
+        "courseImageURL" => "https://www.endangeredalphabets.net/wp-content/uploads/2018/12/Batak-Carving.jpg",
+        "courseID" => 1,
+        "slug" => "one",
+    ];
+    
+    $lessons = [
+        "lesson" => [
+            [
+                "lesson_id" => 1,
+                "lesson_name" => "Sejarah Aksara",
+                "order" => 1
+            ],
+            [
+                "lesson_id" => 2,
+                "lesson_name" => "Ina ni Surat",
+                "order" => 2
+            ],
+            [
+                "lesson_id" => 3,
+                "lesson_name" => "Anak ni Surat",
+                "order" => 3
+            ],
+            [
+                "lesson_id" => 4,
+                "lesson_name" => "Latihan Menulis",
+                "order" => 3
+            ]
+            ],
+        "course_id" => 1,
+    ];
+
+    $lesson_parts = [
+        [
+            "id" => 1,
+            "lesson_id" => 1,
+            "order" => 2,
+            "part_name" => "Part One",
+        ],
+        [
+            "id" => 2,
+            "lesson_id" => 1,
+            "order" => 3,
+            "part_name" => "Part Two",
+        ],
+        [
+            "id" => 3,
+            "lesson_id" => 1,
+            "order" => 4,
+            "part_name" => "Part Three",
+        ],
+        [
+            "id" => 1,
+            "lesson_id" => 1,
+            "order" => 2,
+            "part_name" => "Part One",
+        ],
+        [
+            "id" => 2,
+            "lesson_id" => 1,
+            "order" => 3,
+            "part_name" => "Part Two",
+        ],
+        [
+            "id" => 3,
+            "lesson_id" => 1,
+            "order" => 4,
+            "part_name" => "Part Three",
+        ],
+    ];
+
+    $user_lesson_progress = [
+        "progress" => [
+            [
+                "lesson_part_id" => 1,
+                "completed" => true,
+            ],
+            [
+                "lesson_part_id" => 2, 
+                "completed" => true,
+            ],
+            [
+                "lesson_part_id" => 3, 
+                "completed" => false,
+            ]
+        ]
+    ];
+
+    return view('learn.course', array_merge(["slug" => $slug], 
+                compact('course', 'lessons', 'lesson_parts', 'user_lesson_progress')));
+});
