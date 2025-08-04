@@ -9,7 +9,7 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
 
-    <body class="font-jua bg-black text-white">
+    <body class="font-jua bg-bg-dark text-white">
         <section class="relative w-full h-[100dvh] max-h-[900px] overflow-hidden flex items-center justify-center">
             <!-- Background -->
             <img src="{{ asset('img/culture/hero-section-bg.svg') }}" alt="Background"
