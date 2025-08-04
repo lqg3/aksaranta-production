@@ -36,6 +36,10 @@ Route::prefix('blog')->name('blog.')->group(function () {
     // TODO: users should be able to use the /learn using either cookies or store their data in the database.
 });
 
+Route::get('batak-songs', function () {
+    return view('batak-songs');
+})->name('batak-songs');
+
 
 require __DIR__.'/auth.php';
 Route::get('/virtual', [VirtualTourController::class, 'index']);
