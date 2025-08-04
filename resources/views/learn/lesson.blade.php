@@ -5,12 +5,12 @@
 
     <div x-data="{ videoLoaded: false }" class="w-full">
         <div x-show="activeTab === 'video'" 
-             x-transition:enter="transition ease-out duration-300"
-             x-transition:enter-start="opacity-0 transform translate-y-2"
-             x-transition:enter-end="opacity-100 transform translate-y-0"
-             x-transition:leave="transition ease-in duration-300"
-             x-transition:leave-start="opacity-100 transform translate-y-0"
-             x-transition:leave-end="opacity-0 transform translate-y-2"
+             x-transition:enter="transition ease-out duration-600"
+             x-transition:enter-start="opacity-0"
+             x-transition:enter-end="opacity-100"
+             x-transition:leave="transition ease-in duration-600"
+             x-transition:leave-start="opacity-100"
+             x-transition:leave-end="opacity-0"
              class="w-full" id="video">
             <template x-if="!videoLoaded">
                 <div class="w-full aspect-video flex items-center justify-center bg-bg-card bg-opacity-20 rounded-lg">
@@ -27,12 +27,12 @@
 
         <!-- Notes tab -->
         <div x-show="activeTab === 'notes'" 
-             x-transition:enter="transition ease-out duration-300"
-             x-transition:enter-start="opacity-0 transform translate-y-2"
-             x-transition:enter-end="opacity-100 transform translate-y-0"
-             x-transition:leave="transition ease-in duration-300"
-             x-transition:leave-start="opacity-100 transform translate-y-0"
-             x-transition:leave-end="opacity-0 transform translate-y-2"
+             x-transition:enter="transition ease-out duration-600"
+             x-transition:enter-start="opacity-0"
+             x-transition:enter-end="opacity-100"
+             x-transition:leave="transition ease-in duration-600"
+             x-transition:leave-start="opacity-100"
+             x-transition:leave-end="opacity-0"
              id="notes">
             <h1 class="text-8xl">Lorem ipsum dolor sit amet.</h1>
             <p class="text-lg mt-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum quo eveniet, deleniti
@@ -81,12 +81,12 @@
 
         <!-- Quiz tab -->
         <div x-show="activeTab === 'quiz'" 
-             x-transition:enter="transition ease-out duration-300"
-             x-transition:enter-start="opacity-0 transform translate-y-2"
-             x-transition:enter-end="opacity-100 transform translate-y-0"
-             x-transition:leave="transition ease-in duration-300"
-             x-transition:leave-start="opacity-100 transform translate-y-0"
-             x-transition:leave-end="opacity-0 transform translate-y-2"
+             x-transition:enter="transition ease-out duration-600"
+             x-transition:enter-start="opacity-0"
+             x-transition:enter-end="opacity-100"
+             x-transition:leave="transition ease-in duration-600"
+             x-transition:leave-start="opacity-100"
+             x-transition:leave-end="opacity-0"
              id="quiz">
             <h1 class="text-8xl">Lorem ipsum dolor sit amet.</h1>
         </div>

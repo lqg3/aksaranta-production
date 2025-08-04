@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
             $table->unsignedBigInteger('lesson_id');
-            $table->foreign('lesson_id')->references('id')->on('lessons');            
+            $table->foreigvn('lesson_id')->references('id')->on('lessons');            
             $table->string('part_name');
             $table->string('part_type');
             $table->text('part_description');

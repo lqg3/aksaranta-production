@@ -82,14 +82,14 @@
         <div class="bg-bg-card bg-opacity-10 w-100 rounded-lg">
             <ul class="flex text-center">
                 <!-- TODO: Add logic to track which lessons are active -->
-                <li class="cursor-pointer hover:bg-bg-card hover:bg-opacity-50 transition-all duration-300 ease-out flex-1 py-3 text-center border border-white/20 rounded-l-lg transform hover:scale-[1.02]" 
-                    :class="{'bg-bg-card bg-opacity-30 scale-[1.02]': activeTab === 'video'}"
+                <li class="cursor-pointer hover:bg-bg-card hover:bg-opacity-50 transition-all duration-600 flex-1 py-3 text-center border border-white/20 rounded-l-lg" 
+                    :class="{'bg-bg-card bg-opacity-30': activeTab === 'video'}"
                     @click="switchTab('video')" id="video-button">Video</li>
-                <li class="cursor-pointer hover:bg-bg-card hover:bg-opacity-50 transition-all duration-300 ease-out flex-1 py-3 text-center border border-white/20 transform hover:scale-[1.02]" 
-                    :class="{'bg-bg-card bg-opacity-30 scale-[1.02]': activeTab === 'notes'}"
+                <li class="cursor-pointer hover:bg-bg-card hover:bg-opacity-50 transition-all duration-600 flex-1 py-3 text-center border border-white/20" 
+                    :class="{'bg-bg-card bg-opacity-30': activeTab === 'notes'}"
                     @click="switchTab('notes')" id="notes-button">Notes</li>
-                <li class="cursor-pointer hover:bg-bg-card hover:bg-opacity-50 transition-all duration-300 ease-out flex-1 py-3 text-center border border-white/20 rounded-r-lg transform hover:scale-[1.02]" 
-                    :class="{'bg-bg-card bg-opacity-30 scale-[1.02]': activeTab === 'quiz'}"
+                <li class="cursor-pointer hover:bg-bg-card hover:bg-opacity-50 transition-all duration-600 flex-1 py-3 text-center border border-white/20 rounded-r-lg" 
+                    :class="{'bg-bg-card bg-opacity-30': activeTab === 'quiz'}"
                     @click="switchTab('quiz')" id="quiz-button">Quiz</li>
             </ul>
         </div>

@@ -49,6 +49,7 @@ class LearnController extends Controller
             'lesson_parts' => $lesson_parts,
             'slug' => $slug,
             // TODO: user lesson progress
+            
         ]);
     }
 
