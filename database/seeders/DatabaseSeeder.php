@@ -14,7 +14,18 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         $this->call([
-            AdminUserSeeder::class
+            // First create admin user
+            AdminUserSeeder::class,
+            
+            // Then create course structure (in dependency order)
+            CourseSeeder::class,
+            LessonSeeder::class,
+            LessonPartSeeder::class,
+            QuizSeeder::class,
+            
+            // Finally create user progress data
+            UserLessonProgressSeeder::class,
+            UserLessonPartProgressSeeder::class,
         ]);
     }
 }
