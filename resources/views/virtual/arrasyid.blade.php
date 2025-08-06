@@ -39,8 +39,8 @@ body {
     --highlight-bg: #3f3c3c;
     --text-light: #f0f0f0;
     --text-muted: #d0d0d0;
-    --accent-yellow: #ffee00;
-    --accent-yellow-hover: #ffda00;
+    --accent-yellow: #d84b4b;
+    --accent-yellow-hover: #B10002;
     --shadow-dark: rgba(0, 0, 0, 0.5);
     --font-jua: 'Jua', cursive;
     --font-opensans: 'Open Sans', sans-serif;
@@ -56,6 +56,8 @@ body {
     margin-bottom: 60px; /* Jarak antara header dan konten selanjutnya */
     position: relative;
     overflow: hidden;
+    height: 100vh;
+    display: flex;
     animation: fadeIn 1.5s ease-out; /* Animasi fade-in saat halaman dimuat */
 }
 
@@ -71,6 +73,7 @@ body {
 }
 
 .hero-header-content {
+    margin: auto;
     position: relative;
     z-index: 2;
     transform: translateY(0);
@@ -97,7 +100,7 @@ body {
 .hero-header .button {
     display: inline-block;
     background-color: var(--accent-yellow);
-    color: #333;
+    color: #fff;
     padding: 12px 25px;
     border-radius: 5px;
     text-decoration: none;
@@ -185,7 +188,7 @@ body {
 .daftar-pustaka {
   width: 70%;
   margin: 0 30px 0 30px;
-  border-left: 5px solid rgb(232, 239, 15);
+  border-left: 5px solid #B10002;
 }
 
 .daftar-pustaka p {
@@ -202,6 +205,7 @@ body {
   }
   .flex-kalimat-ampat h3 {
     text-align: center;
+    color: #fff
     margin: 30px 0 30px 0;
   }
 }
@@ -313,7 +317,7 @@ footer {
 .box-peta1 {
   background-image: url('../img/alam.png');
   width: 80%;
-  height: 450px;
+  height: 650px;
   background-size: cover; /* Mengatur agar gambar tidak pecah dan tetap menutupi elemen */
   background-position: center; /* Menjaga gambar tetap berada di tengah */
   background-repeat: no-repeat; /* Menghindari gambar diulang */
@@ -354,7 +358,7 @@ footer {
     </div>
 </header>
 
-    <div class="wisata">
+    <div class="wisata"  id="detail-section">
         <iframe src="https://www.google.com/maps/embed?pb=!4v1752650955374!6m8!1m7!1sCAoSFkNJSE0wb2dLRUlDQWdJQzQ5XzZFU2c.!2m2!1d3.188207978484253!2d98.50930995824886!3f215.46530537032132!4f-8.65823738843359!5f0.7820865974627469" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
     </div>
 
@@ -405,7 +409,7 @@ footer {
 
       <div class="daftar-pustaka">
         <p style="font-family: 'opensans'">
-          <span style="color: rgb(232, 239, 15); font-weight: bold">REFERENSI </span> <br />
+          <span style="color: #B10002; font-weight: bold">REFERENSI </span> <br />
           <br />
           Trip.com. (n.d.). Arrasyiid cookies cake snack. Trip.com. Retrieved July 21, 2025, from
           <a style="color:#3c71cd"
@@ -418,7 +422,7 @@ footer {
     </div>
 
     <!-- FOOTER -->
-    <footer>
+    {{-- <footer>
       <div class="footer-kiri">
         <p class="foo">Geulify</p>
         <p>Nikmati keseruan setiap detik nya.</p>
@@ -443,7 +447,7 @@ footer {
           <p>Khas</p>
         </div>
       </div>
-    </footer>
+    </footer> --}}
     <!-- FOOTER -->
     <script>
         // --- Bagian JavaScript untuk Header ---
