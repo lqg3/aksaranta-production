@@ -2,31 +2,23 @@
 
 namespace Database\Factories;
 
+use App\Models\LessonPart;
+use App\Models\Lesson;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-/**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\LessonPart>
- */
 class LessonPartFactory extends Factory
 {
-    /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
-     */
+    protected $model = LessonPart::class;
+
     public function definition(): array
     {
         return [
-            'lesson_id' => \App\Models\Lesson::factory(),
-            'part_name' => fake()->words(3, true),
-            'part_type' => fake()->randomElement(['video', 'reading', 'quiz']),
-            'part_description' => fake()->text(200), // Limit to 200 characters to be safe
-            'part_video_url' => fake()->optional()->url(),
-            'part_content' => json_encode([
-                'content' => fake()->sentences(2), // Shorter content
-                'exercises' => fake()->words(3) // Fewer words
-            ]),
-            'order' => fake()->numberBetween(1, 3)
+            'lesson_id' => Lesson::factory(), // Bisa di-override di seeder
+            'part_name' => $this->faker->words(3, true),
+            'part_description' => $this->faker->text(150),
+            'part_video_url' => $this->faker->optional()->url(),
+            'part_content' => '<p>' . implode('</p><p>', $this->faker->paragraphs(2)) . '</p>',
+            'order' => $this->faker->numberBetween(1, 10),
         ];
     }
 }

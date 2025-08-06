@@ -11,12 +11,10 @@ class LessonPart extends Model
     protected $fillable = [
         'lesson_id',
         'part_name',
-        'part_type',
         'part_description',
         'part_video_url',
         'part_content',
-        'lesson_part',
-        'part_video_url',
+        'order'
     ];
     /** @use HasFactory<\Database\Factories\LessonPartFactory> */
     use HasFactory;

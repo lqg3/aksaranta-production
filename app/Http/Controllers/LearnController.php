@@ -55,34 +55,31 @@ class LearnController extends Controller
 
     public function lessonShow($slug, $lesson_slug)
     {
-        // Route - /learn/{{slug}}/{{lesson_slug}}
+        // Ambil course berdasarkan slug
         $course = Course::where('slug', $slug)->firstOrFail();
 
-        // Find the lesson by name and course
+        // Ambil lesson berdasarkan course dan slug lesson
         $lesson = Lesson::where('course_id', $course->id)
             ->where('lesson_name', $lesson_slug)
             ->firstOrFail();
 
-        // Get all parts for this lesson
-        $lessonParts = LessonPart::where('lesson_id', $lesson->id)->get();
+        // Ambil semua LessonPart dari lesson ini
+        $lessonParts = LessonPart::where('lesson_id', $lesson->id)
+            ->orderBy('order') // optional: jika kamu pakai kolom 'order'
+            ->get();
 
-        // The original code is not "appending" because it overwrites $partVideoUrl each time a 'video' part is found.
-        // To "append" all video URLs, use an array and push each one in.
-        $partVideoUrls = [];
-        foreach ($lessonParts as $part) {
-            if (strtolower((string) $part->part_type) === 'video') {
-                $partVideoUrls[] = $part->part_video_url;
-            }
-        }
+        // Video pertama (jika ada)
+        $firstVideoUrl = $lessonParts->first()?->part_video_url;
 
         return view('learn.lesson', [
             'course' => $course,
             'lessonSlug' => $lesson_slug,
             'lessonName' => $lesson->lesson_name,
             'lessonParts' => $lessonParts,
-            'partVideoUrl' => $lessonParts[0]->part_video_url,
+            'partVideoUrl' => $firstVideoUrl,
         ]);
     }
+
     
     public function create(){
         // TODO: Admin panel later

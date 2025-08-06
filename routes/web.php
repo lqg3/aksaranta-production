@@ -2,14 +2,14 @@
 
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\ProfileController;
-use App\Models\Post;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\VirtualTourController;
 use App\Http\Controllers\AboutController;
+use App\Http\Controllers\Admin\CourseAdminController;
+use App\Http\Controllers\Admin\LessonAdminController;
+use App\Http\Controllers\Admin\LessonPartAdminController;
 use App\Http\Controllers\LearnController;
-use App\Http\Controllers\CourseCountroller;
-
 
 Route::get('/', function () {
     return view('welcome');
@@ -28,6 +28,10 @@ Route::middleware('auth')->group(function () {
 Route::prefix('admin')->middleware(['auth', 'can:isAdmin'])->name('admin.')->group(function () {
     Route::resource('posts', \App\Http\Controllers\Admin\PostController::class);
     Route::patch('posts/{post}/toggle', [\App\Http\Controllers\Admin\PostController::class, 'toggle'])->name('posts.toggle');
+    
+    Route::resource('course', CourseAdminController::class);
+    Route::resource('course/{course}/learn', LessonAdminController::class);
+    Route::resource('course/{course}/learn/{learn}/lesson-part', LessonPartAdminController::class);
 });
 
 Route::prefix('blog')->name('blog.')->group(function () {

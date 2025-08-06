@@ -14,16 +14,17 @@ return new class extends Migration
         Schema::create('lesson_parts', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->unsignedBigInteger('lesson_id');
-            $table->foreigvn('lesson_id')->references('id')->on('lessons');            
+
+            $table->foreignId('lesson_id')->constrained('lessons')->onDelete('cascade');
+
             $table->string('part_name');
-            $table->string('part_type');
-            $table->text('part_description');
-            $table->text('part_video_url')->nullable();
-            $table->json('part_content')->nullable();
+            $table->text('part_description')->nullable();
+            $table->string('part_video_url')->nullable();
+            $table->longText('part_content')->nullable(); // gunakan longText karena HTML bisa panjang
             $table->smallInteger('order')->nullable();
         });
     }
+
 
     /**
      * Reverse the migrations.
