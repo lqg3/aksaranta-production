@@ -21,8 +21,6 @@ class DatabaseSeeder extends Seeder
             CourseSeeder::class,
             LessonSeeder::class,
             LessonPartSeeder::class,
-            QuizSeeder::class,
-            
             // Finally create user progress data
             UserLessonProgressSeeder::class,
             UserLessonPartProgressSeeder::class,

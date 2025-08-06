@@ -23,6 +23,7 @@
                 <th class="px-4 py-3 text-left">Nama</th>
                 <th class="px-4 py-3 text-left">Order</th>
                 <th class="px-4 py-3 text-center">Aksi</th>
+                <th class="px-4 py-3 text-center">Kuis</th>
             </tr>
         </thead>
 
@@ -48,6 +49,10 @@
                                 <i class="fas fa-trash-alt"></i>
                             </button>
                         </form>
+                    </td>
+                    <td class="text-center">
+                        <a href="{{ route('admin.quiz.index', [$course->id, $learn->id, $part->id]) }}"><i
+                                class="fa-solid text-bg-dark fa-arrow-right hover:text-white transition-all duration-200 aspect-square p-2 bg-white hover:bg-bg-card rounded-full"></i></a>
                     </td>
                 </tr>
             @empty

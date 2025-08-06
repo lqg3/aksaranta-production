@@ -9,6 +9,7 @@ use App\Http\Controllers\AboutController;
 use App\Http\Controllers\Admin\CourseAdminController;
 use App\Http\Controllers\Admin\LessonAdminController;
 use App\Http\Controllers\Admin\LessonPartAdminController;
+use App\Http\Controllers\Admin\QuizAdminController;
 use App\Http\Controllers\LearnController;
 
 Route::get('/', function () {
@@ -32,6 +33,7 @@ Route::prefix('admin')->middleware(['auth', 'can:isAdmin'])->name('admin.')->gro
     Route::resource('course', CourseAdminController::class);
     Route::resource('course/{course}/learn', LessonAdminController::class);
     Route::resource('course/{course}/learn/{learn}/lesson-part', LessonPartAdminController::class);
+    Route::resource('course/{course_id}/learn/{learn_id}/lesson-part/{lesson_part}/quiz', QuizAdminController::class);
 });
 
 Route::prefix('blog')->name('blog.')->group(function () {
