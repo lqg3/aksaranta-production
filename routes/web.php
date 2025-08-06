@@ -4,10 +4,8 @@ use App\Http\Controllers\BlogController;
 use App\Http\Controllers\ProfileController;
 use App\Models\Post;
 use Illuminate\Support\Facades\Route;
-
 use App\Http\Controllers\VirtualTourController;
 use App\Http\Controllers\AboutController;
-
 
 Route::get('/', function () {
     return view('welcome');
@@ -51,4 +49,6 @@ Route::get('/about/aksaranta', [AboutController::class, 'aksaranta']);
 Route::get('/about/history', [AboutController::class, 'history']);
 Route::get('/about/kamus', [AboutController::class, 'kamus']);
 Route::get('/about/kamusAksara', [AboutController::class, 'kamusAksara']);
+Route::get('/about/animasi', [AboutController::class, 'animasi']);
+
 

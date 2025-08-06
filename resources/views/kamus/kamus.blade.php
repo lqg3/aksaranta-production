@@ -13,8 +13,8 @@
             --highlight-bg: #3f3c3c; /* Latar belakang untuk elemen yang menonjol (misal search bar) */
             --text-light: #f0f0f0;
             --text-muted: #d0d0d0;
-            --accent-yellow: #ffee00;
-            --accent-yellow-hover: #ffda00;
+            --accent-yellow: #d84b4b;
+            --accent-yellow-hover: #B10002;
             --shadow-dark: rgba(0, 0, 0, 0.5);
             --font-jua: 'Jua', cursive;
             --font-opensans: 'Open Sans', sans-serif;
@@ -89,7 +89,7 @@
         .hero-header .button {
             display: inline-block;
             background-color: var(--accent-yellow);
-            color: #333;
+            color: #fff;
             padding: 12px 25px;
             border-radius: 5px;
             text-decoration: none;
@@ -399,7 +399,7 @@
         /* --- Did You Know Section (Konsisten) --- */
         .did-you-know {
             background-color: var(--accent-yellow);
-            color: #333;
+            color: #fff;
             padding: 30px;
             border-radius: 10px;
             margin: 80px auto;
@@ -562,41 +562,12 @@
         </div>
     </main>
 
-    <footer>
-        <div class="footer-kiri">
-            <p class="foo">Aksaranta</p>
-            <p>Gerbang Aksara Batak Digital Anda.</p>
-        </div>
-        <div class="footer-kanan">
-            <div class="satu-footer">
-                <h5>Aksara</h5>
-                <p>Toba</p>
-                <p>Karo</p>
-                <p>Simalungun</p>
-                <p>Mandailing</p>
-                <p>Pakpak</p>
-            </div>
-            <div class="satu-footer">
-                <h5>Fitur</h5>
-                <p>Transliterasi</p>
-                <p>Kamus</p>
-                <p>Virtual Tour</p>
-                <p>Musik</p>
-            </div>
-            <div class="satu-footer">
-                <h5>Informasi</h5>
-                <p>Sejarah</p>
-                <p>Budaya</p>
-                <p>Blog</p>
-                <p>Wisata</p>
-            </div>
-        </div>
-    </footer>
+
 
     <div class="up">
         <a href="#top" aria-label="Scroll to top">
             <div class="klik-up">
-                <img src="img/top.png" width="30px" alt="Panah atas" />
+                <img src="../img/top.png" width="30px" alt="Panah atas" />
             </div>
         </a>
     </div>
