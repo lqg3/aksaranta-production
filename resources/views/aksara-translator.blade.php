@@ -284,7 +284,7 @@
         </script>
     </head>
 
-    <body class="bg-black text-white font-poppins">
+    <body class="bg-bg-dark text-white font-poppins">
         <!-- Hero Section -->
         <section class="relative w-full h-[100dvh] max-h-[900px] overflow-hidden flex items-center justify-center">
             <img src="{{ asset('img/culture/hero-section-bg.svg') }}" alt="Background"

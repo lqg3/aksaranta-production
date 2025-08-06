@@ -43,7 +43,7 @@
         </style>
     </head>
 
-    <body class="bg-black text-white font-poppins">
+    <body class="bg-bg-dark text-white font-poppins">
         <!-- Hero Section -->
         <section class="relative w-full h-[100dvh] max-h-[900px] overflow-hidden flex items-center justify-center">
             <img src="{{ asset('img/culture/hero-section-bg.svg') }}" alt="Background"
@@ -57,29 +57,6 @@
                     <p class="font-extralight w-full sm:w-5/6 md:w-3/4 text-sm sm:text-base">
                         Listen to meaningful Batak songs anytime and anywhere.
                     </p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Shazam Section -->
-        <section class="w-full flex justify-center bg-[#1DBF9F]">
-            <div class="w-full max-w-[1440px] flex justify-center py-24 px-4">
-                <div class="relative w-full md:w-[80%] aspect-[1128/429] flex justify-center items-center">
-                    <img src="{{ asset('img/songs/banner.svg') }}" alt="Shazam Banner"
-                        class="absolute inset-0 w-full h-full object-cover rounded-3xl" />
-                    <img src="{{ asset('img/songs/banner-logo.svg') }}" alt="Shazam Banner Logo"
-                        class="absolute top-4 right-4 sm:top-6 sm:right-6 w-12 sm:w-16 md:w-20" />
-                    <div class="z-50 text-center px-4">
-                        <h2 class="text-[#F8B5D4] text-2xl sm:text-3xl mb-3 font-bold">Shazam</h2>
-                        <h1 class="text-white text-xl sm:text-3xl md:text-5xl font-bold">VIRAL CHARTS</h1>
-                        <p class="text-[#F8B5D4] my-5 text-sm sm:text-base">The fastest-growing songs this week, as
-                            discovered<br />on
-                            screens and socials.</p>
-                        <button
-                            class="text-[#36238A] rounded-lg font-bold bg-white px-6 py-3 sm:px-6 sm:py-4 text-sm sm:text-base">
-                            SEE THE CHART
-                        </button>
-                    </div>
                 </div>
             </div>
         </section>
@@ -243,64 +220,6 @@
                             fill="white" />
                     </svg>
                 </button>
-            </div>
-        </section>
-
-        <!-- More Charts Section -->
-        <section class="w-full max-w-[1440px] mx-auto px-4 py-10">
-            <h1 class="font-bold text-3xl mt-4 mb-6">More Charts</h1>
-            <hr class="border-[#1DBF9F]" />
-            <div class="flex flex-col lg:flex-row justify-between w-full my-10 gap-8">
-                <!-- Chart 1 -->
-                <div
-                    class="relative w-full lg:w-1/2  aspect-[556/330] flex items-end lg:pb-10 md:pb-6 pb-2 lg:px-10 md:px-6 px-3 rounded-3xl overflow-hidden">
-                    <img src="{{ asset('img/songs/more-chart-1.svg') }}" alt="More Chart"
-                        class="absolute inset-0 w-full h-full object-cover" />
-                    <div class="z-50 text-sm sm:text-base">
-                        <h1 class="font-bold leading-[2.5rem] sm:leading-[3rem] text-xl sm:text-3xl md:text-5xl mb-4">
-                            Top
-                            200<br />Indonesia</h1>
-                        <div class="flex flex-col sm:flex-row gap-4 sm:gap-10">
-                            <div class="sm:w-4/5">
-                                <p>Featuring songs from Melly Mike, Silet Open Up, Jacson Seran, Juan Reza & Diva Aurel,
-                                    EMIN & JONY and
-                                    more</p>
-                            </div>
-                            <div class="sm:w-1/5 flex justify-end items-end">
-                                <button
-                                    class="font-bold bg-[#236D5E]/30 px-8 py-2 sm:px-10 sm:py-3 rounded-xl text-base sm:text-xl">
-                                    View
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Chart 2 -->
-                <div
-                    class="relative w-full lg:w-1/2  aspect-[556/330] flex items-end lg:pb-10 md:pb-6 pb-2 lg:px-10 md:px-6 px-3 rounded-3xl overflow-hidden">
-                    <img src="{{ asset('img/songs/more-chart-2.svg') }}" alt="More Chart"
-                        class="absolute inset-0 w-full h-full object-cover" />
-                    <div class="z-50 text-sm sm:text-base">
-                        <h1
-                            class="font-bold leading-[3rem] sm:leading-[3rem] md:leading-[4rem] text-xl sm:text-3xl md:text-5xl mb-4">
-                            Top
-                            50<br />New York City</h1>
-                        <div class="flex flex-col sm:flex-row gap-4 sm:gap-10">
-                            <div class="sm:w-4/5">
-                                <p>Featuring songs from MOLIY, Silent Addy, Skillibeng & Shenseea, PARTYNEXTDOOR &
-                                    Drake, Eddie Vedder and
-                                    more</p>
-                            </div>
-                            <div class="sm:w-1/5 flex justify-end items-end">
-                                <button
-                                    class="font-bold bg-white/30 px-8 py-2 sm:px-10 sm:py-3 rounded-xl text-base sm:text-xl">
-                                    View
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
         </section>
 
