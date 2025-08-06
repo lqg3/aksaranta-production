@@ -24,6 +24,9 @@ class AboutController extends Controller
     public function kamusAksara(){
         return view('kamus/kamus-aksara');
     }
+    public function animasi(){
+        return view('about/animasi');
+    }
 
 
 

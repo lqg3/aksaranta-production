@@ -11,8 +11,8 @@
             --card-bg-dark: #2c2c2c;
             --text-light: #f0f0f0;
             --text-muted: #d0d0d0;
-            --accent-yellow: #ffee00;
-            --accent-yellow-hover: #ffda00;
+            --accent-yellow: #d84b4b;
+            --accent-yellow-hover: #B10002;
             --shadow-dark: rgba(0, 0, 0, 0.5);
             --font-jua: 'Jua', cursive;
             --font-opensans: 'Open Sans', sans-serif;
@@ -44,7 +44,7 @@
 
         /* --- Bagian Header Kustom (Hero) --- */
         .hero-header {
-            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://via.placeholder.com/1500x500/34495e/ffffff?text=Aksara+Batak+History+Banner') no-repeat center center/cover; /* Ganti URL gambar banner Anda di sini */
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),url('../img/danautoba2.jpg') no-repeat center center/cover; /* Ganti URL gambar banner Anda di sini */
             color: var(--text-light);
             text-align: center;
             padding: 100px 20px;
@@ -52,6 +52,8 @@
             position: relative;
             overflow: hidden;
             animation: fadeIn 1.5s ease-out;
+            display: flex;
+            height: 100vh;
         }
 
         .hero-header::before {
@@ -68,6 +70,7 @@
         .hero-header-content {
             position: relative;
             z-index: 2;
+            margin: auto;
             transform: translateY(0);
             transition: transform 0.5s ease-out;
         }
@@ -91,7 +94,7 @@
         .hero-header .button {
             display: inline-block;
             background-color: var(--accent-yellow);
-            color: #333;
+            color: #fff;
             padding: 12px 25px;
             border-radius: 5px;
             text-decoration: none;
@@ -318,7 +321,7 @@
 
         .did-you-know {
             background-color: var(--accent-yellow);
-            color: #333;
+            color: #fff;
             padding: 30px;
             border-radius: 10px;
             margin: 80px auto;

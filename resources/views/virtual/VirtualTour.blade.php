@@ -41,7 +41,7 @@
       }
       .kalimat-virtual-tour h5 {
         font-size: 18px;
-        color: #e0e252;
+        color: #B10002;
         font-family: "jua";
       }
       .kalimat-virtual-tour h3 {
@@ -108,7 +108,7 @@
       .kalimat-tour p {
         margin: 0 0 10px 0;
         font-size: 15px;
-        color: #cded3d;
+        color: #B10002;
         font-weight: bold;
         font-family: "jua";
       }
@@ -387,7 +387,7 @@
     </div>
 
     <!-- FOOTER -->
-    <footer>
+    {{-- <footer>
       <div class="footer-kiri">
         <p class="foo">
           <i class="fa-sharp fa-solid fa-satellite" style="color: #fff"></i>
@@ -416,6 +416,6 @@
         </div>
       </div>
     </footer>
-    <!-- FOOTER -->
+    <!-- FOOTER --> --}}
   </body>
 </html>

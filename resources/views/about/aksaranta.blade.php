@@ -12,8 +12,8 @@
             --card-bg-dark: #2c2c2c;
             --text-light: #f0f0f0;
             --text-muted: #d0d0d0;
-            --accent-yellow: #ffee00;
-            --accent-yellow-hover: #ffda00;
+            --accent-yellow: #B10002;
+            --accent-yellow-hover: #B10002;
             --shadow-dark: rgba(0, 0, 0, 0.5);
             --font-jua: 'Jua', cursive;
             --font-opensans: 'Open Sans', sans-serif;
@@ -47,6 +47,8 @@
             color: var(--text-light);
             text-align: center;
             padding: 100px 20px;
+            display: flex;
+            height: 100vh;
             margin-bottom: 60px;
             position: relative;
             overflow: hidden;
@@ -69,6 +71,7 @@
             z-index: 2;
             transform: translateY(0);
             transition: transform 0.5s ease-out;
+            margin: auto;
         }
 
         .hero-header-content h1 {
@@ -91,7 +94,7 @@
         .hero-header .button {
             display: inline-block;
             background-color: var(--accent-yellow);
-            color: #333;
+            color: #fff;
             padding: 12px 25px;
             border-radius: 5px;
             text-decoration: none;
@@ -305,49 +308,7 @@
             background-color: var(--accent-yellow-hover);
         }
 
-        footer {
-            width: 100%;
-            display: flex;
-            justify-content: space-around;
-            background-color: var(--accent-yellow);
-            padding: 15px;
-            box-sizing: border-box;
-            color: #333;
-        }
-        .footer-kiri {
-            margin: 30px 0;
-            width: 40%;
-        }
-        .footer-kiri p {
-            font-size: 16px;
-            color: #333333;
-            font-family: var(--font-opensans);
-        }
-        .footer-kiri .foo {
-            font-size: 21px;
-            color: #333333;
-            font-weight: bold;
-            margin: 0 0 15px 0;
-            font-family: var(--font-opensans);
-        }
-        .footer-kanan {
-            margin: 30px 0;
-            width: 40%;
-            display: flex;
-            justify-content: space-around;
-        }
-        .satu-footer h5 {
-            font-size: 21px;
-            color: #333333;
-            font-weight: bold;
-            font-family: var(--font-opensans);
-        }
-        .satu-footer p {
-            font-size: 16px;
-            color: #333333;
-            margin: 15px 0 0 0;
-            font-family: var(--font-opensans);
-        }
+
 
         @media (max-width: 800px) {
             .hero-header {
@@ -584,7 +545,7 @@
         </div>
     </main>
 
-    <footer>
+    {{-- <footer>
         <div class="footer-kiri">
             <p class="foo">Aksaranta</p>
             <p>Gerbang Aksara Batak Digital Anda.</p>
@@ -616,7 +577,7 @@
                 <p>Wisata</p>
             </div>
         </div>
-    </footer>
+    </footer> --}}
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             const animatedElements = document.querySelectorAll(
