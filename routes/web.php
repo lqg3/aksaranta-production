@@ -3,13 +3,14 @@
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-
 use App\Http\Controllers\VirtualTourController;
 use App\Http\Controllers\AboutController;
+
 use App\Http\Controllers\Admin\CourseAdminController;
 use App\Http\Controllers\Admin\LessonAdminController;
 use App\Http\Controllers\Admin\LessonPartAdminController;
 use App\Http\Controllers\LearnController;
+
 
 Route::get('/', function () {
     return view('welcome');
@@ -49,6 +50,27 @@ Route::get('culture' , function () {
 })->name('culture');
 
 require __DIR__.'/auth.php';
+
+=======
+Route::get('/virtual', [VirtualTourController::class, 'index']);
+Route::get('/virtual/danautoba', [VirtualTourController::class, 'danautoba']);
+Route::get('/virtual/airterjunPiso', [VirtualTourController::class, 'airterjunPiso']);
+Route::get('/virtual/bukitHolbung', [VirtualTourController::class, 'bukitHolbung']);
+Route::get('/virtual/sibeabea', [VirtualTourController::class, 'sibeabea']);
+Route::get('/virtual/tamanAlamLubini', [VirtualTourController::class, 'tamanAlamLubini']);
+Route::get('/virtual/arrasyid', [VirtualTourController::class, 'arrasyid']);
+Route::get('/virtual/grahaBunda', [VirtualTourController::class, 'grahaBunda']);
+Route::get('/virtual/funland', [VirtualTourController::class, 'funland']);
+
+
+Route::get('/about', [AboutController::class, 'index']);
+Route::get('/about/aksaranta', [AboutController::class, 'aksaranta']);
+Route::get('/about/history', [AboutController::class, 'history']);
+Route::get('/about/kamus', [AboutController::class, 'kamus']);
+Route::get('/about/kamusAksara', [AboutController::class, 'kamusAksara']);
+Route::get('/about/animasi', [AboutController::class, 'animasi']);
+
+
 
 // Virtual Tour Routes
 Route::prefix('virtual')->name('virtual.')->group(function () {

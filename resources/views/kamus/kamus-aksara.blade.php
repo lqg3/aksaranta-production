@@ -13,8 +13,8 @@
             --highlight-bg: #3f3c3c;
             --text-light: #f0f0f0;
             --text-muted: #d0d0d0;
-            --accent-yellow: #ffee00;
-            --accent-yellow-hover: #ffda00;
+            --accent-yellow: #d84b4b;
+            --accent-yellow-hover: #B10002;
             --shadow-dark: rgba(0, 0, 0, 0.5);
             --font-jua: 'Jua', cursive;
             --font-opensans: 'Open Sans', sans-serif;
@@ -89,7 +89,7 @@
         .hero-header .button {
             display: inline-block;
             background-color: var(--accent-yellow);
-            color: #333;
+            color: #fff;
             padding: 12px 25px;
             border-radius: 5px;
             text-decoration: none;
@@ -169,7 +169,7 @@
         }
         .alphabet-nav a:hover, .alphabet-nav a.active {
             background-color: var(--accent-yellow);
-            color: #333;
+            color: #fff;
         }
 
         /* --- Aksara Grid --- */
@@ -245,7 +245,7 @@
         footer {
             width: 100%; display: flex; justify-content: space-around;
             background-color: var(--accent-yellow); padding: 15px; box-sizing: border-box;
-            color: #333; margin-top: 60px;
+            color: #fff; margin-top: 60px;
         }
         .footer-kiri { margin: 30px 0; width: 40%; }
         .footer-kiri p { font-size: 16px; color: #333333; font-family: var(--font-opensans); }
@@ -355,7 +355,7 @@
     <div class="up">
         <a href="#top" aria-label="Scroll to top">
             <div class="klik-up">
-                <img src="img/top.png" width="30px" alt="Panah atas" />
+                <img src="../img/top.png" width="30px" alt="Panah atas" />
             </div>
         </a>
     </div>
