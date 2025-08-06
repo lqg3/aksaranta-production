@@ -53,7 +53,6 @@ Route::get('culture' , function () {
 
 require __DIR__.'/auth.php';
 
-=======
 Route::get('/virtual', [VirtualTourController::class, 'index']);
 Route::get('/virtual/danautoba', [VirtualTourController::class, 'danautoba']);
 Route::get('/virtual/airterjunPiso', [VirtualTourController::class, 'airterjunPiso']);
