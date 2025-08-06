@@ -44,27 +44,36 @@ Route::get('batak-songs', function () {
     return view('batak-songs');
 })->name('batak-songs');
 
+Route::get('culture' , function () {
+    return view('culture');
+})->name('culture');
 
 require __DIR__.'/auth.php';
-Route::get('/virtual', [VirtualTourController::class, 'index']);
-Route::get('/virtual/danautoba', [VirtualTourController::class, 'danautoba']);
-Route::get('/virtual/airterjunPiso', [VirtualTourController::class, 'airterjunPiso']);
-Route::get('/virtual/bukitHolbung', [VirtualTourController::class, 'bukitHolbung']);
-Route::get('/virtual/sibeabea', [VirtualTourController::class, 'sibeabea']);
-Route::get('/virtual/tamanAlamLubini', [VirtualTourController::class, 'tamanAlamLubini']);
-Route::get('/virtual/arrasyid', [VirtualTourController::class, 'arrasyid']);
-Route::get('/virtual/grahaBunda', [VirtualTourController::class, 'grahaBunda']);
-Route::get('/virtual/funland', [VirtualTourController::class, 'funland']);
 
+// Virtual Tour Routes
+Route::prefix('virtual')->name('virtual.')->group(function () {
+    Route::get('/', [VirtualTourController::class, 'index'])->name('index');
+    Route::get('/danau-toba', [VirtualTourController::class, 'danauToba'])->name('danau-toba');
+    Route::get('/air-terjun-piso', [VirtualTourController::class, 'airTerjunPiso'])->name('air-terjun-piso');
+    Route::get('/bukit-holbung', [VirtualTourController::class, 'bukitHolbung'])->name('bukit-holbung');
+    Route::get('/sibeabea', [VirtualTourController::class, 'sibeabea'])->name('sibeabea');
+    Route::get('/taman-alam-lubini', [VirtualTourController::class, 'tamanAlamLubini'])->name('taman-alam-lubini');
+    Route::get('/arrasyid', [VirtualTourController::class, 'arrasyid'])->name('arrasyid');
+    Route::get('/graha-bunda', [VirtualTourController::class, 'grahaBunda'])->name('graha-bunda');
+    Route::get('/funland', [VirtualTourController::class, 'funland'])->name('funland');
+});
 
-Route::get('/about', [AboutController::class, 'index']);
-Route::get('/about/aksaranta', [AboutController::class, 'aksaranta']);
-Route::get('/about/history', [AboutController::class, 'history']);
-Route::get('/about/kamus', [AboutController::class, 'kamus']);
-Route::get('/about/kamusAksara', [AboutController::class, 'kamusAksara']);
+// About Routes
+Route::prefix('about')->name('about.')->group(function () {
+    Route::get('/', [AboutController::class, 'index'])->name('index');
+    Route::get('/aksaranta', [AboutController::class, 'aksaranta'])->name('aksaranta');
+    Route::get('/history', [AboutController::class, 'history'])->name('history');
+    Route::get('/kamus', [AboutController::class, 'kamus'])->name('kamus');
+    Route::get('/kamus-aksara', [AboutController::class, 'kamusAksara'])->name('kamus-aksara');
+});
 
 Route::prefix('learn')->name('learn.')->group(function () {
-    Route::get('/', [LearnController::class, 'index']);
+    Route::get('/', [LearnController::class, 'index'])->name('index');
     Route::get('/{slug}', [LearnController::class, 'show'])->name('course');
     Route::get('/{slug}/{lesson_slug}', [LearnController::class, 'lessonShow'])->name('lesson');
 });
