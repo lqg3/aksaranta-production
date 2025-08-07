@@ -56,7 +56,7 @@ jobs:
           SOURCE: "./" # Source directory from the runner
           REMOTE_HOST: ${{ secrets.DO_SSH_HOST }}
           REMOTE_USER: ${{ secrets.DO_SSH_USER }}
-          TARGET: "/var/www/my-laravel-app" # Target directory on the server
+          TARGET: "/var/www/app" # Target directory on the server
 
       # 8. Run Post-Deployment Commands on the Server
       - name: Run Post-Deployment Commands
@@ -66,7 +66,7 @@ jobs:
           username: ${{ secrets.DO_SSH_USER }}
           key: ${{ secrets.DO_SSH_PRIVATE_KEY }}
           script: |
-            cd /var/www/my-laravel-app
+            cd /var/www/app
             php artisan migrate --force
             php artisan optimize:clear
             php artisan optimize
