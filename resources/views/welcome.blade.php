@@ -457,7 +457,7 @@ body{
 </div>
 
 
-<button id="switchNavigation" class="fixed left-1/2 -translate-x-1/2 bottom-6 z-50 px-6 py-3 bg-bg-dark bg-opacity-40 text-white font-title rounded-lg shadow-lg hover:bg-opacity-90 transition-all duration-300 translate-y-24 opacity-0"
+<button id="switchNavigation" class="fixed left-1/2 -translate-x-1/2 bottom-6 z-50 px-6 py-3 text-white font-title rounded-lg shadow-lg hover:bg-opacity-90 transition-all duration-300 translate-y-24 opacity-0"
     style="transition-all duration-300"
 >Lihat Semua Halaman
 </button>
@@ -1914,5 +1914,3 @@ body{
     });
 
 </script>
- <!-- ↑  ↓ ↚ ↛ ↜ ↝ ↞ ↟ -->
- <!-- ↑  ↓ ↚ ↛ ↜ ↝ ↞ ↟ -->

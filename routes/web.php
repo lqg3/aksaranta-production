@@ -69,7 +69,7 @@ Route::get('/aksaranta', [AboutController::class, 'aksaranta']);
 Route::get('/history', [AboutController::class, 'history']);
 Route::get('/kamus', [AboutController::class, 'kamus'])->name('kamus');
 Route::get('/kamusAksara', [AboutController::class, 'kamusAksara'])->name("kamusAksara");
-Route::get('//animasi', [AboutController::class, 'animasi']);
+Route::get('/animasi', [AboutController::class, 'animasi']);
 
 
 
