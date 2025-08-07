@@ -491,7 +491,7 @@
     <div class="up">
         <a href="#top" aria-label="Scroll to top">
             <div class="klik-up">
-                <img src="img/top.png" width="30px" alt="Panah atas" />
+                <img src="../img/top.png" width="30px" alt="" />
             </div>
         </a>
     </div>
