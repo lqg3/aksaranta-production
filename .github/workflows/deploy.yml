@@ -9,6 +9,7 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest # Use the latest Ubuntu runner
+    environment: production
 
     steps:
       # 1. Checkout the repository code
