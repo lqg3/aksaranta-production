@@ -29,7 +29,7 @@ Route::middleware('auth')->group(function () {
 Route::prefix('admin')->middleware(['auth', 'can:isAdmin'])->name('admin.')->group(function () {
     Route::resource('posts', \App\Http\Controllers\Admin\PostController::class);
     Route::patch('posts/{post}/toggle', [\App\Http\Controllers\Admin\PostController::class, 'toggle'])->name('posts.toggle');
-    
+
     Route::resource('course', CourseAdminController::class);
     Route::resource('course/{course}/learn', LessonAdminController::class);
     Route::resource('course/{course}/learn/{learn}/lesson-part', LessonPartAdminController::class);
@@ -51,7 +51,7 @@ Route::get('culture' , function () {
 
 require __DIR__.'/auth.php';
 
-=======
+
 Route::get('/virtual', [VirtualTourController::class, 'index']);
 Route::get('/virtual/danautoba', [VirtualTourController::class, 'danautoba']);
 Route::get('/virtual/airterjunPiso', [VirtualTourController::class, 'airterjunPiso']);

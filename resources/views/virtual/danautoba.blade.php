@@ -368,7 +368,7 @@ footer {
     <div class="up">
       <a href=""
         ><div class="klik-up">
-          <img src="img/top.png" width="30px" alt="" />
+          <img src="../img/top.png" width="30px" alt="" />
         </div>
       </a>
     </div>
