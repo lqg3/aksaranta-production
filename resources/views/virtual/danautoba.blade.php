@@ -75,7 +75,7 @@ body {
 .daftar-pustaka {
   width: 70%;
   margin: 0 30px 0 30px;
-  border-left: 5px solid rgb(232, 239, 15);
+  border-left: 5px solid #B10002;
 }
 
 .daftar-pustaka p {
@@ -235,8 +235,8 @@ footer {
     --highlight-bg: #3f3c3c;
     --text-light: #f0f0f0;
     --text-muted: #d0d0d0;
-    --accent-yellow: #ffee00;
-    --accent-yellow-hover: #ffda00;
+    --accent-yellow: #d84b4b;
+    --accent-yellow-hover: #B10002;
     --shadow-dark: rgba(0, 0, 0, 0.5);
     --font-jua: 'Jua', cursive;
     --font-opensans: 'Open Sans', sans-serif;
@@ -252,6 +252,8 @@ footer {
     margin-bottom: 60px; /* Jarak antara header dan konten selanjutnya */
     position: relative;
     overflow: hidden;
+    display: flex;
+    height: 100vh;
     animation: fadeIn 1.5s ease-out; /* Animasi fade-in saat halaman dimuat */
 }
 
@@ -267,6 +269,7 @@ footer {
 }
 
 .hero-header-content {
+    margin: auto;
     position: relative;
     z-index: 2;
     transform: translateY(0);
@@ -293,7 +296,7 @@ footer {
 .hero-header .button {
     display: inline-block;
     background-color: var(--accent-yellow);
-    color: #333;
+    color: #fff;
     padding: 12px 25px;
     border-radius: 5px;
     text-decoration: none;
@@ -365,7 +368,7 @@ footer {
     <div class="up">
       <a href=""
         ><div class="klik-up">
-          <img src="img/top.png" width="30px" alt="" />
+          <img src="../img/top.png" width="30px" alt="" />
         </div>
       </a>
     </div>
@@ -402,7 +405,7 @@ Di sekitar Danau Toba, wisatawan juga bisa menikmati berbagai aktivitas seru, se
 
       <div class="daftar-pustaka">
         <p style="font-family: 'opensans'">
-          <span style="color: rgb(232, 239, 15); font-weight: bold">REFERENSI </span> <br />
+          <span style="color: #B10002; font-weight: bold">REFERENSI </span> <br />
           <br />
           Aprinawati, & Prayogo, R. R. (2022). Smart tourism destination model development in Danau Toba, Indonesia. International Journal of Research in Business and Social Science, 11(6), 430–437.
           <a style="color: #3662b0"
@@ -415,7 +418,7 @@ Di sekitar Danau Toba, wisatawan juga bisa menikmati berbagai aktivitas seru, se
     </div>
 
     <!-- FOOTER -->
-    <footer>
+    {{-- <footer>
       <div class="footer-kiri">
         <p class="foo">Geulify</p>
         <p>Nikmati keseruan setiap detik nya.</p>
@@ -440,7 +443,7 @@ Di sekitar Danau Toba, wisatawan juga bisa menikmati berbagai aktivitas seru, se
           <p>Khas</p>
         </div>
       </div>
-    </footer>
+    </footer> --}}
     <!-- FOOTER -->
 
     <script>

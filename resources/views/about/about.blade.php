@@ -1,9 +1,8 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aksaranta - Tentang Tim Kami</title>
+@extends('layouts.general')
+
+@section('title', 'Aksaranta - Tentang Tim Kami')
+
+@section('head')
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Jua&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -12,8 +11,8 @@
             --member-card-bg: #3f3c3c;
             --text-light: #f0f0f0;
             --text-muted: #d0d0d0;
-            --accent-yellow: #ffee00;
-            --accent-yellow-hover: #ffda00;
+            --accent-yellow: #B10002;
+            --accent-yellow-hover: #B10002;
             --shadow-dark: rgba(0, 0, 0, 0.5);
             --font-jua: 'Jua', cursive;
             --font-opensans: 'Open Sans', sans-serif;
@@ -46,6 +45,8 @@
             margin-bottom: 60px;
             position: relative;
             overflow: hidden;
+            display: flex;
+            height: 100vh;
             animation: fadeIn 1.5s ease-out;
         }
         .hero-header::before {
@@ -61,6 +62,7 @@
         .hero-header-content {
             position: relative;
             z-index: 2;
+            margin: auto;
             transform: translateY(0);
             transition: transform 0.5s ease-out;
         }
@@ -82,7 +84,7 @@
         .hero-header .button {
             display: inline-block;
             background-color: var(--accent-yellow);
-            color: #333;
+            color: #fff;
             padding: 12px 25px;
             border-radius: 5px;
             text-decoration: none;
@@ -240,7 +242,7 @@
             background-color: var(--accent-yellow);
             padding: 15px;
             box-sizing: border-box;
-            color: #333;
+            color: #fff;
             margin-top: 60px;
         }
         .footer-kiri {
@@ -249,7 +251,7 @@
         }
         .footer-kiri p {
             font-size: 16px;
-            color: #333333;
+            color: #fff;
             font-family: var(--font-opensans);
         }
         .footer-kiri .foo {
@@ -379,8 +381,9 @@
             to { opacity: 1; }
         }
     </style>
-</head>
-<body>
+@endsection
+
+@section('content')
     <header class="hero-header" id="top">
         <div class="hero-header-content">
             <h1>Tentang Tim Aksaranta</h1>
@@ -445,36 +448,7 @@
             </div>
         </div>
     </main>
-    <footer>
-        <div class="footer-kiri">
-            <p class="foo">Aksaranta</p>
-            <p>Gerbang Aksara Batak Digital Anda.</p>
-        </div>
-        <div class="footer-kanan">
-            <div class="satu-footer">
-                <h5>Aksara</h5>
-                <p>Toba</p>
-                <p>Karo</p>
-                <p>Simalungun</p>
-                <p>Mandailing</p>
-                <p>Pakpak</p>
-            </div>
-            <div class="satu-footer">
-                <h5>Fitur</h5>
-                <p>Transliterasi</p>
-                <p>Kamus</p>
-                <p>Virtual Tour</p>
-                <p>Musik</p>
-            </div>
-            <div class="satu-footer">
-                <h5>Informasi</h5>
-                <p>Sejarah</p>
-                <p>Budaya</p>
-                <p>Blog</p>
-                <p>Wisata</p>
-            </div>
-        </div>
-    </footer>
+
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const animatedElements = document.querySelectorAll(
@@ -532,5 +506,4 @@
             }
         });
     </script>
-</body>
-</html>
+@endsection

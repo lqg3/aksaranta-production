@@ -19,7 +19,7 @@
         font-family: "opensans";
       }
       body{
-        background-color: #333;
+        background-color: #000;
       }
 
       h3{
@@ -41,7 +41,7 @@
       }
       .kalimat-virtual-tour h5 {
         font-size: 18px;
-        color: #e0e252;
+        color: #B10002;
         font-family: "jua";
       }
       .kalimat-virtual-tour h3 {
@@ -108,7 +108,7 @@
       .kalimat-tour p {
         margin: 0 0 10px 0;
         font-size: 15px;
-        color: #cded3d;
+        color: #B10002;
         font-weight: bold;
         font-family: "jua";
       }
@@ -241,19 +241,106 @@
             /* font-size: 50px; */
             margin: 0 0 0 30px;
         }
+
+        /* --- Gaya CSS untuk Header --- */
+.hero-header {
+    /* Ganti URL gambar banner Anda di sini. Sesuaikan path jika perlu. */
+    background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('../img/danautoba2.jpg') no-repeat center center/cover;
+    color: var(--text-light);
+    text-align: center;
+    padding: 100px 20px;
+    margin-bottom: 60px; /* Jarak antara header dan konten selanjutnya */
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    height: 100vh;
+    color: #fff;
+    animation: fadeIn 1.5s ease-out; /* Animasi fade-in saat halaman dimuat */
+}
+
+.hero-header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.3); /* Overlay gelap pada gambar */
+    z-index: 1;
+}
+
+.hero-header-content {
+    position: relative;
+    z-index: 2;
+    transform: translateY(0);
+    margin: auto;
+    transition: transform 0.5s ease-out; /* Untuk efek paralaks ringan */
+}
+
+.hero-header-content h1 {
+    font-family: var(--font-jua);
+    font-size: 4.5em;
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
+    animation: fadeInDown 1.2s ease-out; /* Animasi judul */
+    color: var(--text-light);
+}
+
+.hero-header-content p {
+    font-size: 1.3em;
+    max-width: 800px;
+    margin: 0 auto 30px;
+    color: var(--text-light);
+    animation: fadeInUp 1.2s ease-out 0.2s; /* Animasi paragraf */
+}
+
+.hero-header .button {
+    display: inline-block;
+    /* background-color: var(--accent-yellow); */
+    color: #fff;
+    padding: 12px 25px;
+
+    background-color: #B10002;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    animation: fadeIn 1.2s ease-out 0.4s; /* Animasi tombol */
+}
+
+.hero-header .button:hover {
+    background-color: var(--accent-yellow-hover);
+    transform: translateY(-3px); /* Efek hover pada tombol */
+}
+
+/* --- Media Queries untuk Header (Responsive) --- */
+@media (max-width: 800px) {
+    .hero-header {
+        padding: 60px 20px;
+        margin-bottom: 40px;
+    }
+    .hero-header-content h1 {
+        font-size: 3em;
+    }
+    .hero-header-content p {
+        font-size: 1em;
+    }
+}
     </style>
     </style>
   </head>
   <body>
 
-
-    <div class="box-peta1">
-        {{-- <img src="img/wisata.jpg" alt="" height="450" width="100%"/> --}}
-        <div class="content">
-            <h1>Virtual Tour</h1>
-            <p>360-Degree View Control: Users can rotate the view to explore all angles of <br> a space or scene, providing a more realistic experience.</p>
-        </div>
+<header class="hero-header" id="top">
+    <div class="hero-header-content">
+        <h1>Virtual tour</h1>
+        <p>
+             Jelajahi keindahan alam Sumatera Utara dengan virtual tour kami. Nikmati pengalaman interaktif yang membawa Anda ke tempat-tempat wisata terbaik di daerah ini, mulai dari Danau Toba yang megah hingga Air Terjun Piso yang menakjubkan.
+        </p>
+        <a href="#detail-section" class="button">Lihat Lebih Lanjut</a>
     </div>
+    </header>
+
 
     <div class="pembatas"></div>
     <div class="up">
@@ -264,7 +351,7 @@
       </a>
     </div>
 
-    <div class="kalimat-virtual-tour">
+    <div class="kalimat-virtual-tour" id="detail-section">
       <h5>DESKRIPSI SELENGKAPNYA</h5>
       <br />
       <h3>Nikmati virtual tour disetiap detiknya</h3>
@@ -387,7 +474,7 @@
     </div>
 
     <!-- FOOTER -->
-    <footer>
+    {{-- <footer>
       <div class="footer-kiri">
         <p class="foo">
           <i class="fa-sharp fa-solid fa-satellite" style="color: #fff"></i>
@@ -416,6 +503,20 @@
         </div>
       </div>
     </footer>
-    <!-- FOOTER -->
+    <!-- FOOTER --> --}}
   </body>
+  {{-- <script>
+        // --- Bagian JavaScript untuk Header ---
+// Tempatkan kode ini di dalam tag <script> di bagian bawah file HTML Anda,
+// atau di dalam document.addEventListener('DOMContentLoaded', function() { ... });
+
+const heroHeader = document.querySelector('.hero-header');
+if (heroHeader) {
+    window.addEventListener('scroll', function() {
+        const scrollPosition = window.pageYOffset;
+        // Efek paralaks ringan pada gambar latar belakang header
+        heroHeader.style.backgroundPositionY = -scrollPosition * 0.3 + 'px';
+    });
+}
+    </script> --}}
 </html>

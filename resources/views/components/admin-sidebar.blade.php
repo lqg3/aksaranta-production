@@ -8,10 +8,16 @@
     class="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0 border-r border-gray-600">
     <div class="h-full px-3 py-4 overflow-y-auto">
         <ul class="space-y-2 font-medium">
+            <h1 class="text-xl">Aksaranta</h1>
+            <hr class="rounded-full border-gray-500" />
             <li>
                 <a href="{{route('admin.posts.index')}}" class="flex items-center p-2 rounded-lg hover:bg-gray-700 transition-all duration-200">
                     <i class="fa-solid fa-newspaper"></i>
                     <span class="ml-3">Posts</span>
+                </a>
+                <a href="{{route('admin.course.index')}}" class="flex items-center p-2 rounded-lg hover:bg-gray-700 transition-all duration-200">
+                    <i class="fa-solid fa-book"></i>
+                    <span class="ml-3">Courses</span>
                 </a>
             </li>
         </ul>

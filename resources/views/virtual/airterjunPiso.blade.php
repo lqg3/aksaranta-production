@@ -14,8 +14,8 @@
             --highlight-bg: #3f3c3c; /* Latar belakang untuk elemen yang menonjol */
             --text-light: #f0f0f0;
             --text-muted: #d0d0d0;
-            --accent-yellow: #ffee00; /* Mengganti warna kuning tua Anda */
-            --accent-yellow-hover: #ffda00;
+            --accent-yellow: #d84b4b; /* Mengganti warna kuning tua Anda */
+            --accent-yellow-hover: #B10002;
             --shadow-dark: rgba(0, 0, 0, 0.5);
             --font-jua: 'Jua', cursive;
             --font-opensans: 'Open Sans', sans-serif;
@@ -54,6 +54,8 @@
             margin-bottom: 60px;
             position: relative;
             overflow: hidden;
+            display: flex;
+            height: 100vh;
             animation: fadeIn 1.5s ease-out;
         }
 
@@ -69,7 +71,7 @@
         }
 
         .hero-header-content {
-            position: relative;
+            margin: auto;
             z-index: 2;
             transform: translateY(0);
             transition: transform 0.5s ease-out;
@@ -95,7 +97,7 @@
         .hero-header .button {
             display: inline-block;
             background-color: var(--accent-yellow);
-            color: #333;
+            color: #fff;
             padding: 12px 25px;
             border-radius: 5px;
             text-decoration: none;
@@ -163,7 +165,7 @@
             font-size: 2.2em; /* Ukuran lebih besar */
             margin: 0 0 20px 0;
             font-family: var(--font-jua);
-            color: var(--accent-yellow); /* Judul kuning */
+            color: #fff;
         }
 
         .flex-text-block p {
@@ -235,7 +237,7 @@
             background-color: var(--accent-yellow);
             padding: 15px;
             box-sizing: border-box;
-            color: #333;
+            color: #fff;
             margin-top: 60px;
         }
 
@@ -395,6 +397,10 @@
             .klik-up {
                 margin: 0 10px 0 0;
             }
+            footer p, h5 {
+
+                color: #fff
+            }
         }
 
         /* --- Keyframe Animations --- */
@@ -449,7 +455,7 @@
         </div>
     </main>
 
-    <footer>
+    {{-- <footer>
         <div class="footer-kiri">
             <p class="foo">Aksaranta</p>
             <p>Gerbang Aksara Batak Digital Anda.</p>
@@ -481,11 +487,11 @@
                 <p>Wisata</p>
             </div>
         </div>
-    </footer>
+    </footer> --}}
     <div class="up">
         <a href="#top" aria-label="Scroll to top">
             <div class="klik-up">
-                <img src="img/top.png" width="30px" alt="Panah atas" />
+                <img src="../img/top.png" width="30px" alt="" />
             </div>
         </a>
     </div>

@@ -1,0 +1,72 @@
+name: Deploy Laravel App to cPanel
+
+# This action will trigger on pushes to the 'main' branch
+on:
+  push:
+    branches:
+      - learn
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest # Use the latest Ubuntu runner
+
+    steps:
+      # 1. Checkout the repository code
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      # 2. Setup PHP with the correct version and extensions
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2' # Change to your required PHP version
+          extensions: mbstring, dom, fileinfo, mysql, curl, zip # Add extensions your app needs
+          tools: composer
+
+      # 3. Setup Node.js for compiling assets
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20' # Change to your required Node.js version
+
+      # 4. Install Composer dependencies
+      - name: Install Composer Dependencies
+        run: composer install --no-interaction --prefer-dist --optimize-autoloader --no-dev
+
+      # 5. Install NPM dependencies and build assets
+      - name: Install NPM Dependencies & Build Assets
+        run: |
+          npm install
+          npm run build
+
+      # 6. Create .env file from GitHub Secrets
+      - name: Create .env file
+        run: echo "${{ secrets.LARAVEL_ENV }}" > .env
+
+      # 7. Deploy files to cPanel using rsync over SSH
+      - name: Deploy Files
+        uses: easingthemes/ssh-deploy@v5.0.0
+        with:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          REMOTE_HOST: ${{ secrets.SSH_HOST }}
+          REMOTE_USER: ${{ secrets.SSH_USER }}
+          REMOTE_PORT: ${{ secrets.SSH_PORT }}
+          SOURCE: "/"  # Deploy the entire project directory
+          TARGET: ${{ secrets.DEPLOY_PATH }}
+          EXCLUDE: "/.git/, /node_modules/"
+
+      # 8. Run post-deployment commands on the server
+      - name: Run Post-Deployment Commands
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: ${{ secrets.SSH_PORT }}
+          script: |
+            cd ${{ secrets.DEPLOY_PATH }}
+            php artisan migrate --force
+            php artisan optimize:clear
+            php artisan config:cache
+            php artisan route:cache
+            php artisan view:cache

@@ -1,16 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('layouts.general')
 
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
-            integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
-            crossorigin="anonymous" referrerpolicy="no-referrer" />
-        <title>Aksara Translator</title>
+@section('title', 'Aksara Translator')
 
-        @vite(['resources/css/app.css', 'resources/css/virtual-keyboard.css', 'resources/js/app.js'])
+@section('head')
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    @vite(['resources/css/virtual-keyboard.css'])
 
         <script>
             /**
@@ -282,9 +278,11 @@
                 outputElement.textContent = result;
             }
         </script>
-    </head>
+@endsection
 
-    <body class="bg-black text-white font-poppins">
+@section('body-class', 'bg-bg-dark text-white font-poppins')
+
+@section('content')
         <!-- Hero Section -->
         <section class="relative w-full h-[100dvh] max-h-[900px] overflow-hidden flex items-center justify-center">
             <img src="{{ asset('img/culture/hero-section-bg.svg') }}" alt="Background"
@@ -419,6 +417,4 @@
                 textarea.style.height = newHeight + 'px';
             }
         </script>
-    </body>
-
-</html>
+@endsection
