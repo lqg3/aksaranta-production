@@ -1,12 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('layouts.general')
 
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-        <title>Batak Songs</title>
-        <script src="https://cdn.tailwindcss.com"></script>
+@section('title', 'Batak Songs')
+
+@section('head')
+    <script src="https://cdn.tailwindcss.com"></script>
         <style>
             .nav-button {
                 transition: all 0.3s ease;
@@ -41,9 +38,11 @@
                 display: none;
             }
         </style>
-    </head>
+@endsection
 
-    <body class="bg-bg-dark text-white font-poppins">
+@section('body-class', 'bg-bg-dark text-white font-poppins')
+
+@section('content')
         <!-- Hero Section -->
         <section class="relative w-full h-[100dvh] max-h-[900px] overflow-hidden flex items-center justify-center">
             <img src="{{ asset('img/culture/hero-section-bg.svg') }}" alt="Background"
@@ -341,6 +340,4 @@
                 updateArrows('artist-scroll', 'left-arrow', 'right-arrow');
             });
         </script>
-    </body>
-
-</html>
+@endsection

@@ -1,15 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('layouts.general')
 
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-        <title>Batak Culture</title>
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
-    </head>
+@section('title', 'Batak Culture')
 
-    <body class="font-jua bg-bg-dark text-white">
+@section('body-class', 'font-jua bg-bg-dark text-white')
+
+@section('content')
         <section class="relative w-full h-[100dvh] max-h-[900px] overflow-hidden flex items-center justify-center">
             <!-- Background -->
             <img src="{{ asset('img/culture/hero-section-bg.svg') }}" alt="Background"
@@ -91,6 +86,4 @@
                 </div>
             </div>
         </section>
-    </body>
-
-</html>
+@endsection

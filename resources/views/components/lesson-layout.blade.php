@@ -7,6 +7,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
+
 <body class="bg-bg-dark flex flex-col justify-center items-center text-text-primary" 
       x-data="{
         ...pageTransition(),
@@ -28,7 +29,11 @@
         init();
         setTabFromHash();
         window.addEventListener('hashchange', () => setTabFromHash());
+        window.currentPageTransition = $data;
       ">
+
+    <!-- Navigation - outside transition wrapper so it stays static -->
+    @include('components.user-nav')
     
     <!-- Loading overlay -->
     <div x-show="isLoading" 

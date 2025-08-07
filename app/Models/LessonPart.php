@@ -14,7 +14,10 @@ class LessonPart extends Model
         'part_description',
         'part_video_url',
         'part_content',
-        'order'
+        'order',
+    ];
+    protected $casts = [
+        'quiz_content' => 'array', // Agar JSON otomatis jadi array
     ];
     /** @use HasFactory<\Database\Factories\LessonPartFactory> */
     use HasFactory;

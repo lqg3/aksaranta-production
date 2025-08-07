@@ -32,7 +32,7 @@ class LessonPartAdminController extends Controller
             'current_page'  => $paginator->currentPage(),
             'last_page'     => $paginator->lastPage(),
         ];
-
+        
         if (request()->ajax()) {
             return view('admin.lesson-part._table', compact('lessonParts', 'pagination', 'course', 'learn'));
         }

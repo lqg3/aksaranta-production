@@ -1,9 +1,8 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aksaranta - Tentang Tim Kami</title>
+@extends('layouts.general')
+
+@section('title', 'Aksaranta - Tentang Tim Kami')
+
+@section('head')
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Jua&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -382,8 +381,9 @@
             to { opacity: 1; }
         }
     </style>
-</head>
-<body>
+@endsection
+
+@section('content')
     <header class="hero-header" id="top">
         <div class="hero-header-content">
             <h1>Tentang Tim Aksaranta</h1>
@@ -506,5 +506,4 @@
             }
         });
     </script>
-</body>
-</html>
+@endsection

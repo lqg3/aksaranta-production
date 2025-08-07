@@ -1,6 +1,96 @@
 @extends('layouts.homepage')
 
 @section('content')
+
+<style>
+body{
+    height: 100%;
+    width: 100%;
+    margin: 0rem;
+    overflow: hidden;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}
+.image-container {
+    position: relative;
+    width: 40vmin;
+    height: 56vmin;
+}
+
+.image-container > .image{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 100% 50%;
+}
+
+.image-overlay {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    color: white;
+    padding: 2rem;
+    opacity: 0.5;
+    transition: opacity 0.3s ease;
+    background: linear-gradient(transparent, rgba(0,0,0,0.6));
+}
+
+.image-container:hover .image-overlay {
+    opacity: 1;
+}
+
+.image-overlay h3 {
+    margin: 0;
+    font-size: 1.2rem;
+    font-weight: 300;
+    transition: .2s;
+}
+.image-overlay h3:hover{
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.image-overlay p {
+    margin: 0;
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+#image-track{
+    display: flex;
+    gap: 4vmin;
+    position: absolute;
+    left: 40%;
+    top: 50%;
+    transform: translate(0%, -50%);
+}
+#switchNavigation {
+        transition-property: transform, opacity;
+        transition-duration: 0.6s;
+        transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+}
+#switchNavigation.translate-y-24 {
+    transform: translate(-50%, 6rem);
+    opacity: 0;
+}
+#switchNavigation.translate-y-0 {
+    transform: translate(-50%, 0);
+    opacity: 1;
+}
+#switchNavigation.opacity-0 {
+    opacity: 0;
+}
+#switchNavigation.opacity-100 {
+    opacity: 1;
+}
+</style>
+
 <div id="loading-screen" class="fixed inset-0 w-screen h-screen flex items-center justify-center z-[1000] transition-opacity duration-500 opacity-100">
     <div id="loading-text" class="text-md text-white">0%</div>
 </div>
@@ -11,217 +101,776 @@
     }
 </style>
 
-<canvas id="canvas" class="fixed z-[-500] "></canvas>
-<!-- 10% dark overlay over canvas -->
-<div class="fixed inset-0 pointer-events-none z-[-400]"></div>
-<nav class="navigation-carousel text-center text-5xl" role="navigation" aria-label="Main navigation">
-    <div class="navigation-container">
-        <!-- Navigation Item 0: Budaya Batak - Image 9 (center from zoom: column 2, row 1) -->
-        <div class="navigation-item font-extralight transition-all ease-in-out duration-300 hidden" 
-             data-index="0" data-image="9"
-             role="listitem">
-            <button class="nav-control nav-prev hover:underline hover:decoration-2 text-3xl mr-8" 
-                    aria-label="Previous navigation item" 
-                    data-direction="prev">
-                ←
-            </button>
-            <a class="nav-link hover:underline hover:decoration-2" 
-               href="{{ route('culture') }}" 
-               aria-label="Go to Budaya Batak">
-                Budaya Batak
-            </a>
-            <button class="nav-control nav-next hover:underline hover:decoration-2 text-3xl ml-8" 
-                    aria-label="Next navigation item" 
-                    data-direction="next">
-                →
-            </button>
+<div id="nav-1" class="transition-all duration-300">
+    <canvas id="canvas" class="fixed z-[-500] top-0 left-0"></canvas>
+    <!-- 10% dark overlay over canvas -->
+    <div class="fixed inset-0 pointer-events-none z-[-400] bg-black bg-opacity-30"></div>
+
+    <!-- Navigation overlay with fade transitions -->
+    <div id="navigation-overlay" 
+        class="fixed inset-0 pointer-events-none z-10 opacity-0 transition-opacity duration-600 ease-in-out"
+        x-data="navigationTransition()"
+        x-init="init(); window.currentPageTransition = $data"
+        @navigate="navigateTo($event.detail)">
+        
+        <!-- Loading overlay for navigation transitions -->
+        <div x-show="isTransitioning" 
+            x-transition:enter="transition ease-out duration-300"
+            x-transition:enter-start="opacity-0"
+            x-transition:enter-end="opacity-100"
+            x-transition:leave="transition ease-in duration-300"
+            x-transition:leave-start="opacity-100"
+            x-transition:leave-end="opacity-0"
+            class="z-[2500] fixed inset-0 bg-bg-dark flex items-center justify-center">
         </div>
 
-        <!-- Navigation Item 1: Sejarah Batak - Image 0 -->
-        <div class="navigation-item font-extralight transition-all ease-in-out duration-300 hidden" 
-             data-index="1" data-image="25"
-             role="listitem">
-            <button class="nav-control nav-prev hover:underline hover:decoration-2 text-3xl mr-8" 
-                    aria-label="Previous navigation item" 
-                    data-direction="prev">
-                ←
-            </button>
-            <a class="nav-link hover:underline hover:decoration-2" 
-               href="{{ route('about.history') }}" 
-               aria-label="Go to Sejarah Batak">
-                Sejarah Batak
-            </a>
-            <button class="nav-control nav-next hover:underline hover:decoration-2 text-3xl ml-8" 
-                    aria-label="Next navigation item" 
-                    data-direction="next">
-                →
-            </button>
-        </div>
+        <nav class="navigation-carousel text-center text-5xl pointer-events-auto" role="navigation" aria-label="Main navigation">
+        <div class="navigation-container">
+            <!-- Navigation Item 0: Budaya Batak - Image 9 (center from zoom: column 2, row 1) -->
+            <div class="navigation-item font-title font-extralight transition-all ease-in-out duration-100 hidden" 
+                data-index="0" data-image="9"
+                role="listitem">
+                <button class="nav-control nav-prev hover:underline hover:decoration-2 text-3xl mr-8" 
+                        aria-label="Previous navigation item" 
+                        data-direction="prev">
+                    ←
+                </button>
+                <a class="nav-link hover:underline hover:decoration-2" 
+                @click.prevent="$dispatch('navigate', '{{ route('culture') }}')"
+                href="{{ route('culture') }}" 
+                aria-label="Go to Budaya Batak">
+                    Budaya Batak
+                </a>
+                <button class="nav-control nav-next hover:underline hover:decoration-2 text-3xl ml-8" 
+                        aria-label="Next navigation item" 
+                        data-direction="next">
+                    →
+                </button>
+            </div>
 
-        <!-- Navigation Item 2: Aksara Batak - Image 4 -->
-        <div class="navigation-item font-extralight transition-all ease-in-out duration-300 hidden" 
-             data-index="2" data-image="27"
-             role="listitem">
-            <button class="nav-control nav-prev hover:underline hover:decoration-2 text-3xl mr-8" 
-                    aria-label="Previous navigation item" 
-                    data-direction="prev">
-                ←
-            </button>
-            <a class="nav-link hover:underline hover:decoration-2" 
-               href="{{ route('learn.index') }}" 
-               aria-label="Go to Aksara Batak">
-                Aksara Batak
-            </a>
-            <button class="nav-control nav-next hover:underline hover:decoration-2 text-3xl ml-8" 
-                    aria-label="Next navigation item" 
-                    data-direction="next">
-                →
-            </button>
-        </div>
+            <!-- Navigation Item 1: Sejarah Batak - Image 0 -->
+            <div class="navigation-item font-title font-extralight transition-all ease-in-out duration-100 hidden" 
+                data-index="1" data-image="25"
+                role="listitem">
+                <button class="nav-control nav-prev hover:underline hover:decoration-2 text-3xl mr-8" 
+                        aria-label="Previous navigation item" 
+                        data-direction="prev">
+                    ←
+                </button>
+                <a class="nav-link hover:underline hover:decoration-2" 
+                @click.prevent="$dispatch('navigate', '{{ route('about.history') }}')"
+                href="{{ route('about.history') }}" 
+                aria-label="Go to Sejarah Batak">
+                    Sejarah Batak
+                </a>
+                <button class="nav-control nav-next hover:underline hover:decoration-2 text-3xl ml-8" 
+                        aria-label="Next navigation item" 
+                        data-direction="next">
+                    →
+                </button>
+            </div>
 
-        <!-- Navigation Item 3: Glosarium & Kamus - Image 3 -->
-        <div class="navigation-item font-extralight transition-all ease-in-out duration-300 hidden" 
-             data-index="3" data-image="26"
-             role="listitem">
-            <button class="nav-control nav-prev hover:underline hover:decoration-2 text-3xl mr-8" 
-                    aria-label="Previous navigation item" 
-                    data-direction="prev">
-                ←
-            </button>
-            <a class="nav-link hover:underline hover:decoration-2" 
-               href="{{ route('about.kamus') }}" 
-               aria-label="Go to Glosarium & Kamus">
-                Glosarium & Kamus
-            </a>
-            <button class="nav-control nav-next hover:underline hover:decoration-2 text-3xl ml-8" 
-                    aria-label="Next navigation item" 
-                    data-direction="next">
-                →
-            </button>
-        </div>
+            <!-- Navigation Item 2: Aksara Batak - Image 4 -->
+            <div class="navigation-item font-title font-extralight transition-all ease-in-out duration-100 hidden" 
+                data-index="2" data-image="27"
+                role="listitem">
+                <button class="nav-control nav-prev hover:underline hover:decoration-2 text-3xl mr-8" 
+                        aria-label="Previous navigation item" 
+                        data-direction="prev">
+                    ←
+                </button>
+                <a class="nav-link hover:underline hover:decoration-2" 
+                @click.prevent="$dispatch('navigate', '{{ route('learn.index') }}')"
+                href="{{ route('learn.index') }}" 
+                aria-label="Go to Aksara Batak">
+                    Aksara Batak
+                </a>
+                <button class="nav-control nav-next hover:underline hover:decoration-2 text-3xl ml-8" 
+                        aria-label="Next navigation item" 
+                        data-direction="next">
+                    →
+                </button>
+            </div>
 
-        <!-- Navigation Item 4: Virtual Tour - Image 19 -->
-        <div class="navigation-item font-extralight transition-all ease-in-out duration-300 hidden" 
-             data-index="4" data-image="28"
-             role="listitem">
-            <button class="nav-control nav-prev hover:underline hover:decoration-2 text-3xl mr-8" 
-                    aria-label="Previous navigation item" 
-                    data-direction="prev">
-                ←
-            </button>
-            <a class="nav-link hover:underline hover:decoration-2" 
-               href="{{ route('virtual.index') }}" 
-               aria-label="Go to Virtual Tour">
-                Virtual Tour
-            </a>
-            <button class="nav-control nav-next hover:underline hover:decoration-2 text-3xl ml-8" 
-                    aria-label="Next navigation item" 
-                    data-direction="next">
-                →
-            </button>
-        </div>
+            <!-- Navigation Item 3: Glosarium & Kamus - Image 3 -->
+            <div class="navigation-item font-title font-extralight transition-all ease-in-out duration-100 hidden" 
+                data-index="3" data-image="26"
+                role="listitem">
+                <button class="nav-control nav-prev hover:underline hover:decoration-2 text-3xl mr-8" 
+                        aria-label="Previous navigation item" 
+                        data-direction="prev">
+                    ←
+                </button>
+                <a class="nav-link hover:underline hover:decoration-2" 
+                @click.prevent="$dispatch('navigate', '{{ route('about.kamus') }}')"
+                href="{{ route('about.kamus') }}" 
+                aria-label="Go to Glosarium & Kamus">
+                    Glosarium & Kamus
+                </a>
+                <button class="nav-control nav-next hover:underline hover:decoration-2 text-3xl ml-8" 
+                        aria-label="Next navigation item" 
+                        data-direction="next">
+                    →
+                </button>
+            </div>
 
-        <!-- Navigation Item 5: Lagu Batak - Image 5 -->
-        <div class="navigation-item font-extralight transition-all ease-in-out duration-300 hidden" 
-             data-index="5" data-image="29"
-             role="listitem">
-            <button class="nav-control nav-prev hover:underline hover:decoration-2 text-3xl mr-8" 
-                    aria-label="Previous navigation item" 
-                    data-direction="prev">
-                ←
-            </button>
-            <a class="nav-link hover:underline hover:decoration-2" 
-               href="{{ route('batak-songs') }}" 
-               aria-label="Go to Lagu Batak">
-                Lagu Batak
-            </a>
-            <button class="nav-control nav-next hover:underline hover:decoration-2 text-3xl ml-8" 
-                    aria-label="Next navigation item" 
-                    data-direction="next">
-                →
-            </button>
-        </div>
+            <!-- Navigation Item 4: Virtual Tour - Image 19 -->
+            <div class="navigation-item font-title font-extralight transition-all ease-in-out duration-100 hidden" 
+                data-index="4" data-image="28"
+                role="listitem">
+                <button class="nav-control nav-prev hover:underline hover:decoration-2 text-3xl mr-8" 
+                        aria-label="Previous navigation item" 
+                        data-direction="prev">
+                    ←
+                </button>
+                <a class="nav-link hover:underline hover:decoration-2" 
+                @click.prevent="$dispatch('navigate', '{{ route('virtual.index') }}')"
+                href="{{ route('virtual.index') }}" 
+                aria-label="Go to Virtual Tour">
+                    Virtual Tour
+                </a>
+                <button class="nav-control nav-next hover:underline hover:decoration-2 text-3xl ml-8" 
+                        aria-label="Next navigation item" 
+                        data-direction="next">
+                    →
+                </button>
+            </div>
 
-        <!-- Navigation Item 6: Aksaranta - Image 6 -->
-        <div class="navigation-item font-extralight transition-all ease-in-out duration-300 hidden" 
-             data-index="6" data-image="30"
-             role="listitem">
-            <button class="nav-control nav-prev hover:underline hover:decoration-2 text-3xl mr-8" 
-                    aria-label="Previous navigation item" 
-                    data-direction="prev">
-                ←
-            </button>
-            <a class="nav-link hover:underline hover:decoration-2" 
-               href="{{ route('about.kamus-aksara') }}" 
-               aria-label="Go to Aksaranta">
-                Aksaranta
-            </a>
-            <button class="nav-control nav-next hover:underline hover:decoration-2 text-3xl ml-8" 
-                    aria-label="Next navigation item" 
-                    data-direction="next">
-                →
-            </button>
-        </div>
+            <!-- Navigation Item 5: Lagu Batak - Image 5 -->
+            <div class="navigation-item font-title font-extralight transition-all ease-in-out duration-100 hidden" 
+                data-index="5" data-image="29"
+                role="listitem">
+                <button class="nav-control nav-prev hover:underline hover:decoration-2 text-3xl mr-8" 
+                        aria-label="Previous navigation item" 
+                        data-direction="prev">
+                    ←
+                </button>
+                <a class="nav-link hover:underline hover:decoration-2" 
+                @click.prevent="$dispatch('navigate', '{{ route('batak-songs') }}')"
+                href="{{ route('batak-songs') }}" 
+                aria-label="Go to Lagu Batak">
+                    Lagu Batak
+                </a>
+                <button class="nav-control nav-next hover:underline hover:decoration-2 text-3xl ml-8" 
+                        aria-label="Next navigation item" 
+                        data-direction="next">
+                    →
+                </button>
+            </div>
 
-        <!-- Navigation Item 7: Blog - Image 7 -->
-        <div class="navigation-item font-extralight transition-all ease-in-out duration-300 hidden" 
-             data-index="7" data-image="31"
-             role="listitem">
-            <button class="nav-control nav-prev hover:underline hover:decoration-2 text-3xl mr-8" 
-                    aria-label="Previous navigation item" 
-                    data-direction="prev">
-                ←
-            </button>
-            <a class="nav-link hover:underline hover:decoration-2" 
-               href="{{ route('blog.index') }}" 
-               aria-label="Go to Blog">
-                Blog
-            </a>
-            <button class="nav-control nav-next hover:underline hover:decoration-2 text-3xl ml-8" 
-                    aria-label="Next navigation item" 
-                    data-direction="next">
-                →
-            </button>
-        </div>
+            <!-- Navigation Item 6: Aksaranta - Image 6 -->
+            <div class="navigation-item font-title font-extralight transition-all ease-in-out duration-100 hidden" 
+                data-index="6" data-image="30"
+                role="listitem">
+                <button class="nav-control nav-prev hover:underline hover:decoration-2 text-3xl mr-8" 
+                        aria-label="Previous navigation item" 
+                        data-direction="prev">
+                    ←
+                </button>
+                <a class="nav-link hover:underline hover:decoration-2" 
+                @click.prevent="$dispatch('navigate', '{{ route('about.kamus-aksara') }}')"
+                href="{{ route('about.kamus-aksara') }}" 
+                aria-label="Go to Aksaranta">
+                    Aksaranta
+                </a>
+                <button class="nav-control nav-next hover:underline hover:decoration-2 text-3xl ml-8" 
+                        aria-label="Next navigation item" 
+                        data-direction="next">
+                    →
+                </button>
+            </div>
 
-        <!-- Navigation Item 8: Tentang Kami - Image 14 -->
-        <div class="navigation-item font-extralight transition-all ease-in-out duration-300 hidden" 
-             data-index="8" data-image="32"
-             role="listitem">
-            <button class="nav-control nav-prev hover:underline hover:decoration-2 text-3xl mr-8" 
-                    aria-label="Previous navigation item" 
-                    data-direction="prev">
-                ←
-            </button>
-            <a class="nav-link hover:underline hover:decoration-2" 
-               href="{{ route('about.index') }}" 
-               aria-label="Go to Tentang Kami">
-                Tentang Kami
-            </a>
-            <button class="nav-control nav-next hover:underline hover:decoration-2 text-3xl ml-8" 
-                    aria-label="Next navigation item" 
-                    data-direction="next">
-                →
-            </button>
+            <!-- Navigation Item 7: Blog - Image 7 -->
+            <div class="navigation-item font-title font-extralight transition-all ease-in-out duration-100 hidden" 
+                data-index="7" data-image="31"
+                role="listitem">
+                <button class="nav-control nav-prev hover:underline hover:decoration-2 text-3xl mr-8" 
+                        aria-label="Previous navigation item" 
+                        data-direction="prev">
+                    ←
+                </button>
+                <a class="nav-link hover:underline hover:decoration-2" 
+                @click.prevent="$dispatch('navigate', '{{ route('blog.index') }}')"
+                href="{{ route('blog.index') }}" 
+                aria-label="Go to Blog">
+                    Blog
+                </a>
+                <button class="nav-control nav-next hover:underline hover:decoration-2 text-3xl ml-8" 
+                        aria-label="Next navigation item" 
+                        data-direction="next">
+                    →
+                </button>
+            </div>
+
+            <!-- Navigation Item 8: Tentang Kami - Image 14 -->
+            <div class="navigation-item font-title font-extralight transition-all ease-in-out duration-100 hidden" 
+                data-index="8" data-image="32"
+                role="listitem">
+                <button class="nav-control nav-prev hover:underline hover:decoration-2 text-3xl mr-8" 
+                        aria-label="Previous navigation item" 
+                        data-direction="prev">
+                    ←
+                </button>
+                <a class="nav-link hover:underline hover:decoration-2" 
+                @click.prevent="$dispatch('navigate', '{{ route('about.index') }}')"
+                href="{{ route('about.index') }}" 
+                aria-label="Go to Tentang Kami">
+                    Tentang Kami
+                </a>
+                <button class="nav-control nav-next hover:underline hover:decoration-2 text-3xl ml-8" 
+                        aria-label="Next navigation item" 
+                        data-direction="next">
+                    →
+                </button>
+            </div>
+        </div>
+        </nav>
+    </div>
+</div>
+
+<!-- #nav-2 with routes and transitions matching #nav-1 -->
+<div id="nav-2" class="top-0 left-0 transition-all duration-300 hidden"
+     x-data="navigationTransition()"
+     @navigate="navigateTo($event.detail)">
+    
+    <!-- Loading overlay for navigation transitions -->
+    <div x-show="isTransitioning" 
+        x-transition:enter="transition ease-out duration-300"
+        x-transition:enter-start="opacity-0"
+        x-transition:enter-end="opacity-100"
+        x-transition:leave="transition ease-in duration-300"
+        x-transition:leave-start="opacity-100"
+        x-transition:leave-end="opacity-0"
+        class="z-[2500] fixed inset-0 bg-bg-dark flex items-center justify-center">
+    </div>
+    
+    <div id="image-track">
+        <!-- Budaya Batak -->
+        <div class="image-container">
+            <img src="https://aksara-batak.sgp1.cdn.digitaloceanspaces.com/images/homepage/img10.webp" alt="" class="image" data-mouse-down-at="0" draggable="false" data-prev-percentage="0" data-image-index="0">
+            <div class="image-overlay">
+                <a class="font-title text-md hover:!underline cursor-pointer" 
+                   href="{{ route('culture') }}" 
+                   @click.prevent="$dispatch('navigate', '{{ route('culture') }}')"
+                   style="text-decoration: none; color: inherit; cursor: pointer;"
+                   draggable="false"
+                >Budaya Batak</a>
+            </div>
+        </div>
+        <!-- Sejarah Batak -->
+        <div class="image-container">
+            <img src="https://aksara-batak.sgp1.cdn.digitaloceanspaces.com/images/homepage/img26.webp" alt="" class="image" data-mouse-down-at="0" draggable="false" data-prev-percentage="0">
+            <div class="image-overlay">
+                <a class="font-title text-md hover:!underline cursor-pointer" 
+                   href="{{ route('about.history') }}" 
+                   @click.prevent="$dispatch('navigate', '{{ route('about.history') }}')"
+                   style="text-decoration: none; color: inherit; cursor: pointer;"
+                   draggable="false"
+                >Sejarah Batak</a>
+            </div>
+        </div>
+        <!-- Aksara Batak -->
+        <div class="image-container">
+            <img src="https://aksara-batak.sgp1.cdn.digitaloceanspaces.com/images/homepage/img28.webp" alt="" class="image" data-mouse-down-at="0" draggable="false" data-prev-percentage="0">
+            <div class="image-overlay">
+                <a class="font-title text-md hover:!underline cursor-pointer" 
+                   href="{{ route('learn.index') }}" 
+                   @click.prevent="$dispatch('navigate', '{{ route('learn.index') }}')"
+                   style="text-decoration: none; color: inherit; cursor: pointer;"
+                   draggable="false"
+                >Aksara Batak</a>
+            </div>
+        </div>
+        <!-- Glosarium & Kamus -->
+        <div class="image-container">
+            <img src="https://aksara-batak.sgp1.cdn.digitaloceanspaces.com/images/homepage/img27.webp" alt="" class="image" data-mouse-down-at="0" draggable="false" data-prev-percentage="0">
+            <div class="image-overlay">
+                <a class="font-title text-md hover:!underline cursor-pointer" 
+                   href="{{ route('about.kamus') }}" 
+                   @click.prevent="$dispatch('navigate', '{{ route('about.kamus') }}')"
+                   style="text-decoration: none; color: inherit; cursor: pointer;"
+                   draggable="false"
+                >Glosarium & Kamus</a>
+            </div>
+        </div>
+        <!-- Virtual Tour -->
+        <div class="image-container">
+            <img src="https://aksara-batak.sgp1.cdn.digitaloceanspaces.com/images/homepage/img29.webp" alt="" class="image" data-mouse-down-at="0" draggable="false" data-prev-percentage="0">
+            <div class="image-overlay">
+                <a class="font-title text-md hover:!underline cursor-pointer" 
+                   href="{{ route('virtual.index') }}" 
+                   @click.prevent="$dispatch('navigate', '{{ route('virtual.index') }}')"
+                   style="text-decoration: none; color: inherit; cursor: pointer;"
+                   draggable="false"
+                >Virtual Tour</a>
+            </div>
+        </div>
+        <!-- Lagu Batak -->
+        <div class="image-container">
+            <img src="https://aksara-batak.sgp1.cdn.digitaloceanspaces.com/images/homepage/img30.webp" alt="" class="image" data-mouse-down-at="0" draggable="false" data-prev-percentage="0">
+            <div class="image-overlay">
+                <a class="font-title text-md hover:!underline cursor-pointer" 
+                   href="{{ route('batak-songs') }}" 
+                   @click.prevent="$dispatch('navigate', '{{ route('batak-songs') }}')"
+                   style="text-decoration: none; color: inherit; cursor: pointer;"
+                   draggable="false"
+                >Lagu Batak</a>
+            </div>
+        </div>
+        <!-- Aksaranta -->
+        <div class="image-container">
+            <img src="https://aksara-batak.sgp1.cdn.digitaloceanspaces.com/images/homepage/img31.webp" alt="" class="image" data-mouse-down-at="0" draggable="false" data-prev-percentage="0">
+            <div class="image-overlay">
+                <a class="font-title text-md hover:!underline cursor-pointer" 
+                   href="{{ route('about.kamus-aksara') }}" 
+                   @click.prevent="$dispatch('navigate', '{{ route('about.kamus-aksara') }}')"
+                   style="text-decoration: none; color: inherit; cursor: pointer;"
+                   draggable="false"
+                >Aksaranta</a>
+            </div>
+        </div>
+        <!-- Blog -->
+        <div class="image-container">
+            <img src="https://aksara-batak.sgp1.cdn.digitaloceanspaces.com/images/homepage/img32.webp" alt="" class="image" data-mouse-down-at="0" draggable="false" data-prev-percentage="0">
+            <div class="image-overlay">
+                <a class="font-title text-md hover:!underline cursor-pointer" 
+                   href="{{ route('blog.index') }}" 
+                   @click.prevent="$dispatch('navigate', '{{ route('blog.index') }}')"
+                   style="text-decoration: none; color: inherit; cursor: pointer;"
+                   draggable="false"
+                >Blog</a>
+            </div>
+        </div>
+        <!-- Tentang Kami -->
+        <div class="image-container">
+            <img src="https://aksara-batak.sgp1.cdn.digitaloceanspaces.com/images/homepage/img33.webp" alt="" class="image" data-mouse-down-at="0" draggable="false" data-prev-percentage="0">
+            <div class="image-overlay">
+                <a class="font-title text-md hover:!underline cursor-pointer" 
+                   href="{{ route('about.index') }}" 
+                   @click.prevent="$dispatch('navigate', '{{ route('about.index') }}')"
+                   style="text-decoration: none; color: inherit; cursor: pointer;"
+                   draggable="false"
+                >Tentang Kami</a>
+            </div>
         </div>
     </div>
-</nav>
+</div>
+
+
+<button id="switchNavigation" class="fixed left-1/2 -translate-x-1/2 bottom-6 z-50 px-6 py-3 bg-bg-dark bg-opacity-40 text-white font-title rounded-lg shadow-lg hover:bg-opacity-90 transition-all duration-300 translate-y-24 opacity-0"
+    style="transition-all duration-300"
+>Lihat Semua Halaman
+</button>
+
+
+<!-- Navigation switch script -->
+<script>
+    // Navigation switch logic
+    const btn = document.getElementById('switchNavigation');
+    btn.addEventListener('click', function() {
+        const nav1 = document.getElementById('nav-1');
+        const nav2 = document.getElementById('nav-2');
+        const fadeDuration = 300;
+
+        // Helper to fade out an element
+        function fadeOut(el, callback) {
+            el.style.transition = `opacity ${fadeDuration}ms`;
+            el.style.opacity = 0;
+            setTimeout(() => {
+                if (callback) callback();
+            }, fadeDuration);
+        }
+
+        // Helper to fade in an element
+        function fadeIn(el) {
+            el.style.transition = `opacity ${fadeDuration}ms`;
+            el.style.opacity = 1;
+        }
+
+        // Ensure both navs have opacity set for transition
+        nav1.style.opacity = nav1.style.opacity === "" ? "1" : nav1.style.opacity;
+        nav2.style.opacity = nav2.style.opacity === "" ? "1" : nav2.style.opacity;
+
+        if (nav1.classList.contains('hidden')) {
+            // Switch to nav-1 with fade
+            nav1.classList.remove('hidden');
+            nav1.style.opacity = 0;
+            fadeOut(nav2, () => {
+                nav2.classList.add('hidden');
+                fadeIn(nav1);
+            });
+            btn.textContent = 'Lihat Semua Halaman';
+        } else {
+            // Switch to nav-2 with fade
+            nav2.classList.remove('hidden');
+            nav2.style.opacity = 0;
+            fadeOut(nav1, () => {
+                nav1.classList.add('hidden');
+                fadeIn(nav2);
+            });
+            btn.textContent = 'Kembali';
+        }
+    });
+
+    // Track drag logic: only active when nav-2 is visible
+    const track = document.getElementById("image-track");
+    if (track) {
+        track.dataset.prevPercentage = "0";
+
+        let isDragging = false;
+
+        // Helper to check if nav-2 is visible
+        function isNav2Visible() {
+            const nav2 = document.getElementById('nav-2');
+            return nav2 && !nav2.classList.contains('hidden');
+        }
+
+        function onPointerDown(e) {
+            if (!isNav2Visible()) return;
+            isDragging = true;
+            track.dataset.mouseDownAt = e.clientX ?? (e.touches?.[0]?.clientX ?? 0);
+        }
+
+        function onPointerUp(e) {
+            if (!isDragging) return;
+            isDragging = false;
+            track.dataset.mouseDownAt = "0";
+            track.dataset.prevPercentage = track.dataset.percentage || "0";
+        }
+
+        function onPointerMove(e) {
+            if (!isDragging || !isNav2Visible()) return;
+            const clientX = e.clientX ?? (e.touches?.[0]?.clientX ?? 0);
+            if(track.dataset.mouseDownAt === "0") return;
+            const mouseDelta = parseFloat(track.dataset.mouseDownAt) - clientX,
+                maxDelta = window.innerWidth / 2;
+            const percentage = (mouseDelta / maxDelta) * -100,
+                nextPercentageUnconstrained = parseFloat(track.dataset.prevPercentage) + percentage,
+                nextPercentage = Math.max(Math.min(nextPercentageUnconstrained, 0), -90);
+            track.dataset.percentage = nextPercentage;
+            track.animate({
+                transform: `translate(${nextPercentage}%, -50%)` 
+            }, { duration: 1200, fill: "forwards"});
+            for(const image of track.getElementsByClassName("image")) {
+                image.animate({
+                    objectPosition: `${100 + nextPercentage}% center`
+                }, {duration: 1200, fill: "forwards"});
+            }
+        }
+
+        // Mouse events
+        track.addEventListener('mousedown', onPointerDown);
+        window.addEventListener('mouseup', onPointerUp);
+        window.addEventListener('mousemove', onPointerMove);
+
+        // Touch events for mobile
+        track.addEventListener('touchstart', onPointerDown, {passive: false});
+        window.addEventListener('touchend', onPointerUp, {passive: false});
+        window.addEventListener('touchmove', onPointerMove, {passive: false});
+    }
+</script>
+
+<!-- Transition Script -->
+<script>
+    // Alpine.js navigation transition component
+    function navigationTransition() {
+        return {
+            isTransitioning: false,
+            isNavigationReady: false,
+            
+            init() {
+                // Monitor for navigation readiness
+                this.checkNavigationReadiness();
+            },
+            
+            checkNavigationReadiness() {
+                // Wait for canvas animation to complete and navigation to be initialized
+                const checkInterval = setInterval(() => {
+                    if (window.navigationCarousel && window.navigationCarousel.isTextVisible) {
+                        this.showNavigation();
+                        clearInterval(checkInterval);
+                    }
+                }, 100);
+                
+                // Fallback timeout
+                setTimeout(() => {
+                    clearInterval(checkInterval);
+                    if (window.navigationCarousel) {
+                        this.showNavigation();
+                    }
+                }, 8000);
+            },
+            
+            showNavigation() {
+                this.isNavigationReady = true;
+                const overlay = document.getElementById('navigation-overlay');
+                if (overlay) {
+                    overlay.classList.add('ready');
+                }
+            },
+            
+            async navigateTo(url) {
+                if (this.isTransitioning) return;
+                
+                // Start transition
+                this.isTransitioning = true;
+                
+                try {
+                    // Wait for transition animation
+                    await new Promise(resolve => setTimeout(resolve, 600));
+                    
+                    // Navigate to new page
+                    window.location.href = url;
+                    
+                } catch (error) {
+                    console.error('Navigation error:', error);
+                    this.isTransitioning = false;
+                    
+                    // Fallback navigation
+                    window.location.href = url;
+                }
+            }
+        }
+    }
+</script>
 
 <script>
     const canvas = document.getElementById('canvas');
     const context = canvas.getContext('2d');
 
-    var windowWidth = window.innerWidth;
-    var windowHeight = window.innerHeight;
+    // Mobile-optimized viewport handling
+    function getOptimalCanvasSize() {
+        // Get actual viewport dimensions
+        let width = window.innerWidth;
+        let height = window.innerHeight;
+        
+        // Handle mobile viewport quirks
+        if (window.visualViewport) {
+            width = window.visualViewport.width;
+            height = window.visualViewport.height;
+        }
+        
+        // Handle high-DPI screens consistently
+        const dpr = window.devicePixelRatio || 1;
+        
+        return {
+            displayWidth: width,
+            displayHeight: height,
+            canvasWidth: Math.round(width * dpr),
+            canvasHeight: Math.round(height * dpr),
+            pixelRatio: dpr
+        };
+    }
 
-    canvas.width = windowWidth;
-    canvas.height = windowHeight;
+    let canvasSize = getOptimalCanvasSize();
+    var windowWidth = canvasSize.displayWidth;
+    var windowHeight = canvasSize.displayHeight;
+
+    // Set canvas size with proper DPI handling
+    canvas.width = canvasSize.canvasWidth;
+    canvas.height = canvasSize.canvasHeight;
+    canvas.style.width = canvasSize.displayWidth + 'px';
+    canvas.style.height = canvasSize.displayHeight + 'px';
+    
+    // Scale context for high-DPI screens
+    if (canvasSize.pixelRatio !== 1) {
+        context.scale(canvasSize.pixelRatio, canvasSize.pixelRatio);
+    }
 
     context.fillStyle = 'rgba(255, 255, 255, 0.5)';
 
     const cols = 5;
     const rows = 4;
     const totalImages = 33;
+
+    // Performance optimization: Global layout cache
+    let layoutCache = {
+        windowWidth: 0,
+        windowHeight: 0,
+        gap: 0,
+        rectWidth: 0,
+        rectHeight: 0,
+        positions: [],
+        cropCache: new Map(),
+        isValid: false
+    };
+
+    // Performance optimization: Cubic-bezier lookup table
+    const BEZIER_SAMPLES = 100;
+    const bezierLookupTable = new Map();
+
+    // Pre-calculate cubic-bezier values for common easing functions
+    function buildBezierLookupTable() {
+        const curves = {
+            'slideDefault': [0.5, 0.26, 0.25, 1],
+            'slideCenter': [0.89, 0.01, 0.26, 0.80],
+            'zoomEasing': [0.89, 0.01, 0.26, 0.90],
+            'transitionEasing': [0.25, 1, 0.25, 1]
+        };
+
+        for (const [name, [p1x, p1y, p2x, p2y]] of Object.entries(curves)) {
+            const table = [];
+            for (let i = 0; i <= BEZIER_SAMPLES; i++) {
+                const progress = i / BEZIER_SAMPLES;
+                table.push(cubicBezierCalculate(progress, p1x, p1y, p2x, p2y));
+            }
+            bezierLookupTable.set(name, table);
+        }
+    }
+
+    // Fast cubic-bezier lookup
+    function cubicBezierLookup(progress, curveName) {
+        const table = bezierLookupTable.get(curveName);
+        if (!table) return progress; // Fallback
+        
+        const index = Math.min(Math.floor(progress * BEZIER_SAMPLES), BEZIER_SAMPLES - 1);
+        const nextIndex = Math.min(index + 1, BEZIER_SAMPLES);
+        const localProgress = (progress * BEZIER_SAMPLES) - index;
+        
+        // Linear interpolation between samples
+        return table[index] + (table[nextIndex] - table[index]) * localProgress;
+    }
+
+    // Optimized layout calculation with caching
+    function updateLayoutCache() {
+        if (layoutCache.windowWidth === windowWidth && 
+            layoutCache.windowHeight === windowHeight && 
+            layoutCache.isValid) {
+            return; // Use cached values
+        }
+
+        const gap = Math.min(windowWidth, windowHeight) / 50;
+        const rectWidth = (windowWidth - (cols + 1) * gap) / cols;
+        const rectHeight = (windowHeight - (rows + 1) * gap) / rows;
+
+        layoutCache.windowWidth = windowWidth;
+        layoutCache.windowHeight = windowHeight;
+        layoutCache.gap = gap;
+        layoutCache.rectWidth = rectWidth;
+        layoutCache.rectHeight = rectHeight;
+        layoutCache.positions = [];
+        layoutCache.cropCache.clear();
+        layoutCache.isValid = true;
+
+        // Pre-calculate all grid positions
+        let imageIndex = 0;
+        for (let i = 0; i < cols; i++) {
+            for (let j = 0; j < rows; j++) {
+                const x = gap + i * (rectWidth + gap);
+                const y = gap + j * (rectHeight + gap);
+                
+                layoutCache.positions.push({
+                    x, y, imageIndex, column: i, row: j
+                });
+                imageIndex++;
+            }
+        }
+    }
+
+    // Pre-calculate crop coordinates for cover effect
+    function getCropCoordinates(img, targetWidth, targetHeight) {
+        const key = `${img.src}_${targetWidth}_${targetHeight}`;
+        
+        if (layoutCache.cropCache.has(key)) {
+            return layoutCache.cropCache.get(key);
+        }
+
+        const imgAspect = img.width / img.height;
+        const targetAspect = targetWidth / targetHeight;
+        let sx, sy, sWidth, sHeight;
+
+        if (imgAspect > targetAspect) {
+            sHeight = img.height;
+            sWidth = targetWidth * (img.height / targetHeight);
+            sx = (img.width - sWidth) / 2;
+            sy = 0;
+        } else {
+            sWidth = img.width;
+            sHeight = targetHeight * (img.width / targetWidth);
+            sx = 0;
+            sy = (img.height - sHeight) / 2;
+        }
+
+        const cropData = { sx, sy, sWidth, sHeight };
+        layoutCache.cropCache.set(key, cropData);
+        return cropData;
+    }
+
+    // Reusable object to reduce garbage collection
+    const reusableObjects = {
+        animationFrame: { lastTime: 0, deltaTime: 0 }
+    };
+
+    // Debug and verification functions for seamless transitions
+    function verifyTransitionState(targetColumn, targetRow) {
+        const targetImageIndex = targetColumn * rows + targetRow;
+        const targetImage = images[targetImageIndex];
+        
+        if (!targetImage || !targetImage.complete) {
+            console.warn('Transition verification failed: Target image not loaded');
+            return false;
+        }
+        
+        // Verify crop coordinates are cached and consistent
+        const rectCrop = getCropCoordinates(targetImage, layoutCache.rectWidth, layoutCache.rectHeight);
+        const fullCrop = getCropCoordinates(targetImage, windowWidth, windowHeight);
+        
+        if (!rectCrop || !fullCrop) {
+            console.warn('Transition verification failed: Crop coordinates not available');
+            return false;
+        }
+        
+        return true;
+    }
+
+    // Mobile-specific debugging helper
+    function logMobileViewportInfo() {
+        console.log('Mobile Viewport Info:', {
+            windowSize: `${window.innerWidth}x${window.innerHeight}`,
+            visualViewport: window.visualViewport ? `${window.visualViewport.width}x${window.visualViewport.height}` : 'not supported',
+            devicePixelRatio: window.devicePixelRatio,
+            canvasSize: `${canvas.width}x${canvas.height}`,
+            displaySize: `${canvasSize.displayWidth}x${canvasSize.displayHeight}`
+        });
+    }
+
+    // Original cubic-bezier calculation function (used for building lookup table)
+    function cubicBezierCalculate(progress, p1x, p1y, p2x, p2y) {
+        // Binary search to find t value for given x
+        function solveCubicBezierX(x, p1x, p2x) {
+            let t0 = 0;
+            let t1 = 1;
+            let t = x; // Initial guess
+            
+            // Binary search for the correct t value
+            for (let i = 0; i < 10; i++) { // 10 iterations should be enough for good precision
+                const currentX = 3 * (1 - t) * (1 - t) * t * p1x + 
+                            3 * (1 - t) * t * t * p2x + 
+                            t * t * t;
+                
+                if (Math.abs(currentX - x) < 0.001) break;
+                
+                if (currentX < x) {
+                    t0 = t;
+                } else {
+                    t1 = t;
+                }
+                t = (t0 + t1) / 2;
+            }
+            
+            return t;
+        }
+        
+        // Find the t value for the given x
+        const t = solveCubicBezierX(progress, p1x, p2x);
+        
+        // Calculate and return the y value for that t
+        const y = 3 * (1 - t) * (1 - t) * t * p1y + 
+                3 * (1 - t) * t * t * p2y + 
+                t * t * t;
+        
+        return y;
+    }
 
     // Loading screen elements
     const loadingScreen = document.getElementById('loading-screen');
@@ -267,15 +916,16 @@
             return;
         }
 
-        const gap = Math.min(windowWidth, windowHeight) / 50;
-        const rectWidth = (windowWidth - (cols + 1) * gap) / cols;
-        const rectHeight = (windowHeight - (rows + 1) * gap) / rows;
+        // Use cached layout calculations
+        updateLayoutCache();
+        const { gap, rectWidth, rectHeight } = layoutCache;
 
-        // Clear the canvas
+        // Clear the canvas once
         context.clearRect(0, 0, windowWidth, windowHeight);
 
-        // Apply zoom transformation if zooming
-        if (animationState.isZooming) {
+        // Batch zoom transformations to minimize save/restore calls
+        const needsZoomTransform = animationState.isZooming;
+        if (needsZoomTransform) {
             context.save();
             
             // Apply zoom transformations
@@ -292,71 +942,43 @@
             context.translate(-imageCenterX, -imageCenterY);
         }
 
-        let imageIndex = 0;
-        for (let i = 0; i < cols; i++) {
-            for (let j = 0; j < rows; j++) {
-                const x = gap + i * (rectWidth + gap);
-                let y;
-                
-                // Calculate target position (center grid)
-                const targetY = gap + j * (rectHeight + gap);
-                
-                if (animationState.isAnimating && animationState.animationType === 'slideIn' && 
-                    animationState.imageOffsets[i] && animationState.imageOffsets[i][j] !== undefined) {
-                    // Apply individual image offset for slide-in animation
-                    y = targetY + animationState.imageOffsets[i][j];
-                } else if (!animationState.isAnimating) {
-                    // Final positions - center grid
-                    y = targetY;
+        // Set global alpha once instead of per image
+        context.globalAlpha = 1.0;
+
+        // Use cached positions for optimized drawing
+        for (let posIndex = 0; posIndex < layoutCache.positions.length; posIndex++) {
+            const position = layoutCache.positions[posIndex];
+            const { x, column, row, imageIndex } = position;
+            let y = position.y;
+            
+            // Apply animation offsets if needed
+            if (animationState.isAnimating && animationState.animationType === 'slideIn' && 
+                animationState.imageOffsets[column] && animationState.imageOffsets[column][row] !== undefined) {
+                y += animationState.imageOffsets[column][row];
+            } else if (animationState.isAnimating && !animationState.imageOffsets[column]) {
+                // Fallback to staging positions
+                if (column % 2 === 0) {
+                    y = windowHeight + gap + row * (rectHeight + gap);
                 } else {
-                    // Fallback to staging positions if needed
-                    if (i % 2 === 0) {
-                        // Even columns (0, 2, 4) - position at bottom of frame
-                        y = windowHeight + gap + j * (rectHeight + gap);
-                    } else {
-                        // Odd columns (1, 3) - position at top of frame
-                        y = -(rectHeight * rows + gap * (rows + 1)) + gap + j * (rectHeight + gap);
-                    }
+                    y = -(rectHeight * rows + gap * (rows + 1)) + gap + row * (rectHeight + gap);
                 }
+            }
+            
+            const img = images[imageIndex];
+            if (img && img.complete) {
+                // Use pre-calculated crop coordinates
+                const { sx, sy, sWidth, sHeight } = getCropCoordinates(img, rectWidth, rectHeight);
                 
-                const img = images[imageIndex];
-                imageIndex++;
-
-                if (img && img.complete) {
-                    // Set opacity to 100% (no opacity animation)
-                    context.globalAlpha = 1.0;
-
-                    // Draw the image with object-fit: cover effect
-                    // Calculate aspect ratios
-                    const imgAspect = img.width / img.height;
-                    const rectAspect = rectWidth / rectHeight;
-                    let sx, sy, sWidth, sHeight;
-
-                    if (imgAspect > rectAspect) {
-                        // Image is wider than rect: crop sides
-                        sHeight = img.height;
-                        sWidth = rectWidth * (img.height / rectHeight);
-                        sx = (img.width - sWidth) / 2;
-                        sy = 0;
-                    } else {
-                        // Image is taller than rect: crop top/bottom
-                        sWidth = img.width;
-                        sHeight = rectHeight * (img.width / rectWidth);
-                        sx = 0;
-                        sy = (img.height - sHeight) / 2;
-                    }
-
-                    context.drawImage(
-                        img,
-                        sx, sy, sWidth, sHeight,
-                        x, y, rectWidth, rectHeight
-                    );
-                }
+                context.drawImage(
+                    img,
+                    sx, sy, sWidth, sHeight,
+                    x, y, rectWidth, rectHeight
+                );
             }
         }
         
-        // Restore canvas state if we applied zoom transformation
-        if (animationState.isZooming) {
+        // Restore canvas state once if we applied zoom transformation
+        if (needsZoomTransform) {
             context.restore();
         }
     }
@@ -375,14 +997,32 @@
     }
 
     function handleResize() {
-        windowWidth = window.innerWidth;
-        windowHeight = window.innerHeight;
+        // Use mobile-optimized canvas sizing
+        canvasSize = getOptimalCanvasSize();
+        windowWidth = canvasSize.displayWidth;
+        windowHeight = canvasSize.displayHeight;
         
-        canvas.width = windowWidth;
-        canvas.height = windowHeight;
+        // Update canvas with proper DPI handling
+        canvas.width = canvasSize.canvasWidth;
+        canvas.height = canvasSize.canvasHeight;
+        canvas.style.width = canvasSize.displayWidth + 'px';
+        canvas.style.height = canvasSize.displayHeight + 'px';
+        
+        // Reset context scaling for high-DPI screens
+        context.setTransform(1, 0, 0, 1, 0, 0); // Reset transform
+        if (canvasSize.pixelRatio !== 1) {
+            context.scale(canvasSize.pixelRatio, canvasSize.pixelRatio);
+        }
+        
+        // Invalidate layout cache on resize
+        layoutCache.isValid = false;
         
         // Redraw with new dimensions
-        drawRectangles();
+        if (animationState.isSingleImageMode) {
+            drawSingleImage();
+        } else {
+            drawRectangles();
+        }
     }
 
     // Animation state
@@ -405,15 +1045,15 @@
         animationState.isAnimating = true;
         animationState.animationType = 'slideIn';
         
+        // Use cached layout for initial positioning
+        updateLayoutCache();
+        const { gap, rectHeight } = layoutCache;
+        
         // Initialize 2D array for image offsets [column][row]
         animationState.imageOffsets = [];
         for (let i = 0; i < cols; i++) {
             animationState.imageOffsets[i] = [];
             for (let j = 0; j < rows; j++) {
-                // Calculate initial offset for each image
-                const gap = Math.min(windowWidth, windowHeight) / 50;
-                const rectHeight = (windowHeight - (rows + 1) * gap) / rows;
-                
                 if (i % 2 === 0) {
                     // Even columns start below screen
                     animationState.imageOffsets[i][j] = windowHeight + gap;
@@ -465,84 +1105,33 @@
         }, 1000);
     }
 
-    // Proper cubic bezier timing function implementation
-    function cubicBezier(x, p1x, p1y, p2x, p2y) {
-        // For CSS cubic-bezier timing functions, we need to solve for t given x
-        // Then return the corresponding y value
-        
-        // Binary search to find t value for given x
-        function solveCubicBezierX(x, p1x, p2x) {
-            let t0 = 0;
-            let t1 = 1;
-            let t = x; // Initial guess
-            
-            // Binary search for the correct t value
-            for (let i = 0; i < 10; i++) { // 10 iterations should be enough for good precision
-                const currentX = 3 * (1 - t) * (1 - t) * t * p1x + 
-                            3 * (1 - t) * t * t * p2x + 
-                            t * t * t;
-                
-                if (Math.abs(currentX - x) < 0.001) break;
-                
-                if (currentX < x) {
-                    t0 = t;
-                } else {
-                    t1 = t;
-                }
-                t = (t0 + t1) / 2;
-            }
-            
-            return t;
-        }
-        
-        // Find the t value for the given x
-        const t = solveCubicBezierX(x, p1x, p2x);
-        
-        // Calculate and return the y value for that t
-        const y = 3 * (1 - t) * (1 - t) * t * p1y + 
-                3 * (1 - t) * t * t * p2y + 
-                t * t * t;
-        
-        return y;
-    }
+
 
     function animateImageSlideIn(columnIndex, rowIndex) {
-        const duration = 1500; // 2800ms animation duration (2 seconds slower)
-        const startTime = Date.now();
+        const duration = 1500;
+        let startTime = 0;
         
-        // Calculate initial and final positions
-        const gap = Math.min(windowWidth, windowHeight) / 50;
-        const rectHeight = (windowHeight - (rows + 1) * gap) / rows;
+        // Cache initial calculations
+        updateLayoutCache();
+        const { gap, rectHeight } = layoutCache;
         
-        let startOffset;
-        if (columnIndex % 2 === 0) {
-            // Even columns start below screen
-            startOffset = windowHeight + gap;
-        } else {
-            // Odd columns start above screen
-            startOffset = -(rectHeight * rows + gap * (rows + 1));
-        }
+        const startOffset = columnIndex % 2 === 0 
+            ? windowWidth + gap 
+            : -(rectHeight * rows + gap * (rows + 1));
         
-        function animate() {
-            const elapsed = Date.now() - startTime;
+        // Choose easing curve based on image position
+        const easingCurve = (columnIndex === 2 && rowIndex === 0) ? 'slideCenter' : 'slideDefault';
+        
+        function animate(currentTime) {
+            if (startTime === 0) startTime = currentTime;
+            
+            const elapsed = currentTime - startTime;
             const progress = Math.min(elapsed / duration, 1);
             
-            // Custom cubic-bezier easing function
-            let easeProgress;
-            if (progress === 0) {
-                easeProgress = 0;
-            } else if (progress === 1) {
-                easeProgress = 1;
-            } else {
-                // Check if this is the center first image (column 2, row 0)
-                if (columnIndex === 2 && rowIndex === 0) {
-                    // Special easing for center first image: cubic-bezier(.89,.01,.26,.90)
-                    easeProgress = cubicBezier(progress, 0.89, 0.01, 0.26, 0.80);
-                } else {
-                    // Default easing for all other images: cubic-bezier(.5,.26,.25,1)
-                    easeProgress = cubicBezier(progress, 0.5, 0.26, 0.25, 1);
-                }
-            }
+            // Use optimized lookup table for easing
+            const easeProgress = progress === 0 || progress === 1 
+                ? progress 
+                : cubicBezierLookup(progress, easingCurve);
             
             // Animate from start offset to 0 (final position)
             animationState.imageOffsets[columnIndex][rowIndex] = startOffset * (1 - easeProgress);
@@ -553,16 +1142,15 @@
             if (progress < 1) {
                 requestAnimationFrame(animate);
             } else {
-                // Check if all images are done animating
+                // Check if all images are done animating (optimized check)
                 let allImagesAtFinalPosition = true;
-                for (let i = 0; i < cols; i++) {
+                for (let i = 0; i < cols && allImagesAtFinalPosition; i++) {
                     for (let j = 0; j < rows; j++) {
                         if (Math.abs(animationState.imageOffsets[i][j]) >= 1) {
                             allImagesAtFinalPosition = false;
                             break;
                         }
                     }
-                    if (!allImagesAtFinalPosition) break;
                 }
                 
                 if (allImagesAtFinalPosition) {
@@ -583,48 +1171,47 @@
         animationState.zoomTarget = { column: targetColumn, row: targetRow };
         animationState.zoomProgress = 0;
         
-        const duration = 4000; // 4 second zoom animation
-        const startTime = Date.now();
+        const duration = 4000;
+        let startTime = 0;
         
-        function animate() {
-            const elapsed = Date.now() - startTime;
+        // Pre-calculate zoom values to avoid repeated calculations
+        updateLayoutCache();
+        const { gap, rectWidth, rectHeight } = layoutCache;
+        
+        const targetX = gap + targetColumn * (rectWidth + gap);
+        const targetY = gap + targetRow * (rectHeight + gap);
+        const scaleToFitWidth = windowWidth / rectWidth;
+        const scaleToFitHeight = windowHeight / rectHeight;
+        const maxScale = Math.max(scaleToFitWidth, scaleToFitHeight);
+        const imageCenterX = targetX + rectWidth / 2;
+        const imageCenterY = targetY + rectHeight / 2;
+        const screenCenterX = windowWidth / 2;
+        const screenCenterY = windowHeight / 2;
+        const maxOffsetX = screenCenterX - imageCenterX;
+        const maxOffsetY = screenCenterY - imageCenterY;
+        
+        function animate(currentTime) {
+            if (startTime === 0) startTime = currentTime;
+            
+            const elapsed = currentTime - startTime;
             const progress = Math.min(elapsed / duration, 1);
             
-            // Aggressive easing for zoom: cubic-bezier(.89,.01,.26,.90)
-            const easeProgress = cubicBezier(progress, 0.89, 0.01, 0.26, 0.90);
+            // Use optimized easing lookup
+            const easeProgress = progress === 0 || progress === 1 
+                ? progress 
+                : cubicBezierLookup(progress, 'zoomEasing');
             
             animationState.zoomProgress = easeProgress;
             
-            // Calculate zoom scale and offsets
-            const gap = Math.min(windowWidth, windowHeight) / 50;
-            const rectWidth = (windowWidth - (cols + 1) * gap) / cols;
-            const rectHeight = (windowHeight - (rows + 1) * gap) / rows;
-            
-            // Target image position
-            const targetX = gap + targetColumn * (rectWidth + gap);
-            const targetY = gap + targetRow * (rectHeight + gap);
-            
-            // Calculate how much we need to scale to fill the screen
-            const scaleToFitWidth = windowWidth / rectWidth;
-            const scaleToFitHeight = windowHeight / rectHeight;
-            const maxScale = Math.max(scaleToFitWidth, scaleToFitHeight);
-            
-            // Animate scale from 1 to maxScale
+            // Use pre-calculated values for better performance
             animationState.zoomScale = 1 + (maxScale - 1) * easeProgress;
+            animationState.zoomOffsetX = maxOffsetX * easeProgress;
+            animationState.zoomOffsetY = maxOffsetY * easeProgress;
             
-            // Calculate offsets to center the zoomed image
-            const imageCenterX = targetX + rectWidth / 2;
-            const imageCenterY = targetY + rectHeight / 2;
-            const screenCenterX = windowWidth / 2;
-            const screenCenterY = windowHeight / 2;
-            
-            animationState.zoomOffsetX = (screenCenterX - imageCenterX) * easeProgress;
-            animationState.zoomOffsetY = (screenCenterY - imageCenterY) * easeProgress;
-            
-            // Redraw the scene
-            if (easeProgress >= 0.95) {
-                // Near the end of zoom, start rendering as single image for seamless transition
-                drawZoomToSingleTransition(easeProgress, targetColumn, targetRow);
+            // Redraw the scene with seamless transition logic
+            if (easeProgress >= 0.98) {
+                // Near completion: ensure pixel-perfect transition
+                drawSeamlessTransition(easeProgress, targetColumn, targetRow);
             } else {
                 drawRectangles();
             }
@@ -632,19 +1219,15 @@
             if (progress < 1) {
                 requestAnimationFrame(animate);
             } else {
-                // At the end of zoom, switch to single image mode seamlessly
-                // Skip the final drawRectangles call to avoid any visual inconsistency
-                switchToSingleImageMode(targetColumn, targetRow);
+                // Frame-perfect handoff to single image mode
+                seamlessSwitchToSingleImageMode(targetColumn, targetRow);
             }
         }
         
         requestAnimationFrame(animate);
     }
 
-    function drawZoomToSingleTransition(easeProgress, targetColumn, targetRow) {
-        // Transition factor (0 at 0.95 progress, 1 at 1.0 progress)
-        const transitionFactor = Math.min((easeProgress - 0.95) / 0.05, 1);
-        
+    function drawSeamlessTransition(easeProgress, targetColumn, targetRow) {
         // Get the target image
         const targetImageIndex = targetColumn * rows + targetRow;
         const targetImage = images[targetImageIndex];
@@ -654,89 +1237,60 @@
             return;
         }
         
-        // Clear canvas
+        // Clear canvas once
         context.clearRect(0, 0, windowWidth, windowHeight);
         
-        // Calculate zoom rectangle dimensions and position
-        const gap = Math.min(windowWidth, windowHeight) / 50;
-        const rectWidth = (windowWidth - (cols + 1) * gap) / cols;
-        const rectHeight = (windowHeight - (rows + 1) * gap) / rows;
-        const targetX = gap + targetColumn * (rectWidth + gap);
-        const targetY = gap + targetRow * (rectHeight + gap);
-        
-        // Calculate final zoom transform
-        const scaleToFitWidth = windowWidth / rectWidth;
-        const scaleToFitHeight = windowHeight / rectHeight;
-        const maxScale = Math.max(scaleToFitWidth, scaleToFitHeight);
-        
-        const imageCenterX = targetX + rectWidth / 2;
-        const imageCenterY = targetY + rectHeight / 2;
-        const screenCenterX = windowWidth / 2;
-        const screenCenterY = windowHeight / 2;
-        
-        const finalScale = 1 + (maxScale - 1) * easeProgress;
-        const finalOffsetX = (screenCenterX - imageCenterX) * easeProgress;
-        const finalOffsetY = (screenCenterY - imageCenterY) * easeProgress;
-        
-        // Blend between zoomed rectangle rendering and full-screen single image rendering
-        if (transitionFactor < 1) {
-            // Draw the zoomed rectangle version
-            context.save();
-            context.translate(finalOffsetX, finalOffsetY);
-            context.translate(imageCenterX, imageCenterY);
-            context.scale(finalScale, finalScale);
-            context.translate(-imageCenterX, -imageCenterY);
-            
-            // Calculate crop for rectangle
-            const imgAspect = targetImage.width / targetImage.height;
-            const rectAspect = rectWidth / rectHeight;
-            let sx, sy, sWidth, sHeight;
-            
-            if (imgAspect > rectAspect) {
-                sHeight = targetImage.height;
-                sWidth = rectWidth * (targetImage.height / rectHeight);
-                sx = (targetImage.width - sWidth) / 2;
-                sy = 0;
-            } else {
-                sWidth = targetImage.width;
-                sHeight = rectHeight * (targetImage.width / rectWidth);
-                sx = 0;
-                sy = (targetImage.height - sHeight) / 2;
-            }
+        // At 98%+ completion, render exactly as single image will render
+        // This ensures pixel-perfect continuity
+        if (easeProgress >= 0.99) {
+            // Render exactly as drawSingleImage() will
+            const { sx, sy, sWidth, sHeight } = getCropCoordinates(targetImage, windowWidth, windowHeight);
             
             context.drawImage(
                 targetImage,
                 sx, sy, sWidth, sHeight,
+                0, 0, windowWidth, windowHeight
+            );
+        } else {
+            // Transition factor (0 at 0.98 progress, 1 at 0.99 progress)
+            const transitionFactor = (easeProgress - 0.98) / 0.01;
+            
+            // Use cached layout calculations
+            const { gap, rectWidth, rectHeight } = layoutCache;
+            const targetX = gap + targetColumn * (rectWidth + gap);
+            const targetY = gap + targetRow * (rectHeight + gap);
+            
+            // Use pre-calculated zoom values from animationState
+            const finalScale = animationState.zoomScale;
+            const finalOffsetX = animationState.zoomOffsetX;
+            const finalOffsetY = animationState.zoomOffsetY;
+            
+            // Draw the zoomed rectangle version
+            context.save();
+            context.translate(finalOffsetX, finalOffsetY);
+            context.translate(targetX + rectWidth / 2, targetY + rectHeight / 2);
+            context.scale(finalScale, finalScale);
+            context.translate(-(targetX + rectWidth / 2), -(targetY + rectHeight / 2));
+            
+            // Use cached crop coordinates
+            const { sx: rectSx, sy: rectSy, sWidth: rectSWidth, sHeight: rectSHeight } = getCropCoordinates(targetImage, rectWidth, rectHeight);
+            
+            context.globalAlpha = 1 - transitionFactor;
+            context.drawImage(
+                targetImage,
+                rectSx, rectSy, rectSWidth, rectSHeight,
                 targetX, targetY, rectWidth, rectHeight
             );
             
             context.restore();
-        }
-        
-        // If transitioning, also draw the single image version with opacity
-        if (transitionFactor > 0) {
+            
+            // Overlay the single image version
             context.globalAlpha = transitionFactor;
-            
-            // Draw full-screen single image
-            const imgAspect = targetImage.width / targetImage.height;
-            const screenAspect = windowWidth / windowHeight;
-            let sx, sy, sWidth, sHeight;
-            
-            if (imgAspect > screenAspect) {
-                sHeight = targetImage.height;
-                sWidth = windowWidth * (targetImage.height / windowHeight);
-                sx = (targetImage.width - sWidth) / 2;
-                sy = 0;
-            } else {
-                sWidth = targetImage.width;
-                sHeight = windowHeight * (targetImage.width / windowWidth);
-                sx = 0;
-                sy = (targetImage.height - sHeight) / 2;
-            }
+            const { sx: fullSx, sy: fullSy, sWidth: fullSWidth, sHeight: fullSHeight } = getCropCoordinates(targetImage, windowWidth, windowHeight);
             
             context.drawImage(
                 targetImage,
-                sx, sy, sWidth, sHeight,
+                fullSx, fullSy, fullSWidth, fullSHeight,
                 0, 0, windowWidth, windowHeight
             );
             
@@ -744,18 +1298,54 @@
         }
     }
 
-    function switchToSingleImageMode(targetColumn, targetRow) {
+    function seamlessSwitchToSingleImageMode(targetColumn, targetRow) {
+        // Verify transition state before proceeding
+        if (!verifyTransitionState(targetColumn, targetRow)) {
+            console.warn('Seamless transition verification failed, falling back to standard transition');
+            switchToSingleImageMode(targetColumn, targetRow);
+            return;
+        }
+        
         // Set single image mode using the center image that was zoomed (column 2, row 1 = index 9)
         const targetImageIndex = targetColumn * rows + targetRow; // 2 * 4 + 1 = 9
+        const targetImage = images[targetImageIndex];
+        
+        // CRITICAL: Set up state before any rendering to ensure seamless transition
         animationState.isSingleImageMode = true;
-        animationState.singleImage = images[targetImageIndex]; // This matches the first navigation item
+        animationState.singleImage = targetImage;
         
         // Reset animation state
         animationState.isZooming = false;
         animationState.isAnimating = false;
         animationState.animationType = 'none';
         
-        // Draw the single image (this should be seamless since it's the same image that was zoomed)
+        // IMMEDIATE seamless draw - no delay, use same frame
+        // The last frame of the zoom animation should be identical to this
+        requestAnimationFrame(() => {
+            drawSingleImage();
+            
+            // Only initialize navigation after confirming seamless visual transition
+            requestAnimationFrame(() => {
+                if (window.navigationCarousel) {
+                    window.navigationCarousel.showCurrentText();
+                }
+            });
+        });
+    }
+
+    // Legacy function kept for compatibility - fallback implementation
+    function switchToSingleImageMode(targetColumn, targetRow) {
+        // Set single image mode using the center image that was zoomed
+        const targetImageIndex = targetColumn * rows + targetRow;
+        animationState.isSingleImageMode = true;
+        animationState.singleImage = images[targetImageIndex];
+        
+        // Reset animation state
+        animationState.isZooming = false;
+        animationState.isAnimating = false;
+        animationState.animationType = 'none';
+        
+        // Draw the single image
         drawSingleImage();
         
         // Initialize navigation carousel after zoom completes
@@ -763,7 +1353,7 @@
             if (window.navigationCarousel) {
                 window.navigationCarousel.showCurrentText();
             }
-        }, 1000); // Increased delay to ensure zoom is completely finished
+        }, 100);
     }
 
     function drawSingleImage() {
@@ -771,23 +1361,9 @@
         context.clearRect(0, 0, windowWidth, windowHeight);
         
         if (animationState.singleImage && animationState.singleImage.complete) {
-            // Draw the image to fill the entire screen with cover effect
+            // Use cached crop coordinates for consistent rendering with zoom transition
             const img = animationState.singleImage;
-            const imgAspect = img.width / img.height;
-            const screenAspect = windowWidth / windowHeight;
-            let sx, sy, sWidth, sHeight;
-
-            if (imgAspect > screenAspect) {
-                sHeight = img.height;
-                sWidth = windowWidth * (img.height / windowHeight);
-                sx = (img.width - sWidth) / 2;
-                sy = 0;
-            } else {
-                sWidth = img.width;
-                sHeight = windowHeight * (img.width / windowWidth);
-                sx = 0;
-                sy = (img.height - sHeight) / 2;
-            }
+            const { sx, sy, sWidth, sHeight } = getCropCoordinates(img, windowWidth, windowHeight);
 
             context.drawImage(
                 img,
@@ -852,6 +1428,14 @@
             };
             this.isTextVisible = false;
             
+            // Cache DOM elements for performance
+            this.carouselElement = document.querySelector('.navigation-carousel');
+            
+            // Performance optimization: Cache layout and image lookup results
+            this.layoutCache = null;
+            this.imageIndexCache = {};
+            this.imageCache = {};
+            
             this.init();
         }
 
@@ -914,46 +1498,37 @@
                         });
                         carousel.style.display = 'none';
                     }
-                }, 500); // Match CSS transition duration
+                }, 150); // Match CSS transition duration
             }
             
             this.isTextVisible = false;
         }
 
         showCurrentText() {
-            const carousel = document.querySelector('.navigation-carousel');
+            const carousel = this.carouselElement;
             if (!carousel) return;
             
-            // Always start fresh - remove show class and force reflow
-            carousel.classList.remove('show');
-            carousel.style.display = 'none';
+            // Batch DOM operations to minimize reflows
+            const currentItem = this.items[this.currentIndex];
             
-            // Force browser reflow to ensure the state is reset
-            void carousel.offsetHeight;
-            
-            // Prepare the navigation items first
-            this.items.forEach(item => {
-                item.classList.add('hidden');
-                item.removeAttribute('aria-current');
+            // Single batch update: hide all items and show current
+            this.items.forEach((item, index) => {
+                if (index === this.currentIndex) {
+                    item.classList.remove('hidden');
+                    item.setAttribute('aria-current', 'page');
+                } else {
+                    item.classList.add('hidden');
+                    item.removeAttribute('aria-current');
+                }
             });
             
-            // Show only the current navigation item
-            if (this.items[this.currentIndex]) {
-                this.items[this.currentIndex].classList.remove('hidden');
-                this.items[this.currentIndex].setAttribute('aria-current', 'page');
-            }
-            
-            // Set display block first
+            // Optimized show sequence - single reflow
+            carousel.classList.remove('show');
             carousel.style.display = 'block';
             
-            // Force reflow before applying show class for consistent animation
-            void carousel.offsetHeight;
-            
-            // Use double requestAnimationFrame for better consistency
+            // Single requestAnimationFrame is sufficient for modern browsers
             requestAnimationFrame(() => {
-                requestAnimationFrame(() => {
-                    carousel.classList.add('show');
-                });
+                carousel.classList.add('show');
             });
             
             this.isTextVisible = true;
@@ -1012,23 +1587,19 @@
             this.imageTransition.direction = direction;
             this.imageTransition.progress = 0;
 
-            const duration = 800; // 1000ms transition for more comfortable pacing
-            const startTime = Date.now();
+            const duration = 800;
+            let startTime = 0;
 
-            const animate = () => {
-                const elapsed = Date.now() - startTime;
+            const animate = (currentTime) => {
+                if (startTime === 0) startTime = currentTime;
+                
+                const elapsed = currentTime - startTime;
                 const progress = Math.min(elapsed / duration, 1);
                 
-                // Use same smooth cubic bezier as zoom animation
-                let easeProgress;
-                if (progress === 0) {
-                    easeProgress = 0;
-                } else if (progress === 1) {
-                    easeProgress = 1;
-                } else {
-                    // Custom smooth easing: cubic-bezier(.34,.81,.34,.82)
-                    easeProgress = cubicBezier(progress, 0.25, 1, 0.25, 1);
-                }
+                // Use optimized easing lookup
+                const easeProgress = progress === 0 || progress === 1 
+                    ? progress 
+                    : cubicBezierLookup(progress, 'transitionEasing');
                 
                 this.imageTransition.progress = easeProgress;
                 
@@ -1047,10 +1618,8 @@
                         drawSingleImage();
                     }
                     
-                    // Show text only after transition completes
-                    setTimeout(() => {
-                        this.showCurrentText();
-                    }, 0); // Adjusted delay for slower animation
+                    // Show text immediately when transition completes
+                    this.showCurrentText();
                 }
             };
 
@@ -1058,7 +1627,7 @@
         }
 
         drawCenterImageTransition() {
-            // Clear the canvas
+            // Clear only once at the start
             context.clearRect(0, 0, windowWidth, windowHeight);
             
             // Only draw static background images if not in single image mode
@@ -1072,29 +1641,37 @@
         }
 
         drawStaticImages() {
-            const gap = Math.min(windowWidth, windowHeight) / 50;
-            const rectWidth = (windowWidth - (cols + 1) * gap) / cols;
-            const rectHeight = (windowHeight - (rows + 1) * gap) / rows;
+            // Use global layout cache instead of local cache
+            updateLayoutCache();
+            const { rectWidth, rectHeight } = layoutCache;
             
-            let imageIndex = 0;
-            for (let i = 0; i < cols; i++) {
-                for (let j = 0; j < rows; j++) {
+            // Calculate static positions (excluding center image at column 2, row 1)
+            if (!this.staticPositions || 
+                this.staticPositions.windowWidth !== windowWidth || 
+                this.staticPositions.windowHeight !== windowHeight) {
+                
+                this.staticPositions = {
+                    windowWidth,
+                    windowHeight,
+                    positions: []
+                };
+                
+                // Build static positions from global cache, excluding center
+                for (let posIndex = 0; posIndex < layoutCache.positions.length; posIndex++) {
+                    const pos = layoutCache.positions[posIndex];
                     // Skip center image (column 2, row 1)
-                    if (i === 2 && j === 1) {
-                        imageIndex++;
-                        continue;
-                    }
+                    if (pos.column === 2 && pos.row === 1) continue;
                     
-                    const x = gap + i * (rectWidth + gap);
-                    const y = gap + j * (rectHeight + gap);
-                    
-                    const img = images[imageIndex];
-                    imageIndex++;
-
-                    if (img && img.complete) {
-                        context.globalAlpha = 1.0;
-                        this.drawImageWithCover(img, x, y, rectWidth, rectHeight);
-                    }
+                    this.staticPositions.positions.push(pos);
+                }
+            }
+            
+            // Draw all static images efficiently
+            context.globalAlpha = 1.0;
+            for (const pos of this.staticPositions.positions) {
+                const img = images[pos.imageIndex];
+                if (img && img.complete) {
+                    this.drawImageWithCover(img, pos.x, pos.y, rectWidth, rectHeight);
                 }
             }
         }
@@ -1118,10 +1695,8 @@
                         parallaxOffset = 120 * this.imageTransition.progress;
                     }
                     
-                    context.save();
-                    context.translate(parallaxOffset, 0);
-                    this.drawImageFullScreen(previousImage);
-                    context.restore();
+                    // Optimize: draw with offset without save/restore for performance
+                    this.drawImageFullScreenWithOffset(previousImage, parallaxOffset, 0);
                 }
                 
                 // Calculate cover animation offset with parallax for the new image
@@ -1143,10 +1718,7 @@
                 
                 // Draw current image sliding in with parallax effect
                 if (currentImage && currentImage.complete) {
-                    context.save();
-                    context.translate(coverOffset + parallaxOffsetNew, 0);
-                    this.drawImageFullScreen(currentImage);
-                    context.restore();
+                    this.drawImageFullScreenWithOffset(currentImage, coverOffset + parallaxOffsetNew, 0);
                 }
             } else {
                 // Original logic for non-single image mode (shouldn't happen after zoom)
@@ -1206,82 +1778,66 @@
         }
 
         getCenterImageForIndex(pageIndex) {
+            // Cache lookup results to avoid repeated DOM queries
+            if (!this.imageIndexCache) this.imageIndexCache = {};
+            if (this.imageIndexCache[pageIndex] !== undefined) {
+                return this.imageIndexCache[pageIndex];
+            }
+            
             const navItem = this.items[pageIndex];
             if (navItem) {
                 const dataImage = navItem.getAttribute('data-image');
+                let resultImage;
                 
                 // Check if it's a URL (contains http, https, or starts with /)
                 if (dataImage && (dataImage.includes('http') || dataImage.startsWith('/'))) {
-                    // Create and return a new image element for the URL
-                    const img = new Image();
-                    img.src = dataImage;
-                    
-                    // Check if this image is already loaded/cached
-                    if (img.complete) {
-                        return img;
+                    // Check cache first for URL images
+                    const cachedImg = this.imageCache && this.imageCache[dataImage];
+                    if (cachedImg && cachedImg.complete) {
+                        resultImage = cachedImg;
                     } else {
-                        // For unloaded images, we'll use a cached version or fallback
-                        // Check if we already have this image in our cache
-                        const cachedImg = this.imageCache && this.imageCache[dataImage];
-                        if (cachedImg && cachedImg.complete) {
-                            return cachedImg;
-                        }
+                        // Create new image and cache it
+                        const img = new Image();
+                        img.src = dataImage;
                         
-                        // Start loading the image and cache it
                         if (!this.imageCache) this.imageCache = {};
-                        if (!this.imageCache[dataImage]) {
-                            this.imageCache[dataImage] = img;
-                            img.onload = () => {
-                                // Redraw if this is the current image
-                                if (animationState.isSingleImageMode && 
-                                    animationState.singleImage === img) {
-                                    drawSingleImage();
-                                }
-                            };
-                        }
+                        this.imageCache[dataImage] = img;
                         
-                        // Return the loading image (might not display until loaded)
-                        return img;
+                        img.onload = () => {
+                            // Clear cache to force refresh
+                            delete this.imageIndexCache[pageIndex];
+                            // Redraw if this is the current image
+                            if (animationState.isSingleImageMode && 
+                                animationState.singleImage === img) {
+                                drawSingleImage();
+                            }
+                        };
+                        
+                        resultImage = img;
                     }
                 } else {
                     // Original behavior: treat as image index
                     const imageIndex = parseInt(dataImage);
-                    return images[imageIndex];
+                    resultImage = images[imageIndex] || images[0];
                 }
+                
+                // Cache the result for future lookups
+                this.imageIndexCache[pageIndex] = resultImage;
+                return resultImage;
             }
+            
             // Fallback to first image if not found
-            return images[0];
+            const fallback = images[0];
+            this.imageIndexCache[pageIndex] = fallback;
+            return fallback;
         }
 
-        drawImageWithCover(img, x, y, width, height) {
-            const imgAspect = img.width / img.height;
-            const rectAspect = width / height;
-            let sx, sy, sWidth, sHeight;
-
-            if (imgAspect > rectAspect) {
-                sHeight = img.height;
-                sWidth = width * (img.height / height);
-                sx = (img.width - sWidth) / 2;
-                sy = 0;
-            } else {
-                sWidth = img.width;
-                sHeight = height * (img.width / width);
-                sx = 0;
-                sy = (img.height - sHeight) / 2;
-            }
-
-            context.drawImage(
-                img,
-                sx, sy, sWidth, sHeight,
-                x, y, width, height
-            );
-        }
-
-        drawImageFullScreen(img) {
+        drawImageFullScreenWithOffset(img, offsetX, offsetY) {
+            // Optimized full-screen drawing with offset, avoiding save/restore
             const imgAspect = img.width / img.height;
             const screenAspect = windowWidth / windowHeight;
             let sx, sy, sWidth, sHeight;
-
+            
             if (imgAspect > screenAspect) {
                 sHeight = img.height;
                 sWidth = windowWidth * (img.height / windowHeight);
@@ -1293,6 +1849,28 @@
                 sx = 0;
                 sy = (img.height - sHeight) / 2;
             }
+            
+            context.drawImage(
+                img,
+                sx, sy, sWidth, sHeight,
+                offsetX, offsetY, windowWidth, windowHeight
+            );
+        }
+
+        drawImageWithCover(img, x, y, width, height) {
+            // Use global crop cache for better performance
+            const { sx, sy, sWidth, sHeight } = getCropCoordinates(img, width, height);
+
+            context.drawImage(
+                img,
+                sx, sy, sWidth, sHeight,
+                x, y, width, height
+            );
+        }
+
+        drawImageFullScreen(img) {
+            // Use global crop cache for consistent performance
+            const { sx, sy, sWidth, sHeight } = getCropCoordinates(img, windowWidth, windowHeight);
 
             context.drawImage(
                 img,
@@ -1306,18 +1884,35 @@
 
     // Initial setup
     document.addEventListener('DOMContentLoaded', function() {
+        // Build easing lookup tables for performance
+        buildBezierLookupTable();
+        
         // Initialize image preloading and animation
         preloadImages();
-        setTimeout(animateIntro(), 1000);
+        setTimeout(animateIntro(), 1500);
         
         // Initialize navigation carousel (store globally for later access)
         setTimeout(() => {
             window.navigationCarousel = new NavigationCarousel();
-        }, 6000); // Start after zoom animation completes
+            const switchBtn = document.getElementById("switchNavigation");
+            switchBtn.classList.remove('translate-y-24', 'opacity-0');
+            switchBtn.classList.add('translate-y-0', 'opacity-100');
+        }, 5000); // Start after zoom animation completes
     });
 
-    // Handle window resize
+    // Handle window resize and mobile viewport changes
     window.addEventListener('resize', debouncedResize);
+    
+    // Handle mobile viewport changes (iOS Safari, etc.)
+    if (window.visualViewport) {
+        window.visualViewport.addEventListener('resize', debouncedResize);
+    }
+    
+    // Handle orientation changes on mobile
+    window.addEventListener('orientationchange', () => {
+        setTimeout(debouncedResize, 100); // Small delay for orientation to complete
+    });
 
 </script>
+ <!-- ↑  ↓ ↚ ↛ ↜ ↝ ↞ ↟ -->
  <!-- ↑  ↓ ↚ ↛ ↜ ↝ ↞ ↟ -->

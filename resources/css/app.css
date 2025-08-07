@@ -14,18 +14,22 @@
     font-family: 'Open Sans', sans-serif;
 }
 
+.font-title{
+    font-family: 'Comfortaa', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+}
+
 /* Navigation Carousel Styles */
 .navigation-carousel {
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    z-index: 10;
+    z-index: 20;
     width: 100%;
     max-width: 1200px;
     display: none;
     opacity: 0;
-    transition: opacity 0.5s cubic-bezier(0.89, 0.01, 0.26, 0.90);
+    transition: opacity 0.15s cubic-bezier(0.89, 0.01, 0.26, 0.90);
 }
 
 .navigation-carousel.show {
@@ -33,18 +37,7 @@
     opacity: 1;
 }
 
-.navigation-carousel::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 120%;
-    height: 200px;
-    background: radial-gradient(ellipse 600px 150px at center, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.1) 40%, transparent 80%);
-    z-index: -1;
-    border-radius: 100px;
-}
+/* Navigation background removed for better text visibility on light images */
 
 .navigation-container {
     min-height: 80px;
@@ -90,7 +83,6 @@
     transition: all 0.3s ease;
     outline: none;
     position: relative;
-    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8), 0 0 2px rgba(0, 0, 0, 0.9);
 }
 
 /* Add smooth fade transition for navigation items */
@@ -115,11 +107,7 @@
         font-size: 2rem;
     }
     
-    .navigation-carousel::before {
-        width: 130%;
-        height: 150px;
-        background: radial-gradient(ellipse 400px 100px at center, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.3) 40%, transparent 80%);
-    }
+    /* Navigation background removed */
     
     .nav-control {
         font-size: 1.5rem;
@@ -137,11 +125,7 @@
         font-size: 1.5rem;
     }
     
-    .navigation-carousel::before {
-        width: 140%;
-        height: 120px;
-        background: radial-gradient(ellipse 300px 80px at center, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.4) 40%, transparent 80%);
-    }
+    /* Navigation background removed */
     
     .nav-control {
         font-size: 1.25rem;
@@ -152,5 +136,24 @@
         min-height: 50px;
     }
 }
+
+/* Navigation overlay transition styles */
+#navigation-overlay {
+    transition: opacity 0.6s ease-in-out, visibility 0.6s ease-in-out;
+}
+
+#navigation-overlay.ready {
+    opacity: 1 !important;
+    pointer-events: auto !important;
+}
+
+/* Smooth transition for navigation links */
+/* .nav-link {
+} */
+
+.nav-link:hover {
+    transform: translateY(-1px);
+}
+
 @plugin "flowbite/plugin";
 @source "../../node_modules/flowbite";

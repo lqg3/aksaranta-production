@@ -9,12 +9,13 @@ use App\Http\Controllers\AboutController;
 use App\Http\Controllers\Admin\CourseAdminController;
 use App\Http\Controllers\Admin\LessonAdminController;
 use App\Http\Controllers\Admin\LessonPartAdminController;
+use App\Http\Controllers\Admin\QuizAdminController;
 use App\Http\Controllers\LearnController;
 
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('home');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -33,6 +34,7 @@ Route::prefix('admin')->middleware(['auth', 'can:isAdmin'])->name('admin.')->gro
     Route::resource('course', CourseAdminController::class);
     Route::resource('course/{course}/learn', LessonAdminController::class);
     Route::resource('course/{course}/learn/{learn}/lesson-part', LessonPartAdminController::class);
+    Route::resource('course/{course_id}/learn/{learn_id}/lesson-part/{lesson_part}/quiz', QuizAdminController::class);
 });
 
 Route::prefix('blog')->name('blog.')->group(function () {
@@ -52,6 +54,9 @@ Route::get('culture' , function () {
 require __DIR__.'/auth.php';
 
 
+
+
+
 Route::get('/virtual', [VirtualTourController::class, 'index']);
 Route::get('/virtual/danautoba', [VirtualTourController::class, 'danautoba']);
 Route::get('/virtual/airterjunPiso', [VirtualTourController::class, 'airterjunPiso']);
@@ -64,11 +69,11 @@ Route::get('/virtual/funland', [VirtualTourController::class, 'funland']);
 
 
 Route::get('/about', [AboutController::class, 'index']);
-Route::get('/about/aksaranta', [AboutController::class, 'aksaranta']);
-Route::get('/about/history', [AboutController::class, 'history']);
-Route::get('/about/kamus', [AboutController::class, 'kamus']);
-Route::get('/about/kamusAksara', [AboutController::class, 'kamusAksara']);
-Route::get('/about/animasi', [AboutController::class, 'animasi']);
+Route::get('/aksaranta', [AboutController::class, 'aksaranta']);
+Route::get('/history', [AboutController::class, 'history']);
+Route::get('/kamus', [AboutController::class, 'kamus'])->name('kamus');
+Route::get('/kamusAksara', [AboutController::class, 'kamusAksara'])->name("kamusAksara");
+Route::get('//animasi', [AboutController::class, 'animasi']);
 
 
 
