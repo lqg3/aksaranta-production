@@ -15,7 +15,7 @@ use App\Http\Controllers\LearnController;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('home');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -65,11 +65,11 @@ Route::get('/virtual/funland', [VirtualTourController::class, 'funland']);
 
 
 Route::get('/about', [AboutController::class, 'index']);
-Route::get('/about/aksaranta', [AboutController::class, 'aksaranta']);
-Route::get('/about/history', [AboutController::class, 'history']);
-Route::get('/about/kamus', [AboutController::class, 'kamus']);
-Route::get('/about/kamusAksara', [AboutController::class, 'kamusAksara']);
-Route::get('/about/animasi', [AboutController::class, 'animasi']);
+Route::get('/aksaranta', [AboutController::class, 'aksaranta']);
+Route::get('/history', [AboutController::class, 'history']);
+Route::get('/kamus', [AboutController::class, 'kamus'])->name('kamus');
+Route::get('/kamusAksara', [AboutController::class, 'kamusAksara'])->name("kamusAksara");
+Route::get('//animasi', [AboutController::class, 'animasi']);
 
 
 
