@@ -1,73 +1,33 @@
-name: Laravel
+name: deploy
 
-# Triggers the workflow on push events to the main branch
 on:
   push:
     branches:
       - main
 
-
 jobs:
   deploy:
-    runs-on: ubuntu-latest # Use the latest Ubuntu runner
-    environment: production
+    name: Deploy to Server
+    runs-on: ubuntu-latest
 
     steps:
-      # 1. Checkout Repository
-      - name: Checkout Code
-        uses: actions/checkout@v4
+    - name: Get latest code
+      uses: actions/checkout@v4
 
-      # 2. Setup PHP
-      - name: Setup PHP
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: '8.2' # Match your server's PHP version
-          extensions: mbstring, xml, bcmath, pdo, mysql
-          ini-values: post_max_size=256M, upload_max_filesize=256M
-          coverage: none
-
-      # 3. Setup Node.js for npm
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20' # Choose a version you use
-          cache: 'npm'
-
-      # 4. Install Composer Dependencies
-      - name: Install Composer Dependencies
-        run: composer install --no-interaction --no-dev --prefer-dist --optimize-autoloader
-
-      # 5. Install NPM Dependencies and Build Assets
-      - name: Install NPM Dependencies
-        run: npm install
-      - name: Build Frontend Assets
-        run: npm run build
-
-      # 6. Create .env file from GitHub Secret
-      - name: Create .env file
-        run: echo "${{ secrets.LARAVEL_ENV }}" > .env
-
-      # 7. Deploy to DigitalOcean with rsync
-      - name: Deploy Files to Server
-        uses: easingthemes/ssh-deploy@v5.0.0
-        with:
-          SSH_PRIVATE_KEY: ${{ secrets.DO_SSH_PRIVATE_KEY }}
-          ARGS: "-avz --delete" # rsync arguments
-          SOURCE: "./" # Source directory from the runner
-          REMOTE_HOST: ${{ secrets.DO_SSH_HOST }}
-          REMOTE_USER: ${{ secrets.DO_SSH_USER }}
-          TARGET: "/var/www/html" # Target directory on the server
-
-      # 8. Run Post-Deployment Commands on the Server
-      - name: Run Post-Deployment Commands
-        uses: appleboy/ssh-action@v1.0.3
-        with:
-          host: ${{ secrets.DO_SSH_HOST }}
-          username: ${{ secrets.DO_SSH_USER }}
-          key: ${{ secrets.DO_SSH_PRIVATE_KEY }}
-          script: |
-            cd /var/www/html
-            php artisan migrate --force
-            php artisan optimize:clear
-            php artisan optimize
-            php artisan storage:link
+    - name: Deploy to Server via SSH
+      uses: appleboy/ssh-action@v1.0.3
+      with:
+        host: ${{ secrets.SERVER_HOST }}
+        username: ${{ secrets.SERVER_USER }}
+        key: ${{ secrets.SERVER_SSH_KEY }}
+        script: |
+          cd /var/www/aksaranta
+          git pull origin main
+          echo "${{ secrets.DOT_ENV }}" > .env
+          composer install --optimize-autoloader --no-dev
+          php artisan config:cache
+          php artisan route:cache
+          php artisan view:cache
+          php artisan migrate --force
+          npm install
+          npm run build

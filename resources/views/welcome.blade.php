@@ -3,6 +3,9 @@
 @section('content')
 
 <style>
+html, body {
+    background-color: #000; /* Prevent white flash before CSS loads */
+}
 body{
     height: 100%;
     width: 100%;
@@ -12,6 +15,21 @@ body{
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
+}
+/* Ensure canvas positions correctly even before external CSS loads */
+#canvas{
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -500;
+}
+/* Ensure nav-2 stays hidden before Tailwind CSS is ready */
+#nav-2{
+    display: none;
+}
+/* Mobile list is hidden by default as well */
+#nav-2-mobile{
+    display: none;
 }
 .image-container {
     position: relative;
@@ -95,6 +113,12 @@ body{
     <div id="loading-text" class="text-md text-white">0%</div>
 </div>
 <style>
+    /* Fallback to ensure loading screen covers viewport and is dark before CSS loads */
+    #loading-screen {
+        position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+        background: #000; display: flex; align-items: center; justify-content: center;
+        z-index: 1000;
+    }
     #loading-screen.fade-out {
         opacity: 0 !important;
         pointer-events: none;
@@ -329,7 +353,7 @@ body{
 </div>
 
 <!-- #nav-2 with routes and transitions matching #nav-1 -->
-<div id="nav-2" class="top-0 left-0 transition-all duration-300 hidden"
+<div id="nav-2" class="top-0 left-0 transition-all duration-300 hidden" style="display:none;"
      x-data="navigationTransition()"
      @navigate="navigateTo($event.detail)">
     
@@ -456,6 +480,70 @@ body{
     </div>
 </div>
 
+<!-- Mobile-friendly list alternative for nav-2 -->
+<div id="nav-2-mobile" class="fixed inset-0 z-40 overflow-y-auto bg-black/90 hidden" style="display:none;">
+    <div class="max-w-md mx-auto py-8 px-4 space-y-4">
+        <button id="closeNav2Mobile" class="mb-4 w-full text-center text-white font-title py-3 rounded-lg bg-white/10 hover:bg-white/20 transition">
+            Tutup
+        </button>
+
+        <a class="block overflow-hidden rounded-lg border border-white/10 bg-white/5 hover:bg-white/10 transition" 
+           href="{{ route('culture') }}">
+            <img src="https://aksara-batak.sgp1.cdn.digitaloceanspaces.com/images/homepage/img10.webp" alt="" style="width:100%; height:48vw; object-fit:cover;">
+            <div class="p-4 text-white font-title">Budaya Batak</div>
+        </a>
+
+        <a class="block overflow-hidden rounded-lg border border-white/10 bg-white/5 hover:bg-white/10 transition" 
+           href="{{ route('about.history') }}">
+            <img src="https://aksara-batak.sgp1.cdn.digitaloceanspaces.com/images/homepage/img26.webp" alt="" style="width:100%; height:48vw; object-fit:cover;">
+            <div class="p-4 text-white font-title">Sejarah Batak</div>
+        </a>
+
+        <a class="block overflow-hidden rounded-lg border border-white/10 bg-white/5 hover:bg-white/10 transition" 
+           href="{{ route('learn.index') }}">
+            <img src="https://aksara-batak.sgp1.cdn.digitaloceanspaces.com/images/homepage/img28.webp" alt="" style="width:100%; height:48vw; object-fit:cover;">
+            <div class="p-4 text-white font-title">Aksara Batak</div>
+        </a>
+
+        <a class="block overflow-hidden rounded-lg border border-white/10 bg-white/5 hover:bg-white/10 transition" 
+           href="{{ route('about.kamus') }}">
+            <img src="https://aksara-batak.sgp1.cdn.digitaloceanspaces.com/images/homepage/img27.webp" alt="" style="width:100%; height:48vw; object-fit:cover;">
+            <div class="p-4 text-white font-title">Glosarium & Kamus</div>
+        </a>
+
+        <a class="block overflow-hidden rounded-lg border border-white/10 bg-white/5 hover:bg-white/10 transition" 
+           href="{{ route('virtual.index') }}">
+            <img src="https://aksara-batak.sgp1.cdn.digitaloceanspaces.com/images/homepage/img29.webp" alt="" style="width:100%; height:48vw; object-fit:cover;">
+            <div class="p-4 text-white font-title">Virtual Tour</div>
+        </a>
+
+        <a class="block overflow-hidden rounded-lg border border-white/10 bg-white/5 hover:bg-white/10 transition" 
+           href="{{ route('batak-songs') }}">
+            <img src="https://aksara-batak.sgp1.cdn.digitaloceanspaces.com/images/homepage/img30.webp" alt="" style="width:100%; height:48vw; object-fit:cover;">
+            <div class="p-4 text-white font-title">Lagu Batak</div>
+        </a>
+
+        <a class="block overflow-hidden rounded-lg border border-white/10 bg-white/5 hover:bg-white/10 transition" 
+           href="{{ route('about.kamus-aksara') }}">
+            <img src="https://aksara-batak.sgp1.cdn.digitaloceanspaces.com/images/homepage/img31.webp" alt="" style="width:100%; height:48vw; object-fit:cover;">
+            <div class="p-4 text-white font-title">Aksaranta</div>
+        </a>
+
+        <a class="block overflow-hidden rounded-lg border border-white/10 bg-white/5 hover:bg-white/10 transition" 
+           href="{{ route('blog.index') }}">
+            <img src="https://aksara-batak.sgp1.cdn.digitaloceanspaces.com/images/homepage/img32.webp" alt="" style="width:100%; height:48vw; object-fit:cover;">
+            <div class="p-4 text-white font-title">Blog</div>
+        </a>
+
+        <a class="block overflow-hidden rounded-lg border border-white/10 bg-white/5 hover:bg-white/10 transition" 
+           href="{{ route('about.index') }}">
+            <img src="https://aksara-batak.sgp1.cdn.digitaloceanspaces.com/images/homepage/img33.webp" alt="" style="width:100%; height:48vw; object-fit:cover;">
+            <div class="p-4 text-white font-title">Tentang Kami</div>
+        </a>
+    </div>
+    
+</div>
+
 
 <button id="switchNavigation" class="fixed left-1/2 -translate-x-1/2 bottom-6 z-50 px-6 py-3 text-white font-title rounded-lg shadow-lg hover:bg-opacity-90 transition-all duration-300 translate-y-24 opacity-0"
     style="transition-all duration-300"
@@ -468,8 +556,14 @@ body{
     // Navigation switch logic
     const btn = document.getElementById('switchNavigation');
     btn.addEventListener('click', function() {
+        function isMobileDevice() {
+            return (window.matchMedia && window.matchMedia('(max-width: 768px)').matches) ||
+                   ('ontouchstart' in window && navigator.maxTouchPoints > 0);
+        }
+
         const nav1 = document.getElementById('nav-1');
         const nav2 = document.getElementById('nav-2');
+        const nav2Mobile = document.getElementById('nav-2-mobile');
         const fadeDuration = 300;
 
         // Helper to fade out an element
@@ -491,18 +585,34 @@ body{
         nav1.style.opacity = nav1.style.opacity === "" ? "1" : nav1.style.opacity;
         nav2.style.opacity = nav2.style.opacity === "" ? "1" : nav2.style.opacity;
 
+        // Mobile: toggle mobile list overlay without changing nav-1
+        if (isMobileDevice()) {
+            if (nav2Mobile.classList.contains('hidden') || nav2Mobile.style.display === 'none') {
+                nav2Mobile.classList.remove('hidden');
+                nav2Mobile.style.display = 'block';
+                btn.textContent = 'Kembali';
+            } else {
+                nav2Mobile.classList.add('hidden');
+                nav2Mobile.style.display = 'none';
+                btn.textContent = 'Lihat Semua Halaman';
+            }
+            return;
+        }
+
         if (nav1.classList.contains('hidden')) {
             // Switch to nav-1 with fade
             nav1.classList.remove('hidden');
             nav1.style.opacity = 0;
             fadeOut(nav2, () => {
                 nav2.classList.add('hidden');
+                nav2.style.display = 'none';
                 fadeIn(nav1);
             });
             btn.textContent = 'Lihat Semua Halaman';
         } else {
             // Switch to nav-2 with fade
             nav2.classList.remove('hidden');
+            nav2.style.display = 'block';
             nav2.style.opacity = 0;
             fadeOut(nav1, () => {
                 nav1.classList.add('hidden');
@@ -511,6 +621,17 @@ body{
             btn.textContent = 'Kembali';
         }
     });
+
+    // Close button for mobile list
+    const closeNav2Mobile = document.getElementById('closeNav2Mobile');
+    if (closeNav2Mobile) {
+        closeNav2Mobile.addEventListener('click', () => {
+            const nav2Mobile = document.getElementById('nav-2-mobile');
+            nav2Mobile.classList.add('hidden');
+            nav2Mobile.style.display = 'none';
+            btn.textContent = 'Lihat Semua Halaman';
+        });
+    }
 
     // Track drag logic: only active when nav-2 is visible
     const track = document.getElementById("image-track");
