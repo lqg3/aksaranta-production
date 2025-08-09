@@ -66,7 +66,7 @@
                         </a>
 
                         {{-- Delete --}}
-                        <form method="POST" action="{{ route('admin.course.destroy', $course->id) }}" class="inline"
+                        <form method="POST" action="{{ route('admin.course.destroy', $course->id) }}" class="inline" data-delete-course="1"
                             onsubmit="return confirm('Yakin ingin menghapus course ini?')">
                             @csrf
                             @method('DELETE')

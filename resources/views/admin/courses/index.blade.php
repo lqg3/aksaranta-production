@@ -40,10 +40,12 @@
             });
 
             container.addEventListener('submit', function(e) {
-                const form = e.target.closest('#search-form');
-                if (form) {
+                const searchForm = e.target.closest('#search-form');
+                const deleteForm = e.target.closest('form[data-delete-course="1"]');
+
+                if (searchForm) {
                     e.preventDefault();
-                    const url = form.action + '?search=' + encodeURIComponent(form.search.value);
+                    const url = searchForm.action + '?search=' + encodeURIComponent(searchForm.search.value);
 
                     fetch(url, {
                             headers: {
@@ -59,6 +61,33 @@
 
                             window.history.pushState(null, '', url);
                         });
+                }
+
+                if (deleteForm) {
+                    e.preventDefault();
+                    const confirmed = deleteForm.getAttribute('onsubmit') ? confirm('Yakin ingin menghapus course ini?') : true;
+                    if (!confirmed) return;
+
+                    const formData = new FormData(deleteForm);
+                    const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
+                    fetch(deleteForm.action, {
+                        method: 'POST',
+                        headers: {
+                            'X-Requested-With': 'XMLHttpRequest',
+                            'X-CSRF-TOKEN': csrfToken
+                        },
+                        body: formData
+                    })
+                    .then(() => fetch(window.location.href, { headers: { 'X-Requested-With': 'XMLHttpRequest' } }))
+                    .then(res => res.text())
+                    .then(html => {
+                        const parser = new DOMParser();
+                        const doc = parser.parseFromString(html, 'text/html');
+                        const newContent = doc.querySelector('#datatable-content');
+                        container.innerHTML = newContent.innerHTML;
+                    })
+                    .catch(() => window.location.reload());
                 }
             });
         });

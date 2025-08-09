@@ -11,7 +11,7 @@
 >
     <!-- Left Nav -->
     <div class="items-center h-full hidden md:flex">
-        <p class="text-2xl font-title">aksaranta</p>
+        <a href="{{ route('home') }}" class="text-2xl text-white font-title">aksaranta</a>
     </div>
 
     <!-- Center Nav -->
@@ -41,14 +41,18 @@
     </div>
 
     <!-- Right Nav -->
-    <div class="flex items-center h-full">
+    <div class="flex items-center text-white h-full">
         <p class="text-white text-opacity-50 font-title border-r border-white pr-4 mr-4"></p>
         @if (auth()->check())
-            <span class="text-opacity-80 mr-4">{{ auth()->user()->name }}</span>
-            <a href="{{ route('logout') }}" class="text-red-500 hover:text-red-700 transition-colors duration-300"
-               @click.prevent="navigateTo('{{ route('logout') }}')">Logout</a>
+            <span class="text-opacity-80 mr-4  font-title text-white">{{ auth()->user()->name }}</span>
+            <form method="POST" action="{{ route('logout') }}" class="inline">
+                @csrf
+                <button type="submit" class="text-red-500 hover:text-red-700 transition-colors duration-300">
+                    Logout
+                </button>
+            </form>
         @else
-            <a href="{{ route('login') }}" class="text-white hover:text-opacity-80 transition-colors duration-300"
+            <a href="{{ route('login') }}" class=" font-title text-white hover:text-opacity-80 transition-colors duration-300"
                @click.prevent="navigateTo('{{ route('login') }}')">Login</a>
         @endif
     </div>
