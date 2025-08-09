@@ -6,7 +6,7 @@
         </p>
     @endif
 
-    <form method="GET" action="{{ route('blog.index') }}" class="w-full max-w-lg flex
+    <form method="GET" action="{{ route('blog.index') }}" class="w-full max-w-lg flex"
         id="search-form">
         {{-- Search Input --}}
         <input type="text" name="search" value="{{ request('search') }}"
