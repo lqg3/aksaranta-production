@@ -1,4 +1,4 @@
-name: deploy
+name: Build and Deploy Application
 
 on:
   push:
@@ -7,14 +7,51 @@ on:
 
 jobs:
   deploy:
-    name: Deploy to Server
+    name: Build and Deploy
     runs-on: ubuntu-latest
 
     steps:
-    - name: Get latest code
+    # 1. Get the latest code from the repository
+    - name: Checkout Code
       uses: actions/checkout@v4
 
-    - name: Deploy to Server via SSH
+    # 2. Set up the build environment in the runner
+    - name: Setup PHP & Composer
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: '8.2'  # <-- IMPORTANT: Change to your project's PHP version
+        tools: composer
+
+    - name: Setup Node.js & NPM
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'  # <-- IMPORTANT: Change to your project's Node.js version
+        cache: 'npm'
+
+    # 3. Install dependencies and build the application
+    - name: Install, Build & Configure
+      run: |
+        # Create the .env file from your secret to be deployed
+        echo "${{ secrets.DOT_ENV }}" > .env
+        # Install dependencies
+        composer install --prefer-dist --no-progress --optimize-autoloader --no-dev
+        npm install
+        # Build frontend assets
+        npm run build
+
+    # 4. Deploy the built files to the server using rsync for efficiency
+    - name: Sync Files to Server
+      uses: easingthemes/ssh-deploy@v5.0.0
+      with:
+        SSH_PRIVATE_KEY: ${{ secrets.SERVER_SSH_KEY }}
+        REMOTE_HOST: ${{ secrets.SERVER_HOST }}
+        REMOTE_USER: ${{ secrets.SERVER_USER }}
+        SOURCE: "./"
+        TARGET: "/var/www/aksaranta"
+        EXCLUDE: "/.git/, /node_modules/"
+
+    # 5. Run final commands on the server after deployment
+    - name: Run Post-Deploy Commands
       uses: appleboy/ssh-action@v1.0.3
       with:
         host: ${{ secrets.SERVER_HOST }}
@@ -22,12 +59,10 @@ jobs:
         key: ${{ secrets.SERVER_SSH_KEY }}
         script: |
           cd /var/www/aksaranta
-          git pull origin main
-          echo "${{ secrets.DOT_ENV }}" > .env
-          composer install --optimize-autoloader --no-dev
+          php artisan down || true
+          php artisan migrate --force
+          php artisan optimize:clear
           php artisan config:cache
           php artisan route:cache
           php artisan view:cache
-          php artisan migrate --force
-          npm install
-          npm run build
+          php artisan up
