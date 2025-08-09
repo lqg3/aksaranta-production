@@ -3,7 +3,8 @@
 @section('title', $isEdit ? 'Edit Course' : 'Buat Course Baru')
 
 @section('head-scripts')
-    <script src="https://cdn.tiny.cloud/1/{{ env('TINYMCE_API_KEY') }}/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
+    <script src="https://cdn.tiny.cloud/1/{{ env('TINYMCE_API_KEY') }}/tinymce/7/tinymce.min.js" referrerpolicy="origin">
+    </script>
 @endsection
 
 @section('content')
@@ -22,24 +23,25 @@
             <!-- Course Name -->
             <div>
                 <label for="course_name" class="block font-semibold mb-1 text-accent-teal">Nama Course</label>
-                <input type="text" name="course_name" id="course_name"
+                <input required type="text" name="course_name" id="course_name"
                     value="{{ old('course_name', $course->course_name ?? '') }}"
                     class="w-full px-4 py-2 bg-[#262626] text-white border border-accent-teal rounded-lg focus:ring focus:ring-accent-teal focus:border-accent-teal"
-                    required>
+                    >
             </div>
 
             <!-- Instructor -->
             <div>
                 <label for="instructor" class="block font-semibold mb-1 text-accent-teal">Instructor</label>
-                <input type="text" name="instructor" id="instructor"
+                <input required type="text" name="instructor" id="instructor"
                     value="{{ old('instructor', $course->instructor ?? '') }}"
                     class="w-full px-4 py-2 bg-[#262626] text-white border border-accent-teal rounded-lg focus:ring focus:ring-accent-teal focus:border-accent-teal">
             </div>
 
             <!-- Course Description -->
             <div>
-                <label for="course_description" class="block font-semibold mb-1 text-accent-teal">Deskripsi Course</label>
-                <textarea name="course_description" id="course_description" class="hidden">{{ old('course_description', $course->course_description ?? '') }}</textarea>
+                <label for="course_description" class="block font-semibold mb-1 text-accent-teal">Deskripsi</label>
+                <textarea name="course_description" id="course_description" rows="3"
+                    class="w-full px-4 py-2 bg-[#262626] text-white border border-accent-teal rounded-lg focus:ring focus:ring-accent-teal focus:border-accent-teal">{{ old('course_description', $lessonPart->course_description ?? '') }}</textarea>
             </div>
 
             <!-- Preview Image -->
@@ -77,17 +79,6 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            tinymce.init({
-                selector: 'textarea#course_description',
-                plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount',
-                toolbar: 'undo redo | blocks | bold italic underline | alignleft aligncenter alignright | bullist numlist | image link | code',
-                height: 400,
-                menubar: false,
-                branding: false,
-                skin: "oxide-dark",
-                content_css: "dark",
-                license_key: 'gpl',
-            });
 
             const fileInput = document.getElementById('thumbnail');
             const previewImage = document.getElementById('thumbnail-preview');
