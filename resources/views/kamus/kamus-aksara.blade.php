@@ -1,522 +1,305 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aksaranta - Aksara & Ejaan</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Jua&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
-    <style>
-        /* --- Variabel CSS Global (Konsisten dengan halaman lain) --- */
-        :root {
-            --bg-dark: #1a1a1a;
-            --card-bg-dark: #2c2c2c;
-            --highlight-bg: #3f3c3c;
-            --text-light: #f0f0f0;
-            --text-muted: #d0d0d0;
-            --accent-yellow: #d84b4b;
-            --accent-yellow-hover: #B10002;
-            --shadow-dark: rgba(0, 0, 0, 0.5);
-            --font-jua: 'Jua', cursive;
-            --font-opensans: 'Open Sans', sans-serif;
-        }
+@extends('layouts.general')
 
-        /* --- Reset & Base Styling --- */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+@section('title', 'Aksaranta - Aksara & Ejaan')
 
-        body {
-            font-family: var(--font-opensans);
-            background-color: var(--bg-dark);
-            color: var(--text-light);
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
+@section('body-class', 'font-title bg-bg-dark text-white')
 
-        .container {
-            max-width: 1200px;
-            margin: 40px auto;
-            padding: 20px;
-            background-color: var(--card-bg-dark);
-            border-radius: 12px;
-            box-shadow: 0 8px 20px var(--shadow-dark);
-        }
-
-        /* --- Header Kustom (Hero Section) --- */
-        .hero-header {
-            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://via.placeholder.com/1500x500/1e88e5/ffffff?text=Aksara+Batak+Chart+Banner') no-repeat center center/cover; /* Ganti URL gambar banner Anda di sini */
-            color: var(--text-light);
-            text-align: center;
-            padding: 100px 20px;
-            margin-bottom: 60px;
-            position: relative;
-            overflow: hidden;
-            animation: fadeIn 1.5s ease-out;
-        }
-        .hero-header::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.3);
-            z-index: 1;
-        }
-        .hero-header-content {
-            position: relative;
-            z-index: 2;
-            transform: translateY(0);
-            transition: transform 0.5s ease-out;
-        }
-        .hero-header-content h1 {
-            font-family: var(--font-jua);
-            font-size: 4.5em;
-            margin-bottom: 10px;
-            text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
-            animation: fadeInDown 1.2s ease-out;
-            color: var(--text-light);
-        }
-        .hero-header-content p {
-            font-size: 1.3em;
-            max-width: 800px;
-            margin: 0 auto 30px;
-            color: var(--text-light);
-            animation: fadeInUp 1.2s ease-out 0.2s;
-        }
-        .hero-header .button {
-            display: inline-block;
-            background-color: var(--accent-yellow);
-            color: #fff;
-            padding: 12px 25px;
-            border-radius: 5px;
-            text-decoration: none;
-            font-weight: bold;
-            transition: background-color 0.3s ease, transform 0.2s ease;
-            animation: fadeIn 1.2s ease-out 0.4s;
-        }
-        .hero-header .button:hover {
-            background-color: var(--accent-yellow-hover);
-            transform: translateY(-3px);
-        }
-
-        /* --- Section Intro (Umum) --- */
-        .section-intro {
-            max-width: 800px;
-            margin: 60px auto;
-            padding: 0 20px;
-            text-align: center;
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 1s ease-out, transform 1s ease-out;
-        }
-        .section-intro.fade-in {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        .section-intro h2 {
-            font-family: var(--font-jua);
-            font-size: 2.5em;
-            color: var(--accent-yellow);
-            margin-bottom: 15px;
-            position: relative;
-        }
-        .section-intro h2::after {
-            content: '';
-            display: block;
-            width: 80px;
-            height: 4px;
-            background-color: var(--accent-yellow);
-            margin: 15px auto 0;
-            border-radius: 2px;
-        }
-        .section-intro p {
-            font-size: 1.1em;
-            color: var(--text-muted);
-            margin-top: 20px;
-            line-height: 1.8;
-        }
-
-        /* --- Navigasi A-Z --- */
-        .alphabet-nav {
-            text-align: center;
-            margin: 30px auto;
-            padding: 15px;
-            background-color: var(--highlight-bg);
-            border-radius: 8px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-            max-width: 1000px;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-        }
-        .alphabet-nav.fade-in {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        .alphabet-nav a {
-            display: inline-block;
-            padding: 8px 12px;
-            margin: 2px;
-            color: var(--text-light);
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 0.9em;
-            border-radius: 4px;
-            transition: background-color 0.2s ease, color 0.2s ease;
-        }
-        .alphabet-nav a:hover, .alphabet-nav a.active {
-            background-color: var(--accent-yellow);
-            color: #fff;
-        }
-
-        /* --- Aksara Grid --- */
-        #aksara-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); /* Kolom lebih kecil untuk aksara */
-            gap: 20px; /* Gap lebih kecil */
-            padding: 20px 0;
-            justify-content: center;
-        }
-        .aksara-card {
-            background-color: var(--member-card-bg);
-            padding: 20px;
-            border-radius: 12px;
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
-            border: 1px solid var(--accent-yellow);
-            text-align: center;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-            cursor: pointer;
-        }
-        .aksara-card.fade-in {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        .aksara-card:hover {
-            transform: translateY(-8px) scale(1.02);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
-        }
-        .aksara-card .aksara-glyph {
-            font-family: 'Noto Sans Batak', sans-serif; /* PENTING: Font untuk Aksara Batak */
-            font-size: 5em; /* Ukuran besar untuk glyph */
-            color: var(--text-light);
-            line-height: 1;
-            margin-bottom: 10px;
-            transition: color 0.3s ease;
-        }
-        .aksara-card:hover .aksara-glyph {
-            color: var(--accent-yellow);
-        }
-        .aksara-card .latin-translit {
-            font-family: var(--font-jua);
-            font-size: 1.8em;
-            color: var(--accent-yellow);
-            margin-bottom: 5px;
-        }
-        .aksara-card .type {
-            font-size: 0.85em;
-            color: var(--text-muted);
-            font-style: italic;
-        }
-        .alphabet-heading { /* Judul A, B, C, dll. di dalam grid */
-            grid-column: 1 / -1; /* Membentang seluruh lebar grid */
-            text-align: left;
-            font-family: var(--font-jua);
-            color: var(--accent-yellow);
-            font-size: 2.5em;
-            margin-top: 30px;
-            margin-bottom: 15px;
-            border-bottom: 2px solid var(--accent-yellow);
-            padding-bottom: 5px;
-        }
-        .no-results {
-            grid-column: 1 / -1;
-            text-align: center;
-            color: var(--text-muted);
-            font-size: 1.2em;
-            padding: 50px 0;
-        }
-
-        /* --- Footer & Scroll-to-Top (Konsisten) --- */
-        footer {
-            width: 100%; display: flex; justify-content: space-around;
-            background-color: var(--accent-yellow); padding: 15px; box-sizing: border-box;
-            color: #fff; margin-top: 60px;
-        }
-        .footer-kiri { margin: 30px 0; width: 40%; }
-        .footer-kiri p { font-size: 16px; color: #333333; font-family: var(--font-opensans); }
-        .footer-kiri .foo { font-size: 21px; color: #333333; font-weight: bold; margin: 0 0 15px 0; font-family: var(--font-opensans); }
-        .footer-kanan { margin: 30px 0; width: 40%; display: flex; justify-content: space-around; }
-        .satu-footer h5 { font-size: 21px; color: #333333; font-weight: bold; font-family: var(--font-opensans); }
-        .satu-footer p { font-size: 16px; color: #333333; margin: 15px 0 0 0; font-family: var(--font-opensans); }
-        .up {
-            width: 100%; bottom: 0px; padding: 20px; box-sizing: border-box;
-            position: fixed; margin: 0 0 15px 0; z-index: 1000;
-        }
-        .klik-up {
-            width: 50px; height: 50px; border-radius: 50%;
-            background-color: var(--accent-yellow); display: flex; float: right;
-            transition: 0.7s; margin: 0 35px 0 0; cursor: pointer;
-        }
-        .klik-up img { margin: auto; filter: invert(100%); }
-        .klik-up:hover { background-color: var(--accent-yellow-hover); }
-
-        /* --- Responsive Design --- */
-        @media (max-width: 768px) {
-            .hero-header { padding: 60px 20px; margin-bottom: 40px; }
-            .hero-header-content h1 { font-size: 3em; }
-            .hero-header-content p { font-size: 1em; }
-            .container { width: 95%; margin: 20px auto; padding: 15px; }
-            .section-intro h2 { font-size: 2em; }
-            .section-intro p { font-size: 1em; }
-            .alphabet-nav { margin: 20px auto; padding: 10px; }
-            .alphabet-nav a { padding: 5px 8px; font-size: 0.8em; }
-            #aksara-grid { grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 10px; }
-            .aksara-card .aksara-glyph { font-size: 3.5em; }
-            .aksara-card .latin-translit { font-size: 1.4em; }
-            .alphabet-heading { font-size: 2em; }
-            footer { flex-wrap: wrap; text-align: center; }
-            .footer-kiri, .footer-kanan { width: 100%; margin: 15px 0; justify-content: center; }
-            .footer-kanan div { margin: 0 10px; }
-            .up { padding: 10px; margin: 0 0 25px 0; }
-            .klik-up { margin: 0 10px 0 0; }
-        }
-
-        /* --- Keyframe Animations --- */
-        @keyframes fadeInDown { from { opacity: 0; transform: translateY(-50px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-    </style>
+@section('head')
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Batak&display=swap" rel="stylesheet">
-</head>
-<body>
-    <header class="hero-header" id="top">
-        <div class="hero-header-content">
-            <h1>Aksara Batak & Ejaan</h1>
-            <p>
-                Pelajari bentuk dan pelafalan setiap aksara Batak. Jelajahi konsonan dasar, vokal, dan tanda baca yang membentuk warisan tulis-menulis yang indah ini.
+@endsection
+
+@section('content')
+
+    <!-- Hero / Intro -->
+    <section class="w-full max-w-[1440px] mx-auto px-6 sm:px-12 lg:px-28 my-20 lg:my-28 flex flex-col gap-6">
+        <div class="flex flex-col gap-3">
+            <h2 class="text-red-400">Kamus</h2>
+            <h3 class="font-bold text-2xl sm:text-3xl md:text-4xl leading-snug tracking-wider">
+                Aksara Batak <span class="text-red-400">& Ejaan</span>
+            </h3>
+            <p class="font-sans text-sm sm:text-base md:text-lg max-w-3xl">
+                Pelajari bentuk dan pelafalan setiap aksara Batak. Jelajahi konsonan dasar, vokal, dan tanda baca yang membentuk warisan tulis-menulis ini.
             </p>
-            <a href="#aksara-chart-section" class="button">Lihat Aksara Lengkap</a>
         </div>
-    </header>
+    </section>
 
-    <main id="main-content">
-        <div class="container">
-            <section class="section-intro">
-                <h2 id="aksara-chart-section">Mengenal Induk Surat dan Anak Surat</h2>
-                <p>
-                    Aksara Batak terdiri dari "Induk Surat" (huruf dasar) yang memiliki vokal 'a' inheren, dan "Anak Surat" (diakritik) yang mengubah vokal dasar atau menambahkan konsonan akhir. Berikut adalah daftar aksara yang umum digunakan.
+    <!-- Intro + Alphabet nav + Grid -->
+    <section class="flex flex-col gap-8">
+        <div class="w-full max-w-[1440px] mx-auto px-6 sm:px-12 lg:px-28">
+            <div class="bg-white/5 rounded-3xl p-6 sm:p-10">
+                <h3 class="text-red-400 text-center my-2 text-sm sm:text-base">Mengenal</h3>
+                <h2 class="text-center text-2xl sm:text-3xl md:text-4xl">Induk Surat dan <span class="text-red-400">Anak Surat</span></h2>
+                <p class="font-sans text-center mx-auto max-w-3xl text-sm sm:text-base mt-4">
+                    "Induk Surat" (huruf dasar) memuat vokal inheren 'a'. "Anak Surat" (diakritik) mengubah vokal dasar atau menambahkan konsonan akhir.
                 </p>
-            </section>
+            </div>
 
-            <div class="alphabet-nav">
+            <!-- Tabs: sub-etnis -->
+            <div id="aksara-tabs" class="mt-6 flex flex-wrap gap-2">
+                <button type="button" data-tab="all" class="px-3 py-1.5 rounded-full bg-white/20 text-white text-sm">Semua</button>
+                <button type="button" data-tab="toba" class="px-3 py-1.5 rounded-full bg-white/10 hover:bg-white/20 text-white text-sm">Batak Toba</button>
+                <button type="button" data-tab="karo" class="px-3 py-1.5 rounded-full bg-white/10 hover:bg-white/20 text-white text-sm">Batak Karo</button>
+                <button type="button" data-tab="pakpak" class="px-3 py-1.5 rounded-full bg-white/10 hover:bg-white/20 text-white text-sm">Batak Pakpak</button>
+                <button type="button" data-tab="mandailing" class="px-3 py-1.5 rounded-full bg-white/10 hover:bg-white/20 text-white text-sm">Batak Mandailing</button>
+                <button type="button" data-tab="simalungun" class="px-3 py-1.5 rounded-full bg-white/10 hover:bg-white/20 text-white text-sm">Batak Simalungun</button>
+            </div>
+
+            <!-- Base characters -->
+            <h4 class="mt-8 text-white/80 text-sm tracking-wide">Huruf dasar</h4>
+            <div id="aksara-grid-base" class="mt-2 grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 xl:grid-cols-10 gap-3 sm:gap-4"></div>
+
+            <!-- Vocals / Diacritics -->
+            <h4 class="mt-8 text-white/80 text-sm tracking-wide">Vokal & diakritik</h4>
+            <div id="aksara-grid-diacritics" class="mt-2 grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 xl:grid-cols-10 gap-3 sm:gap-4"></div>
+            
+            <!-- Guide: Usage & Pronunciation -->
+            <div class="mt-12 bg-white/5 rounded-3xl p-6 sm:p-10">
+                <h3 class="text-red-400 text-center my-2 text-sm sm:text-base">Panduan</h3>
+                <h2 class="text-center text-2xl sm:text-3xl md:text-4xl">Penggunaan & <span class="text-red-400">Pelafalan</span></h2>
+                
+                <div class="mt-6 grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <!-- How to write/read -->
+                    <div class="bg-white/5 rounded-2xl p-5 border border-white/10">
+                        <h4 class="font-semibold text-lg">Cara menggunakan aksara</h4>
+                        <ul class="mt-3 list-disc list-inside space-y-2 text-white/80 font-sans text-sm">
+                            <li>Huruf dasar memiliki vokal inheren <span class="font-semibold">"a"</span> (mis. <span style="font-family: 'Noto Sans Batak', sans-serif" class="text-lg uc" data-cp="1BC5"></span> dibaca <span class="italic">ba</span>).</li>
+                            <li>Ubah vokal dengan <span class="font-semibold">tanda vokal</span> (anak surat):
+                                <span class="inline-flex gap-2 pl-1" style="font-family: 'Noto Sans Batak', sans-serif">
+                                    <span title="E" class="uc" data-cp="1BE7"></span>
+                                    <span title="I" class="uc" data-cp="1BEA"></span>
+                                    <span title="U" class="uc" data-cp="1BEE"></span>
+                                    <span title="O" class="uc" data-cp="1BEC"></span>
+                                </span>
+                                (contoh: <span style="font-family: 'Noto Sans Batak', sans-serif" class="text-lg"><span class="uc" data-cp="1BC5"></span><span class="uc" data-cp="1BEA"></span></span> ≈ <span class="italic">bi</span>).
+                            </li>
+                            <li>Matikan vokal dengan <span class="font-semibold">pangolat/panongonan</span>:
+                                <span style="font-family: 'Noto Sans Batak', sans-serif" class="inline-flex gap-2 pl-1">
+                                    <span title="Pangolat" class="uc" data-cp="1BF2"></span>
+                                    <span title="Panongonan" class="uc" data-cp="1BF3"></span>
+                                </span>
+                                (mis. <span style="font-family: 'Noto Sans Batak', sans-serif" class="text-lg"><span class="uc" data-cp="1BC5"></span><span class="uc" data-cp="1BF2"></span></span> ≈ <span class="italic">b</span>).</li>
+                            <li>Konsonan akhir: gunakan pangolat, opsional dengan <span class="font-semibold">tanda NG/H</span>:
+                                <span style="font-family: 'Noto Sans Batak', sans-serif" class="inline-flex gap-2 pl-1">
+                                    <span title="NG" class="uc" data-cp="1BF0"></span>
+                                    <span title="H" class="uc" data-cp="1BF1"></span>
+                                </span>
+                                (mis. <span style="font-family: 'Noto Sans Batak', sans-serif" class="text-lg"><span class="uc" data-cp="1BD4"></span><span class="uc" data-cp="1BF2"></span><span class="uc" data-cp="1BF0"></span></span> ≈ <span class="italic">m-ng</span>).</li>
+                            <li>Variasi dialek: beberapa tanda memiliki bentuk khusus (mis. <span class="italic">Karo I</span> <span class="uc" data-cp="1BEB"></span>, <span class="italic">Karo O</span> <span class="uc" data-cp="1BED"></span>).</li>
+                            <li>Arah tulis: kiri → kanan.</li>
+                        </ul>
+                        <div class="mt-4 rounded-xl bg-white/5 border border-white/10 p-4">
+                            <p class="text-white/70 text-sm">Contoh merangkai suku kata:</p>
+                            <div class="mt-2 grid grid-cols-2 gap-3 text-sm">
+                                <div>
+                                    <p class="text-white/60">ba + i</p>
+                                    <p style="font-family: 'Noto Sans Batak', sans-serif" class="text-2xl"><span class="uc" data-cp="1BC5"></span><span class="uc" data-cp="1BEA"></span></p>
+                                </div>
+                                <div>
+                                    <p class="text-white/60">ta + o</p>
+                                    <p style="font-family: 'Noto Sans Batak', sans-serif" class="text-2xl"><span class="uc" data-cp="1BD6"></span><span class="uc" data-cp="1BEC"></span></p>
+                                </div>
+                                <div>
+                                    <p class="text-white/60">ga + pangolat</p>
+                                    <p style="font-family: 'Noto Sans Batak', sans-serif" class="text-2xl"><span class="uc" data-cp="1BCE"></span><span class="uc" data-cp="1BF2"></span></p>
+                                </div>
+                                <div>
+                                    <p class="text-white/60">sa + u</p>
+                                    <p style="font-family: 'Noto Sans Batak', sans-serif" class="text-2xl"><span class="uc" data-cp="1BD8"></span><span class="uc" data-cp="1BEE"></span></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Pronunciation quick map -->
+                    <div class="bg-white/5 rounded-2xl p-5 border border-white/10">
+                        <h4 class="font-semibold text-lg">Peta pelafalan singkat</h4>
+                        <div class="mt-3 grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm font-sans">
+                            <div class="space-y-2">
+                                <div class="flex items-center justify-between gap-3 p-2 rounded-lg bg-white/5">
+                                    <span>Ba</span><span style="font-family: 'Noto Sans Batak', sans-serif" class="text-xl uc" data-cp="1BC5"></span><span class="text-white/60">/ba/</span>
+                                </div>
+                                <div class="flex items-center justify-between gap-3 p-2 rounded-lg bg-white/5">
+                                    <span>Pa</span><span style="font-family: 'Noto Sans Batak', sans-serif" class="text-xl uc" data-cp="1BC7"></span><span class="text-white/60">/pa/</span>
+                                </div>
+                                <div class="flex items-center justify-between gap-3 p-2 rounded-lg bg-white/5">
+                                    <span>Ga</span><span style="font-family: 'Noto Sans Batak', sans-serif" class="text-xl uc" data-cp="1BCE"></span><span class="text-white/60">/ga/</span>
+                                </div>
+                                <div class="flex items-center justify-between gap-3 p-2 rounded-lg bg-white/5">
+                                    <span>Da</span><span style="font-family: 'Noto Sans Batak', sans-serif" class="text-xl uc" data-cp="1BD1"></span><span class="text-white/60">/da/</span>
+                                </div>
+                            </div>
+                            <div class="space-y-2">
+                                <div class="flex items-center justify-between gap-3 p-2 rounded-lg bg-white/5">
+                                    <span>Sa</span><span style="font-family: 'Noto Sans Batak', sans-serif" class="text-xl uc" data-cp="1BD8"></span><span class="text-white/60">/sa/</span>
+                                </div>
+                                <div class="flex items-center justify-between gap-3 p-2 rounded-lg bg-white/5">
+                                    <span>Ta</span><span style="font-family: 'Noto Sans Batak', sans-serif" class="text-xl uc" data-cp="1BD6"></span><span class="text-white/60">/ta/</span>
+                                </div>
+                                <div class="flex items-center justify-between gap-3 p-2 rounded-lg bg-white/5">
+                                    <span>La</span><span style="font-family: 'Noto Sans Batak', sans-serif" class="text-xl uc" data-cp="1BDE"></span><span class="text-white/60">/la/</span>
+                                </div>
+                                <div class="flex items-center justify-between gap-3 p-2 rounded-lg bg-white/5">
+                                    <span>Ra</span><span style="font-family: 'Noto Sans Batak', sans-serif" class="text-xl uc" data-cp="1BD2"></span><span class="text-white/60">/ra/</span>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="mt-3 text-xs text-white/60">Catatan: simbol IPA disederhanakan. Pelafalan dapat bervariasi antar dialek.</p>
+                    </div>
                 </div>
-
-            <section id="aksara-grid">
-                </section>
-        </div>
-    </main>
-
-    <footer>
-        <div class="footer-kiri">
-            <p class="foo">Aksaranta</p>
-            <p>Gerbang Aksara Batak Digital Anda.</p>
-        </div>
-        <div class="footer-kanan">
-            <div class="satu-footer">
-                <h5>Aksara</h5>
-                <p>Toba</p>
-                <p>Karo</p>
-                <p>Simalungun</p>
-                <p>Mandailing</p>
-                <p>Pakpak</p>
-            </div>
-            <div class="satu-footer">
-                <h5>Fitur</h5>
-                <p>Transliterasi</p>
-                <p>Kamus</p>
-                <p>Virtual Tour</p>
-                <p>Musik</p>
-            </div>
-            <div class="satu-footer">
-                <h5>Informasi</h5>
-                <p>Sejarah</p>
-                <p>Budaya</p>
-                <p>Blog</p>
-                <p>Wisata</p>
             </div>
         </div>
-    </footer>
+    </section>
 
-    <div class="up">
-        <a href="#top" aria-label="Scroll to top">
-            <div class="klik-up">
-                <img src="../img/top.png" width="30px" alt="Panah atas" />
-            </div>
-        </a>
-    </div>
+@endsection
 
+@section('scripts')
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // --- Data Karakter Aksara Batak ---
-            // Karakter-karakter ini sesuai dengan yang Anda berikan, diurutkan berdasarkan transliterasi Latinnya
+            // Replace raw unicode placeholders in guide (elements with class 'uc' and data-cp)
+            document.querySelectorAll('.uc[data-cp]').forEach(el => {
+                const cp = el.getAttribute('data-cp');
+                try {
+                    el.textContent = String.fromCodePoint(parseInt(cp, 16));
+                } catch { /* noop */ }
+            });
+            // Unicode-based dataset (see unicode.md reference)
             const aksaraCharacters = [
-                { latin: "A", aksara: "ᯀ", type: "Vokal Induk" },
-                { latin: "Ba", aksara: "ᯞ", type: "Konsonan Induk" },
-                { latin: "Ca", aksara: "ᯝ", type: "Konsonan Induk" },
-                { latin: "Da", aksara: "ᯔ", type: "Konsonan Induk" },
-                { latin: "E (diacritic)", aksara: "ᯬ", type: "Anak Surat Vokal" }, // Anak Surat untuk 'e'
-                { latin: "Ga", aksara: "ᯋ", type: "Konsonan Induk" },
-                { latin: "Ha", aksara: "ᯂ", type: "Konsonan Induk" },
-                { latin: "I (diacritic)", aksara: "ᯩ", type: "Anak Surat Vokal" }, // Anak Surat untuk 'i'
-                { latin: "Ja", aksara: "ᯒ", type: "Konsonan Induk" },
-                { latin: "Ka", aksara: "ᯡ", type: "Konsonan Induk" },
-                { latin: "La", aksara: "ᯎ", type: "Konsonan Induk" },
-                { latin: "Ma", aksara: "ᯇ", type: "Konsonan Induk" },
-                { latin: "Na", aksara: "ᯅ", type: "Konsonan Induk" },
-                { latin: "Nga", aksara: "ᯖ", type: "Konsonan Induk" },
-                { latin: "Nja", aksara: "ᯣ", type: "Konsonan Induk" },
-                { latin: "Nya", aksara: "ᯛ", type: "Konsonan Induk" },
-                { latin: "Mba", aksara: "ᯤ", type: "Konsonan Khusus" }, // Contoh konsonan khusus
-                { latin: "Ngga", aksara: "ᯥ", type: "Konsonan Khusus" }, // Contoh konsonan khusus
-                { latin: "O (diacritic)", aksara: "ᯪ", type: "Anak Surat Vokal" }, // Anak Surat untuk 'o' (seringnya ᯫ)
-                { latin: "Pa", aksara: "ᯐ", type: "Konsonan Induk" },
-                { latin: "Pangolat Ha", aksara: "ᯮ", type: "Pangolat" }, // Tanda penghenti konsonan
-                { latin: "Pangolat La", aksara: "᯲", type: "Pangolat" },
-                { latin: "Pangolat Ma", aksara: "᯽", type: "Pangolat" },
-                { latin: "Pangolat Na", aksara: "᯳", type: "Pangolat" },
-                { latin: "Pangolat Nga", aksara: "ᯰ", type: "Pangolat" },
-                { latin: "Pangolat Nya", aksara: "᯿", type: "Pangolat" },
-                { latin: "Pangolat Pa", aksara: "᯼", type: "Pangolat" },
-                { latin: "Pangolat Ra", aksara: "ᯱ", type: "Pangolat" },
-                { latin: "Pangolat Ta", aksara: "᯾", type: "Pangolat" },
-                { latin: "Ra", aksara: "ᯉ", type: "Konsonan Induk" },
-                { latin: "Sa", aksara: "ᯑ", type: "Konsonan Induk" },
-                { latin: "Ta", aksara: "ᯠ", type: "Konsonan Induk" },
-                { latin: "U (diacritic)", aksara: "ᯧ", type: "Anak Surat Vokal" }, // Anak Surat untuk 'u'
-                { latin: "Wa", aksara: "ᯗ", type: "Konsonan Induk" },
-                { latin: "Ya", aksara: "ᯢ", type: "Konsonan Induk" }
-            ].sort((a,b) => a.latin.localeCompare(b.latin)); // Urutkan data secara alfabetis berdasarkan Latin
+                // Vokal Induk (independent vowels)
+                { latin: 'A', aksara: '\u{1BC0}', type: 'Vokal Induk' }, // BATAK LETTER A
+                { latin: 'A (Simalungun)', aksara: '\u{1BC1}', type: 'Vokal Induk' }, // SIMALUNGUN A
+                { latin: 'I', aksara: '\u{1BE4}', type: 'Vokal Induk' }, // BATAK LETTER I
+                { latin: 'U', aksara: '\u{1BE5}', type: 'Vokal Induk' }, // BATAK LETTER U
 
+                // Konsonan Induk (base consonants)
+                { latin: 'Ha', aksara: '\u{1BC2}', type: 'Konsonan Induk' }, // BATAK LETTER HA
+                { latin: 'Ha (Simalungun)', aksara: '\u{1BC3}', type: 'Konsonan Induk' },
+                { latin: 'Ha (Mandailing)', aksara: '\u{1BC4}', type: 'Konsonan Induk' },
+                { latin: 'Ba', aksara: '\u{1BC5}', type: 'Konsonan Induk' },
+                { latin: 'Ba (Karo)', aksara: '\u{1BC6}', type: 'Konsonan Induk' },
+                { latin: 'Pa', aksara: '\u{1BC7}', type: 'Konsonan Induk' },
+                { latin: 'Pa (Simalungun)', aksara: '\u{1BC8}', type: 'Konsonan Induk' },
+                { latin: 'Na', aksara: '\u{1BC9}', type: 'Konsonan Induk' },
+                { latin: 'Na (Mandailing)', aksara: '\u{1BCA}', type: 'Konsonan Induk' },
+                { latin: 'Wa', aksara: '\u{1BCB}', type: 'Konsonan Induk' },
+                { latin: 'Wa (Simalungun)', aksara: '\u{1BCC}', type: 'Konsonan Induk' },
+                { latin: 'Wa (Pakpak)', aksara: '\u{1BCD}', type: 'Konsonan Induk' },
+                { latin: 'Ga', aksara: '\u{1BCE}', type: 'Konsonan Induk' },
+                { latin: 'Ga (Simalungun)', aksara: '\u{1BCF}', type: 'Konsonan Induk' },
+                { latin: 'Ja', aksara: '\u{1BD0}', type: 'Konsonan Induk' },
+                { latin: 'Da', aksara: '\u{1BD1}', type: 'Konsonan Induk' },
+                { latin: 'Ra', aksara: '\u{1BD2}', type: 'Konsonan Induk' },
+                { latin: 'Ra (Simalungun)', aksara: '\u{1BD3}', type: 'Konsonan Induk' },
+                { latin: 'Ma', aksara: '\u{1BD4}', type: 'Konsonan Induk' },
+                { latin: 'Ma (Simalungun)', aksara: '\u{1BD5}', type: 'Konsonan Induk' },
+                { latin: 'Ta (Selatan)', aksara: '\u{1BD6}', type: 'Konsonan Induk' },
+                { latin: 'Ta (Utara)', aksara: '\u{1BD7}', type: 'Konsonan Induk' },
+                { latin: 'Sa', aksara: '\u{1BD8}', type: 'Konsonan Induk' },
+                { latin: 'Sa (Simalungun)', aksara: '\u{1BD9}', type: 'Konsonan Induk' },
+                { latin: 'Sa (Mandailing)', aksara: '\u{1BDA}', type: 'Konsonan Induk' },
+                { latin: 'Ya', aksara: '\u{1BDB}', type: 'Konsonan Induk' },
+                { latin: 'Ya (Simalungun)', aksara: '\u{1BDC}', type: 'Konsonan Induk' },
+                { latin: 'Nga', aksara: '\u{1BDD}', type: 'Konsonan Induk' },
+                { latin: 'La', aksara: '\u{1BDE}', type: 'Konsonan Induk' },
+                { latin: 'La (Simalungun)', aksara: '\u{1BDF}', type: 'Konsonan Induk' },
+                { latin: 'Nya', aksara: '\u{1BE0}', type: 'Konsonan Induk' },
+                { latin: 'Ca', aksara: '\u{1BE1}', type: 'Konsonan Induk' },
+                { latin: 'Nda', aksara: '\u{1BE2}', type: 'Konsonan Khusus' },
+                { latin: 'Mba', aksara: '\u{1BE3}', type: 'Konsonan Khusus' },
 
-            // --- Elemen DOM ---
-            const aksaraGridContainer = document.getElementById('aksara-grid');
-            const alphabetNavContainer = document.querySelector('.alphabet-nav');
-            const animatedElementsOnLoad = document.querySelectorAll('.hero-header, .section-intro, .alphabet-nav');
+                // Anak Surat Vokal (vowel signs)
+                { latin: 'E (tanda)', aksara: '\u{1BE7}', type: 'Anak Surat Vokal' },
+                { latin: 'Pakpak E (tanda)', aksara: '\u{1BE8}', type: 'Anak Surat Vokal' },
+                { latin: 'EE (tanda)', aksara: '\u{1BE9}', type: 'Anak Surat Vokal' },
+                { latin: 'I (tanda)', aksara: '\u{1BEA}', type: 'Anak Surat Vokal' },
+                { latin: 'Karo I (tanda)', aksara: '\u{1BEB}', type: 'Anak Surat Vokal' },
+                { latin: 'O (tanda)', aksara: '\u{1BEC}', type: 'Anak Surat Vokal' },
+                { latin: 'Karo O (tanda)', aksara: '\u{1BED}', type: 'Anak Surat Vokal' },
+                { latin: 'U (tanda)', aksara: '\u{1BEE}', type: 'Anak Surat Vokal' },
+                { latin: 'U untuk Simalungun SA (tanda)', aksara: '\u{1BEF}', type: 'Anak Surat Vokal' },
 
-            // --- Fungsi Rendering Aksara ---
-            function renderAksaraCharacters(characters) {
-                aksaraGridContainer.innerHTML = ''; // Kosongkan grid sebelumnya
+                // Tanda Konsonan / Virama
+                { latin: 'Tanda NG', aksara: '\u{1BF0}', type: 'Tanda Konsonan' },
+                { latin: 'Tanda H', aksara: '\u{1BF1}', type: 'Tanda Konsonan' },
+                { latin: 'Pangolat', aksara: '\u{1BF2}', type: 'Pangolat' },
+                { latin: 'Panongonan', aksara: '\u{1BF3}', type: 'Pangolat' },
+            ].sort((a, b) => a.latin.localeCompare(b.latin));
 
-                if (characters.length === 0) {
-                    aksaraGridContainer.innerHTML = '<p class="no-results">Tidak ada aksara yang ditemukan.</p>';
+    const gridBase = document.getElementById('aksara-grid-base');
+    const gridDia = document.getElementById('aksara-grid-diacritics');
+    const tabsContainer = document.getElementById('aksara-tabs');
+
+    function renderGridTo(container, chars) {
+        container.innerHTML = '';
+        if (!chars.length) {
+            container.innerHTML = '<p class="col-span-full text-center text-white/60">Tidak ada aksara.</p>';
                     return;
                 }
+        chars.forEach((ch) => {
+            const card = document.createElement('div');
+            card.className = 'bg-white/5 rounded-xl p-2 sm:p-3 text-center border border-white/10 hover:border-red-400/50 transition-colors';
 
-                let lastInitial = '';
-                characters.forEach((char, index) => {
-                    const currentInitial = char.latin.charAt(0).toUpperCase();
-                    if (currentInitial !== lastInitial) {
-                        const heading = document.createElement('h2');
-                        heading.classList.add('alphabet-heading');
-                        heading.textContent = currentInitial;
-                        heading.id = `alpha-${currentInitial}`; // Tambahkan ID untuk navigasi A-Z
-                        aksaraGridContainer.appendChild(heading);
-                        observer.observe(heading); // Amati heading untuk animasi
-                        lastInitial = currentInitial;
-                    }
-
-                    const card = document.createElement('div');
-                    card.classList.add('aksara-card');
-                    card.innerHTML = `
-                        <p class="aksara-glyph">${char.aksara}</p>
-                        <h3 class="latin-translit">${char.latin}</h3>
-                        <p class="type">${char.type}</p>
-                    `;
-                    aksaraGridContainer.appendChild(card);
-                    observer.observe(card); // Amati kartu baru untuk animasi
-                });
+            // Split variant label in parentheses into a small badge
+            let baseLabel = ch.latin;
+            let variantLabel = '';
+            const m = typeof ch.latin === 'string' ? ch.latin.match(/^(.*?)\s*\(([^)]+)\)$/) : null;
+            if (m) {
+                baseLabel = m[1].trim();
+                variantLabel = m[2].trim();
             }
 
-            // --- Inisialisasi Navigasi A-Z ---
-            function setupAlphabetNav() {
-                const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
-                alphabetNavContainer.innerHTML = '';
-                alphabet.forEach(letter => {
-                    const link = document.createElement('a');
-                    link.href = `#alpha-${letter}`;
-                    link.textContent = letter;
-                    link.addEventListener('click', (e) => {
-                        e.preventDefault();
-                        const targetId = e.target.getAttribute('href').substring(1);
-                        const targetElement = document.getElementById(targetId);
-                        if (targetElement) {
-                            window.scrollTo({
-                                top: targetElement.offsetTop - 100, // Geser sedikit ke atas untuk header/nav
-                                behavior: 'smooth'
-                            });
-                            alphabetNavContainer.querySelectorAll('a').forEach(a => a.classList.remove('active'));
-                            e.target.classList.add('active');
-                        }
-                    });
-                    alphabetNavContainer.appendChild(link);
-                });
-            }
+            card.innerHTML = `
+                <p style=\"font-family: 'Noto Sans Batak', sans-serif\" class=\"text-3xl sm:text-4xl leading-none\">${ch.aksara}</p>
+                <div class=\"mt-2 flex flex-col items-center justify-center gap-1\">
+                    <h3 class=\"text-white text-sm sm:text-base font-semibold break-words whitespace-normal\" title=\"${ch.latin}\">${baseLabel}</h3>
+                    ${variantLabel ? `<span class=\"px-2 py-0.5 rounded-full text-[10px] bg-white/10 border border-white/10 text-white/80\">${variantLabel}</span>` : ''}
+                </div>
+                <p class=\"text-white/70 text-[10px] sm:text-xs mt-0.5\" title=\"${ch.type}\">${ch.type}</p>
+            `;
+            container.appendChild(card);
+        });
+    }
 
-            // --- Animasi Fade-in On Scroll (Intersection Observer) ---
-            const observerOptions = {
-                root: null,
-                rootMargin: '0px',
-                threshold: 0.1
-            };
+    function renderSections(chars) {
+        const baseTypes = new Set(['Konsonan Induk', 'Konsonan Khusus', 'Vokal Induk']);
+        const diaTypes = new Set(['Anak Surat Vokal', 'Tanda Konsonan', 'Pangolat']);
+        const base = chars.filter(ch => baseTypes.has(ch.type));
+        const dia = chars.filter(ch => diaTypes.has(ch.type));
+        renderGridTo(gridBase, base);
+        renderGridTo(gridDia, dia);
+    }
 
-            const observer = new IntersectionObserver((entries, observer) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('fade-in');
-                        // Unobserve elemen yang dianimasikan sekali
-                        observer.unobserve(entry.target);
-                    }
-                });
-            }, observerOptions);
+    // Datasets per sub-etnis (placeholder subsets). TODO: Adjust arrays to real variant coverage if needed.
+    const pick = (names) => aksaraCharacters.filter(ch => names.includes(ch.latin));
+    const datasets = {
+        all: aksaraCharacters,
+        toba: pick(['A','I','U','Ha','Ba','Pa','Na','Wa','Ga','Ja','Da','Ra','Ma','Ta (Selatan)','Sa','Ya','Nga','La','Nya','Ca','Nda','Mba']),
+        karo: pick(['A','I','U','Ha','Ba (Karo)','Pa','Na','Wa','Ga','Ja','Da','Ra','Ma','Ta (Utara)','Sa','Ya','Nga','La','Nya','Ca','Nda','Mba']),
+        pakpak: pick(['A','I','U','Ha','Ba','Pa','Na','Wa (Pakpak)','Ga','Ja','Da','Ra','Ma','Ta (Utara)','Sa','Ya','Nga','La','Nya','Ca','Nda','Mba']),
+        mandailing: pick(['A','I','U','Ha (Mandailing)','Ba','Pa','Na (Mandailing)','Wa','Ga','Ja','Da','Ra','Ma','Ta (Selatan)','Sa (Mandailing)','Ya','Nga','La','Nya','Ca','Nda','Mba']),
+        simalungun: pick(['A (Simalungun)','I','U','Ha (Simalungun)','Ba','Pa (Simalungun)','Na','Wa (Simalungun)','Ga (Simalungun)','Ja','Da','Ra (Simalungun)','Ma (Simalungun)','Ta (Selatan)','Sa (Simalungun)','Ya (Simalungun)','Nga','La (Simalungun)','Nya','Ca','Nda','Mba'])
+    };
 
-            // Mengamati elemen yang sudah ada saat load
-            animatedElementsOnLoad.forEach(element => observer.observe(element));
-
-            // --- Scroll-to-Top Button ---
-            const scrollToTopBtn = document.querySelector('.klik-up');
-            if (scrollToTopBtn) {
-                scrollToTopBtn.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                });
-                window.addEventListener('scroll', function() {
-                    if (window.pageYOffset > 300) {
-                        if (scrollToTopBtn.style.display === 'none' || scrollToTopBtn.style.display === '') {
-                            scrollToTopBtn.style.display = 'flex';
-                            scrollToTopBtn.style.opacity = '1';
-                        }
+    function setActiveTab(tabKey) {
+        const buttons = tabsContainer.querySelectorAll('button[data-tab]');
+        buttons.forEach(btn => {
+            if (btn.getAttribute('data-tab') === tabKey) {
+                btn.className = 'px-3 py-1.5 rounded-full bg-white/20 text-white text-sm';
                     } else {
-                        if (scrollToTopBtn.style.display === 'flex' || scrollToTopBtn.style.opacity === '1') {
-                            scrollToTopBtn.style.opacity = '0';
-                            setTimeout(() => { scrollToTopBtn.style.display = 'none'; }, 300);
-                        }
-                    }
-                });
-                if (window.pageYOffset <= 300 && scrollToTopBtn) {
-                    scrollToTopBtn.style.display = 'none';
-                    scrollToTopBtn.style.opacity = '0';
-                }
+                btn.className = 'px-3 py-1.5 rounded-full bg-white/10 hover:bg-white/20 text-white text-sm';
             }
+        });
+        renderSections(datasets[tabKey] || aksaraCharacters);
+    }
 
-            // --- Inisialisasi Halaman saat dimuat ---
-            setupAlphabetNav(); // Buat navigasi A-Z
-            renderAksaraCharacters(aksaraCharacters); // Tampilkan semua aksara
+    tabsContainer.addEventListener('click', (e) => {
+        const target = e.target.closest('button[data-tab]');
+        if (!target) return;
+        const tabKey = target.getAttribute('data-tab');
+        setActiveTab(tabKey);
+    });
+
+    // Initialize default tab
+    setActiveTab('all');
         });
     </script>
-</body>
-</html>
+@endsection

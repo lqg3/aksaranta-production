@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Course;
 use Illuminate\Http\Request;
-use App\Services\SupabaseStorageService;
+use App\Services\DOCdnStorageService;
 
 class CourseAdminController extends Controller
 {
@@ -57,7 +57,7 @@ class CourseAdminController extends Controller
         return view('admin.courses.form', compact('isEdit'));
     }
 
-    public function store(Request $request, SupabaseStorageService $storage)
+    public function store(Request $request, DOCdnStorageService $storage)
     {
         $request->validate([
             'course_name'        => 'required|string|max:255',
@@ -71,10 +71,10 @@ class CourseAdminController extends Controller
         $course->course_description = $request->course_description;
         $course->instructor = $request->instructor;
 
-        // Upload image to Supabase if provided
+        // Upload image to DO CDN if provided
         if ($request->hasFile('thumbnail')) {
             $file = $request->file('thumbnail');
-            $url = $storage->upload($file, 'courses'); // optional folder name
+            $url = $storage->upload($file, 'courses');
             $course->image_url = $url;
         }
 
@@ -94,7 +94,7 @@ class CourseAdminController extends Controller
         ]);
     }
     
-    public function update(Request $request, Course $course, SupabaseStorageService $storage)
+    public function update(Request $request, Course $course, DOCdnStorageService $storage)
     {
         $request->validate([
             'course_name'        => 'required|string|max:255',
@@ -119,7 +119,7 @@ class CourseAdminController extends Controller
                 }
             }
 
-            // Upload thumbnail baru ke Supabase
+            // Upload thumbnail baru ke DO CDN
             $file = $request->file('thumbnail');
             $url = $storage->upload($file, 'courses');
             $course->image_url = $url;
@@ -131,21 +131,29 @@ class CourseAdminController extends Controller
     }
 
     
-   public function destroy(Course $course, SupabaseStorageService $storage)
+   public function destroy(Course $course, DOCdnStorageService $storage)
     {
+        $imageDeletionWarning = null;
+
         if ($course->image_url) {
             try {
                 $storage->delete($course->image_url);
             } catch (\Exception $e) {
-                return redirect()->route('admin.course.index')
-                    ->with('error', 'Gagal menghapus gambar: ' . $e->getMessage());
+                // Continue deleting the course even if the image removal fails
+                $imageDeletionWarning = 'Gagal menghapus gambar dari storage: ' . $e->getMessage();
             }
         }
 
         $course->delete();
 
-        return redirect()->route('admin.course.index')
-            ->with('success', 'Course dan gambar berhasil dihapus.');
+        $redirect = redirect()->route('admin.course.index')
+            ->with('success', 'Course berhasil dihapus.');
+
+        if ($imageDeletionWarning) {
+            $redirect->with('warning', $imageDeletionWarning);
+        }
+
+        return $redirect;
     }
 
 }

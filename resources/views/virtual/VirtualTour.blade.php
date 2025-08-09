@@ -1,522 +1,85 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Aksaranta</title>
-    <style>
-      * {
-        margin: 0;
-        /*padding: 0;*/
-      }
-      @font-face {
-        src: url(font/Jua-Regular.ttf);
-        font-family: "jua";
-      }
-      @font-face {
-        src: url(font/OpenSansRegular.ttf);
-        font-family: "opensans";
-      }
-      body{
-        background-color: #000;
-      }
+@extends('layouts.general')
 
-      h3{
-        color: rgb(255, 255, 255);
-      }
+@section('title', 'Virtual Tour')
 
+@section('body-class', 'font-title bg-bg-dark text-white')
 
+@section('content')
 
-      .pembatas {
-        height: 100px;
-      }
+    <section class="w-full max-w-[1440px] mx-auto px-6 sm:px-12 lg:px-28 pt-24">
+        <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold">Virtual Tour</h1>
+        <p class="mt-3 text-white/80 font-sans max-w-3xl">Jelajahi keindahan alam Sumatera Utara melalui pengalaman interaktif, dari Danau Toba yang megah hingga Air Terjun Sipiso-piso yang menakjubkan.</p>
+    </section>
 
-      /* END HEADER */
-
-      .kalimat-virtual-tour {
-        width: 80%;
-        margin: 10px auto;
-        text-align: center;
-      }
-      .kalimat-virtual-tour h5 {
-        font-size: 18px;
-        color: #B10002;
-        font-family: "jua";
-      }
-      .kalimat-virtual-tour h3 {
-        font-size: 45px;
-        /*margin: -25px 0 0 0;*/
-        font-family: "jua";
-        color: rgb(255, 255, 255);
-      }
-      .kalimat-virtual-tour p {
-        font-size: 23px;
-        font-family: "opensans";
-        color: rgb(255, 255, 255);
-      }
-      @media (max-width: 800px) {
-        .kalimat-virtual-tour h3 {
-          font-size: 30px;
-          margin: -15px 0 0 0;
-        }
-        .kalimat-virtual-tour p {
-          font-size: 14px;
-        }
-      }
-      .box-peta {
-        width: 80%;
-        height: 95%;
-        margin: 50px auto;
-        /* box-shadow: 0.1px 0.1px 50px #d1d1d1; */
-        border-radius: 20px;
-      }
-      .box-peta iframe {
-        width: 100%;
-        border-radius: 10px;
-      }
-
-      .container-virtual-tour {
-        width: 80%;
-        margin: 200px auto;
-        /* border: 1px solid black; */
-        display: flex;
-        justify-content: space-between;
-        flex-wrap: wrap;
-      }
-      .box-tour {
-        margin: 30px 0 0 5px;
-        width: 20%;
-        /* border: 1px solid black; */
-        /* box-shadow: 0.1px 0.1px 50px #d1d1d1; */
-        border-radius: 10px;
-        transition: 0.8s;
-      }
-      .box-tour:hover {
-        background-color: #5a5151;
-      }
-      .box-tour img {
-        width: 100%;
-        border-radius: 10px;
-        height: 150px;
-      }
-      .kalimat-tour {
-        padding: 20px;
-        box-sizing: border-box;
-        text-align: center;
-      }
-      .kalimat-tour p {
-        margin: 0 0 10px 0;
-        font-size: 15px;
-        color: #B10002;
-        font-weight: bold;
-        font-family: "jua";
-      }
-      .kalimat-tour h3 {
-        font-size: 23px;
-        font-family: "opensans";
-      }
-
-      /* FOOTER */
-      footer {
-        width: 100%;
-        background-color: #2b2c16;
-        display: flex;
-        justify-content: space-around;
-        padding: 15px;
-        box-sizing: border-box;
-      }
-      .footer-kiri {
-        margin: 30px 0 30px 0;
-        width: 40%;
-        /*border: 1px solid black;*/
-      }
-      .footer-kiri p {
-        font-size: 16px;
-        color: #fff;
-      }
-      .footer-kiri .foo {
-        font-size: 21px;
-        color: #fff;
-        font-weight: bold;
-        margin: 0 0 15px 0;
-      }
-      .footer-kanan {
-        margin: 30px 0 30px 0;
-        /*border: 1px solid black;*/
-        width: 40%;
-        display: flex;
-        justify-content: space-around;
-      }
-      .satu-footer h5 {
-        font-size: 21px;
-        color: #fff;
-        font-weight: bold;
-      }
-      .satu-footer p {
-        font-size: 16px;
-        color: #fff;
-        margin: 15px 0 0 0;
-      }
-      @media (max-width: 800px) {
-        footer {
-          flex-wrap: wrap;
-        }
-        .footer-kiri {
-          width: 100%;
-          text-align: center;
-        }
-        .footer-kanan {
-          width: 100%;
-        }
-        .box-tour {
-          width: 100%;
-        }
-      }
-      /* END FOOTER */
-
-      /* NAIK */
-      .up {
-        width: 100%;
-        /* border: 1px solid black; */
-        bottom: 0px;
-        padding: 20px;
-        box-sizing: border-box;
-        position: absolute;
-        margin: auto;
-        position: fixed;
-        margin: 0 0 15px 0;
-      }
-      .klik-up {
-        width: 50px;
-        height: 50px;
-        border-radius: 50%;
-        background-color: #bab5ff;
-        /* box-shadow: 0.1px 0.1px 50px #d1d1d1; */
-        display: flex;
-        float: right;
-        transition: 0.7s;
-        margin: 0 35px 0 0;
-      }
-      .klik-up img {
-        margin: auto;
-      }
-      .klik-up:hover {
-        background-color: antiquewhite;
-      }
-      @media (max-width: 800px) {
-        .up {
-          padding: 10px;
-          margin: 0 0 35px 0;
-        }
-        .klik-up {
-          margin: 0 1px 0 0;
-        }
-      }
-      /* END NAIK */
-
-      .box-peta1{
-        background-image: url('../img/airterjunpiso.jpg'); /* Gambar latar belakang */
-    width: 100%;
-    height: 600px;
-    background-size: 100% 100%;
-    display: flex;
-    flex-direction: column; /* Mengatur agar elemen anak ditata secara vertikal */
-    justify-content: flex-end; /* Mengatur agar konten berada di bagian bawah */
-    color: white;
-      }
-      .box-peta1 .content {
-            /* text-align: center; */
-            padding: 20px;
-            background-color: rgba(0, 0, 0, 0.5); /* Latar belakang semi-transparan */
-            border-radius: 15px;
-        }
-
-        .box-peta1 .content h1{
-            font-size: 50px;
-            margin: 0 0 10px 30px;
-        }
-
-        .box-peta1 .content p{
-            /* font-size: 50px; */
-            margin: 0 0 0 30px;
-        }
-
-        /* --- Gaya CSS untuk Header --- */
-.hero-header {
-    /* Ganti URL gambar banner Anda di sini. Sesuaikan path jika perlu. */
-    background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('../img/danautoba2.jpg') no-repeat center center/cover;
-    color: var(--text-light);
-    text-align: center;
-    padding: 100px 20px;
-    margin-bottom: 60px; /* Jarak antara header dan konten selanjutnya */
-    position: relative;
-    overflow: hidden;
-    display: flex;
-    height: 100vh;
-    color: #fff;
-    animation: fadeIn 1.5s ease-out; /* Animasi fade-in saat halaman dimuat */
-}
-
-.hero-header::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,0.3); /* Overlay gelap pada gambar */
-    z-index: 1;
-}
-
-.hero-header-content {
-    position: relative;
-    z-index: 2;
-    transform: translateY(0);
-    margin: auto;
-    transition: transform 0.5s ease-out; /* Untuk efek paralaks ringan */
-}
-
-.hero-header-content h1 {
-    font-family: var(--font-jua);
-    font-size: 4.5em;
-    margin-bottom: 10px;
-    text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
-    animation: fadeInDown 1.2s ease-out; /* Animasi judul */
-    color: var(--text-light);
-}
-
-.hero-header-content p {
-    font-size: 1.3em;
-    max-width: 800px;
-    margin: 0 auto 30px;
-    color: var(--text-light);
-    animation: fadeInUp 1.2s ease-out 0.2s; /* Animasi paragraf */
-}
-
-.hero-header .button {
-    display: inline-block;
-    /* background-color: var(--accent-yellow); */
-    color: #fff;
-    padding: 12px 25px;
-
-    background-color: #B10002;
-    border-radius: 5px;
-    text-decoration: none;
-    font-weight: bold;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-    animation: fadeIn 1.2s ease-out 0.4s; /* Animasi tombol */
-}
-
-.hero-header .button:hover {
-    background-color: var(--accent-yellow-hover);
-    transform: translateY(-3px); /* Efek hover pada tombol */
-}
-
-/* --- Media Queries untuk Header (Responsive) --- */
-@media (max-width: 800px) {
-    .hero-header {
-        padding: 60px 20px;
-        margin-bottom: 40px;
-    }
-    .hero-header-content h1 {
-        font-size: 3em;
-    }
-    .hero-header-content p {
-        font-size: 1em;
-    }
-}
-    </style>
-    </style>
-  </head>
-  <body>
-
-<header class="hero-header" id="top">
-    <div class="hero-header-content">
-        <h1>Virtual tour</h1>
-        <p>
-             Jelajahi keindahan alam Sumatera Utara dengan virtual tour kami. Nikmati pengalaman interaktif yang membawa Anda ke tempat-tempat wisata terbaik di daerah ini, mulai dari Danau Toba yang megah hingga Air Terjun Piso yang menakjubkan.
-        </p>
-        <a href="#detail-section" class="button">Lihat Lebih Lanjut</a>
-    </div>
-    </header>
-
-
-    <div class="pembatas"></div>
-    <div class="up">
-      <a href=""
-        ><div class="klik-up">
-          <img src="img/top.png" width="30px" alt="" />
+    <section id="detail-section" class="w-full max-w-[1440px] mx-auto px-6 sm:px-12 lg:px-28 py-16">
+        <div class="text-center max-w-3xl mx-auto">
+            <h5 class="text-red-400 tracking-wider">Nikmati keindahan alamn Sumatera Utara</h5>
+            <h3 class="mt-2 text-2xl sm:text-3xl md:text-4xl font-bold">Virtual Tour Sumatera Utara</h3>
         </div>
-      </a>
-    </div>
-
-    <div class="kalimat-virtual-tour" id="detail-section">
-      <h5>DESKRIPSI SELENGKAPNYA</h5>
-      <br />
-      <h3>Nikmati virtual tour disetiap detiknya</h3>
-      <br />
-      <p>
-        Gambar Di Bawah Ini Merupakan Virtual Tour Untuk Megetahui Keindahan
-        Tempat Hiburan Secara Lansung Serta Mengispirasi Agar Semua Orang Bisa
-        Memilih Destinasi Hiburan Selanjutnya
-      </p>
-    </div>
-
-    <div class="box-peta">
-      <iframe src="https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d1019974.485808343!2d98.41522052909876!3d3.020530465828571!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1swisata%20sumatra%20utara!5e0!3m2!1sen!2sid!4v1752649389494!5m2!1sen!2sid" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-    </div>
-
-    <div class="container-virtual-tour">
-      <div class="box-tour">
-        <div class="img-tour">
-          <a href="{{ url('/virtual/bukitHolbung') }}"><img src="../img/bukitholbung.jpg" alt="" /></a>
-        </div>
-
-        <div class="kalimat-tour">
-          <div class="flex-tour">
-            <p>SUMATRA UTARA</p>
+ 
+        <div class="mt-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <a href="{{ route('virtual.bukit-holbung') }}" class="group bg-white/5 hover:bg-white/10 rounded-2xl overflow-hidden transition-colors">
+                <img src="{{ asset('img/bukitholbung.jpg') }}" alt="Bukit Holbung" class="w-full h-40 object-cover" />
+                <div class="p-4 text-center">
+                    <p class="text-red-400 text-xs tracking-wider">SUMATERA UTARA</p>
+                    <h3 class="mt-1 text-lg font-semibold">Bukit Holbung</h3>
           </div>
-          <h3>Bukit Holbung</h3>
+            </a>
+            <a href="{{ route('virtual.air-terjun-piso') }}" class="group bg-white/5 hover:bg-white/10 rounded-2xl overflow-hidden transition-colors">
+                <img src="{{ asset('img/airterjunpiso.jpg') }}" alt="Air Terjun Sipiso-piso" class="w-full h-40 object-cover" />
+                <div class="p-4 text-center">
+                    <p class="text-red-400 text-xs tracking-wider">SUMATERA UTARA</p>
+                    <h3 class="mt-1 text-lg font-semibold">Air Terjun Sipiso-piso</h3>
         </div>
+            </a>
+            <a href="{{ route('virtual.danau-toba') }}" class="group bg-white/5 hover:bg-white/10 rounded-2xl overflow-hidden transition-colors">
+                <img src="{{ asset('img/danautoba2.jpg') }}" alt="Danau Toba" class="w-full h-40 object-cover" />
+                <div class="p-4 text-center">
+                    <p class="text-red-400 text-xs tracking-wider">SUMATERA UTARA</p>
+                    <h3 class="mt-1 text-lg font-semibold">Danau Toba</h3>
       </div>
-
-      <div class="box-tour">
-        <div class="img-tour">
-          <a href="{{ url('/virtual/airterjunPiso') }}"><img src="../img/airterjunpiso.jpg" alt="" /></a>
+            </a>
+            <a href="{{ route('virtual.sibeabea') }}" class="group bg-white/5 hover:bg-white/10 rounded-2xl overflow-hidden transition-colors">
+                <img src="{{ asset('img/sibeabea2.jpg') }}" alt="Sibea-bea" class="w-full h-40 object-cover" />
+                <div class="p-4 text-center">
+                    <p class="text-red-400 text-xs tracking-wider">SUMATERA UTARA</p>
+                    <h3 class="mt-1 text-lg font-semibold">Sibea-bea</h3>
         </div>
-
-        <div class="kalimat-tour">
-          <div class="flex-tour">
-            <p>SUMATRA UTARA</p>
+            </a>
+            <a href="{{ route('virtual.taman-alam-lubini') }}" class="group bg-white/5 hover:bg-white/10 rounded-2xl overflow-hidden transition-colors">
+                <img src="{{ asset('img/tamanalamlubini.jpg') }}" alt="Taman Alam Lumbini" class="w-full h-40 object-cover" />
+                <div class="p-4 text-center">
+                    <p class="text-red-400 text-xs tracking-wider">SUMATERA UTARA</p>
+                    <h3 class="mt-1 text-lg font-semibold">Taman Alam Lumbini</h3>
           </div>
-          <h3>Air terjun Piso</h3>
+            </a>
+            <a href="{{ route('virtual.arrasyid') }}" class="group bg-white/5 hover:bg-white/10 rounded-2xl overflow-hidden transition-colors">
+                <img src="{{ asset('img/alam.png') }}" alt="Arrasyiid Cookies Cake Snack" class="w-full h-40 object-cover" />
+                <div class="p-4 text-center">
+                    <p class="text-red-400 text-xs tracking-wider">SUMATERA UTARA</p>
+                    <h3 class="mt-1 text-lg font-semibold">Arrasyiid Cookies Cake Snack</h3>
         </div>
+            </a>
+            <a href="{{ route('virtual.graha-bunda') }}" class="group bg-white/5 hover:bg-white/10 rounded-2xl overflow-hidden transition-colors">
+                <img src="{{ asset('img/gereja.jpg') }}" alt="Graha Bunda Maria Annai Velangkanni" class="w-full h-40 object-cover" />
+                <div class="p-4 text-center">
+                    <p class="text-red-400 text-xs tracking-wider">SUMATERA UTARA</p>
+                    <h3 class="mt-1 text-lg font-semibold">Graha Bunda Maria Annai Velangkanni</h3>
       </div>
-
-      <div class="box-tour">
-        <div class="img-tour">
-          <a href="{{ url('/virtual/danautoba') }}"><img src="../img/danautoba2.jpg" alt="" height="100%" /></a>
+            </a>
+            <a href="{{ route('virtual.funland') }}" class="group bg-white/5 hover:bg-white/10 rounded-2xl overflow-hidden transition-colors">
+                <img src="{{ asset('img/fundlan.jpeg') }}" alt="Mikie Funland" class="w-full h-40 object-cover" />
+                <div class="p-4 text-center">
+                    <p class="text-red-400 text-xs tracking-wider">SUMATERA UTARA</p>
+                    <h3 class="mt-1 text-lg font-semibold">Mikie Funland</h3>
         </div>
-
-        <div class="kalimat-tour">
-          <div class="flex-tour">
-            <p>SUMATRA UTARA</p>
-          </div>
-          <h3>Danau toba</h3>
+            </a>
         </div>
-      </div>
+    </section>
 
-      <div class="box-tour">
-        <div class="img-tour">
-          <a href="{{ url('/virtual/sibeabea') }}"><img src="../img/sibeabea2.jpg" alt="" /></a>
-        </div>
+    <a href="#top" class="fixed bottom-6 right-6 w-12 h-12 rounded-full bg-red-600 hover:bg-red-700 flex items-center justify-center shadow-lg transition-colors" aria-label="Scroll to top">
+        <img src="{{ asset('img/top.png') }}" alt="Top" class="w-6 h-6 invert" />
+    </a>
 
-        <div class="kalimat-tour">
-          <div class="flex-tour">
-            <p>SUMATRA UTARA</p>
-          </div>
-          <h3>Sibea-bea</h3>
-        </div>
-      </div>
 
-      <div class="box-tour">
-        <div class="img-tour">
-          <a href="{{ url('/virtual/tamanAlamLubini') }}"><img src="../img/tamanalamlubini.jpg" alt="" /></a>
-        </div>
-
-        <div class="kalimat-tour">
-          <div class="flex-tour">
-            <p>SUMATRA UTARA</p>
-          </div>
-          <h3>Taman alam lubini</h3>
-        </div>
-      </div>
-
-      <div class="box-tour">
-        <div class="img-tour">
-          <a href="{{ url('/virtual/arrasyid') }}"><img src="../img/alam.png" alt="" /></a>
-        </div>
-
-        <div class="kalimat-tour">
-          <div class="flex-tour">
-            <p>SUMATRA UTARA</p>
-          </div>
-          <h3>Arrasyiid cookies cake snack</h3>
-        </div>
-      </div>
-
-      <div class="box-tour">
-        <div class="img-tour">
-          <a href="{{ url('/virtual/grahaBunda') }}"><img src="../img/gereja.jpg" alt="" /></a>
-        </div>
-
-        <div class="kalimat-tour">
-          <div class="flex-tour">
-            <p>SUMATRA UTARA</p>
-          </div>
-          <h3>Graha bunda maria annai velangkanni</h3>
-        </div>
-      </div>
-
-      <div class="box-tour">
-        <div class="img-tour">
-          <a href="{{ url('/virtual/funland') }}"><img src="../img/fundlan.jpeg" alt="" /></a>
-        </div>
-
-        <div class="kalimat-tour">
-          <div class="flex-tour">
-            <p>SUMATRA UTARA</p>
-          </div>
-          <h3>Mikie Funland</h3>
-        </div>
-      </div>
-    </div>
-
-    <!-- FOOTER -->
-    {{-- <footer>
-      <div class="footer-kiri">
-        <p class="foo">
-          <i class="fa-sharp fa-solid fa-satellite" style="color: #fff"></i>
-          Geulify
-        </p>
-        <p>Nikmati keseruan setiap detik nya.</p>
-      </div>
-
-      <div class="footer-kanan">
-        <div class="satu-footer">
-          <h5>Gunung</h5>
-          <p>Keindahan</p>
-          <p>Natural</p>
-        </div>
-
-        <div class="satu-footer">
-          <h5>Pantai</h5>
-          <p>Suasana</p>
-          <p>Sejuk</p>
-        </div>
-
-        <div class="satu-footer">
-          <h5>Kuliner</h5>
-          <p>Kenikmatan</p>
-          <p>Khas</p>
-        </div>
-      </div>
-    </footer>
-    <!-- FOOTER --> --}}
-  </body>
-  {{-- <script>
-        // --- Bagian JavaScript untuk Header ---
-// Tempatkan kode ini di dalam tag <script> di bagian bawah file HTML Anda,
-// atau di dalam document.addEventListener('DOMContentLoaded', function() { ... });
-
-const heroHeader = document.querySelector('.hero-header');
-if (heroHeader) {
-    window.addEventListener('scroll', function() {
-        const scrollPosition = window.pageYOffset;
-        // Efek paralaks ringan pada gambar latar belakang header
-        heroHeader.style.backgroundPositionY = -scrollPosition * 0.3 + 'px';
-    });
-}
-    </script> --}}
-</html>
+@endsection

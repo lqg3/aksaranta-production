@@ -3,44 +3,18 @@
 @section('title', 'Batak Songs')
 
 @section('head')
-    <script src="https://cdn.tailwindcss.com"></script>
-        <style>
-            .nav-button {
-                transition: all 0.3s ease;
-            }
-
-            .nav-button:hover {
-                transform: scale(1.1);
-            }
-
-            .nav-button:active {
-                transform: scale(0.95);
-            }
-
-            .indicator-dot {
-                transition: all 0.3s ease;
-            }
-
-            .indicator-dot.active {
-                width: 2rem;
-                background-color: #ffffff;
-            }
-
-            .scroll-container,
-            #artist-scroll {
-                scroll-behavior: smooth;
-                scrollbar-width: none;
-                -ms-overflow-style: none;
-            }
-
-            .scroll-container::-webkit-scrollbar,
-            #artist-scroll::-webkit-scrollbar {
-                display: none;
-            }
-        </style>
+    <style>
+        .nav-button { transition: all 0.3s ease; }
+        .nav-button:hover { transform: scale(1.1); }
+        .nav-button:active { transform: scale(0.95); }
+        .indicator-dot { transition: all 0.3s ease; }
+        .indicator-dot.active { width: 2rem; background-color: #ffffff; }
+        .scroll-container, #artist-scroll { scroll-behavior: smooth; scrollbar-width: none; -ms-overflow-style: none; }
+        .scroll-container::-webkit-scrollbar, #artist-scroll::-webkit-scrollbar { display: none; }
+    </style>
 @endsection
 
-@section('body-class', 'bg-bg-dark text-white font-poppins')
+@section('body-class', 'font-title bg-bg-dark text-white')
 
 @section('content')
         <!-- Hero Section -->
@@ -123,7 +97,7 @@
                 </button>
 
                 <button id="scrollRight"
-                    class="nav-button absolute right-4 -bottom-10 w-8 h-8 flex items-center justify-center bg-[#1DBF9F] hover:brightness-[80%] transition-all duration-200 rounded-full shadow z-10" onclick="scrollSection('songs-container', 300, 'scrollLeft', 'scrollRight')">
+                    class="nav-button absolute right-4 -bottom-10 w-8 h-8 flex items-center justify-center bg-red-800 hover:brightness-[80%] transition-all duration-200 rounded-full shadow z-10" onclick="scrollSection('songs-container', 300, 'scrollLeft', 'scrollRight')">
                     <!-- SVG right -->
                     <svg width="9" height="15" viewBox="0 0 9 15" fill="none"
                         xmlns="http://www.w3.org/2000/svg">
@@ -210,7 +184,7 @@
                 </button>
 
                 <button id="right-arrow"
-                    class="absolute right-4 -bottom-10 w-8 h-8 flex items-center justify-center bg-[#1DBF9F] hover:brightness-[80%] transition-all duration-200 rounded-full shadow z-10"
+                    class="absolute right-4 -bottom-10 w-8 h-8 flex items-center justify-center bg-red-800 hover:brightness-[80%] transition-all duration-200 rounded-full shadow z-10"
                     onclick="scrollSection('artist-scroll', 300, 'left-arrow', 'right-arrow')">
                     <svg width="9" height="15" viewBox="0 0 9 15" fill="none"
                         xmlns="http://www.w3.org/2000/svg">
@@ -246,19 +220,19 @@
                 // Disable/enable left arrow
                 if (scrollLeft <= 0) {
                     leftArrow.classList.add('bg-gray-400', 'cursor-not-allowed');
-                    leftArrow.classList.remove('bg-[#1DBF9F]');
+                    leftArrow.classList.remove('bg-red-800');
                 } else {
                     leftArrow.classList.remove('bg-gray-400', 'cursor-not-allowed');
-                    leftArrow.classList.add('bg-[#1DBF9F]');
+                    leftArrow.classList.add('bg-red-800');
                 }
 
                 // Disable/enable right arrow. A small tolerance is added due to potential sub-pixel rendering differences.
                 if (scrollLeft >= maxScrollLeft - 5) {
                     rightArrow.classList.add('bg-gray-400', 'cursor-not-allowed');
-                    rightArrow.classList.remove('bg-[#1DBF9F]');
+                    rightArrow.classList.remove('bg-red-800');
                 } else {
                     rightArrow.classList.remove('bg-gray-400', 'cursor-not-allowed');
-                    rightArrow.classList.add('bg-[#1DBF9F]');
+                    rightArrow.classList.add('bg-red-800');
                 }
             }
 

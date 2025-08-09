@@ -158,8 +158,8 @@ body{
                     ←
                 </button>
                 <a class="nav-link hover:underline hover:decoration-2" 
-                @click.prevent="$dispatch('navigate', '{{ route('about.history') }}')"
-                href="{{ route('about.history') }}" 
+                @click.prevent="$dispatch('navigate', '{{ route('history') }}')"
+                href="{{ route('history') }}" 
                 aria-label="Go to Sejarah Batak">
                     Sejarah Batak
                 </a>
@@ -180,8 +180,8 @@ body{
                     ←
                 </button>
                 <a class="nav-link hover:underline hover:decoration-2" 
-                @click.prevent="$dispatch('navigate', '{{ route('learn.index') }}')"
-                href="{{ route('learn.index') }}" 
+                @click.prevent="$dispatch('navigate', '{{ route('kamus-aksara') }}')"
+                href="{{ route('kamus-aksara') }}" 
                 aria-label="Go to Aksara Batak">
                     Aksara Batak
                 </a>
@@ -202,8 +202,8 @@ body{
                     ←
                 </button>
                 <a class="nav-link hover:underline hover:decoration-2" 
-                @click.prevent="$dispatch('navigate', '{{ route('about.kamus') }}')"
-                href="{{ route('about.kamus') }}" 
+                @click.prevent="$dispatch('navigate', '{{ route('kamus') }}')"
+                href="{{ route('kamus') }}" 
                 aria-label="Go to Glosarium & Kamus">
                     Glosarium & Kamus
                 </a>
@@ -268,8 +268,8 @@ body{
                     ←
                 </button>
                 <a class="nav-link hover:underline hover:decoration-2" 
-                @click.prevent="$dispatch('navigate', '{{ route('about.kamus-aksara') }}')"
-                href="{{ route('about.kamus-aksara') }}" 
+                @click.prevent="$dispatch('navigate', '{{ route('aksaranta') }}')"
+                href="{{ route('aksaranta') }}" 
                 aria-label="Go to Aksaranta">
                     Aksaranta
                 </a>
@@ -328,6 +328,86 @@ body{
     </div>
 </div>
 
+<div id="nav-3" class="pt-24 left-0 transition-all duration-300 hidden min-h-screen"
+     x-data="navigationTransition()"
+     @navigate="navigateTo($event.detail)">
+    <!-- Loading overlay for navigation transitions -->
+    <div x-show="isTransitioning" 
+        x-transition:enter="transition ease-out duration-300"
+        x-transition:enter-start="opacity-0"
+        x-transition:enter-end="opacity-100"
+        x-transition:leave="transition ease-in duration-300"
+        x-transition:leave-start="opacity-100"
+        x-transition:leave-end="opacity-0"
+        class="z-[2500] fixed inset-0 bg-bg-dark flex items-center justify-center">
+    </div>
+
+<div class="max-w-md mx-auto px-4 space-y-4">
+        <a class="block overflow-hidden rounded-lg border border-white/10 bg-white/5 hover:bg-white/10 transition" 
+           href="{{ route('culture') }}"
+           @click.prevent="$dispatch('navigate', '{{ route('culture') }}')">
+            <img src="https://aksara-batak.sgp1.cdn.digitaloceanspaces.com/images/homepage/img10.webp" alt="" style="width:100%; height:48vw; object-fit:cover;">
+            <div class="p-4 text-white font-title">Budaya Batak</div>
+        </a>
+
+        <a class="block overflow-hidden rounded-lg border border-white/10 bg-white/5 hover:bg-white/10 transition" 
+           href="{{ route('history') }}"
+           @click.prevent="$dispatch('navigate', '{{ route('history') }}')">
+            <img src="https://aksara-batak.sgp1.cdn.digitaloceanspaces.com/images/homepage/img26.webp" alt="" style="width:100%; height:48vw; object-fit:cover;">
+            <div class="p-4 text-white font-title">Sejarah Batak</div>
+        </a>
+
+        <a class="block overflow-hidden rounded-lg border border-white/10 bg-white/5 hover:bg-white/10 transition" 
+           href="{{ route('kamus-aksara') }}"
+           @click.prevent="$dispatch('navigate', '{{ route('kamus-aksara') }}')">
+            <img src="https://aksara-batak.sgp1.cdn.digitaloceanspaces.com/images/homepage/img28.webp" alt="" style="width:100%; height:48vw; object-fit:cover;">
+            <div class="p-4 text-white font-title">Aksara Batak</div>
+        </a>
+
+        <a class="block overflow-hidden rounded-lg border border-white/10 bg-white/5 hover:bg-white/10 transition" 
+           href="{{ route('kamus') }}"
+           @click.prevent="$dispatch('navigate', '{{ route('kamus') }}')">
+            <img src="https://aksara-batak.sgp1.cdn.digitaloceanspaces.com/images/homepage/img27.webp" alt="" style="width:100%; height:48vw; object-fit:cover;">
+            <div class="p-4 text-white font-title">Glosarium & Kamus</div>
+        </a>
+
+        <a class="block overflow-hidden rounded-lg border border-white/10 bg-white/5 hover:bg-white/10 transition" 
+           href="{{ route('virtual.index') }}"
+           @click.prevent="$dispatch('navigate', '{{ route('virtual.index') }}')">
+            <img src="https://aksara-batak.sgp1.cdn.digitaloceanspaces.com/images/homepage/img29.webp" alt="" style="width:100%; height:48vw; object-fit:cover;">
+            <div class="p-4 text-white font-title">Virtual Tour</div>
+        </a>
+
+        <a class="block overflow-hidden rounded-lg border border-white/10 bg-white/5 hover:bg-white/10 transition" 
+           href="{{ route('batak-songs') }}"
+           @click.prevent="$dispatch('navigate', '{{ route('batak-songs') }}')">
+            <img src="https://aksara-batak.sgp1.cdn.digitaloceanspaces.com/images/homepage/img30.webp" alt="" style="width:100%; height:48vw; object-fit:cover;">
+            <div class="p-4 text-white font-title">Lagu Batak</div>
+        </a>
+
+        <a class="block overflow-hidden rounded-lg border border-white/10 bg-white/5 hover:bg-white/10 transition" 
+           href="{{ route('aksaranta') }}"
+           @click.prevent="$dispatch('navigate', '{{ route('aksaranta') }}')">
+            <img src="https://aksara-batak.sgp1.cdn.digitaloceanspaces.com/images/homepage/img31.webp" alt="" style="width:100%; height:48vw; object-fit:cover;">
+            <div class="p-4 text-white font-title">Aksaranta</div>
+        </a>
+
+        <a class="block overflow-hidden rounded-lg border border-white/10 bg-white/5 hover:bg-white/10 transition" 
+           href="{{ route('blog.index') }}"
+           @click.prevent="$dispatch('navigate', '{{ route('blog.index') }}')">
+            <img src="https://aksara-batak.sgp1.cdn.digitaloceanspaces.com/images/homepage/img32.webp" alt="" style="width:100%; height:48vw; object-fit:cover;">
+            <div class="p-4 text-white font-title">Blog</div>
+        </a>
+
+        <a class="block overflow-hidden rounded-lg border border-white/10 bg-white/5 hover:bg-white/10 transition" 
+           href="{{ route('about.index') }}"
+           @click.prevent="$dispatch('navigate', '{{ route('about.index') }}')">
+            <img src="https://aksara-batak.sgp1.cdn.digitaloceanspaces.com/images/homepage/img33.webp" alt="" style="width:100%; height:48vw; object-fit:cover;">
+            <div class="p-4 text-white font-title">Tentang Kami</div>
+        </a>
+    </div>
+</div>
+
 <!-- #nav-2 with routes and transitions matching #nav-1 -->
 <div id="nav-2" class="top-0 left-0 transition-all duration-300 hidden"
      x-data="navigationTransition()"
@@ -362,8 +442,8 @@ body{
             <img src="https://aksara-batak.sgp1.cdn.digitaloceanspaces.com/images/homepage/img26.webp" alt="" class="image" data-mouse-down-at="0" draggable="false" data-prev-percentage="0">
             <div class="image-overlay">
                 <a class="font-title text-md hover:!underline cursor-pointer" 
-                   href="{{ route('about.history') }}" 
-                   @click.prevent="$dispatch('navigate', '{{ route('about.history') }}')"
+                   href="{{ route('history') }}" 
+                   @click.prevent="$dispatch('navigate', '{{ route('history') }}')"
                    style="text-decoration: none; color: inherit; cursor: pointer;"
                    draggable="false"
                 >Sejarah Batak</a>
@@ -374,8 +454,8 @@ body{
             <img src="https://aksara-batak.sgp1.cdn.digitaloceanspaces.com/images/homepage/img28.webp" alt="" class="image" data-mouse-down-at="0" draggable="false" data-prev-percentage="0">
             <div class="image-overlay">
                 <a class="font-title text-md hover:!underline cursor-pointer" 
-                   href="{{ route('learn.index') }}" 
-                   @click.prevent="$dispatch('navigate', '{{ route('learn.index') }}')"
+                   href="{{ route('kamus-aksara') }}" 
+                   @click.prevent="$dispatch('navigate', '{{ route('kamus-aksara') }}')"
                    style="text-decoration: none; color: inherit; cursor: pointer;"
                    draggable="false"
                 >Aksara Batak</a>
@@ -386,8 +466,8 @@ body{
             <img src="https://aksara-batak.sgp1.cdn.digitaloceanspaces.com/images/homepage/img27.webp" alt="" class="image" data-mouse-down-at="0" draggable="false" data-prev-percentage="0">
             <div class="image-overlay">
                 <a class="font-title text-md hover:!underline cursor-pointer" 
-                   href="{{ route('about.kamus') }}" 
-                   @click.prevent="$dispatch('navigate', '{{ route('about.kamus') }}')"
+                   href="{{ route('kamus') }}" 
+                   @click.prevent="$dispatch('navigate', '{{ route('kamus') }}')"
                    style="text-decoration: none; color: inherit; cursor: pointer;"
                    draggable="false"
                 >Glosarium & Kamus</a>
@@ -422,8 +502,8 @@ body{
             <img src="https://aksara-batak.sgp1.cdn.digitaloceanspaces.com/images/homepage/img31.webp" alt="" class="image" data-mouse-down-at="0" draggable="false" data-prev-percentage="0">
             <div class="image-overlay">
                 <a class="font-title text-md hover:!underline cursor-pointer" 
-                   href="{{ route('about.kamus-aksara') }}" 
-                   @click.prevent="$dispatch('navigate', '{{ route('about.kamus-aksara') }}')"
+                   href="{{ route('kamus-aksara') }}" 
+                   @click.prevent="$dispatch('navigate', '{{ route('kamus-aksara') }}')"
                    style="text-decoration: none; color: inherit; cursor: pointer;"
                    draggable="false"
                 >Aksaranta</a>
@@ -465,52 +545,110 @@ body{
 
 <!-- Navigation switch script -->
 <script>
-    // Navigation switch logic
+    // Navigation switch logic (desktop: nav-1 <-> nav-2, mobile: nav-1 <-> nav-3)
     const btn = document.getElementById('switchNavigation');
-    btn.addEventListener('click', function() {
+    const FADE_DURATION = 300;
+
+    function isMobileViewport() {
+        const minDim = Math.min(window.innerWidth, window.innerHeight);
+        const isTouch = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
+        return minDim <= 768 && isTouch;
+    }
+
+    function getSecondaryNav() {
+        return isMobileViewport() ? document.getElementById('nav-3') : document.getElementById('nav-2');
+    }
+
+    function updateSwitchButtonLabel() {
         const nav1 = document.getElementById('nav-1');
-        const nav2 = document.getElementById('nav-2');
-        const fadeDuration = 300;
+        btn.textContent = nav1.classList.contains('hidden') ? 'Kembali' : 'Lihat Semua Halaman';
+    }
 
-        // Helper to fade out an element
-        function fadeOut(el, callback) {
-            el.style.transition = `opacity ${fadeDuration}ms`;
-            el.style.opacity = 0;
-            setTimeout(() => {
-                if (callback) callback();
-            }, fadeDuration);
-        }
+    // Control body vertical scrolling when mobile list (nav-3) is active
+    function updateBodyOverflowForNavState() {
+        const nav1 = document.getElementById('nav-1');
+        const secondary = getSecondaryNav();
+        const isNav3Active = isMobileViewport() &&
+            secondary && secondary.id === 'nav-3' &&
+            !secondary.classList.contains('hidden') &&
+            nav1.classList.contains('hidden');
+        // Enable vertical scroll only for mobile list view; otherwise keep hidden
+        document.body.style.overflowY = isNav3Active ? 'auto' : 'hidden';
+    }
 
-        // Helper to fade in an element
-        function fadeIn(el) {
-            el.style.transition = `opacity ${fadeDuration}ms`;
-            el.style.opacity = 1;
-        }
+    function fadeOut(el, callback) {
+        el.style.transition = `opacity ${FADE_DURATION}ms`;
+        el.style.opacity = 0;
+        setTimeout(() => callback && callback(), FADE_DURATION);
+    }
 
-        // Ensure both navs have opacity set for transition
-        nav1.style.opacity = nav1.style.opacity === "" ? "1" : nav1.style.opacity;
-        nav2.style.opacity = nav2.style.opacity === "" ? "1" : nav2.style.opacity;
+    function fadeIn(el) {
+        el.style.transition = `opacity ${FADE_DURATION}ms`;
+        el.style.opacity = 1;
+    }
+
+    function toggleNav() {
+        const nav1 = document.getElementById('nav-1');
+        const secondary = getSecondaryNav();
+
+        nav1.style.opacity = nav1.style.opacity === '' ? '1' : nav1.style.opacity;
+        secondary.style.opacity = secondary.style.opacity === '' ? '1' : secondary.style.opacity;
 
         if (nav1.classList.contains('hidden')) {
-            // Switch to nav-1 with fade
             nav1.classList.remove('hidden');
             nav1.style.opacity = 0;
-            fadeOut(nav2, () => {
-                nav2.classList.add('hidden');
+            fadeOut(secondary, () => {
+                secondary.classList.add('hidden');
                 fadeIn(nav1);
+                updateSwitchButtonLabel();
+                updateBodyOverflowForNavState();
             });
-            btn.textContent = 'Lihat Semua Halaman';
         } else {
-            // Switch to nav-2 with fade
-            nav2.classList.remove('hidden');
-            nav2.style.opacity = 0;
+            secondary.classList.remove('hidden');
+            secondary.style.opacity = 0;
             fadeOut(nav1, () => {
                 nav1.classList.add('hidden');
-                fadeIn(nav2);
+                fadeIn(secondary);
+                updateSwitchButtonLabel();
+                updateBodyOverflowForNavState();
+                if (secondary && secondary.id === 'nav-3') {
+                    // Ensure the top cards are visible when switching to list view
+                    window.scrollTo({ top: 0, behavior: 'auto' });
+                }
             });
-            btn.textContent = 'Kembali';
         }
-    });
+    }
+
+    btn.addEventListener('click', toggleNav);
+
+    function ensureNavForDevice() {
+        const nav1 = document.getElementById('nav-1');
+        const nav2 = document.getElementById('nav-2');
+        const nav3 = document.getElementById('nav-3');
+        const targetSecondary = getSecondaryNav();
+        const otherSecondary = targetSecondary.id === 'nav-2' ? nav3 : nav2;
+
+        if (nav1.classList.contains('hidden')) {
+            if (!otherSecondary.classList.contains('hidden')) {
+                otherSecondary.classList.add('hidden');
+                targetSecondary.classList.remove('hidden');
+                targetSecondary.style.opacity = 1;
+            }
+        } else {
+            nav2.classList.add('hidden');
+            nav3.classList.add('hidden');
+        }
+
+        updateSwitchButtonLabel();
+        updateBodyOverflowForNavState();
+    }
+
+    document.addEventListener('DOMContentLoaded', ensureNavForDevice);
+    window.addEventListener('resize', ensureNavForDevice);
+    if (window.visualViewport) {
+        window.visualViewport.addEventListener('resize', ensureNavForDevice);
+    }
+    window.addEventListener('orientationchange', ensureNavForDevice);
 
     // Track drag logic: only active when nav-2 is visible
     const track = document.getElementById("image-track");
@@ -890,7 +1028,19 @@ body{
                 loadingScreen.classList.add('fade-out');
                 setTimeout(() => {
                     loadingScreen.classList.add('hidden');
-                    drawRectangles();
+                    // Start intro animation only AFTER images are fully loaded
+                    animateIntro();
+                    // Initialize navigation carousel after the zoom animation completes (~5s)
+                    setTimeout(() => {
+                        if (!window.navigationCarousel) {
+                            window.navigationCarousel = new NavigationCarousel();
+                            const switchBtn = document.getElementById("switchNavigation");
+                            if (switchBtn) {
+                                switchBtn.classList.remove('translate-y-24', 'opacity-0');
+                                switchBtn.classList.add('translate-y-0', 'opacity-100');
+                            }
+                        }
+                    }, 5000);
                 }, 500); // Wait for fade-out transition (match CSS)
             }, 200); // Small delay to show 100%
         }
@@ -904,9 +1054,13 @@ body{
                 imagesLoaded++;
                 updateLoadingProgress();
             };
+            img.onerror = function() {
+                // Count errored images as loaded to prevent lock
+                imagesLoaded++;
+                updateLoadingProgress();
+            };
             images.push(img);
         }
-        
     }
 
     function drawRectangles() {
@@ -1887,17 +2041,10 @@ body{
         // Build easing lookup tables for performance
         buildBezierLookupTable();
         
-        // Initialize image preloading and animation
+        // Preload images first; animations start after all images are loaded
         preloadImages();
-        setTimeout(animateIntro(), 1500);
         
-        // Initialize navigation carousel (store globally for later access)
-        setTimeout(() => {
-            window.navigationCarousel = new NavigationCarousel();
-            const switchBtn = document.getElementById("switchNavigation");
-            switchBtn.classList.remove('translate-y-24', 'opacity-0');
-            switchBtn.classList.add('translate-y-0', 'opacity-100');
-        }, 5000); // Start after zoom animation completes
+        // Navigation carousel is initialized after images finish loading (see updateLoadingProgress)
     });
 
     // Handle window resize and mobile viewport changes
