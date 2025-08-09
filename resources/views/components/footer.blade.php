@@ -1,6 +1,9 @@
 @php($year = date('Y'))
 
-<footer class="w-full mt-20 border-t border-white/10 bg-bg-dark text-white">
+<footer class="w-full mt-20 border-t border-white/10 text-white overflow-hidden">
+  <div class="absolute w-full max-w-[1440px] mx-auto px-6 sm:px-12 lg:px-28 py-10">
+    <img src="https://aksara-batak.sgp1.cdn.digitaloceanspaces.com/design/logo-white-notext.svg" alt="Aksaranta Logo" class="opacity-20 max-w-[100vw]" />
+  </div>
   <div class="w-full max-w-[1440px] mx-auto px-6 sm:px-12 lg:px-28 py-10">
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
       <!-- Brand -->
@@ -13,7 +16,7 @@
 
       <!-- Explore -->
       <div>
-        <h4 class="text-white/80 text-sm tracking-wide mb-3">Explore</h4>
+        <h4 class="text-white/50 text-sm tracking-wide mb-3">Explore</h4>
         <ul class="space-y-2 text-sm">
           <li><a href="{{ route('learn.index') }}" class="hover:text-red-400 transition-colors">Learn</a></li>
           <li><a href="{{ route('culture') }}" class="hover:text-red-400 transition-colors">Culture</a></li>
@@ -24,7 +27,7 @@
 
       <!-- Kamus & Tools -->
       <div>
-        <h4 class="text-white/80 text-sm tracking-wide mb-3">Kamus & Tools</h4>
+        <h4 class="text-white/50 text-sm tracking-wide mb-3">Kamus & Tools</h4>
         <ul class="space-y-2 text-sm">
           <li><a href="{{ route('kamus') }}" class="hover:text-red-400 transition-colors">Kamus</a></li>
           <li><a href="{{ route('kamus-aksara') }}" class="hover:text-red-400 transition-colors">Kamus Aksara</a></li>
@@ -34,13 +37,22 @@
 
       <!-- Virtual & More -->
       <div>
-        <h4 class="text-white/80 text-sm tracking-wide mb-3">Virtual & More</h4>
+        <h4 class="text-white/50 text-sm tracking-wide mb-3">Virtual & More</h4>
         <ul class="space-y-2 text-sm">
           <li><a href="{{ route('virtual.index') }}" class="hover:text-red-400 transition-colors">Virtual Tour</a></li>
+          <li class="pt-1 text-white/50 text-xs uppercase tracking-wide">Destinations</li>
+          <li><a href="{{ route('virtual.bukit-holbung') }}" class="hover:text-red-400 transition-colors">Bukit Holbung</a></li>
+          <li><a href="{{ route('virtual.air-terjun-piso') }}" class="hover:text-red-400 transition-colors">Air Terjun Sipiso-piso</a></li>
+          <li><a href="{{ route('virtual.danau-toba') }}" class="hover:text-red-400 transition-colors">Danau Toba</a></li>
+          <li><a href="{{ route('virtual.sibeabea') }}" class="hover:text-red-400 transition-colors">Sibea-bea</a></li>
+          <li><a href="{{ route('virtual.taman-alam-lubini') }}" class="hover:text-red-400 transition-colors">Taman Alam Lumbini</a></li>
+          <li><a href="{{ route('virtual.arrasyid') }}" class="hover:text-red-400 transition-colors">Arrasyiid</a></li>
+          <li><a href="{{ route('virtual.graha-bunda') }}" class="hover:text-red-400 transition-colors">Graha Bunda</a></li>
+          <li><a href="{{ route('virtual.funland') }}" class="hover:text-red-400 transition-colors">Mikie Funland</a></li>
           @auth
-            <li><a href="{{ route('dashboard') }}" class="hover:text-red-400 transition-colors">Dashboard</a></li>
+            <li class="pt-3"><a href="{{ route('dashboard') }}" class="hover:text-red-400 transition-colors">Dashboard</a></li>
           @else
-            <li><a href="{{ route('login') }}" class="hover:text-red-400 transition-colors">Login</a></li>
+            <li class="pt-3"><a href="{{ route('login') }}" class="hover:text-red-400 transition-colors">Login</a></li>
           @endauth
         </ul>
       </div>
@@ -72,7 +84,7 @@
         Tutup
       </button>
     </div>
-    <p>Website ini menarik inspirasi besar dari <a class="text-red-400 hover:underline cursor-pointer">camillemormal.com</a></p>
+    <p>Website ini menarik inspirasi besar dari <a href="https://camillemormal.com/" target="_blank" class="text-red-400 hover:underline cursor-pointer">camillemormal.com</a></p>
   </dialog>
 
   <script>

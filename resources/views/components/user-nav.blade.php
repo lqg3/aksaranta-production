@@ -38,13 +38,15 @@
                 <!-- Dropdown anchored to arrow/home -->
                 <div x-cloak x-show="open" x-transition class="absolute top-full left-0 mt-2 w-80 bg-bg-dark/50 backdrop-blur-sm rounded-xl border border-white/10 shadow-lg p-3">
                     <div class="grid grid-cols-2 gap-2 text-sm">
-                        <a @click.prevent="navigateTo('{{ route('culture') }}')" href="{{ route('culture') }}" class="text-white px-3 py-2 rounded-lg hover:bg-white/5 {{ $navActive['culture'] ? 'bg-white/10' : '' }}">Culture</a>
-                        <a @click.prevent="navigateTo('{{ route('history') }}')" href="{{ route('history') }}" class="text-white px-3 py-2 rounded-lg hover:bg-white/5 {{ $navActive['history'] ? 'bg-white/10' : '' }}">History</a>
-                        <a @click.prevent="navigateTo('{{ route('kamus') }}')" href="{{ route('kamus') }}" class="text-white px-3 py-2 rounded-lg hover:bg-white/5 {{ $navActive['kamus'] ? 'bg-white/10' : '' }}">Kamus & Glosarium</a>
-                        <a @click.prevent="navigateTo('{{ route('kamus-aksara') }}')" href="{{ route('kamus-aksara') }}" class="text-white px-3 py-2 rounded-lg hover:bg-white/5 {{ $navActive['kamusAksara'] ? 'bg-white/10' : '' }}">Kamus Aksara</a>
-                        <a @click.prevent="navigateTo('{{ route('virtual.index') }}')" href="{{ route('virtual.index') }}" class="text-white px-3 py-2 rounded-lg hover:bg-white/5 {{ $navActive['virtual'] ? 'bg-white/10' : '' }}">Virtual Tour</a>
+                        <a @click.prevent="navigateTo('{{ route('culture') }}')" href="{{ route('culture') }}" class="text-white px-3 py-2 rounded-lg hover:bg-white/5 {{ $navActive['culture'] ? 'bg-white/10' : '' }}">Budaya</a>
+                        <a @click.prevent="navigateTo('{{ route('history') }}')" href="{{ route('history') }}" class="text-white px-3 py-2 rounded-lg hover:bg-white/5 {{ $navActive['history'] ? 'bg-white/10' : '' }}">Sejarah</a>
+                        <a @click.prevent="navigateTo('{{ route('kamus-aksara') }}')" href="{{ route('kamus-aksara') }}" class="text-white px-3 py-2 rounded-lg hover:bg-white/5 {{ $navActive['kamusAksara'] ? 'bg-white/10' : '' }}">Aksara</a>
+                        <a @click.prevent="navigateTo('{{ route('kamus') }}')" href="{{ route('kamus') }}" class="text-white px-3 py-2 rounded-lg hover:bg-white/5 {{ $navActive['kamus'] ? 'bg-white/10' : '' }}">Kamus</a>
+                        <a @click.prevent="navigateTo('{{ route('virtual.index') }}')" href="{{ route('virtual.index') }}" class="text-white px-3 py-2 rounded-lg hover:bg-white/5 {{ $navActive['virtual'] ? 'bg-white/10' : '' }}">Virtual</a>
+                        <a @click.prevent="navigateTo('{{ route('aksaranta') }}')" href="{{ route('aksaranta') }}" class="text-white px-3 py-2 rounded-lg hover:bg-white/5 {{ $navActive['songs'] ? 'bg-white/10' : '' }}">Aksaranta</a>
                         <a @click.prevent="navigateTo('{{ route('blog.index') }}')" href="{{ route('blog.index') }}" class="text-white px-3 py-2 rounded-lg hover:bg-white/5 {{ $navActive['blog'] ? 'bg-white/10' : '' }}">Blog</a>
-                        <a @click.prevent="navigateTo('{{ route('batak-songs') }}')" href="{{ route('batak-songs') }}" class="text-white px-3 py-2 rounded-lg hover:bg-white/5 {{ $navActive['songs'] ? 'bg-white/10' : '' }}">Songs</a>
+                        <a @click.prevent="navigateTo('{{ route('batak-songs') }}')" href="{{ route('batak-songs') }}" class="text-white px-3 py-2 rounded-lg hover:bg-white/5 {{ $navActive['songs'] ? 'bg-white/10' : '' }}">Lagu Batak</a>
+                        <a @click.prevent="navigateTo('{{ route('about.index') }}')" href="{{ route('about.index') }}" class="text-white px-3 py-2 rounded-lg hover:bg-white/5 {{ $navActive['songs'] ? 'bg-white/10' : '' }}">Kami</a>
                     </div>
                 </div>
             </li>

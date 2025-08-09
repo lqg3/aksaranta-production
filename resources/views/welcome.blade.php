@@ -181,7 +181,7 @@ body{
                 </button>
                 <a class="nav-link hover:underline hover:decoration-2" 
                 @click.prevent="$dispatch('navigate', '{{ route('kamus-aksara') }}')"
-                href="{{ route('learn.index') }}" 
+                href="{{ route('kamus-aksara') }}" 
                 aria-label="Go to Aksara Batak">
                     Aksara Batak
                 </a>
@@ -268,8 +268,8 @@ body{
                     ←
                 </button>
                 <a class="nav-link hover:underline hover:decoration-2" 
-                @click.prevent="$dispatch('navigate', '{{ route('kamus-aksara') }}')"
-                href="{{ route('kamus-aksara') }}" 
+                @click.prevent="$dispatch('navigate', '{{ route('aksaranta') }}')"
+                href="{{ route('aksaranta') }}" 
                 aria-label="Go to Aksaranta">
                     Aksaranta
                 </a>
@@ -358,8 +358,8 @@ body{
         </a>
 
         <a class="block overflow-hidden rounded-lg border border-white/10 bg-white/5 hover:bg-white/10 transition" 
-           href="{{ route('learn.index') }}"
-           @click.prevent="$dispatch('navigate', '{{ route('learn.index') }}')">
+           href="{{ route('kamus-aksara') }}"
+           @click.prevent="$dispatch('navigate', '{{ route('kamus-aksara') }}')">
             <img src="https://aksara-batak.sgp1.cdn.digitaloceanspaces.com/images/homepage/img28.webp" alt="" style="width:100%; height:48vw; object-fit:cover;">
             <div class="p-4 text-white font-title">Aksara Batak</div>
         </a>
@@ -386,8 +386,8 @@ body{
         </a>
 
         <a class="block overflow-hidden rounded-lg border border-white/10 bg-white/5 hover:bg-white/10 transition" 
-           href="{{ route('kamus-aksara') }}"
-           @click.prevent="$dispatch('navigate', '{{ route('kamus-aksara') }}')">
+           href="{{ route('aksaranta') }}"
+           @click.prevent="$dispatch('navigate', '{{ route('aksaranta') }}')">
             <img src="https://aksara-batak.sgp1.cdn.digitaloceanspaces.com/images/homepage/img31.webp" alt="" style="width:100%; height:48vw; object-fit:cover;">
             <div class="p-4 text-white font-title">Aksaranta</div>
         </a>
@@ -454,8 +454,8 @@ body{
             <img src="https://aksara-batak.sgp1.cdn.digitaloceanspaces.com/images/homepage/img28.webp" alt="" class="image" data-mouse-down-at="0" draggable="false" data-prev-percentage="0">
             <div class="image-overlay">
                 <a class="font-title text-md hover:!underline cursor-pointer" 
-                   href="{{ route('learn.index') }}" 
-                   @click.prevent="$dispatch('navigate', '{{ route('learn.index') }}')"
+                   href="{{ route('kamus-aksara') }}" 
+                   @click.prevent="$dispatch('navigate', '{{ route('kamus-aksara') }}')"
                    style="text-decoration: none; color: inherit; cursor: pointer;"
                    draggable="false"
                 >Aksara Batak</a>
@@ -1028,7 +1028,19 @@ body{
                 loadingScreen.classList.add('fade-out');
                 setTimeout(() => {
                     loadingScreen.classList.add('hidden');
-                    drawRectangles();
+                    // Start intro animation only AFTER images are fully loaded
+                    animateIntro();
+                    // Initialize navigation carousel after the zoom animation completes (~5s)
+                    setTimeout(() => {
+                        if (!window.navigationCarousel) {
+                            window.navigationCarousel = new NavigationCarousel();
+                            const switchBtn = document.getElementById("switchNavigation");
+                            if (switchBtn) {
+                                switchBtn.classList.remove('translate-y-24', 'opacity-0');
+                                switchBtn.classList.add('translate-y-0', 'opacity-100');
+                            }
+                        }
+                    }, 5000);
                 }, 500); // Wait for fade-out transition (match CSS)
             }, 200); // Small delay to show 100%
         }
@@ -1042,9 +1054,13 @@ body{
                 imagesLoaded++;
                 updateLoadingProgress();
             };
+            img.onerror = function() {
+                // Count errored images as loaded to prevent lock
+                imagesLoaded++;
+                updateLoadingProgress();
+            };
             images.push(img);
         }
-        
     }
 
     function drawRectangles() {
@@ -2025,17 +2041,10 @@ body{
         // Build easing lookup tables for performance
         buildBezierLookupTable();
         
-        // Initialize image preloading and animation
+        // Preload images first; animations start after all images are loaded
         preloadImages();
-        setTimeout(animateIntro(), 1500);
         
-        // Initialize navigation carousel (store globally for later access)
-        setTimeout(() => {
-            window.navigationCarousel = new NavigationCarousel();
-            const switchBtn = document.getElementById("switchNavigation");
-            switchBtn.classList.remove('translate-y-24', 'opacity-0');
-            switchBtn.classList.add('translate-y-0', 'opacity-100');
-        }, 5000); // Start after zoom animation completes
+        // Navigation carousel is initialized after images finish loading (see updateLoadingProgress)
     });
 
     // Handle window resize and mobile viewport changes

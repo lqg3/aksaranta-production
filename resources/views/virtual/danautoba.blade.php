@@ -5,15 +5,10 @@
 @section('body-class', 'font-title bg-bg-dark text-white')
 
 @section('content')
-    <header id="top" class="relative h-[70vh] md:h-[85vh] flex items-center justify-center">
-        <div class="absolute inset-0 bg-center bg-cover" style="background-image: url('{{ asset('img/danautoba2.jpg') }}')"></div>
-        <div class="absolute inset-0 bg-black/60"></div>
-        <div class="relative z-10 max-w-[1000px] px-6 text-center">
-            <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold">Danau Toba</h1>
-            <p class="mt-4 text-white/90 text-base sm:text-lg md:text-xl">Danau vulkanik terbesar di dunia dengan warisan budaya Batak yang kaya.</p>
-            <a href="#detail-section" class="inline-block mt-6 bg-red-600 hover:bg-red-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors">Lihat Lebih Lanjut</a>
-        </div>
-    </header>
+    <section class="w-full max-w-[1440px] mx-auto px-6 sm:px-12 lg:px-28 pt-24">
+        <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold">Danau Toba</h1>
+        <p class="mt-3 text-white/80 font-sans max-w-3xl">Danau vulkanik terbesar di dunia dengan warisan budaya Batak yang kaya.</p>
+    </section>
 
     <section id="detail-section" class="w-full max-w-[1440px] mx-auto px-6 sm:px-12 lg:px-28 py-16">
         <div class="rounded-2xl overflow-hidden shadow-xl bg-white/5">
@@ -39,7 +34,7 @@
                 <span>←</span><span>Kembali ke Virtual Tour</span>
             </a>
             <div class="flex items-center gap-3">
-                <a href="{{ route('virtual.bukit-holbung') }}" class="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white/90 hover:text-white px-4 py-2 rounded-lg transition-colors">← Prev: Bukit Holbung</a>
+                <a href="{{ route('virtual.air-terjun-piso') }}" class="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white/90 hover:text-white px-4 py-2 rounded-lg transition-colors">← Prev: Air Terjun Sipiso-piso</a>
                 <a href="{{ route('virtual.sibeabea') }}" class="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white/90 hover:text-white px-4 py-2 rounded-lg transition-colors">Next: Sibea-bea →</a>
             </div>
         </nav>
@@ -48,4 +43,18 @@
     <a href="#top" class="fixed bottom-6 right-6 w-12 h-12 rounded-full bg-red-600 hover:bg-red-700 flex items-center justify-center shadow-lg transition-colors" aria-label="Scroll to top">
         <img src="{{ asset('img/top.png') }}" alt="Top" class="w-6 h-6 invert" />
     </a>
+
+    <nav class="w-full max-w-[1440px] mx-auto px-6 sm:px-12 lg:px-28 pb-8">
+    <h2 class="text-2xl text-bold text-white"> Virtual Tour Lainnya </h2>
+        <div class="mt-8 flex flex-wrap gap-3">
+            <a href="{{ route('virtual.bukit-holbung') }}" class="bg-white/10 hover:bg-white/20 text-white/90 hover:text-white px-4 py-2 rounded-lg transition-colors">Bukit Holbung</a>
+            <a href="{{ route('virtual.air-terjun-piso') }}" class="bg-white/10 hover:bg-white/20 text-white/90 hover:text-white px-4 py-2 rounded-lg transition-colors">Air Terjun Sipiso-piso</a>
+            <a href="{{ route('virtual.danau-toba') }}" class="bg-white/20 hover:bg-white/20 text-white/90 hover:text-white px-4 py-2 rounded-lg transition-colors">Danau Toba</a>
+            <a href="{{ route('virtual.sibeabea') }}" class="bg-white/10 hover:bg-white/20 text-white/90 hover:text-white px-4 py-2 rounded-lg transition-colors">Sibea-bea</a>
+            <a href="{{ route('virtual.taman-alam-lubini') }}" class="bg-white/10 hover:bg-white/20 text-white/90 hover:text-white px-4 py-2 rounded-lg transition-colors">Taman Alam Lumbini</a>
+            <a href="{{ route('virtual.arrasyid') }}" class="bg-white/10 hover:bg-white/20 text-white/90 hover:text-white px-4 py-2 rounded-lg transition-colors">Arrasyiid</a>
+            <a href="{{ route('virtual.graha-bunda') }}" class="bg-white/10 hover:bg-white/20 text-white/90 hover:text-white px-4 py-2 rounded-lg transition-colors">Graha Bunda</a>
+            <a href="{{ route('virtual.funland') }}" class="bg-white/10 hover:bg-white/20 text-white/90 hover:text-white px-4 py-2 rounded-lg transition-colors">Mikie Funland</a>
+        </div>
+    </nav>
 @endsection
