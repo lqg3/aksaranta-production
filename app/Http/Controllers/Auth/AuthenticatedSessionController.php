@@ -28,7 +28,15 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->intended(route('dashboard', absolute: false));
+        // Ambil user yang login
+        $user = $request->user();
+
+        // Redirect berdasarkan role user
+        if ($user->role === 'admin') {
+            return redirect()->route('admin.posts.index');
+        } else {
+            return redirect()->route('learn.index');
+        }
     }
 
     /**
