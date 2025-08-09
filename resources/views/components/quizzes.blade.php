@@ -80,8 +80,7 @@
                                         'bg-green-700 border-green-500': getQuizFeedback(index).pairFeedback &&
                                             getQuizFeedback(index).pairFeedback[target] === true,
                                         'bg-red-700 border-red-500': getQuizFeedback(index).pairFeedback &&
-                                            getQuizFeedback(
-                                                index).pairFeedback[target] === false
+                                            getQuizFeedback(index).pairFeedback[target] === false
                                     }"
                                     :title="quiz.droppedPairs[target] ? 'Drag this item to reassign or remove' : 'Drop here'">
                                     <template x-if="quiz.droppedPairs[target]">
@@ -100,7 +99,6 @@
                     </div>
                 </template>
 
-
                 <!-- Fill in the Blank -->
                 <template x-if="quiz.quiz_type === 'fill_in_the_blank'">
                     <div class="flex flex-col space-y-3 max-w-md">
@@ -116,7 +114,6 @@
                             class="rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-accent-teal focus:border-accent-teal transition duration-200" />
                     </div>
                 </template>
-
 
                 <!-- Show correct answer after submission -->
                 <template x-if="feedback.length > 0">
@@ -144,30 +141,37 @@
                 </template>
             </div>
         </template>
+
+        <!-- IMPORTANT: Wrap submit button in a real element like div -->
     </template>
-    <!-- Submit All Button -->
-    <div class="mt-6 flex flex-col md:flex-row md:items-center md:justify-between space-y-4 md:space-y-0">
-        <div class="flex space-x-4 justify-center md:justify-start">
-            <button @click="submitAll()" :disabled="hasSubmitted"
-                class="px-6 py-3 bg-accent-teal text-white rounded hover:bg-teal-600 transition disabled:opacity-50 disabled:cursor-not-allowed">
-                Submit
-            </button>
 
-            <button x-show="hasSubmitted" @click="resetQuiz()" type="button"
-                class="px-6 py-3 bg-red-600 text-white rounded hover:bg-red-700 transition">
-                Try Again
-            </button>
-        </div>
+    
+    @if (!empty($quizzes) && count($quizzes) > 0)
+        <div class="mt-6 flex flex-col md:flex-row md:items-center md:justify-between space-y-4 md:space-y-0">
+            <div class="flex space-x-4 justify-center md:justify-start">
+                <button @click="submitAll()" :disabled="hasSubmitted"
+                    class="px-6 py-3 bg-accent-teal text-white rounded hover:bg-teal-600 transition disabled:opacity-50 disabled:cursor-not-allowed">
+                    Submit
+                </button>
 
-        <template x-if="hasSubmitted">
-            <div
-                class="self-end md:self-auto bg-accent-teal text-white px-4 py-2 rounded shadow-lg font-semibold text-lg max-w-max mx-auto md:mx-0">
-                Score: <span x-text="calculateScore()"></span>%
+                <button x-show="hasSubmitted" @click="resetQuiz()" type="button"
+                    class="px-6 py-3 bg-red-600 text-white rounded hover:bg-red-700 transition">
+                    Try Again
+                </button>
             </div>
-        </template>
-    </div>
+
+            <template x-if="hasSubmitted">
+                <div
+                    class="self-end md:self-auto bg-accent-teal text-white px-4 py-2 rounded shadow-lg font-semibold text-lg max-w-max mx-auto md:mx-0">
+                    Score: <span x-text="calculateScore()"></span>%
+                </div>
+            </template>
+        </div>
+    @endif
 
 </div>
+
+
 
 <script>
     function quizComponent({
