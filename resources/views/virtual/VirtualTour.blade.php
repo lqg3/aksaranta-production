@@ -16,7 +16,7 @@
             <h5 class="text-red-400 tracking-wider">Nikmati keindahan alamn Sumatera Utara</h5>
             <h3 class="mt-2 text-2xl sm:text-3xl md:text-4xl font-bold">Virtual Tour Sumatera Utara</h3>
         </div>
-
+ 
         <div class="mt-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             <a href="{{ route('virtual.bukit-holbung') }}" class="group bg-white/5 hover:bg-white/10 rounded-2xl overflow-hidden transition-colors">
                 <img src="{{ asset('img/bukitholbung.jpg') }}" alt="Bukit Holbung" class="w-full h-40 object-cover" />
