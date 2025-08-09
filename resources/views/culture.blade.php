@@ -82,12 +82,12 @@
         scroll-behavior: smooth;
     }
 
-    /* Horizontal chips scrollbar styling – match site tone */
+    /* Horizontal scrollbar styling (gray) for the marga table */
     #marga-chips-scroll {
-        scrollbar-width: thin;               /* Firefox */
-        scrollbar-color: #dc143c transparent; /* Firefox */
+        scrollbar-width: thin;                /* Firefox */
+        scrollbar-color: #9ca3af transparent; /* gray-400 on transparent track */
     }
-    #marga-chips-scroll::-webkit-scrollbar { /* Chrome/Safari/Edge */
+    #marga-chips-scroll::-webkit-scrollbar {  /* Chrome/Safari/Edge */
         height: 8px;
     }
     #marga-chips-scroll::-webkit-scrollbar-track {
@@ -95,11 +95,11 @@
         border-radius: 9999px;
     }
     #marga-chips-scroll::-webkit-scrollbar-thumb {
-        background: #dc143c; /* crimson */
+        background: #9ca3af; /* gray-400 */
         border-radius: 9999px;
     }
     #marga-chips-scroll::-webkit-scrollbar-thumb:hover {
-        background: #b3122f; /* darker on hover */
+        background: #6b7280; /* gray-500 */
     }
 </style>
 
@@ -256,7 +256,7 @@
             <div class="flex flex-col lg:flex-row-reverse lg:justify-between w-full my-12 gap-10">
                 <div class="w-full lg:w-1/2 flex justify-center items-center">
                     <!-- TODO: Replace placeholder with asset('img/culture/marga-overview.webp') or a relevant SVG/WEBP -->
-                    <img src="https://placehold.co/800x450?text=Marga+Overview" alt="Ilustrasi Sistem Marga" class="w-full max-w-md rounded-[36px] aspect-video" />
+                    <img src="https://aksara-batak.sgp1.cdn.digitaloceanspaces.com/images/homepage/img40.webp" alt="Ilustrasi Sistem Marga" class="w-full max-w-md rounded-[36px] aspect-video" />
                 </div>
                 <div class="w-full lg:w-1/2 flex flex-col justify-center gap-5">
                     <h3 class="text-red-400">Patrilineal & Identitas</h3>
@@ -290,42 +290,53 @@
                 </div>
             </div>
 
-            <!-- Horizontal chips: contoh marga per sub-etnis -->
+            <!-- Tabel scroll horizontal: contoh marga per sub-etnis -->
             <div class="mt-10">
                 <h4 class="text-lg font-semibold mb-3">Contoh marga pada sub-etnis</h4>
                 <div id="marga-chips-scroll" class="overflow-x-auto scroll-smooth pb-2">
-                    <div class="inline-flex gap-3 whitespace-nowrap pr-3">
-                        <span class="px-3 py-1 rounded-full bg-white/10">Toba: Simanjuntak</span>
-                        <span class="px-3 py-1 rounded-full bg-white/10">Toba: Sihombing</span>
-                        <span class="px-3 py-1 rounded-full bg-white/10">Toba: Situmorang</span>
-                        <span class="px-3 py-1 rounded-full bg-white/10">Toba: Sitorus</span>
-                        <span class="px-3 py-1 rounded-full bg-white/10">Toba: Siahaan</span>
-                        <span class="px-3 py-1 rounded-full bg-white/10">Toba: Butarbutar</span>
-
-                        <span class="px-3 py-1 rounded-full bg-white/10">Simalungun: Damanik</span>
-                        <span class="px-3 py-1 rounded-full bg-white/10">Simalungun: Purba</span>
-                        <span class="px-3 py-1 rounded-full bg-white/10">Simalungun: Saragih</span>
-                        <span class="px-3 py-1 rounded-full bg-white/10">Simalungun: Sinaga</span>
-
-                        <span class="px-3 py-1 rounded-full bg-white/10">Karo: Ginting</span>
-                        <span class="px-3 py-1 rounded-full bg-white/10">Karo: Karo-karo</span>
-                        <span class="px-3 py-1 rounded-full bg-white/10">Karo: Perangin-angin</span>
-                        <span class="px-3 py-1 rounded-full bg-white/10">Karo: Sembiring</span>
-                        <span class="px-3 py-1 rounded-full bg-white/10">Karo: Tarigan</span>
-
-                        <span class="px-3 py-1 rounded-full bg-white/10">Pakpak: Berutu</span>
-                        <span class="px-3 py-1 rounded-full bg-white/10">Pakpak: Manik</span>
-                        <span class="px-3 py-1 rounded-full bg-white/10">Pakpak: Padang</span>
-                        <span class="px-3 py-1 rounded-full bg-white/10">Pakpak: Ujung</span>
-                        <span class="px-3 py-1 rounded-full bg-white/10">Pakpak: Solin</span>
-
-                        <span class="px-3 py-1 rounded-full bg-white/10">Angkola: Harahap</span>
-                        <span class="px-3 py-1 rounded-full bg-white/10">Angkola: Siregar</span>
-                        <span class="px-3 py-1 rounded-full bg-white/10">Mandailing: Nasution</span>
-                        <span class="px-3 py-1 rounded-full bg-white/10">Mandailing: Lubis</span>
-                        <span class="px-3 py-1 rounded-full bg-white/10">Mandailing: Hasibuan</span>
-                    </div>
+                    <table class="min-w-full text-left text-sm font-sans whitespace-nowrap">
+                        <thead>
+                            <tr class="text-white/70">
+                                <th class="py-2 pr-6">Sub-etnis</th>
+                                <th class="py-2 pr-6">Contoh marga</th>
+                                <th class="py-2 pr-6">Catatan</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="border-t border-white/10">
+                                <td class="py-3 pr-6">Toba</td>
+                                <td class="py-3 pr-6">Simanjuntak, Sihombing, Situmorang, Sitorus, Siahaan, Butarbutar</td>
+                                <td class="py-3 pr-6">Sistem Dalihan Na Tolu kuat, larangan semarga</td>
+                            </tr>
+                            <tr class="border-t border-white/10">
+                                <td class="py-3 pr-6">Simalungun</td>
+                                <td class="py-3 pr-6">Damanik, Purba, Saragih, Sinaga</td>
+                                <td class="py-3 pr-6">Sejarah harajaon (kerajaan kecil)</td>
+                            </tr>
+                            <tr class="border-t border-white/10">
+                                <td class="py-3 pr-6">Karo (Merga Silima)</td>
+                                <td class="py-3 pr-6">Ginting, Karo-karo, Perangin-angin, Sembiring, Tarigan</td>
+                                <td class="py-3 pr-6">Lima marga induk (Merga Silima)</td>
+                            </tr>
+                            <tr class="border-t border-white/10">
+                                <td class="py-3 pr-6">Pakpak</td>
+                                <td class="py-3 pr-6">Berutu, Manik, Padang, Ujung, Solin</td>
+                                <td class="py-3 pr-6">Pembagian Silima Suak</td>
+                            </tr>
+                            <tr class="border-t border-white/10">
+                                <td class="py-3 pr-6">Angkola</td>
+                                <td class="py-3 pr-6">Harahap, Siregar</td>
+                                <td class="py-3 pr-6">Falsafah Dalihan Na Tolu dijunjung</td>
+                            </tr>
+                            <tr class="border-t border-white/10">
+                                <td class="py-3 pr-6">Mandailing</td>
+                                <td class="py-3 pr-6">Nasution, Lubis, Hasibuan</td>
+                                <td class="py-3 pr-6">Tradisi merantau dan Gordang Sambilan</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
+                <p class="text-md font-semibold-mb-3">Suku batak memiliki ratusan marga. Untuk melihat marga lain, dapat membaca <a href="https://id.wikipedia.org/wiki/Daftar_marga_Batak" class="text-red-400 underline">artikel ini</a></p>
             </div>
         </div>
     </section>
@@ -339,7 +350,7 @@
                 <h3 class="text-red-400 text-center my-2 text-sm sm:text-base">Kepercayaan & Spiritualitas</h3>
                 <h2 class="text-center text-2xl sm:text-3xl md:text-4xl">Religi dalam masyarakat <span class="text-red-400">Batak</span></h2>
                 <p class="font-sans text-center mx-auto max-w-3xl text-sm sm:text-base mt-4">
-                    Ekspresi religius masyarakat Batak hadir dalam pelbagai bentuk—dari kepercayaan asli hingga agama-agama besar—
+                    Ekspresi religius masyarakat Batak hadir dalam pelbagai bentuk, dari kepercayaan asli hingga agama-agama besar, 
                     berpadu dengan adat dan musik tradisional.
                 </p>
             </div>
@@ -348,19 +359,19 @@
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-10">
                 <div class="bg-white/5 rounded-2xl p-6 h-full flex flex-col">
                     <!-- TODO: Replace placeholder with asset('img/culture/parmalim.webp') -->
-                    <img src="https://placehold.co/800x450?text=Parmalim" alt="Ugamo Parmalim" class="w-full rounded-2xl aspect-video object-cover" />
+                    <img src="https://aksara-batak.sgp1.cdn.digitaloceanspaces.com/images/homepage/img42.webp" alt="Ugamo Parmalim" class="w-full rounded-2xl aspect-video object-cover" />
                     <h4 class="text-lg font-semibold mt-4">Ugamo Parmalim</h4>
                     <p class="font-sans text-sm mt-2">Kepercayaan asli Batak menekankan keselarasan alam, hormat leluhur, dan etika hidup.</p>
                 </div>
                 <div class="bg-white/5 rounded-2xl p-6 h-full flex flex-col">
                     <!-- TODO: Replace placeholder with asset('img/culture/kristen.webp') -->
-                    <img src="https://placehold.co/800x450?text=Kekristenan" alt="Kekristenan di Tanah Batak" class="w-full rounded-2xl aspect-video object-cover" />
+                    <img src="https://aksara-batak.sgp1.cdn.digitaloceanspaces.com/images/homepage/img41.webp" alt="Kekristenan di Tanah Batak" class="w-full rounded-2xl aspect-video object-cover" />
                     <h4 class="text-lg font-semibold mt-4">Kekristenan</h4>
                     <p class="font-sans text-sm mt-2">Berkembang pesat melalui misi dan pendidikan; berpadu dengan adat dan musik gereja.</p>
                 </div>
                 <div class="bg-white/5 rounded-2xl p-6 h-full flex flex-col">
                     <!-- TODO: Replace placeholder with asset('img/culture/islam.webp') -->
-                    <img src="https://placehold.co/800x450?text=Islam" alt="Islam di Mandailing dan Angkola" class="w-full rounded-2xl aspect-video object-cover" />
+                    <img src="https://aksara-batak.sgp1.cdn.digitaloceanspaces.com/images/homepage/img43.webp" class="w-full rounded-2xl aspect-video object-cover" />
                     <h4 class="text-lg font-semibold mt-4">Islam</h4>
                     <p class="font-sans text-sm mt-2">Kuat di Mandailing–Angkola; identitas keislaman berpadu dengan Dalihan Na Tolu.</p>
                 </div>
@@ -370,7 +381,7 @@
             <div class="flex flex-col lg:justify-between lg:flex-row w-full my-12 gap-10">
                 <div class="w-full lg:w-1/2 flex justify-center items-center">
                     <!-- TODO: Replace placeholder with asset('img/culture/parmalim-ritual.webp') -->
-                    <img src="https://placehold.co/800x450?text=Ritual+Parmalim" alt="Ritual Parmalim" class="w-full max-w-md rounded-[36px] aspect-video" />
+                    <img src="https://aksara-batak.sgp1.cdn.digitaloceanspaces.com/images/homepage/img44.webp" alt="Ritual Parmalim" class="w-full max-w-md rounded-[36px] aspect-video" />
                 </div>
                 <div class="w-full lg:w-1/2 flex flex-col justify-center gap-5">
                     <h3 class="text-red-400">Warisan Lokal</h3>
@@ -385,14 +396,14 @@
             <!-- Kutipan / callout -->
             <div class="bg-white/5 rounded-3xl p-6 sm:p-10">
                 <p class="font-sans text-base sm:text-lg italic text-white/90">
-                    “Adat do na nioloi, ugamo do na niatur” — adat menuntun pergaulan, agama mengatur batin; keduanya berjalan serasi.
+                    “Adat do na nioloi, ugamo do na niatur”: adat menuntun pergaulan, agama mengatur batin; keduanya berjalan serasi.
                 </p>
             </div>
         </div>
     </section>
 
     <!-- Extra content: deepen sections -->
-    <section class="flex flex-col gap-8">
+    <section class="flex flex-col gap-8 mt-8">
         <div class="w-full max-w-[1440px] mx-auto px-6 sm:px-12 lg:px-28">
             <!-- Marga: Etika & Siklus Adat -->
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -412,21 +423,15 @@
                     <h4 class="text-2xl sm:text-3xl md:text-4xl leading-snug tracking-wide mt-1">Dari lahir hingga kematian</h4>
                     <div class="mt-5 grid grid-cols-1 sm:grid-cols-3 gap-4">
                         <div class="rounded-2xl bg-white/5 p-4">
-                            <!-- TODO: Replace with asset('img/culture/kelahiran.webp') -->
-                            <img src="https://placehold.co/400x240?text=Kelahiran" alt="Adat Kelahiran" class="rounded-xl aspect-video w-full object-cover">
-                            <h5 class="mt-3 font-semibold">Kelahiran</h5>
+                            <h5 class="font-semibold">Kelahiran</h5>
                             <p class="font-sans text-sm mt-1">Pemberian nama mempertimbangkan marga dan doa keluarga.</p>
                         </div>
                         <div class="rounded-2xl bg-white/5 p-4">
-                            <!-- TODO: Replace with asset('img/culture/pernikahan.webp') -->
-                            <img src="https://placehold.co/400x240?text=Pernikahan" alt="Adat Pernikahan" class="rounded-xl aspect-video w-full object-cover">
-                            <h5 class="mt-3 font-semibold">Pernikahan</h5>
+                            <h5 class="font-semibold">Pernikahan</h5>
                             <p class="font-sans text-sm mt-1">Eksogami antarmarga; peran <em>hula-hula</em> dan <em>boru</em> sangat sentral.</p>
                         </div>
                         <div class="rounded-2xl bg-white/5 p-4">
-                            <!-- TODO: Replace with asset('img/culture/kematian.webp') -->
-                            <img src="https://placehold.co/400x240?text=Kematian" alt="Adat Kematian" class="rounded-xl aspect-video w-full object-cover">
-                            <h5 class="mt-3 font-semibold">Kematian</h5>
+                            <h5 class="font-semibold">Kematian</h5>
                             <p class="font-sans text-sm mt-1">Upacara dan posisi duduk diatur menurut relasi marga.</p>
                         </div>
                     </div>
@@ -472,15 +477,11 @@
                 <div class="rounded-3xl bg-white/5 p-6 sm:p-8 flex flex-col">
                     <h3 class="text-red-400 text-sm">Ruang ibadah</h3>
                     <h4 class="text-2xl sm:text-3xl md:text-4xl leading-snug tracking-wide mt-1">Jejak arsitektur & komunitas</h4>
-                    <!-- TODO: Replace with asset('img/culture/rumah-ibadah-collage.webp') -->
-                    <img src="https://placehold.co/800x450?text=Ruang+Ibadah" alt="Ruang Ibadah" class="w-full rounded-2xl aspect-video object-cover mt-4" />
                     <p class="font-sans text-sm sm:text-base mt-3">Gereja, masjid, dan ruang pertemuan adat sering berdiri berdekatan, menandai ko-eksistensi yang akrab.</p>
                 </div>
                 <div class="rounded-3xl bg-white/5 p-6 sm:p-8 flex flex-col">
                     <h3 class="text-red-400 text-sm">Musik & liturgi</h3>
                     <h4 class="text-2xl sm:text-3xl md:text-4xl leading-snug tracking-wide mt-1">Gondang, nyanyian, dan inculturasi</h4>
-                    <!-- TODO: Replace with asset('img/culture/gondang-ensemble.webp') -->
-                    <img src="https://placehold.co/800x450?text=Musik+Gondang" alt="Musik Gondang" class="w-full rounded-2xl aspect-video object-cover mt-4" />
                     <p class="font-sans text-sm sm:text-base mt-3">Unsur musik tradisional kerap hadir dalam ibadah dan perayaan, mencerminkan identitas budaya.</p>
                 </div>
             </div>

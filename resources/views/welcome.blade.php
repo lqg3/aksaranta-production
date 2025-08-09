@@ -158,8 +158,8 @@ body{
                     ←
                 </button>
                 <a class="nav-link hover:underline hover:decoration-2" 
-                @click.prevent="$dispatch('navigate', '{{ route('about.history') }}')"
-                href="{{ route('about.history') }}" 
+                @click.prevent="$dispatch('navigate', '{{ route('history') }}')"
+                href="{{ route('history') }}" 
                 aria-label="Go to Sejarah Batak">
                     Sejarah Batak
                 </a>
@@ -180,7 +180,7 @@ body{
                     ←
                 </button>
                 <a class="nav-link hover:underline hover:decoration-2" 
-                @click.prevent="$dispatch('navigate', '{{ route('learn.index') }}')"
+                @click.prevent="$dispatch('navigate', '{{ route('kamus-aksara') }}')"
                 href="{{ route('learn.index') }}" 
                 aria-label="Go to Aksara Batak">
                     Aksara Batak
@@ -202,8 +202,8 @@ body{
                     ←
                 </button>
                 <a class="nav-link hover:underline hover:decoration-2" 
-                @click.prevent="$dispatch('navigate', '{{ route('about.kamus') }}')"
-                href="{{ route('about.kamus') }}" 
+                @click.prevent="$dispatch('navigate', '{{ route('kamus') }}')"
+                href="{{ route('kamus') }}" 
                 aria-label="Go to Glosarium & Kamus">
                     Glosarium & Kamus
                 </a>
@@ -268,8 +268,8 @@ body{
                     ←
                 </button>
                 <a class="nav-link hover:underline hover:decoration-2" 
-                @click.prevent="$dispatch('navigate', '{{ route('about.kamus-aksara') }}')"
-                href="{{ route('about.kamus-aksara') }}" 
+                @click.prevent="$dispatch('navigate', '{{ route('kamus-aksara') }}')"
+                href="{{ route('kamus-aksara') }}" 
                 aria-label="Go to Aksaranta">
                     Aksaranta
                 </a>
@@ -351,8 +351,8 @@ body{
         </a>
 
         <a class="block overflow-hidden rounded-lg border border-white/10 bg-white/5 hover:bg-white/10 transition" 
-           href="{{ route('about.history') }}"
-           @click.prevent="$dispatch('navigate', '{{ route('about.history') }}')">
+           href="{{ route('history') }}"
+           @click.prevent="$dispatch('navigate', '{{ route('history') }}')">
             <img src="https://aksara-batak.sgp1.cdn.digitaloceanspaces.com/images/homepage/img26.webp" alt="" style="width:100%; height:48vw; object-fit:cover;">
             <div class="p-4 text-white font-title">Sejarah Batak</div>
         </a>
@@ -365,8 +365,8 @@ body{
         </a>
 
         <a class="block overflow-hidden rounded-lg border border-white/10 bg-white/5 hover:bg-white/10 transition" 
-           href="{{ route('about.kamus') }}"
-           @click.prevent="$dispatch('navigate', '{{ route('about.kamus') }}')">
+           href="{{ route('kamus') }}"
+           @click.prevent="$dispatch('navigate', '{{ route('kamus') }}')">
             <img src="https://aksara-batak.sgp1.cdn.digitaloceanspaces.com/images/homepage/img27.webp" alt="" style="width:100%; height:48vw; object-fit:cover;">
             <div class="p-4 text-white font-title">Glosarium & Kamus</div>
         </a>
@@ -386,8 +386,8 @@ body{
         </a>
 
         <a class="block overflow-hidden rounded-lg border border-white/10 bg-white/5 hover:bg-white/10 transition" 
-           href="{{ route('about.kamus-aksara') }}"
-           @click.prevent="$dispatch('navigate', '{{ route('about.kamus-aksara') }}')">
+           href="{{ route('kamus-aksara') }}"
+           @click.prevent="$dispatch('navigate', '{{ route('kamus-aksara') }}')">
             <img src="https://aksara-batak.sgp1.cdn.digitaloceanspaces.com/images/homepage/img31.webp" alt="" style="width:100%; height:48vw; object-fit:cover;">
             <div class="p-4 text-white font-title">Aksaranta</div>
         </a>
@@ -442,8 +442,8 @@ body{
             <img src="https://aksara-batak.sgp1.cdn.digitaloceanspaces.com/images/homepage/img26.webp" alt="" class="image" data-mouse-down-at="0" draggable="false" data-prev-percentage="0">
             <div class="image-overlay">
                 <a class="font-title text-md hover:!underline cursor-pointer" 
-                   href="{{ route('about.history') }}" 
-                   @click.prevent="$dispatch('navigate', '{{ route('about.history') }}')"
+                   href="{{ route('history') }}" 
+                   @click.prevent="$dispatch('navigate', '{{ route('history') }}')"
                    style="text-decoration: none; color: inherit; cursor: pointer;"
                    draggable="false"
                 >Sejarah Batak</a>
@@ -466,8 +466,8 @@ body{
             <img src="https://aksara-batak.sgp1.cdn.digitaloceanspaces.com/images/homepage/img27.webp" alt="" class="image" data-mouse-down-at="0" draggable="false" data-prev-percentage="0">
             <div class="image-overlay">
                 <a class="font-title text-md hover:!underline cursor-pointer" 
-                   href="{{ route('about.kamus') }}" 
-                   @click.prevent="$dispatch('navigate', '{{ route('about.kamus') }}')"
+                   href="{{ route('kamus') }}" 
+                   @click.prevent="$dispatch('navigate', '{{ route('kamus') }}')"
                    style="text-decoration: none; color: inherit; cursor: pointer;"
                    draggable="false"
                 >Glosarium & Kamus</a>
@@ -502,8 +502,8 @@ body{
             <img src="https://aksara-batak.sgp1.cdn.digitaloceanspaces.com/images/homepage/img31.webp" alt="" class="image" data-mouse-down-at="0" draggable="false" data-prev-percentage="0">
             <div class="image-overlay">
                 <a class="font-title text-md hover:!underline cursor-pointer" 
-                   href="{{ route('about.kamus-aksara') }}" 
-                   @click.prevent="$dispatch('navigate', '{{ route('about.kamus-aksara') }}')"
+                   href="{{ route('kamus-aksara') }}" 
+                   @click.prevent="$dispatch('navigate', '{{ route('kamus-aksara') }}')"
                    style="text-decoration: none; color: inherit; cursor: pointer;"
                    draggable="false"
                 >Aksaranta</a>

@@ -11,11 +11,11 @@ class VirtualTourController extends Controller
         return view('virtual/VirtualTour');
     }
 
-    public function danautoba(){
+    public function danauToba(){
         return view('virtual/danautoba');
     }
 
-    public function airterjunPiso(){
+    public function airTerjunPiso(){
         return view('virtual/airterjunPiso');
     }
 
@@ -40,7 +40,7 @@ class VirtualTourController extends Controller
     }
 
     public function funland(){
-        return view('virtual/mikiefunland');
+        return view('virtual/mikieFunland');
     }
 
 

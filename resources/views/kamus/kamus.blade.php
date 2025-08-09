@@ -1,582 +1,91 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aksaranta - Glosarium & Kamus</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Jua&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
-    <style>
-        /* --- Variabel CSS Global (Konsisten dengan halaman lain) --- */
-        :root {
-            --bg-dark: #1a1a1a;
-            --card-bg-dark: #2c2c2c; /* Latar belakang card/kontainer utama */
-            --highlight-bg: #3f3c3c; /* Latar belakang untuk elemen yang menonjol (misal search bar) */
-            --text-light: #f0f0f0;
-            --text-muted: #d0d0d0;
-            --accent-yellow: #d84b4b;
-            --accent-yellow-hover: #B10002;
-            --shadow-dark: rgba(0, 0, 0, 0.5);
-            --font-jua: 'Jua', cursive;
-            --font-opensans: 'Open Sans', sans-serif;
-        }
+@extends('layouts.general')
 
-        /* --- Reset & Base Styling --- */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+@section('title', 'Glosarium & Kamus')
 
-        body {
-            font-family: var(--font-opensans);
-            background-color: var(--bg-dark);
-            color: var(--text-light);
-            line-height: 1.6;
-            overflow-x: hidden; /* Mencegah scroll horizontal yang tidak diinginkan */
-        }
+@section('body-class', 'font-title bg-bg-dark text-white')
 
-        .container {
-            max-width: 1200px;
-            margin: 40px auto;
-            padding: 20px;
-            background-color: var(--card-bg-dark);
-            border-radius: 12px;
-            box-shadow: 0 8px 20px var(--shadow-dark);
-        }
+@section('content')
 
-        /* --- Header Kustom (Hero Section) --- */
-        .hero-header {
-            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://via.placeholder.com/1500x500/8e44ad/ffffff?text=Kamus+Aksara+Batak+Banner') no-repeat center center/cover; /* Ganti URL gambar banner Anda di sini */
-            color: var(--text-light);
-            text-align: center;
-            padding: 100px 20px;
-            margin-bottom: 60px;
-            position: relative;
-            overflow: hidden;
-            animation: fadeIn 1.5s ease-out;
-        }
-        .hero-header::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.3); /* Overlay gelap */
-            z-index: 1;
-        }
-        .hero-header-content {
-            position: relative;
-            z-index: 2;
-            transform: translateY(0);
-            transition: transform 0.5s ease-out;
-        }
-        .hero-header-content h1 {
-            font-family: var(--font-jua);
-            font-size: 4.5em;
-            margin-bottom: 10px;
-            text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
-            animation: fadeInDown 1.2s ease-out;
-            color: var(--text-light);
-        }
-        .hero-header-content p {
-            font-size: 1.3em;
-            max-width: 800px;
-            margin: 0 auto 30px;
-            color: var(--text-light);
-            animation: fadeInUp 1.2s ease-out 0.2s;
-        }
-        .hero-header .button {
-            display: inline-block;
-            background-color: var(--accent-yellow);
-            color: #fff;
-            padding: 12px 25px;
-            border-radius: 5px;
-            text-decoration: none;
-            font-weight: bold;
-            transition: background-color 0.3s ease, transform 0.2s ease;
-            animation: fadeIn 1.2s ease-out 0.4s;
-        }
-        .hero-header .button:hover {
-            background-color: var(--accent-yellow-hover);
-            transform: translateY(-3px);
-        }
-
-        /* --- Search Section --- */
-        .search-section {
-            background-color: var(--highlight-bg);
-            padding: 40px;
-            border-radius: 12px;
-            box-shadow: 0 8px 20px var(--shadow-dark);
-            text-align: center;
-            margin-bottom: 60px;
-            opacity: 0; /* Untuk animasi */
-            transform: translateY(30px);
-            transition: opacity 1s ease-out, transform 1s ease-out;
-        }
-        .search-section.fade-in {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        .search-section h2 {
-            font-family: var(--font-jua);
-            color: var(--accent-yellow);
-            font-size: 2.5em;
-            margin-bottom: 20px;
-        }
-        .search-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            max-width: 600px;
-            margin: 0 auto;
-            background-color: var(--card-bg-dark);
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-        }
-        .search-container input, .search-container select {
-            flex-grow: 1;
-            padding: 15px 20px;
-            border: none;
-            background: none;
-            color: var(--text-light);
-            font-size: 1.1em;
-            outline: none;
-            -webkit-appearance: none; /* Hapus gaya default select */
-            -moz-appearance: none;
-            appearance: none;
-            background-color: var(--card-bg-dark); /* Agar select match input */
-        }
-        .search-container input::placeholder {
-            color: var(--text-muted);
-        }
-        .search-container button {
-            background-color: var(--accent-yellow);
-            color: #333;
-            border: none;
-            padding: 15px 25px;
-            font-size: 1.1em;
-            cursor: pointer;
-            transition: background-color 0.3s ease, transform 0.2s ease;
-            font-weight: bold;
-        }
-        .search-container button:hover {
-            background-color: var(--accent-yellow-hover);
-            transform: scale(1.05);
-        }
-
-        /* --- Filter Dialek --- */
-        .filter-dialek {
-            margin-top: 20px;
-            text-align: center;
-        }
-        .filter-dialek label {
-            font-size: 1.1em;
-            color: var(--text-light);
-            margin-right: 10px;
-        }
-        .filter-dialek select {
-            padding: 10px 15px;
-            border-radius: 5px;
-            border: 1px solid var(--accent-yellow);
-            background-color: var(--card-bg-dark);
-            color: var(--text-light);
-            font-size: 1em;
-            cursor: pointer;
-            outline: none;
-        }
-        .filter-dialek select option {
-            background-color: var(--card-bg-dark);
-            color: var(--text-light);
-        }
-
-
-        /* --- Guide Section --- */
-        .guide-section {
-            background-color: var(--highlight-bg);
-            padding: 40px;
-            border-radius: 12px;
-            box-shadow: 0 8px 20px var(--shadow-dark);
-            text-align: center;
-            margin: 60px auto; /* Margin atas dan bawah */
-            opacity: 0; /* Untuk animasi */
-            transform: translateY(30px);
-            transition: opacity 1s ease-out, transform 1s ease-out;
-            max-width: 1000px; /* Lebar maksimum seperti container utama */
-        }
-        .guide-section.fade-in {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        .guide-section h2 {
-            font-family: var(--font-jua);
-            color: var(--accent-yellow);
-            font-size: 2.5em;
-            margin-bottom: 20px;
-        }
-        .guide-section ol {
-            list-style: none; /* Hapus bullet/angka default */
-            padding: 0;
-            counter-reset: step-counter; /* Reset counter untuk angka kustom */
-            text-align: left; /* Teks panduan ke kiri */
-            max-width: 700px;
-            margin: 0 auto;
-        }
-        .guide-section ol li {
-            counter-increment: step-counter; /* Tambahkan angka */
-            margin-bottom: 15px;
-            padding-left: 35px; /* Ruang untuk angka kustom */
-            position: relative;
-            font-size: 1.1em;
-            color: var(--text-light);
-        }
-        .guide-section ol li::before {
-            content: counter(step-counter) "."; /* Tampilkan angka kustom */
-            position: absolute;
-            left: 0;
-            top: 0;
-            font-family: var(--font-jua);
-            color: var(--accent-yellow);
-            font-size: 1.3em;
-            font-weight: bold;
-            line-height: 1.6;
-        }
-        .guide-section ol li strong {
-            color: var(--accent-yellow); /* Highlight kata kunci dalam panduan */
-        }
-
-        /* --- Navigasi A-Z --- */
-        .alphabet-nav {
-            text-align: center;
-            margin: 30px auto;
-            padding: 15px;
-            background-color: var(--highlight-bg);
-            border-radius: 8px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-            max-width: 1000px;
-        }
-        .alphabet-nav a {
-            display: inline-block;
-            padding: 8px 12px;
-            margin: 2px;
-            color: var(--text-light);
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 0.9em;
-            border-radius: 4px;
-            transition: background-color 0.2s ease, color 0.2s ease;
-        }
-        .alphabet-nav a:hover, .alphabet-nav a.active {
-            background-color: var(--accent-yellow);
-            color: #333;
-        }
-
-
-        /* --- Dictionary Results --- */
-        #dictionary-results {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            padding: 20px 0;
-            justify-content: center; /* Untuk menengahkan item jika tidak mengisi baris penuh */
-            min-height: 300px; /* Agar ada ruang saat loading */
-        }
-        .dict-card {
-            background-color: var(--member-card-bg); /* Latar belakang card entri */
-            padding: 25px;
-            border-radius: 12px;
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
-            border: 1px solid var(--accent-yellow);
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-            cursor: pointer; /* Menunjukkan bisa diklik */
-            word-wrap: break-word; /* Memastikan kata panjang tidak keluar dari batas */
-        }
-        .dict-card.fade-in {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        .dict-card:hover {
-            transform: translateY(-8px) scale(1.01);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
-        }
-        .dict-card h3 {
-            font-family: var(--font-jua);
-            color: var(--accent-yellow);
-            font-size: 1.6em;
-            margin-bottom: 5px;
-            line-height: 1.2;
-        }
-        .dict-card .batak-term {
-            font-family: var(--font-opensans);
-            color: var(--text-light);
-            font-size: 1.2em;
-            font-weight: 600;
-            margin-bottom: 10px;
-        }
-        .dict-card .dialek { /* Gaya untuk dialek */
-            font-size: 0.85em;
-            color: #999;
-            margin-bottom: 8px;
-            font-style: italic;
-        }
-        .dict-card .description {
-            color: var(--text-muted);
-            font-size: 0.9em;
-        }
-        .no-results {
-            grid-column: 1 / -1; /* Menempati seluruh lebar grid */
-            text-align: center;
-            color: var(--text-muted);
-            font-size: 1.2em;
-            padding: 50px 0;
-        }
-        .alphabet-heading { /* Judul A, B, C, dll. di dalam kamus */
-            grid-column: 1 / -1; /* Membentang seluruh lebar grid */
-            text-align: left;
-            font-family: var(--font-jua);
-            color: var(--accent-yellow);
-            font-size: 2.5em;
-            margin-top: 30px;
-            margin-bottom: 15px;
-            border-bottom: 2px solid var(--accent-yellow);
-            padding-bottom: 5px;
-        }
-
-
-        /* --- Load More Button & Loading State --- */
-        .load-more-container {
-            grid-column: 1 / -1; /* Agar tombol di tengah di bawah grid */
-            text-align: center;
-            margin-top: 30px;
-            padding-bottom: 50px;
-        }
-        #loadMoreButton {
-            background-color: var(--accent-yellow);
-            color: #333;
-            border: none;
-            padding: 12px 30px;
-            border-radius: 5px;
-            font-size: 1.1em;
-            font-weight: bold;
-            cursor: pointer;
-            transition: background-color 0.3s ease, transform 0.3s ease;
-        }
-        #loadMoreButton:hover {
-            background-color: var(--accent-yellow-hover);
-            transform: translateY(-3px);
-        }
-        #loadMoreButton:disabled {
-            background-color: #888;
-            cursor: not-allowed;
-            transform: none;
-        }
-        .loading-indicator {
-            display: none; /* Default hidden */
-            margin-top: 20px;
-            color: var(--text-muted);
-            font-size: 1.1em;
-        }
-        .loading-indicator.active {
-            display: block;
-        }
-        .loading-spinner {
-            border: 4px solid #f3f3f3; /* Light grey */
-            border-top: 4px solid var(--accent-yellow); /* Yellow */
-            border-radius: 50%;
-            width: 30px;
-            height: 30px;
-            animation: spin 1s linear infinite;
-            margin: 10px auto;
-        }
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        /* --- Did You Know Section (Konsisten) --- */
-        .did-you-know {
-            background-color: var(--accent-yellow);
-            color: #fff;
-            padding: 30px;
-            border-radius: 10px;
-            margin: 80px auto;
-            max-width: 800px;
-            text-align: center;
-            box-shadow: 0 6px 15px var(--shadow-dark);
-            opacity: 0; /* Untuk animasi */
-            transform: scale(0.8) rotateZ(-5deg);
-            transition: opacity 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-                        transform 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        }
-        .did-you-know.fade-in {
-            opacity: 1;
-            transform: scale(1) rotateZ(0deg);
-        }
-        .did-you-know h3 {
-            font-family: var(--font-jua);
-            font-size: 2em;
-            margin-bottom: 15px;
-        }
-        .did-you-know p {
-            font-size: 1.2em;
-            font-weight: 500;
-            transition: opacity 0.5s ease-in-out;
-        }
-
-        /* --- Footer (Konsisten) --- */
-        footer {
-            width: 100%;
-            display: flex;
-            justify-content: space-around;
-            background-color: var(--accent-yellow);
-            padding: 15px;
-            box-sizing: border-box;
-            color: #333;
-            margin-top: 60px;
-        }
-        .footer-kiri { margin: 30px 0; width: 40%; }
-        .footer-kiri p { font-size: 16px; color: #333333; font-family: var(--font-opensans); }
-        .footer-kiri .foo { font-size: 21px; color: #333333; font-weight: bold; margin: 0 0 15px 0; font-family: var(--font-opensans); }
-        .footer-kanan { margin: 30px 0; width: 40%; display: flex; justify-content: space-around; }
-        .satu-footer h5 { font-size: 21px; color: #333333; font-weight: bold; font-family: var(--font-opensans); }
-        .satu-footer p { font-size: 16px; color: #333333; margin: 15px 0 0 0; font-family: var(--font-opensans); }
-
-        /* --- Scroll-to-Top Button (Konsisten) --- */
-        .up {
-            width: 100%; bottom: 0px; padding: 20px; box-sizing: border-box;
-            position: fixed; margin: 0 0 15px 0; z-index: 1000;
-        }
-        .klik-up {
-            width: 50px; height: 50px; border-radius: 50%;
-            background-color: var(--accent-yellow); display: flex; float: right;
-            transition: 0.7s; margin: 0 35px 0 0; cursor: pointer;
-        }
-        .klik-up img { margin: auto; filter: invert(100%); }
-        .klik-up:hover { background-color: var(--accent-yellow-hover); }
-
-        /* --- Responsive Design --- */
-        @media (max-width: 768px) {
-            .hero-header { padding: 60px 20px; margin-bottom: 40px; }
-            .hero-header-content h1 { font-size: 3em; }
-            .hero-header-content p { font-size: 1em; }
-
-            .container { width: 95%; margin: 20px auto; padding: 15px; }
-            .search-section { padding: 25px; margin-bottom: 40px; }
-            .search-section h2 { font-size: 2em; }
-            .search-container { flex-direction: column; }
-            .search-container input, .search-container select { width: 100%; margin-bottom: 10px; }
-            .search-container button { width: 100%; }
-
-            .guide-section { margin: 40px auto; padding: 25px; }
-            .guide-section h2 { font-size: 2em; }
-            .guide-section ol li { font-size: 1em; padding-left: 25px; }
-            .guide-section ol li::before { font-size: 1.1em; }
-
-            .alphabet-nav { margin: 20px auto; padding: 10px; }
-            .alphabet-nav a { padding: 5px 8px; font-size: 0.8em; }
-
-            #dictionary-results { grid-template-columns: 1fr; gap: 20px; }
-
-            .did-you-know { margin: 50px auto; padding: 20px; }
-            .did-you-know h3 { font-size: 1.5em; }
-            .did-you-know p { font-size: 1em; }
-
-            footer { flex-wrap: wrap; text-align: center; }
-            .footer-kiri, .footer-kanan { width: 100%; margin: 15px 0; justify-content: center; }
-            .footer-kanan div { margin: 0 10px; }
-            .up { padding: 10px; margin: 0 0 25px 0; }
-            .klik-up { margin: 0 10px 0 0; }
-        }
-
-        /* --- Keyframe Animations --- */
-        @keyframes fadeInDown { from { opacity: 0; transform: translateY(-50px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-    </style>
-</head>
-<body>
-    <header class="hero-header" id="top">
-        <div class="hero-header-content">
-            <h1>Glosarium & Kamus Aksaranta</h1>
-            <p>
-                Temukan kekayaan kosakata Bahasa Batak dalam terjemahan Indonesia. Cari kata, pelajari maknanya, dan
-                selami lebih dalam warisan linguistik yang mempesona.
-            </p>
-            <a href="#search-section" class="button">Mulai Mencari</a>
+    <section class="w-full max-w-[1440px] mx-auto px-6 sm:px-12 lg:px-28 my-20 lg:my-28 flex flex-col gap-6">
+        <div class="flex flex-col gap-3">
+            <h2 class="text-red-400">Kamus</h2>
+            <h3 class="font-bold text-2xl sm:text-3xl md:text-4xl leading-snug tracking-wider">Glosarium <span class="text-red-400">Aksaranta</span></h3>
+            <p class="font-sans text-sm sm:text-base md:text-lg max-w-3xl">Temukan kosakata Batak lintas dialek. Cari, saring, dan jelajahi istilah sehari-hari hingga budaya.</p>
         </div>
-    </header>
+    </section>
 
-    <main id="main-content">
-        <section class="search-section" id="search-section">
-            <h2>Cari Kata dalam Bahasa Batak</h2>
-            <div class="search-container">
-                <input type="text" id="searchInput" placeholder="Ketik kata dalam Bahasa Indonesia...">
-                <button id="searchButton">Cari</button>
+
+    
+    <section class="flex flex-col gap-8">
+        <div class="w-full max-w-[1440px] mx-auto px-6 sm:px-12 lg:px-28">
+
+            <div class="mt-6 bg-white/5 rounded-3xl p-6 sm:p-8 mb-8">
+                <p class="text-sm text-white/70">
+                    Karena keterbatasan data, bahasa Batak Toba memiliki jumlah kata yang paling banyak. Proyek
+                    <a class="text-red-400 underline" href="https://github.com/IndoNLP/nusax" target="_blank" rel="noopener">NusaX</a>
+                    digunakan untuk mendapatkan kata-kata Batak Toba.
+                </p>
             </div>
-            <div class="filter-dialek">
-                <label for="dialekFilter">Filter Dialek:</label>
-                <select id="dialekFilter">
-                    <option value="all">Semua Dialek</option>
-                    <option value="Toba">Batak Toba</option>
-                    <option value="Simalungun">Batak Simalungun</option>
-                    <option value="Angkola-Mandailing">Batak Angkola-Mandailing</option>
-                    <option value="Karo">Batak Karo</option>
-                    <option value="Pakpak-Dairi">Batak Pakpak-Dairi</option>
+
+
+            <div class="bg-white/5 rounded-3xl p-6 sm:p-10" id="search-section">
+                <h3 class="text-red-400 text-center my-2 text-sm sm:text-base">Cari Kata</h3>
+                <h2 class="text-center text-2xl sm:text-3xl md:text-4xl">Kamus <span class="text-red-400">Bahasa Batak</span></h2>
+                <div class="mt-6 flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
+                    <input id="searchInput" type="text" placeholder="Ketik kata Indonesia atau Batak..." class="w-full sm:w-2/3 max-w-xl px-4 py-3 rounded-xl bg-white/10 border border-white/10 outline-none focus:border-red-400 font-sans placeholder-white/40" />
+                    <select id="dialekFilter" class="w-full sm:w-64 px-4 py-3 rounded-xl bg-white/10 border border-white/10 focus:border-red-400 font-sans">
+                        <option class="bg-bg-card font-sans" value="all">Semua Dialek</option>
+                        <option class="bg-bg-card font-sans" value="Toba">Batak Toba</option>
+                        <option class="bg-bg-card font-sans" value="Simalungun">Batak Simalungun</option>
+                        <option class="bg-bg-card font-sans" value="Angkola-Mandailing">Batak Angkola–Mandailing</option>
+                        <option class="bg-bg-card font-sans" value="Karo">Batak Karo</option>
+                        <option class="bg-bg-card font-sans" value="Pakpak-Dairi">Batak Pakpak–Dairi</option>
                 </select>
-            </div>
-        </section>
-
-        <section class="guide-section">
-            <h2>Panduan Penggunaan Kamus</h2>
-            <ol>
-                <li><strong>Temukan Kosakata:</strong> Semua kosakata kamus dimuat secara bertahap di bawah ini. Gulir ke bawah untuk melihat lebih banyak.</li>
-                <li><strong>Gunakan Pencarian:</strong> Ketik kata dalam Bahasa Indonesia atau Batak pada kolom pencarian untuk memfilter daftar secara otomatis.</li>
-                <li><strong>Filter Dialek:</strong> Gunakan dropdown "Filter Dialek" untuk menampilkan kosakata hanya dari dialek tertentu.</li>
-                <li><strong>Navigasi A-Z:</strong> Klik huruf pada navigasi A-Z di bawah ini untuk melompat ke bagian kosakata yang dimulai dengan huruf tersebut.</li>
-                <li><strong>Lihat Detail:</strong> Setiap kartu menampilkan kata Indonesia, terjemahan Batak, deskripsi singkat, dan dialeknya.</li>
-            </ol>
-        </section>
-
-        <div class="container">
-            <div class="alphabet-nav">
-                </div>
-
-            <section id="dictionary-results">
-                </section>
-
-            <div class="load-more-container">
-                <button id="loadMoreButton">Muat Lebih Banyak</button>
-                <div id="loadingIndicator" class="loading-indicator">
-                    <div class="loading-spinner"></div>
-                    Memuat...
+                    <button id="searchButton" class="px-5 py-3 rounded-xl bg-red-500 hover:bg-red-600 transition-colors font-sans">Cari</button>
                 </div>
             </div>
+            <!-- Letter filter A-Z below search -->
+            <div id="letter-filter" class="mt-4 overflow-x-auto scroll-smooth pb-2">
+                <div class="inline-flex gap-2 whitespace-nowrap text-sm text-white/80"></div>
         </div>
 
-        <div class="did-you-know">
-            <h3>Tahukah Kamu?</h3>
-            <p id="fact-text">Bahasa Batak memiliki beragam dialek yang kaya, seperti Toba, Karo, Simalungun, Mandailing, dan Pakpak. Setiap dialek memiliki kekhasan kosakata dan pelafalannya.</p>
-        </div>
-    </main>
+            <section id="dictionary-results" class="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6"></section>
+            <div id="loadingIndicator" class="hidden text-white/60 text-sm mt-6 text-center">Memuat...</div>
 
 
-
-    <div class="up">
-        <a href="#top" aria-label="Scroll to top">
-            <div class="klik-up">
-                <img src="../img/top.png" width="30px" alt="Panah atas" />
+            <div class="mt-12 bg-white/5 rounded-3xl p-6 sm:p-10">
+                <h3 class="text-red-400 text-center my-2 text-sm sm:text-base">Tahukah kamu?</h3>
+                <p id="fact-text" class="text-center font-sans text-base sm:text-lg">Bahasa Batak memiliki beragam dialek dengan kekhasan kosakata dan pelafalan.</p>
             </div>
-        </a>
     </div>
+    </section>
 
+    <style>
+        #letter-filter { scrollbar-width: thin; scrollbar-color: #9ca3af transparent; }
+        #letter-filter::-webkit-scrollbar { height: 8px; }
+        #letter-filter::-webkit-scrollbar-track { background: rgba(255,255,255,0.08); border-radius: 9999px; }
+        #letter-filter::-webkit-scrollbar-thumb { background: #9ca3af; border-radius: 9999px; }
+        #letter-filter::-webkit-scrollbar-thumb:hover { background: #6b7280; }
+    </style>
+
+@endsection
+
+@section('scripts')
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // --- DATA KAMUS SIMULASI (dengan dialek yang berbeda) ---
-            // Data ini akan mensimulasikan data yang diambil dari "API"
-            const ALL_DICTIONARY_DATA = [
+    const PAGE_SIZE = 12;
+
+    // DOM elements
+    const searchInput = document.getElementById('searchInput');
+    const searchButton = document.getElementById('searchButton');
+    const dialekFilterSelect = document.getElementById('dialekFilter');
+    const dictionaryResultsContainer = document.getElementById('dictionary-results');
+    const loadingIndicator = document.getElementById('loadingIndicator');
+    const letterFilterContainer = document.querySelector('#letter-filter > div');
+    const factTextElement = document.getElementById('fact-text');
+
+    // Simulated dictionary data
+    let ALL_DICTIONARY_DATA = [
                 { id: 1, indo: "cinta", batak: "holong", desc: "Perasaan kasih sayang yang mendalam.", dialek: "Toba" },
                 { id: 2, indo: "selamat datang", batak: "horas", desc: "Ungkapan sambutan.", dialek: "Toba" },
                 { id: 3, indo: "terima kasih", batak: "mauliate", desc: "Ungkapan rasa syukur.", dialek: "Toba" },
@@ -842,269 +351,159 @@
                 { id: 241, indo: "bodoh", batak: "oto", desc: "Tidak cerdas.", dialek: "Pakpak-Dairi" },
                 { id: 242, indo: "sehat", batak: "hipas", desc: "Kondisi tubuh baik.", dialek: "Pakpak-Dairi" },
                 { id: 243, indo: "sakit", batak: "hansit", desc: "Kondisi tubuh tidak enak.", dialek: "Pakpak-Dairi" }
-                // Anda bisa tambahkan lebih banyak data di sini untuk mencapai "ratusan" atau "ribuan"
-                // Pastikan setiap entri memiliki 'dialek'
-            ].sort((a,b) => a.indo.localeCompare(b.indo)); // Urutkan data secara alfabetis berdasarkan kata Indonesia
+        // Tambahkan lebih banyak data bila perlu
+    ].sort((a,b) => a.indo.localeCompare(b.indo));
 
-            // --- KONFIGURASI PAGINASI ---
-            const INITIAL_LOAD_LIMIT = 30; // Jumlah kata yang dimuat saat pertama kali atau setelah pencarian baru
-            const LOAD_MORE_STEP = 20;    // Jumlah kata yang dimuat setiap kali tombol "Muat Lebih Banyak" diklik
-
-            let currentOffset = 0;
+    // Letter filter state
+    let currentLetter = 'A';
             let currentQuery = '';
-            let currentDialekFilter = 'all'; // Default filter dialek
-            let filteredData = []; // Data yang sudah difilter oleh pencarian dan dialek
-            let isLoading = false; // Status loading untuk menghindari pemuatan ganda
+    let currentDialekFilter = 'all';
+    let filteredData = [];
+    let isLoading = false;
 
-            // --- Elemen DOM ---
-            const searchInput = document.getElementById('searchInput');
-            const searchButton = document.getElementById('searchButton');
-            const dialekFilterSelect = document.getElementById('dialekFilter');
-            const dictionaryResultsContainer = document.getElementById('dictionary-results');
-            const loadMoreButton = document.getElementById('loadMoreButton');
-            const loadingIndicator = document.getElementById('loadingIndicator');
-            const factTextElement = document.getElementById('fact-text');
-            const alphabetNavContainer = document.querySelector('.alphabet-nav');
-            const animatedElementsOnLoad = document.querySelectorAll('.hero-header, .search-section, .guide-section');
-
-            // --- SIMULASI API: fetchDictionaryData ---
-            async function fetchDictionaryData(query = '', dialek = 'all', offset = 0, limit = INITIAL_LOAD_LIMIT) {
-                isLoading = true;
-                loadingIndicator.classList.add('active'); // Tampilkan indikator loading
-                loadMoreButton.disabled = true; // Nonaktifkan tombol load more
-
-                return new Promise(resolve => {
-                    setTimeout(() => { // Simulasikan delay jaringan
-                        const lowerCaseQuery = query.toLowerCase();
-
-                        let tempFilteredData = ALL_DICTIONARY_DATA.filter(term => {
-                            const matchesQuery = term.indo.toLowerCase().includes(lowerCaseQuery) ||
-                                                 term.batak.toLowerCase().includes(lowerCaseQuery);
+    function getFilteredData(query, dialek) {
+        const q = (query || '').toLowerCase();
+        const result = ALL_DICTIONARY_DATA.filter(term => {
+            const matchesQuery = term.indo.toLowerCase().includes(q) || term.batak.toLowerCase().includes(q);
                             const matchesDialek = dialek === 'all' || term.dialek === dialek;
                             return matchesQuery && matchesDialek;
-                        });
+        }).sort((a,b) => a.indo.localeCompare(b.indo));
+        return result;
+    }
 
-                        // Urutkan kembali hasil setelah filter
-                        tempFilteredData.sort((a, b) => a.indo.localeCompare(b.indo));
-
-                        if (offset === 0) { // Jika ini pencarian/filter baru, reset filteredData global
-                            filteredData = tempFilteredData;
-                        }
-
-                        const paginatedResults = filteredData.slice(offset, offset + limit);
-
-                        isLoading = false;
-                        loadingIndicator.classList.remove('active'); // Sembunyikan indikator loading
-                        loadMoreButton.disabled = false; // Aktifkan tombol load more
-
-                        resolve(paginatedResults);
-                    }, 300); // Delay 300ms
-                });
-            }
-
-            // --- Fungsi Rendering Hasil Kamus ---
             function renderDictionaryResults(results, append = false) {
                 if (!append) {
-                    dictionaryResultsContainer.innerHTML = ''; // Kosongkan jika tidak append
-                    // Hapus observer dari card lama
-                    dictionaryResultsContainer.querySelectorAll('.dict-card').forEach(card => observer.unobserve(card));
+            dictionaryResultsContainer.innerHTML = '';
                 }
-
                 if (results.length === 0 && !append) {
-                    dictionaryResultsContainer.innerHTML = '<p class="no-results">Kata tidak ditemukan. Coba kata lain!</p>';
-                    loadMoreButton.style.display = 'none'; // Sembunyikan tombol
+            dictionaryResultsContainer.innerHTML = '<p class="col-span-full text-center text-white/60">Kata tidak ditemukan. Coba kata lain!</p>';
                     return;
                 }
 
-                let lastInitial = ''; // Untuk menambahkan judul A, B, C
-                results.forEach((term) => {
+        let lastInitial = append && dictionaryResultsContainer.lastInitial ? dictionaryResultsContainer.lastInitial : '';
+        results.forEach(term => {
                     const currentInitial = term.indo.charAt(0).toUpperCase();
                     if (currentInitial !== lastInitial) {
                         const heading = document.createElement('h2');
-                        heading.classList.add('alphabet-heading');
+                heading.className = 'col-span-full text-left font-title text-red-400 text-2xl sm:text-3xl mt-8 mb-2 border-b border-red-400/60 pb-1';
                         heading.textContent = currentInitial;
-                        heading.id = `alpha-${currentInitial}`; // Tambahkan ID untuk navigasi A-Z
+                heading.id = `alpha-${currentInitial}`;
                         dictionaryResultsContainer.appendChild(heading);
                         lastInitial = currentInitial;
                     }
 
                     const card = document.createElement('div');
-                    card.classList.add('dict-card');
+            card.className = 'bg-white/5 rounded-xl p-4 border border-white/10 hover:bg-white/10 transition';
                     card.innerHTML = `
-                        <h3>${term.indo}</h3>
-                        <p class="batak-term">${term.batak}</p>
-                        <p class="dialek">${term.dialek}</p>
-                        <p class="description">${term.desc}</p>
+                <h3 class="font-bold text-red-400 text-lg">${term.indo}</h3>
+                <p class="text-white mt-1">${term.batak}</p>
+                <p class="text-white/60 text-sm mt-1 italic">${term.dialek}</p>
+                <p class="text-white/80 text-sm mt-2">${term.desc}</p>
                     `;
                     dictionaryResultsContainer.appendChild(card);
-                    observer.observe(card); // Amati kartu baru untuk animasi on scroll
                 });
-
-                // Tampilkan/sembunyikan tombol "Muat Lebih Banyak"
-                if (currentOffset + results.length < filteredData.length) {
-                    loadMoreButton.style.display = 'block'; // Tampilkan jika masih ada data
-                } else {
-                    loadMoreButton.style.display = 'none'; // Sembunyikan jika semua data sudah dimuat
-                }
+        dictionaryResultsContainer.lastInitial = lastInitial;
             }
 
-            // --- Fungsi Pencarian Utama ---
             async function performSearch(reset = true) {
                 if (isLoading) return;
-
                 if (reset) {
-                    currentOffset = 0;
-                    currentQuery = searchInput.value.toLowerCase().trim();
-                    currentDialekFilter = dialekFilterSelect.value;
-                }
+            currentQuery = (searchInput?.value || '').toLowerCase().trim();
+            currentDialekFilter = dialekFilterSelect?.value || 'all';
+            filteredData = getFilteredData(currentQuery, currentDialekFilter);
+            dictionaryResultsContainer.lastInitial = '';
+        }
+        isLoading = true;
+        loadingIndicator.classList.remove('hidden');
+        const pageItems = filteredData.filter(item => !currentLetter || item.indo.charAt(0).toUpperCase() === currentLetter);
+        renderDictionaryResults(pageItems, false);
+        isLoading = false;
+        loadingIndicator.classList.add('hidden');
+        setupLetterFilter();
+    }
 
-                // Panggil fetchDictionaryData dengan parameter yang sesuai
-                const newResults = await fetchDictionaryData(currentQuery, currentDialekFilter, currentOffset, reset ? INITIAL_LOAD_LIMIT : LOAD_MORE_STEP);
-                renderDictionaryResults(newResults, !reset); // Jika reset false, append
-
-                currentOffset += newResults.length;
+    async function loadNusaxToba() {
+        try {
+            const url = 'https://raw.githubusercontent.com/IndoNLP/nusax/refs/heads/main/datasets/lexicon/toba_batak.csv';
+            const res = await fetch(url, { headers: { 'Accept': 'text/csv' } });
+            if (!res.ok) return;
+            const text = await res.text();
+            const lines = text.split(/\r?\n/).filter(l => l.trim().length > 0);
+            // first line is header
+            const dataLines = lines.slice(1);
+            const nusaxItems = [];
+            for (let i = 0; i < dataLines.length; i++) {
+                const row = dataLines[i];
+                const parts = row.split(',');
+                if (parts.length < 3) continue;
+                const indo = parts[1]?.trim();
+                const batak = parts.slice(2).join(',').trim(); // in case value contains comma
+                if (!indo || !batak) continue;
+                nusaxItems.push({ id: `nusax_${i}`, indo, batak, desc: 'Sumber: NusaX', dialek: 'Toba' });
             }
+            // remove existing Toba items and merge
+            const nonToba = ALL_DICTIONARY_DATA.filter(t => t.dialek !== 'Toba');
+            ALL_DICTIONARY_DATA = nonToba.concat(nusaxItems).sort((a,b) => a.indo.localeCompare(b.indo));
+        } catch (e) {
+            console.warn('Gagal memuat data NusaX:', e);
+        }
+    }
 
-            // --- Inisialisasi Navigasi A-Z ---
-            function setupAlphabetNav() {
-                const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
-                alphabetNavContainer.innerHTML = '';
-                alphabet.forEach(letter => {
-                    const link = document.createElement('a');
-                    link.href = `#alpha-${letter}`;
-                    link.textContent = letter;
-                    link.addEventListener('click', (e) => {
-                        e.preventDefault();
-                        const targetId = e.target.getAttribute('href').substring(1);
-                        const targetElement = document.getElementById(targetId);
-                        if (targetElement) {
-                            window.scrollTo({
-                                top: targetElement.offsetTop - 100, // Geser sedikit ke atas untuk header/nav
-                                behavior: 'smooth'
-                            });
-                            // Tandai huruf yang aktif (opsional)
-                            alphabetNavContainer.querySelectorAll('a').forEach(a => a.classList.remove('active'));
-                            e.target.classList.add('active');
-                        }
-                    });
-                    alphabetNavContainer.appendChild(link);
-                });
-            }
-
-            // --- Event Listeners ---
-            searchButton.addEventListener('click', () => performSearch(true));
-            searchInput.addEventListener('keyup', function(event) {
-                // Filter real-time saat mengetik, tapi hanya jika query berubah
-                // Atau jika Enter ditekan (paksa refresh)
+    // Events
+    if (searchButton) searchButton.addEventListener('click', () => performSearch(true));
+    if (searchInput) {
+        searchInput.addEventListener('keyup', (event) => {
                 if (event.key === 'Enter') {
                     performSearch(true);
-                } else if (searchInput.value.toLowerCase().trim() !== currentQuery ||
-                           dialekFilterSelect.value !== currentDialekFilter) {
-                    // Beri sedikit delay untuk typing experience yang lebih baik
-                    // Ini menghindari terlalu sering memicu pencarian saat mengetik cepat
+            } else {
                     clearTimeout(searchInput.typingTimer);
-                    searchInput.typingTimer = setTimeout(() => {
-                        performSearch(true);
-                    }, 300);
-                }
-            });
+                searchInput.typingTimer = setTimeout(() => performSearch(true), 300);
+            }
+        });
+    }
+    if (dialekFilterSelect) dialekFilterSelect.addEventListener('change', () => performSearch(true));
 
-            dialekFilterSelect.addEventListener('change', () => performSearch(true));
-            loadMoreButton.addEventListener('click', () => performSearch(false));
-
-            // Infinite Scroll
-            window.addEventListener('scroll', async () => {
-                const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
-                if (scrollTop + clientHeight >= scrollHeight - 300 && !isLoading && loadMoreButton.style.display !== 'none') {
-                    await performSearch(false);
-                }
-            });
-
-
-            // --- Animasi Fade-in On Scroll (Intersection Observer) ---
-            const observerOptions = {
-                root: null,
-                rootMargin: '0px',
-                threshold: 0.1
-            };
-
-            const observer = new IntersectionObserver((entries, observer) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('fade-in');
-                        // Hanya unobserve elemen yang dianimasikan sekali (misalnya header, search section, dll.)
-                        // Dict-card tidak di-unobserve agar bisa dianimasikan ulang jika di-render ulang
-                        if (entry.target.classList.contains('hero-header') ||
-                            entry.target.classList.contains('search-section') ||
-                            entry.target.classList.contains('guide-section') ||
-                            entry.target.classList.contains('did-you-know') ||
-                            entry.target.classList.contains('alphabet-heading')) { // Juga untuk heading A-Z
-                             observer.unobserve(entry.target);
-                        }
-                    }
-                });
-            }, observerOptions);
-
-            // Mengamati elemen yang sudah ada saat load
-            animatedElementsOnLoad.forEach(element => observer.observe(element));
-            const didYouKnowBox = document.querySelector('.did-you-know');
-            if (didYouKnowBox) observer.observe(didYouKnowBox);
-
-            // --- Fakta Menarik Bergantian ---
+    // Rotate fun facts
             const facts = [
-                "Bahasa Batak memiliki beragam dialek yang kaya, seperti Toba, Karo, Simalungun, Mandailing, dan Pakpak. Setiap dialek memiliki kekhasan kosakata dan pelafalannya.",
-                "Aksara Batak disebut juga Surat Batak. Setiap sub-etnis Batak memiliki sedikit perbedaan dalam gaya penulisannya.",
-                "Pustaha Laklak, media tulis Aksara Batak, seringkali dibuat dari kulit kayu pohon alim.",
-                "Kata 'horas' adalah salam umum yang penuh makna di kalangan Batak, berarti 'sehat' atau 'sukses'.",
-                "Marga adalah sistem kekerabatan penting dalam budaya Batak, diwariskan dari ayah ke anak."
-            ];
-            let currentFactIndex = 0;
-
+        'Bahasa Batak memiliki beragam dialek: Toba, Karo, Simalungun, Mandailing, Pakpak.',
+        'Aksara Batak disebut juga Surat Batak dan memiliki variasi per sub-etnis.',
+        'Pustaha Laklak sering dibuat dari kulit kayu pohon alim.',
+        "Kata 'horas' berarti sehat/sukses dan dipakai sebagai salam umum.",
+        'Marga adalah sistem kekerabatan penting dalam budaya Batak.'
+    ];
+    let factIndex = 0;
             function updateFact() {
-                if (factTextElement) {
-                    factTextElement.style.opacity = 0;
+        if (!factTextElement) return;
+        factTextElement.style.opacity = 0.4;
                     setTimeout(() => {
-                        factTextElement.textContent = facts[currentFactIndex];
+            factTextElement.textContent = facts[factIndex];
                         factTextElement.style.opacity = 1;
-                        currentFactIndex = (currentFactIndex + 1) % facts.length;
-                    }, 500);
-                }
+            factIndex = (factIndex + 1) % facts.length;
+        }, 250);
             }
             if (factTextElement) {
                 updateFact();
                 setInterval(updateFact, 7000);
             }
 
-            // --- Scroll-to-Top Button ---
-            const scrollToTopBtn = document.querySelector('.klik-up');
-            if (scrollToTopBtn) {
-                scrollToTopBtn.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                });
-                window.addEventListener('scroll', function() {
-                    if (window.pageYOffset > 300) {
-                        if (scrollToTopBtn.style.display === 'none' || scrollToTopBtn.style.display === '') {
-                            scrollToTopBtn.style.display = 'flex';
-                            scrollToTopBtn.style.opacity = '1';
-                        }
-                    } else {
-                        if (scrollToTopBtn.style.display === 'flex' || scrollToTopBtn.style.opacity === '1') {
-                            scrollToTopBtn.style.opacity = '0';
-                            setTimeout(() => { scrollToTopBtn.style.display = 'none'; }, 300);
-                        }
-                    }
-                });
-                if (window.pageYOffset <= 300 && scrollToTopBtn) {
-                    scrollToTopBtn.style.display = 'none';
-                    scrollToTopBtn.style.opacity = '0';
-                }
-            }
+    function setupLetterFilter() {
+        if (!letterFilterContainer) return;
+        const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
+        letterFilterContainer.innerHTML = '';
+        alphabet.forEach(letter => {
+            const btn = document.createElement('button');
+            btn.textContent = letter;
+            btn.className = `px-3 py-1 rounded-full ${currentLetter === letter ? 'bg-red-500 text-white' : 'bg-white/10 hover:bg-white/20'}`;
+            btn.addEventListener('click', () => { currentLetter = letter; performSearch(false); });
+            letterFilterContainer.appendChild(btn);
+        });
+    }
 
-            // --- Inisialisasi Kamus & Navigasi A-Z saat halaman dimuat ---
-            setupAlphabetNav(); // Buat navigasi A-Z
-            performSearch(true); // Muat data pertama kali
+    // Init
+    (async () => {
+        await loadNusaxToba();
+        performSearch(true);
+    })();
         });
     </script>
-</body>
-</html>
+@endsection

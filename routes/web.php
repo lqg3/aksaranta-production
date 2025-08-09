@@ -53,30 +53,6 @@ Route::get('culture' , function () {
 
 require __DIR__.'/auth.php';
 
-
-
-
-
-Route::get('/virtual', [VirtualTourController::class, 'index']);
-Route::get('/virtual/danautoba', [VirtualTourController::class, 'danautoba']);
-Route::get('/virtual/airterjunPiso', [VirtualTourController::class, 'airterjunPiso']);
-Route::get('/virtual/bukitHolbung', [VirtualTourController::class, 'bukitHolbung']);
-Route::get('/virtual/sibeabea', [VirtualTourController::class, 'sibeabea']);
-Route::get('/virtual/tamanAlamLubini', [VirtualTourController::class, 'tamanAlamLubini']);
-Route::get('/virtual/arrasyid', [VirtualTourController::class, 'arrasyid']);
-Route::get('/virtual/grahaBunda', [VirtualTourController::class, 'grahaBunda']);
-Route::get('/virtual/funland', [VirtualTourController::class, 'funland']);
-
-
-Route::get('/about', [AboutController::class, 'index']);
-Route::get('/aksaranta', [AboutController::class, 'aksaranta']);
-Route::get('/history', [AboutController::class, 'history']);
-Route::get('/kamus', [AboutController::class, 'kamus'])->name('kamus');
-Route::get('/kamusAksara', [AboutController::class, 'kamusAksara'])->name("kamusAksara");
-Route::get('/animasi', [AboutController::class, 'animasi']);
-
-
-
 // Virtual Tour Routes
 Route::prefix('virtual')->name('virtual.')->group(function () {
     Route::get('/', [VirtualTourController::class, 'index'])->name('index');
@@ -93,11 +69,13 @@ Route::prefix('virtual')->name('virtual.')->group(function () {
 // About Routes
 Route::prefix('about')->name('about.')->group(function () {
     Route::get('/', [AboutController::class, 'index'])->name('index');
-    Route::get('/aksaranta', [AboutController::class, 'aksaranta'])->name('aksaranta');
-    Route::get('/history', [AboutController::class, 'history'])->name('history');
-    Route::get('/kamus', [AboutController::class, 'kamus'])->name('kamus');
-    Route::get('/kamus-aksara', [AboutController::class, 'kamusAksara'])->name('kamus-aksara');
 });
+
+Route::get('/kamus', [AboutController::class, 'kamus'])->name('kamus');
+Route::get('/kamus-aksara', [AboutController::class, 'kamusAksara'])->name('kamus-aksara');
+Route::get('/aksaranta', [AboutController::class, 'aksaranta'])->name('aksaranta');
+Route::get('/history', [AboutController::class, 'history'])->name('history');
+
 
 Route::prefix('learn')->name('learn.')->group(function () {
     Route::get('/', [LearnController::class, 'index'])->name('index');

@@ -86,4 +86,6 @@
     @yield('scripts')
 </body>
 
+<!-- Footer -->
+    @include('components.footer')
 </html>
