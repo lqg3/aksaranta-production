@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
             $table->unsignedBigInteger('lesson_part_id');
-            $table->foreign('lesson_part_id')->references('id')->on('lesson_parts');
+            $table->foreign('lesson_part_id')->references('id')->on('lesson_parts')->onDelete("cascade");
             $table->string('quiz_type');
             $table->json('quiz_content');
         });

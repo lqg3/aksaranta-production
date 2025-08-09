@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('part_video_url')->nullable();
             $table->longText('part_content')->nullable(); // gunakan longText karena HTML bisa panjang
             $table->smallInteger('order')->nullable();
+            $table->string('slug')->unique();
         });
     }
 

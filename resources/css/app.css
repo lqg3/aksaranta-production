@@ -156,5 +156,9 @@
     transform: translateY(-1px);
 }
 
+.tinymce-content * {
+    all: revert; /* Reset semua style supaya ikut bawaan browser/TinyMCE */
+}
+
 @plugin "flowbite/plugin";
 @source "../../node_modules/flowbite";

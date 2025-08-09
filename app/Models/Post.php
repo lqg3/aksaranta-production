@@ -37,9 +37,18 @@ class Post extends Model
     protected static function booted()
     {
         static::creating(function ($post) {
-            $post->slug = static::generateUniqueSlug($post->title);
+            if (empty($post->slug)) {
+                $post->slug = static::generateUniqueSlug($post->title);
+            }
+        });
+
+        static::updating(function ($post) {
+            if ($post->isDirty('title')) { // hanya update slug jika title berubah
+                $post->slug = static::generateUniqueSlug($post->title);
+            }
         });
     }
+
 
     /**
      * Scope for published posts

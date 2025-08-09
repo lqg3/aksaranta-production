@@ -36,12 +36,18 @@ class Course extends Model
     }
 
     /**
-     * Automatically set slug before creating
+     * Automatically set slug before creating/updating
      */
     protected static function booted()
     {
         static::creating(function ($course) {
             if (empty($course->slug)) {
+                $course->slug = static::generateUniqueSlug($course->course_name);
+            }
+        });
+
+        static::updating(function ($course) {
+            if ($course->isDirty('course_name')) { // hanya jika nama kursus berubah
                 $course->slug = static::generateUniqueSlug($course->course_name);
             }
         });

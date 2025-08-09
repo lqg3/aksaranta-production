@@ -80,5 +80,9 @@ Route::get('/history', [AboutController::class, 'history'])->name('history');
 Route::prefix('learn')->name('learn.')->group(function () {
     Route::get('/', [LearnController::class, 'index'])->name('index');
     Route::get('/{slug}', [LearnController::class, 'show'])->name('course');
-    Route::get('/{slug}/{lesson_slug}', [LearnController::class, 'lessonShow'])->name('lesson');
+    Route::get('/{slug}/{lesson_slug}/{lesson_part_slug}', [LearnController::class, 'lessonPartShow'])->name('lesson-part');
+    Route::post('/{course_id}/{lesson_id}/{lesson_part_id}/quiz', [LearnController::class, 'submitQuiz'])->name('quiz-submit');
+    Route::post('/{course_id}/{lesson_id}/{lesson_part_id}/toggle-complete', [LearnController::class, 'toggleComplete'])->name('toggle-complete');
+    
+    // Route::get('/{slug}/{lesson_slug}', [LearnController::class, 'lessonShow'])->name('lesson');
 });

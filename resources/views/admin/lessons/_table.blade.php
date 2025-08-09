@@ -1,10 +1,11 @@
 <div id="lesson-datatable-content" class="space-y-4">
 
-    <div class="flex justify-between items-center mb-4">
+    <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-4 gap-3 sm:gap-0">
         <form id="search-form" method="GET" action="{{ route('admin.learn.index', $course->id) }}"
-            class="flex gap-2 w-full sm:w-auto">
+            class="flex w-full sm:w-auto gap-2 flex-col sm:flex-row">
             <input type="text" name="search" value="{{ request('search') }}" placeholder="Cari judul..."
-                class="w-full sm:w-64 px-4 py-2 bg-[#262626] text-white border border-accent-teal rounded-lg focus:ring focus:ring-accent-teal focus:border-accent-teal">
+                class="flex-grow px-4 py-2 bg-[#262626] text-white border border-accent-teal rounded-lg
+                  focus:ring focus:ring-accent-teal focus:border-accent-teal" />
             <button type="submit"
                 class="px-4 py-2 bg-accent-teal text-white text-sm rounded hover:bg-teal-600 transition">
                 Cari
@@ -12,10 +13,11 @@
         </form>
 
         <a href="{{ route('admin.learn.create', $course->id) }}"
-            class="px-4 py-2 bg-accent-yellow text-black text-sm rounded hover:bg-yellow-500 transition">
+            class="w-full sm:w-auto text-center px-4 py-2 bg-accent-yellow text-black text-sm rounded hover:bg-yellow-500 transition">
             New Lesson
         </a>
     </div>
+
 
     <table class="min-w-full text-sm border rounded-md overflow-hidden shadow-sm">
         <thead class="bg-gray-600 uppercase text-xs">
