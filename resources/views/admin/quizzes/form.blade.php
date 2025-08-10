@@ -57,6 +57,17 @@
     <script>
         window.quizContent = {!! json_encode($quiz['quiz_content'] ?? []) !!};
         window.isEdit = {{ $isEdit ? 'true' : 'false' }};
+
+        // Tambahan fungsi escape
+        function escapeHtml(str) {
+            if (!str) return '';
+            return String(str)
+                .replace(/&/g, '&amp;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#39;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;');
+        }
     </script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
@@ -77,7 +88,7 @@
                 container.innerHTML += `
                 <div>
                     <label class="block font-semibold mb-1 text-accent-teal">Pertanyaan</label>
-                    <input type="text" name="quiz_content[question]" value="${question}" class="w-full px-4 py-2 bg-[#262626] border border-accent-teal rounded-lg text-white" required>
+                    <input type="text" name="quiz_content[question]" value="${escapeHtml(question)}" class="w-full px-4 py-2 bg-[#262626] border border-accent-teal rounded-lg text-white" required>
                 </div>
             `;
 
@@ -92,7 +103,7 @@
                     const checked = correct == i ? 'checked' : '';
                     optionsHTML += `
                     <div class="flex items-center gap-4">
-                        <input type="text" name="quiz_content[options][${i}][option_text]" placeholder="Pilihan ${i + 1}" value="${optionText}" class="flex-1 px-4 py-2 bg-[#262626] border border-gray-600 rounded-lg text-white">
+                        <input type="text" name="quiz_content[options][${i}][option_text]" placeholder="Pilihan ${i + 1}" value="${escapeHtml(optionText)}" class="flex-1 px-4 py-2 bg-[#262626] border border-gray-600 rounded-lg text-white">
                         <label class="flex items-center text-sm">
                             <input type="radio" name="quiz_content[correct_option]" value="${i}" class="mr-2" ${checked}> Benar
                         </label>
@@ -104,21 +115,9 @@
                 container.innerHTML += optionsHTML;
 
             } else if (type === 'drag_and_drop') {
-                // Fungsi untuk escape HTML agar aman dimasukkan ke atribut value
-                function escapeHtml(str) {
-                    if (!str) return '';
-                    return String(str)
-                        .replace(/&/g, '&amp;')
-                        .replace(/"/g, '&quot;')
-                        .replace(/'/g, '&#39;')
-                        .replace(/</g, '&lt;')
-                        .replace(/>/g, '&gt;');
-                }
-
                 const question = isEdit ? (data.question || '') : '';
                 const pairs = isEdit ? (data.pairs || []) : [];
 
-                // Render field instruksi soal
                 container.innerHTML += `
                     <div>
                         <label class="block font-semibold mb-1 text-accent-teal">Instruksi Soal</label>
@@ -130,7 +129,6 @@
                     </div>
                 `;
 
-                // Render field pasangan drag & drop
                 let pairsHTML = `
                     <div class="space-y-2 mt-4">
                         <label class="block font-semibold text-accent-teal">Item dan Tempat Drop</label>
@@ -165,11 +163,11 @@
                 container.innerHTML += `
                 <div>
                     <label class="block font-semibold mb-1 text-accent-teal">Teks dengan ____ untuk bagian kosong</label>
-                    <textarea name="quiz_content[question]" rows="4" class="w-full px-4 py-2 bg-[#262626] border border-accent-teal rounded-lg text-white" required>${question}</textarea>
+                    <textarea name="quiz_content[question]" rows="4" class="w-full px-4 py-2 bg-[#262626] border border-accent-teal rounded-lg text-white" required>${escapeHtml(question)}</textarea>
                 </div>
                 <div class="mt-2">
                     <label class="block font-semibold text-accent-teal">Jawaban yang benar</label>
-                    <input type="text" name="quiz_content[answer]" value="${answer}" class="w-full px-4 py-2 bg-[#262626] border border-gray-600 rounded-lg text-white" required>
+                    <input type="text" name="quiz_content[answer]" value="${escapeHtml(answer)}" class="w-full px-4 py-2 bg-[#262626] border border-gray-600 rounded-lg text-white" required>
                 </div>
             `;
             }
