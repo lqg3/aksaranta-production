@@ -1,7 +1,7 @@
 @php($year = date('Y'))
 
 <footer class="w-full mt-20 border-t border-white/10 text-white overflow-hidden">
-  <div class="absolute w-full max-w-[1440px] mx-auto px-6 sm:px-12 lg:px-28 py-10">
+  <div class="absolute w-full max-w-[1440px] mx-auto px-6 sm:px-12 lg:px-28 py-10 -z-50">
     <img src="https://aksara-batak.sgp1.cdn.digitaloceanspaces.com/design/logo-white-notext.svg" alt="Aksaranta Logo" class="opacity-20 max-w-[100vw]" />
   </div>
   <div class="w-full max-w-[1440px] mx-auto px-6 sm:px-12 lg:px-28 py-10">
@@ -22,6 +22,7 @@
           <li><a href="{{ route('culture') }}" class="hover:text-red-400 transition-colors">Culture</a></li>
           <li><a href="{{ route('history') }}" class="hover:text-red-400 transition-colors">History</a></li>
           <li><a href="{{ route('blog.index') }}" class="hover:text-red-400 transition-colors">Blog</a></li>
+          <li><a href="{{ route('animasi') }}" class="hover:text-red-400 transition-colors">Game</a></li>
         </ul>
       </div>
 
@@ -50,7 +51,12 @@
           <li><a href="{{ route('virtual.graha-bunda') }}" class="hover:text-red-400 transition-colors">Graha Bunda</a></li>
           <li><a href="{{ route('virtual.funland') }}" class="hover:text-red-400 transition-colors">Mikie Funland</a></li>
           @auth
-            <li class="pt-3"><a href="{{ route('dashboard') }}" class="hover:text-red-400 transition-colors">Dashboard</a></li>
+            <li class="pt-3">
+              <form method="POST" action="{{ route('logout') }}">
+                @csrf
+                <button type="submit" class="hover:text-red-400 transition-colors">Log out</button>
+              </form>
+            </li>
           @else
             <li class="pt-3"><a href="{{ route('login') }}" class="hover:text-red-400 transition-colors">Login</a></li>
           @endauth
@@ -67,7 +73,7 @@
         <span class="opacity-30">•</span>
         <a href="#" class="hover:text-red-400 transition-colors">Privacy</a>
         <span class="opacity-30">•</span>
-        <a href="#top" class="hover:text-red-400 transition-colors">Kembali ke atas</a>
+        <a href="#top" class="hover:text-red-400 transition-colors scroll-smooth" onclick="event.preventDefault(); window.scrollTo({top: 0, behavior: 'smooth'});">Kembali ke atas</a>
         <span class="opacity-30">•</span>
         <a href="#top" id="credits" class="hover:text-red-400 transition-colors">Credits</a>
       </div>

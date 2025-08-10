@@ -20,12 +20,12 @@
             <div class="relative p-6 border border-bg-card shadow rounded-lg"
                 :class="hasSubmitted
                     ?
-                    (getQuizFeedback(index).correct ? 'border-green-500' : 'border-red-600') :
+                    (getQuizFeedback(index).correct ? 'border-green-700' : 'border-red-600') :
                     ''">
                 <!-- Top-right status label -->
                 <template x-if="hasSubmitted">
                     <div class="absolute top-2 right-2 px-2 py-1 text-xs font-semibold rounded"
-                        :class="getQuizFeedback(index).correct ? 'bg-green-600 text-green-100' : 'bg-red-600 text-red-100'"
+                        :class="getQuizFeedback(index).correct ? 'bg-green-700 text-green-100' : 'bg-red-600 text-red-100'"
                         x-text="getQuizFeedback(index).correct ? 'Correct' : 'Wrong'"></div>
                 </template>
 
@@ -38,14 +38,14 @@
                             <button @click="selectOption(index, optIndex)" type="button" :disabled="hasSubmitted"
                                 class="block w-full text-left px-4 py-2 mb-2 border rounded transition"
                                 :class="{
-                                    'bg-green-700 border-green-500 text-white': hasSubmitted && getQuizFeedback(index)
+                                    'bg-green-700 border-red-500 text-white': hasSubmitted && getQuizFeedback(index)
                                         .correctAnswer === option.option_text,
                                     'bg-red-700 border-red-500 text-white': hasSubmitted && quiz.selectedOption ===
                                         optIndex && getQuizFeedback(index).correctAnswer !== option.option_text,
-                                    'border-2 border-accent-teal bg-gray-700 text-white': !hasSubmitted && quiz
+                                    'border-2 border-red-800 bg-white/10 text-white': !hasSubmitted && quiz
                                         .selectedOption === optIndex,
-                                    'border-gray-600': !hasSubmitted && quiz.selectedOption !== optIndex,
-                                    'hover:bg-gray-700': !hasSubmitted
+                                    'border-white/20': !hasSubmitted && quiz.selectedOption !== optIndex,
+                                    'hover:bg-white/10': !hasSubmitted
                                 }"
                                 x-text="option.option_text"></button>
                         </template>
@@ -56,15 +56,15 @@
                 <template x-if="quiz.quiz_type === 'drag_and_drop'">
                     <div class="grid grid-cols-2 gap-6">
                         <!-- Left side: Available items -->
-                        <div class="space-y-3 border border-gray-700 rounded-lg p-4 bg-gray-800 min-h-[200px]"
+                        <div class="space-y-3 border border-white/30 rounded-lg p-4 bg-white/5 min-h-[200px]"
                             @dragover.prevent="!hasSubmitted"
                             @drop="hasSubmitted ? null : dropBackToLeft(index, $event)">
                             <template x-for="item in getAvailableItems(index)" :key="item">
                                 <div draggable="true"
                                     @dragstart="hasSubmitted ? $event.preventDefault() : dragItem(index, item, null)"
-                                    class="cursor-move rounded-lg bg-gray-900 border border-gray-700 text-text-primary px-4 py-3 shadow-sm select-none
-                        hover:bg-accent-teal hover:text-black transition ease-in-out duration-200"
-                                    x-text="item" title="Drag me to a target"></div>
+                                    class="cursor-move rounded-lg bg-white/10 border border-white/10 text-text-primary px-4 py-3 shadow-sm select-none
+                        hover:bg-white/50 hover:text-black transition ease-in-out duration-200"
+                                    x-text="item" title="Drag ke target jawaban"></div>
                             </template>
                         </div>
 
@@ -75,9 +75,9 @@
                                     @drop="hasSubmitted ? null : dropItem(index, target)"
                                     class="flex items-center justify-center h-12 rounded-lg border-2 border-dashed text-text-primary select-none text-sm font-medium transition-colors duration-200 cursor-pointer"
                                     :class="{
-                                        'border-accent-teal bg-gray-900': quiz.droppedPairs[target],
-                                        'border-gray-700 bg-gray-800': !quiz.droppedPairs[target],
-                                        'bg-green-700 border-green-500': getQuizFeedback(index).pairFeedback &&
+                                        'border-white/20 bg-white/20': quiz.droppedPairs[target],
+                                        'border-white/10 bg-white/5': !quiz.droppedPairs[target],
+                                        'bg-white/30 border-white/40': getQuizFeedback(index).pairFeedback &&
                                             getQuizFeedback(index).pairFeedback[target] === true,
                                         'bg-red-700 border-red-500': getQuizFeedback(index).pairFeedback &&
                                             getQuizFeedback(index).pairFeedback[target] === false
@@ -109,15 +109,15 @@
                                     getQuizFeedback(index).correct,
                                 'bg-red-700 border-red-500 text-white placeholder-gray-300': hasSubmitted && !
                                     getQuizFeedback(index).correct,
-                                'bg-gray-900 border-gray-700 text-text-primary placeholder-gray-500': !hasSubmitted
+                                'bg-white/10 border-white/20 text-text-primary placeholder-gray-500': !hasSubmitted
                             }"
-                            class="rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-accent-teal focus:border-accent-teal transition duration-200" />
+                            class="rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-red-800 focus:border-red-800 transition duration-200" />
                     </div>
                 </template>
 
                 <!-- Show correct answer after submission -->
                 <template x-if="feedback.length > 0">
-                    <div class="mt-4 p-4 bg-gray-800 rounded border border-gray-700 text-sm text-text-secondary">
+                    <div class="mt-4 p-4 bg-gray-800 rounded border border-white/10 text-sm text-text-secondary">
                         <template x-if="quiz.quiz_type === 'multiple_choice'">
                             <div><strong>Correct answer:</strong> <span
                                     x-text="getQuizFeedback(index).correctAnswer"></span></div>
@@ -150,7 +150,7 @@
         <div class="mt-6 flex flex-col md:flex-row md:items-center md:justify-between space-y-4 md:space-y-0">
             <div class="flex space-x-4 justify-center md:justify-start">
                 <button @click="submitAll()" :disabled="hasSubmitted"
-                    class="px-6 py-3 bg-accent-teal text-white rounded hover:bg-teal-600 transition disabled:opacity-50 disabled:cursor-not-allowed">
+                    class="px-6 py-3 bg-red-800 text-white rounded-max hover:bg-red-600 transition disabled:opacity-50 disabled:cursor-not-allowed">
                     Submit
                 </button>
 

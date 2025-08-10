@@ -90,48 +90,52 @@
                                     Sudah Selesai</p>
                             </template>
                             <template x-if="!completed">
-                                <p class="bg-red-800 bg-opacity-50 p-2 px-4 rounded-full text-white font-semibold">Belum
+                                <p class="bg-red-700 bg-opacity-50 p-2 px-4 rounded-full text-white font-semibold">Belum
                                     Selesai</p>
                             </template>
 
                             <!-- Button action dengan icon dan tooltip -->
-                            <button @click="toggleComplete()" :disabled="loading"
-                                :class="completed ? 'bg-gray-600' :
-                                    'bg-accent-teal hover:bg-teal-600 cursor-pointer'"
-                                class="relative flex items-center gap-2 text-white rounded px-4 py-2 transition disabled:opacity-50 disabled:cursor-not-allowed"
-                                aria-label="Tandai tugas sebagai selesai atau batalkan status selesai">
+                            <p 
+                                @click="!loading && toggleComplete()" 
+                                :class="[
+                                    'mt-1 text-xs select-none flex items-center gap-2 cursor-pointer transition',
+                                    loading ? 'opacity-50 cursor-not-allowed' : '',
+                                    completed ? 'text-white/60 hover:text-white/80' : 'text-white/60 hover:text-white/80'
+                                ]"
+                                style="background: none;"
+                                aria-label="Tandai tugas sebagai selesai atau batalkan status selesai"
+                                x-cloak
+                            >
                                 <template x-if="!completed">
-                                    <!-- Icon centang -->
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
-                                        viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
-                                    </svg>
-                                    Tandai selesai
+                                    <span class="flex items-center gap-2">
+                                        <!-- Icon centang -->
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline" fill="none"
+                                            viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                                        </svg>
+                                        Tandai selesai
+                                        <span x-show="loading" class="ml-2 text-xs text-white/60 animate-pulse">Mohon tunggu...</span>
+                                    </span>
                                 </template>
                                 <template x-if="completed">
-                                    <!-- Icon silang -->
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
-                                        viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-                                    </svg>
-                                    Batalkan selesai
+                                    <span class="flex items-center gap-2">
+                                        <!-- Icon silang -->
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline" fill="none"
+                                            viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                                        </svg>
+                                        Tandai belum selesai
+                                        <span x-show="loading" class="ml-2 text-xs text-white/60 animate-pulse">Mohon tunggu...</span>
+                                    </span>
                                 </template>
-                            </button>
-
-                            <!-- Keterangan yang selalu tampil di bawah tombol -->
-                            <p class="mt-1 text-xs text-gray-600 select-none">
-                                <span x-show="!completed" x-cloak class="text-gray-400">Tandai tugas ini sebagai
-                                    selesai</span>
-                                <span x-show="completed" x-cloak class="text-gray-400">Batalkan status selesai tugas
-                                    ini</span>
                             </p>
                         @else
-                            <p class="text-yellow-400 font-semibold">Silakan <a href="{{ route('login') }}"
+                            <p class="text-red-400 font-semibold font-title">Silahkan <a href="{{ route('login') }}"
                                     class="underline">login</a> untuk menyimpan progres Anda.</p>
                         @endif
                     </div>
 
-                    <div class="bg-accent-teal p-2 px-4 rounded-full flex items-center justify-center gap-2 cursor-pointer hover:bg-opacity-80 transition-all duration-600"
+                    <div class="bg-red-800 p-2 px-4 rounded-full flex items-center justify-center gap-2 cursor-pointer hover:bg-opacity-80 transition-all duration-600"
                         @click="navigateToNext()">
                         <p>Daftar Pelajaran</p>
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 fill-white" viewBox="0 0 640 640">

@@ -1,5 +1,10 @@
-<!DOCTYPE html>
-<html lang="id">
+@extends('layouts.general')
+
+@section('title', 'Batak Culture')
+
+@section('body-class', 'font-title bg-bg-dark text-white')
+
+@section('content')
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -12,9 +17,9 @@
       }
 
       body {
-        font-family: "Arial", sans-serif;
+        font-family: "Open Sans", sans-serif;
         /* background: linear-gradient(135deg, #fff8dc 0%, #ffe4e1 100%); */
-        background-color: #333;
+        background-color: #1b1b1b;
         min-height: 100vh;
         padding: 20px;
       }
@@ -94,6 +99,7 @@
         padding: 25px;
         box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
         border: 4px solid #dc143c;
+        max-width: 500px;
       }
 
       .category-tabs {
@@ -107,7 +113,6 @@
         padding: 15px 10px;
         border: none;
         border-radius: 10px;
-        background: #f5f5f5;
         cursor: pointer;
         transition: all 0.3s ease;
         text-align: center;
@@ -122,9 +127,6 @@
         box-shadow: 0 4px 12px rgba(220, 20, 60, 0.3);
       }
 
-      .category-tab:hover:not(.active) {
-        background: #e0e0e0;
-      }
 
       .clothing-items {
         max-height: 400px;
@@ -217,7 +219,7 @@
 
       .cultural-info {
         margin-top: 30px;
-        background: white;
+        background-color: #1b1b1b;
         padding: 25px;
         border-radius: 15px;
         box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
@@ -243,7 +245,7 @@
       }
 
       .info-item p {
-        color: #666;
+        color: #fff;
         line-height: 1.6;
         font-size: 0.95rem;
       }
@@ -322,44 +324,44 @@
     </style>
   </head>
   <body>
-    <div class="container">
+    <div class="container pt-24 max-w-[1440px] mx-auto px-6 sm:px-12 lg:px-28">
       <!-- Header -->
       <div class="header">
-        <h1>🎭 Pakaian Adat Batak 🎭</h1>
+        <h1>Pakaian Adat Batak</h1>
         <p>
           Ganti pakaian karakter dengan pakaian tradisional Batak yang indah
         </p>
       </div>
 
       <!-- Game Area -->
-      <div class="game-area">
+      <div class="game-area ">
         <!-- Character Section -->
         <div class="character-section">
-          <div class="character-container">
-            <canvas id="gameCanvas" width="400" height="500"></canvas>
+          <div class="character-container bg-white/10 border border-white/10">
+            <canvas id="gameCanvas" width="400" height="500" class="border border-white/10"></canvas>
             <button class="reset-btn" onclick="resetOutfit()">
-              🔄 Reset Pakaian
+              Reset Pakaian
             </button>
           </div>
         </div>
 
         <!-- Controls Section -->
-        <div class="controls-section">
+        <div class="controls-section bg-white/10 border border-white/10">
           <!-- Category Tabs -->
-          <div class="category-tabs">
+          <div class="category-tabs ">
             <button
-              class="category-tab active"
+              class="category-tab active bg-white/10 hover:bg-white/20 text-white"
               onclick="selectCategory('head')"
             >
-              <div style="font-size: 1.5rem; margin-bottom: 5px">👑</div>
+              <div style="font-size: 1.5rem; margin-bottom: 5px bg-white/10 hover:bg-white/20">👑</div>
               Kepala
             </button>
-            <button class="category-tab" onclick="selectCategory('shirt')">
-              <div style="font-size: 1.5rem; margin-bottom: 5px">👕</div>
+            <button class="category-tab bg-white/10 hover:bg-white/20 " onclick="selectCategory('shirt')">
+              <div style="font-size: 1.5rem; margin-bottom: 5px bg-white/10 hover:bg-white/20">👕</div>
               Baju
             </button>
-            <button class="category-tab" onclick="selectCategory('pants')">
-              <div style="font-size: 1.5rem; margin-bottom: 5px">👖</div>
+            <button class="category-tab bg-white/10 hover:bg-white/20 " onclick="selectCategory('pants')">
+              <div style="font-size: 1.5rem; margin-bottom: 5px bg-white/10 hover:bg-white/20">👖</div>
               Celana
             </button>
           </div>
@@ -369,10 +371,10 @@
             <h3
               style="
                 margin-bottom: 15px;
-                color: #333;
                 border-bottom: 2px solid #dc143c;
                 padding-bottom: 10px;
               "
+              class="text-white"
             >
               Pilih <span id="categoryName">Kepala</span>
             </h3>
@@ -401,11 +403,11 @@
       </div>
 
       <!-- Cultural Information -->
-      <div class="cultural-info">
-        <h3>📚 Tentang Pakaian Adat Batak</h3>
+      <div class="cultural-info border border-white/30">
+        <h3 class="!text-red-600">📚 Tentang Pakaian Adat Batak</h3>
         <div class="info-grid">
           <div class="info-item">
-            <h4>🧵 Ulos - Kain Suci Batak</h4>
+            <h4 class="!text-red-600">🧵 Ulos - Kain Suci Batak</h4>
             <p>
               Ulos adalah kain tenun tradisional Batak yang dianggap suci dan
               memiliki kekuatan magis. Terdapat berbagai jenis Ulos seperti Ragi

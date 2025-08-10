@@ -75,7 +75,7 @@ Route::get('/kamus', [AboutController::class, 'kamus'])->name('kamus');
 Route::get('/kamus-aksara', [AboutController::class, 'kamusAksara'])->name('kamus-aksara');
 Route::get('/aksaranta', [AboutController::class, 'aksaranta'])->name('aksaranta');
 Route::get('/history', [AboutController::class, 'history'])->name('history');
-
+Route::get('animasi', [AboutController::class, 'animasi'])->name('animasi');
 
 Route::prefix('learn')->name('learn.')->group(function () {
     Route::get('/', [LearnController::class, 'index'])->name('index');
