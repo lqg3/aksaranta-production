@@ -5,15 +5,18 @@
         <ol class="list-reset flex">
             <li><a href="{{ route('admin.course.index') }}" class="text-blue-600 hover:underline">Courses</a></li>
             <li><span class="mx-2">/</span></li>
-            <li><a href="#"
-                    class="text-blue-800 hover:underline">{{ $course->course_name }}</a></li>
+            <li><a href="#" class="text-blue-800 hover:underline">{{ $course->course_name }}</a></li>
         </ol>
     </nav>
 
     <div class="p-4">
-        <h1 class="text-2xl font-bold mb-4">Daftar Lesson - {{ $course->course_name }}</h1>
+        <div class="bg-white/5 rounded-3xl p-6 sm:p-8">
+            <h1 class="text-2xl font-bold mb-2 text-red-400">Daftar Lesson - {{ $course->course_name }}</h1>
+            <p class="text-white/70 text-sm">Kelola pelajaran dalam kursus "{{ $course->course_name }}" yang tampil pada
+                aplikasi.</p>
+        </div>
 
-        <div class="w-full relative">
+        <div class="w-full relative mt-6">
             <div id="lesson-datatable">
                 @include('admin.lessons._table', ['lessons' => $lessons])
             </div>

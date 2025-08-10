@@ -8,11 +8,11 @@
 @endsection
 
 @section('content')
-    <div class="max-w-3xl mx-auto bg-bg-dark text-white shadow-md rounded-lg p-8">
-        <h1 class="text-2xl font-bold mb-6 text-accent-teal">
+    <div class="max-w-3xl mx-auto bg-white/5 text-white shadow-md rounded-3xl p-8">
+        <h1 class="text-2xl font-bold mb-6 text-white/80">
             {{ $isEdit ? 'Edit Bagian Pelajaran' : 'Buat Bagian Pelajaran' }} -
             <span class="text-white">{{ $course->course_name }}</span> /
-            <span class="text-accent-yellow">{{ $learn->lesson_name }}</span>
+            <span class="text-white">{{ $learn->lesson_name }}</span>
         </h1>
 
         <form method="POST"
@@ -25,47 +25,41 @@
                 @method('PUT')
             @endif
 
-            <!-- Part Name -->
             <div>
-                <label for="part_name" class="block font-semibold mb-1 text-accent-teal">Nama Bagian</label>
+                <label for="part_name" class="block font-semibold mb-1 text-white/80">Nama Bagian</label>
                 <input required type="text" name="part_name" id="part_name"
                     value="{{ old('part_name', $lessonPart->part_name ?? '') }}"
-                    class="w-full px-4 py-2 bg-[#262626] text-white border border-accent-teal rounded-lg focus:ring focus:ring-accent-teal focus:border-accent-teal"
-                    >
+                    class="w-full px-4 py-2 bg-[#262626] text-white border border-white/10 rounded-lg focus:ring focus:ring-white/10 focus:border-white/10">
             </div>
 
-            <!-- Description -->
             <div>
-                <label for="part_description" class="block font-semibold mb-1 text-accent-teal">Deskripsi (Opsional)</label>
+                <label for="part_description" class="block font-semibold mb-1 text-white/80">Deskripsi (Opsional)</label>
                 <textarea name="part_description" id="part_description" rows="3"
-                    class="w-full px-4 py-2 bg-[#262626] text-white border border-accent-teal rounded-lg focus:ring focus:ring-accent-teal focus:border-accent-teal">{{ old('part_description', $lessonPart->part_description ?? '') }}</textarea>
+                    class="w-full px-4 py-2 bg-[#262626] text-white border border-white/10 rounded-lg focus:ring focus:ring-white/10 focus:border-white/10">{{ old('part_description', $lessonPart->part_description ?? '') }}</textarea>
             </div>
 
-            <!-- Video URL -->
             <div>
-                <label for="part_video_url" class="block font-semibold mb-1 text-accent-teal">URL Video (Embed)</label>
+                <label for="part_video_url" class="block font-semibold mb-1 text-white/80">URL Video (Embed)</label>
                 <input required type="url" name="part_video_url" id="part_video_url"
                     value="{{ old('part_video_url', $lessonPart->part_video_url ?? '') }}"
-                    class="w-full px-4 py-2 bg-[#262626] text-white border border-accent-teal rounded-lg focus:ring focus:ring-accent-teal focus:border-accent-teal"
-                    >
+                    class="w-full px-4 py-2 bg-[#262626] text-white border border-white/10 rounded-lg focus:ring focus:ring-white/10 focus:border-white/10">
             </div>
 
             <div>
-                <label for="part_content" class="block font-semibold mb-1 text-accent-teal">Konten Teks</label>
+                <label for="part_content" class="block font-semibold mb-1 text-white/80">Konten Teks</label>
                 <textarea name="part_content" id="part_content">{{ old('part_content', $lessonPart->part_content ?? '') }}</textarea>
             </div>
 
-            <!-- Order -->
             <div>
-                <label for="order" class="block font-semibold mb-1 text-accent-teal">Urutan</label>
-                <input required type="number" name="order" id="order" value="{{ old('order', $lessonPart->order ?? '') }}"
-                    class="w-full px-4 py-2 bg-[#262626] text-white border border-accent-teal rounded-lg focus:ring focus:ring-accent-teal focus:border-accent-teal">
+                <label for="order" class="block font-semibold mb-1 text-white/80">Urutan</label>
+                <input required type="number" name="order" id="order"
+                    value="{{ old('order', $lessonPart->order ?? '') }}"
+                    class="w-full px-4 py-2 bg-[#262626] text-white border border-white/10 rounded-lg focus:ring focus:ring-white/10 focus:border-white/10">
             </div>
 
-            <!-- Submit -->
             <div class="pt-4">
                 <button type="submit"
-                    class="bg-accent-yellow hover:bg-yellow-500 text-black font-semibold px-6 py-2 rounded-lg transition">
+                    class="bg-red-800 hover:bg-red-700 text-white font-semibold px-6 py-2 rounded-lg transition">
                     {{ $isEdit ? 'Update' : 'Simpan' }} Bagian
                 </button>
             </div>
