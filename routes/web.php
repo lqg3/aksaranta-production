@@ -51,8 +51,6 @@ Route::get('culture' , function () {
     return view('culture');
 })->name('culture');
 
-// Aksara Translator
-Route::view('/aksara-translator', 'aksara-translator')->name('aksara-translator');
 
 // Removed Aksaranta Translator placeholder; using Aksara Translator only
 
