@@ -2,9 +2,12 @@
 
 @section('content')
     <div class="p-4">
-        <h1 class="text-2xl font-bold mb-4">Daftar Post</h1>
+        <div class="bg-white/5 rounded-3xl p-6 sm:p-8">
+            <h1 class="text-2xl font-bold mb-2 text-red-400">Daftar Post</h1>
+            <p class="text-white/70 text-sm">Kelola artikel blog yang tampil pada aplikasi.</p>
+        </div>
 
-        <div class="w-full relative">
+        <div class="w-full relative mt-6">
             <div id="datatable">
                 @include('admin.posts._table')
             </div>

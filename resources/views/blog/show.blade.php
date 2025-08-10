@@ -9,12 +9,12 @@
         @vite('resources/css/app.css')
     </head>
 
-    <body class="font-jua bg-black text-white">
+    <body class="font-jua bg-bg-dark text-white">
 
         <a href="{{ route('blog.index') }}"
-            class="absolute top-6 left-6 sm:top-8 sm:left-8 z-50 flex items-center gap-2 px-4 py-2 hover:bg-accent-teal text-accent-teal bg-white border border-accent-teal hover:text-white font-semibold rounded-full shadow-md transition-all">
+            class="absolute top-6 left-6 sm:top-8 sm:left-8 z-50 flex items-center gap-2 px-4 py-2 text-white bg-white/10 hover:bg-white/20 border border-white/20 font-semibold rounded-full shadow-md transition-all">
             <i class="fa-solid fa-chevron-left w-3.5"></i>
-            <span class="text-sm sm:text-bas flex items-center">Back</span>
+            <span class="text-sm sm:text-bas flex items-center font-title">Back</span>
         </a>
 
 
@@ -27,10 +27,10 @@
             <!-- Overlay Text -->
             <div class="px-6 sm:px-12 lg:px-24 w-full pb-16 max-w-[1440px]">
                 <h1
-                    class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold font-poppins leading-relaxed w-full max-w[1440px]">
+                    class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold font-title leading-relaxed w-full max-w[1440px]">
                     {{ $post->title }}
                 </h1>
-                <p class="text-accent-yellow text-sm sm:text-base mb-2">
+                <p class="text-white/70 text-sm sm:text-base mb-2 font-sans">
                     {{ \Carbon\Carbon::parse($post->published_at)->translatedFormat('d F Y') }}
                 </p>
             </div>
@@ -39,7 +39,7 @@
         {{-- Blog Content --}}
         <section class="w-full max-w-[1440px] mx-auto px-6 sm:px-12 lg:px-20 my-16 sm:my-24">
             <article
-                class="prose prose-invert max-w-none font-opensans prose-lg prose-img:rounded-xl prose-a:text-accent-teal prose-a:underline hover:prose-a:text-white prose-pre:bg-gray-900">
+                class="prose prose-invert max-w-none font-opensans prose-lg prose-img:rounded-xl prose-a:text-white prose-a:underline hover:prose-a:text-white/80 prose-pre:bg-gray-900">
                 {!! $post->body !!}
             </article>
         </section>

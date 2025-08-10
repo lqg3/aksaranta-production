@@ -1,7 +1,7 @@
 <div
     class="w-full my-10 flex flex-col sm:items-center sm:flex-row gap-6 {{ request('search') ? 'justify-between' : 'justify-end' }}">
     @if (request('search'))
-        <p class="text-center text-accent-yellow text-lg mt-4">
+        <p class="text-center text-white/80 text-lg mt-4">
             Showing results for: <strong>"{{ request('search') }}"</strong>
         </p>
     @endif
@@ -10,10 +10,10 @@
         id="search-form">
         {{-- Search Input --}}
         <input type="text" name="search" value="{{ request('search') }}"
-            class="flex-1 px-4 py-2 rounded-l-full border border-accent-teal bg-white text-black focus:outline-none focus:ring-2 focus:ring-accent-yellow"
+            class="flex-1 px-4 py-2 rounded-l-full border border-white/10 bg-white text-black focus:outline-none focus:ring-2 focus:ring-white/30"
             placeholder="Search posts...">
         <button type="submit"
-            class="px-5 py-2 rounded-r-full bg-accent-teal text-black hover:bg-accent-yellow transition-all">
+            class="px-5 py-2 rounded-r-full bg-white/10 text-white hover:bg-white/20 transition-all">
             <i class="fa-solid fa-magnifying-glass"></i>
         </button>
     </form>
@@ -26,17 +26,17 @@
         <div>
             <img src="{{ $post->thumbnail ?? asset('img/blog/default blog thumbnail.png') }}" alt="{{ $post->title }}"
                 class="w-full aspect-[243.32/162.21] object-cover rounded-lg shadow-md mb-2">
-            <p class="text-accent-yellow">
+            <p class="text-white/70">
                 {{ \Carbon\Carbon::parse($post->published_at)->translatedFormat('d F Y') }}
             </p>
-            <h4 class="text-3xl font-opensans font-bold tracking-[0.02rem]">{{ $post->title }}</h4>
+            <h4 class="text-2xl font-opensans font-bold tracking-[0.02rem] truncate">{{ $post->title }}</h4>
             <a href="{{ route('blog.show', $post->slug) }}"
-                class="block w-full mt-5 rounded-full border border-accent-teal hover:bg-white hover:text-black text-center transition-all duration-200 py-1">
+                class="block w-full mt-5 rounded-full border border-white/10 hover:bg-white/10 text-center transition-all duration-200 py-1">
                 Read now
             </a>
         </div>
     @empty
-        <div class="col-span-full text-center text-accent-yellow text-xl font-semibold">
+        <div class="col-span-full text-center text-white/80 text-xl font-semibold">
             No blog posts found.
         </div>
     @endforelse
@@ -48,7 +48,7 @@
     <div class="mt-16 flex justify-center space-x-2 pagination">
         @if ($pagination['prev'])
             <a href="{{ $pagination['prev'] }}"
-                class="px-4 py-2 text-sm bg-accent-teal text-black hover:bg-accent-yellow rounded-full transition-all flex items-center justify-center">
+                class="px-4 py-2 text-sm bg-white/10 text-white hover:bg-white/20 rounded-full transition-all flex items-center justify-center">
                 <i class="fa-solid fa-chevron-left w-3.5 flex items-center justify-center"></i>
             </a>
         @else
@@ -61,16 +61,16 @@
             @php $url = request()->fullUrlWithQuery(['page' => $page]) @endphp
             @if ($page == $pagination['current_page'])
                 <span
-                    class="px-4 py-2 text-sm bg-accent-yellow text-black font-bold rounded-full">{{ $page }}</span>
+                    class="px-4 py-2 text-sm bg-white/20 text-white font-bold rounded-full">{{ $page }}</span>
             @else
                 <a href="{{ $url }}"
-                    class="px-4 py-2 text-sm bg-accent-teal text-black hover:bg-accent-yellow rounded-full transition-all">{{ $page }}</a>
+                    class="px-4 py-2 text-sm bg-white/10 text-white hover:bg-white/20 rounded-full transition-all">{{ $page }}</a>
             @endif
         @endfor
 
         @if ($pagination['next'])
             <a href="{{ $pagination['next'] }}"
-                class="px-4 py-2 text-sm bg-accent-teal text-black hover:bg-accent-yellow rounded-full transition-all flex items-center justify-center">
+                class="px-4 py-2 text-sm bg-white/10 text-white hover:bg-white/20 rounded-full transition-all flex items-center justify-center">
                 <i class="fa-solid fa-chevron-right w-3.5 flex items-center justify-center"></i>
             </a>
         @else

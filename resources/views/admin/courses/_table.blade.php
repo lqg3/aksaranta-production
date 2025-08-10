@@ -4,35 +4,35 @@
         <form id="search-form" method="GET" action="{{ route('admin.course.index') }}"
             class="flex w-full sm:w-auto gap-2 flex-col sm:flex-row">
             <input type="text" name="search" value="{{ request('search') }}" placeholder="Cari judul..."
-                class="flex-grow px-4 py-2 bg-[#262626] text-white border border-accent-teal rounded-lg focus:ring focus:ring-accent-teal focus:border-accent-teal" />
+                class="flex-grow px-4 py-2 bg-[#262626] text-white border border-white/10 rounded-lg focus:ring focus:ring-white/10 focus:border-white/10" />
             <button type="submit"
-                class="px-4 py-2 bg-accent-teal text-white text-sm rounded hover:bg-teal-600 transition">
+                class="px-4 py-2 bg-white/10 text-white text-sm rounded hover:bg-white/20 transition">
                 Cari
             </button>
         </form>
 
         <a href="{{ route('admin.course.create') }}"
-            class="px-4 py-2 bg-accent-yellow text-black text-sm rounded hover:bg-yellow-500 transition whitespace-nowrap">
+            class="px-4 py-2 bg-red-800 text-white text-sm rounded hover:bg-red-700 transition whitespace-nowrap">
             New Course
         </a>
     </div>
 
 
 
-    <table class="min-w-full text-sm border rounded-md overflow-hidden shadow-sm">
-        <thead class="bg-gray-600 uppercase text-xs">
+    <table class="min-w-full text-sm rounded-2xl overflow-hidden shadow-sm bg-white/5">
+        <thead class="uppercase text-xs bg-white/10">
             <tr>
-                <th class="px-4 py-3 text-left">Nama</th>
-                <th class="px-4 py-3 text-left">Thumbnail</th>
-                <th class="px-4 py-3 text-left">Instruktor</th>
-                <th class="px-4 py-3 text-left">Deskripsi</th>
-                <th class="px-4 py-3 text-left">Dibuat</th>
-                <th class="px-4 py-3 text-center">Aksi</th>
-                <th class="px-4 py-3 text-center">Lesson</th>
+                <th class="px-4 py-3 text-left text-white/70">Nama</th>
+                <th class="px-4 py-3 text-left text-white/70">Thumbnail</th>
+                <th class="px-4 py-3 text-left text-white/70">Instruktor</th>
+                <th class="px-4 py-3 text-left text-white/70">Deskripsi</th>
+                <th class="px-4 py-3 text-left text-white/70">Dibuat</th>
+                <th class="px-4 py-3 text-center text-white/70">Aksi</th>
+                <th class="px-4 py-3 text-center text-white/70">Lesson</th>
             </tr>
         </thead>
 
-        <tbody class="divide-y divide-gray-700">
+        <tbody class="divide-y divide-white/10">
             @forelse ($courses as $course)
                 <tr>
                     {{-- Nama Kursus --}}
@@ -62,8 +62,8 @@
                     {{-- Aksi --}}
                     <td class="px-4 py-2 text-center gap-2 flex items-center">
                         {{-- Edit --}}
-                        <a href="{{ route('admin.course.edit', $course->id) }}"
-                            class="text-blue-500 hover:text-blue-700" title="Edit">
+                            <a href="{{ route('admin.course.edit', $course->id) }}"
+                            class="text-white/80 hover:text-white" title="Edit">
                             <i class="fas fa-edit"></i>
                         </a>
 
@@ -72,7 +72,7 @@
                             onsubmit="return confirm('Yakin ingin menghapus course ini?')">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="text-red-500 hover:text-red-700" title="Hapus">
+                            <button type="submit" class="text-red-500 hover:text-red-400" title="Hapus">
                                 <i class="fas fa-trash-alt"></i>
                             </button>
                         </form>
