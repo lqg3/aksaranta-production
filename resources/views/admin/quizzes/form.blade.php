@@ -3,8 +3,8 @@
 @section('title', $isEdit ? 'Edit Quiz' : 'Buat Quiz Baru')
 
 @section('content')
-    <div class="max-w-4xl mx-auto bg-bg-dark text-white shadow-md rounded-lg p-8">
-        <h1 class="text-2xl font-bold mb-6 text-accent-teal">
+    <div class="max-w-4xl mx-auto bg-white/5 text-white shadow-md rounded-3xl p-8">
+        <h1 class="text-2xl font-bold mb-6 text-white/80">
             {{ $isEdit ? 'Edit Quiz' : 'Buat Quiz Baru' }} - <span
                 class="text-white">{{ $lessonPart->title ?? 'Lesson Part' }}</span>
         </h1>
@@ -21,10 +21,10 @@
 
             {{-- Quiz Type --}}
             <div>
-                <label for="quiz_type" class="block font-semibold mb-1 text-accent-teal">Tipe Soal</label>
+                <label for="quiz_type" class="block font-semibold mb-1 text-white/80">Tipe Soal</label>
                 <select name="quiz_type" id="quiz_type"
-                    class="w-full px-4 py-2 bg-[#262626] text-white border border-accent-teal rounded-lg" required
-                    onchange="handleTypeChange()">
+                    class="w-full px-4 py-2 bg-[#262626] text-white border border-white/10 rounded-lg focus:ring focus:ring-white/10 focus:border-white/10"
+                    required onchange="handleTypeChange()">
                     @php
                         $quizType = old('quiz_type') ?? ($quiz['quiz_type'] ?? '');
                     @endphp
@@ -39,13 +39,12 @@
 
             {{-- Quiz Content (Dynamic Based on Type) --}}
             <div id="quiz-content-fields">
-                <!-- Will be populated by JS based on quiz_type -->
             </div>
 
             {{-- Submit --}}
             <div class="pt-4">
                 <button type="submit"
-                    class="bg-accent-yellow hover:bg-yellow-500 text-black font-semibold px-6 py-2 rounded-lg transition">
+                    class="bg-red-800 hover:bg-red-700 text-white font-semibold px-6 py-2 rounded-lg transition">
                     {{ $isEdit ? 'Update' : 'Simpan' }} Quiz
                 </button>
             </div>
@@ -87,8 +86,8 @@
 
                 container.innerHTML += `
                 <div>
-                    <label class="block font-semibold mb-1 text-accent-teal">Pertanyaan</label>
-                    <input type="text" name="quiz_content[question]" value="${escapeHtml(question)}" class="w-full px-4 py-2 bg-[#262626] border border-accent-teal rounded-lg text-white" required>
+                    <label class="block font-semibold mb-1 text-white/80">Pertanyaan</label>
+                    <input type="text" name="quiz_content[question]" value="${escapeHtml(question)}" class="w-full px-4 py-2 bg-[#262626] border border-white/10 rounded-lg text-white" required>
                 </div>
             `;
 
@@ -96,15 +95,15 @@
                 const correct = isEdit ? data.correct_option : null;
 
                 let optionsHTML =
-                    '<div class="space-y-2 mt-4"><label class="block font-semibold text-accent-teal">Pilihan & Jawaban Benar</label>';
+                    '<div class="space-y-2 mt-4"><label class="block font-semibold text-white/80">Pilihan & Jawaban Benar</label>';
 
                 for (let i = 0; i < 4; i++) {
                     const optionText = options[i]?.option_text || '';
                     const checked = correct == i ? 'checked' : '';
                     optionsHTML += `
                     <div class="flex items-center gap-4">
-                        <input type="text" name="quiz_content[options][${i}][option_text]" placeholder="Pilihan ${i + 1}" value="${escapeHtml(optionText)}" class="flex-1 px-4 py-2 bg-[#262626] border border-gray-600 rounded-lg text-white">
-                        <label class="flex items-center text-sm">
+                        <input type="text" name="quiz_content[options][${i}][option_text]" placeholder="Pilihan ${i + 1}" value="${escapeHtml(optionText)}" class="flex-1 px-4 py-2 bg-[#262626] border border-white/10 rounded-lg text-white">
+                        <label class="flex items-center text-sm text-white/80">
                             <input type="radio" name="quiz_content[correct_option]" value="${i}" class="mr-2" ${checked}> Benar
                         </label>
                     </div>
@@ -120,18 +119,18 @@
 
                 container.innerHTML += `
                     <div>
-                        <label class="block font-semibold mb-1 text-accent-teal">Instruksi Soal</label>
+                        <label class="block font-semibold mb-1 text-white/80">Instruksi Soal</label>
                         <input type="text" 
                             name="quiz_content[question]" 
                             value="${escapeHtml(question)}" 
-                            class="w-full px-4 py-2 bg-[#262626] border border-accent-teal rounded-lg text-white" 
+                            class="w-full px-4 py-2 bg-[#262626] border border-white/10 rounded-lg text-white" 
                             required>
                     </div>
                 `;
 
                 let pairsHTML = `
                     <div class="space-y-2 mt-4">
-                        <label class="block font-semibold text-accent-teal">Item dan Tempat Drop</label>
+                        <label class="block font-semibold text-white/80">Item dan Tempat Drop</label>
                 `;
 
                 for (let i = 0; i < 3; i++) {
@@ -144,12 +143,12 @@
                                 name="quiz_content[pairs][${i}][item]" 
                                 placeholder="Item" 
                                 value="${escapeHtml(item)}" 
-                                class="flex-1 px-4 py-2 bg-[#262626] border border-gray-600 rounded-lg text-white">
+                                class="flex-1 px-4 py-2 bg-[#262626] border border-white/10 rounded-lg text-white">
                             <input type="text" 
                                 name="quiz_content[pairs][${i}][target]" 
                                 placeholder="Tempat Drop" 
                                 value="${escapeHtml(target)}" 
-                                class="flex-1 px-4 py-2 bg-[#262626] border border-gray-600 rounded-lg text-white">
+                                class="flex-1 px-4 py-2 bg-[#262626] border border-white/10 rounded-lg text-white">
                         </div>
                     `;
                 }
@@ -162,12 +161,12 @@
 
                 container.innerHTML += `
                 <div>
-                    <label class="block font-semibold mb-1 text-accent-teal">Teks dengan ____ untuk bagian kosong</label>
-                    <textarea name="quiz_content[question]" rows="4" class="w-full px-4 py-2 bg-[#262626] border border-accent-teal rounded-lg text-white" required>${escapeHtml(question)}</textarea>
+                    <label class="block font-semibold mb-1 text-white/80">Teks dengan ____ untuk bagian kosong</label>
+                    <textarea name="quiz_content[question]" rows="4" class="w-full px-4 py-2 bg-[#262626] border border-white/10 rounded-lg text-white" required>${escapeHtml(question)}</textarea>
                 </div>
                 <div class="mt-2">
-                    <label class="block font-semibold text-accent-teal">Jawaban yang benar</label>
-                    <input type="text" name="quiz_content[answer]" value="${escapeHtml(answer)}" class="w-full px-4 py-2 bg-[#262626] border border-gray-600 rounded-lg text-white" required>
+                    <label class="block font-semibold text-white/80">Jawaban yang benar</label>
+                    <input type="text" name="quiz_content[answer]" value="${escapeHtml(answer)}" class="w-full px-4 py-2 bg-[#262626] border border-white/10 rounded-lg text-white" required>
                 </div>
             `;
             }
