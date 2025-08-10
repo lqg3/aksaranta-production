@@ -77,7 +77,7 @@
                             </button>
                         </form>
                     </td>
-                    <td class="text-center">
+                    <td class="text-center py-2">
                         <a href="{{ route('admin.learn.index', $course->id) }}"><i
                                 class="fa-solid text-bg-dark fa-arrow-right hover:text-white transition-all duration-200 aspect-square p-2 bg-white hover:bg-bg-card rounded-full"></i></a>
                     </td>
