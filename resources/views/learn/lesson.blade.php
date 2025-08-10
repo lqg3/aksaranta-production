@@ -33,7 +33,7 @@
                     {!! $lessonPart->part_content !!}
                 </div>
             @else
-                <p>No notes available for this lesson part.</p>
+                <p>Tidak ada catatan untuk bagian ini.</p>
             @endif
         </div>
 
@@ -46,7 +46,7 @@
             @if (!empty($lessonPart->quiz_content))
                 <x-quizzes :quizzes="$lessonPart->quiz_content" :course_id="$course->id" :lesson_id="$lesson->id" :lesson_part_id="$lessonPart->id" />
             @else
-                <p>Coming soon...</p>
+                <p>Akan datang...</p>
             @endif
         </div>
     </div>

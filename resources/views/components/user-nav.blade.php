@@ -32,15 +32,15 @@
     <div class="flex items-center h-full">
         <ul class="flex items-center justify-center h-full font-title gap-4">
             <li class="flex items-center h-full relative" x-data="{open:false}" @mouseenter="open=true" @mouseleave="open=false">
-                <button type="button" class="mr-2 text-white text-opacity-50 hover:text-opacity-80 transition-colors" aria-label="All pages">
+                <button type="button" class="mr-2 text-white text-opacity-50 md:hover:text-opacity-80 transition-colors" aria-label="All pages">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 hidden md:inline" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 111.06 1.06l-4.24 4.24a.75.75 0 01-1.06 0L5.25 8.29a.75.75 0 01-.02-1.08z" clip-rule="evenodd"/></svg>
                 </button>
-                <a class="text-white transition-all duration-300 {{ $navActive['home'] ? 'text-opacity-80 font-bold cursor-default' : 'text-opacity-50 hover:text-opacity-80' }}"
+                <a class="text-white transition-all duration-300 {{ $navActive['home'] ? 'text-opacity-80 font-bold cursor-default' : 'text-opacity-50 md:hover:text-opacity-80' }}"
                    href="{{ route('home') }}"
                    @click.prevent="navigateTo('{{ route('home') }}')"
                 >Home</a>
                 <!-- Dropdown anchored to arrow/home -->
-                <div x-cloak x-show="open" x-transition class="absolute top-full left-0 mt-2 w-80 bg-bg-dark/50 backdrop-blur-sm rounded-xl border border-white/10 shadow-lg p-3">
+                <div x-cloak x-show="open" x-transition class="hidden md:block absolute top-full left-0 mt-2 w-80 bg-bg-dark/50 backdrop-blur-sm rounded-xl border border-white/10 shadow-lg p-3">
                     <div class="grid grid-cols-2 gap-2 text-sm">
                         <a @click.prevent="navigateTo('{{ route('culture') }}')" href="{{ route('culture') }}" class="text-white px-3 py-2 rounded-lg hover:bg-white/5 {{ $navActive['culture'] ? 'bg-white/10' : '' }}">Budaya</a>
                         <a @click.prevent="navigateTo('{{ route('history') }}')" href="{{ route('history') }}" class="text-white px-3 py-2 rounded-lg hover:bg-white/5 {{ $navActive['history'] ? 'bg-white/10' : '' }}">Sejarah</a>
@@ -95,7 +95,10 @@
                             <a @click.prevent="navigateTo('{{ route('about.index') }}')" href="{{ route('about.index') }}" class="px-3 py-2 rounded-lg hover:bg-white/5 {{ $navActive['about'] ? 'bg-white/10' : '' }}">Kami</a>
                             <a @click.prevent="navigateTo('{{ route('animasi') }}')" href="{{ route('animasi') }}" class="px-3 py-2 rounded-lg hover:bg-white/5 {{ $navActive['animasi'] ? 'bg-white/10' : '' }}">Game</a>
                             @if (auth()->check())
-                                <a @click.prevent="navigateTo('{{ route('dashboard') }}')" href="{{ route('dashboard') }}" class="px-3 py-2 rounded-lg hover:bg-white/5">Dashboard</a>
+                                <form method="POST" action="{{ route('logout') }}" class="mt-1">
+                                    @csrf
+                                    <button type="submit" class="text-left px-3 py-2 rounded-lg hover:bg-white/5 text-red-400">Logout</button>
+                                </form>
                             @endif
                         </nav>
                     </div>
@@ -109,11 +112,9 @@
         <p class="text-white text-opacity-50 font-title border-r border-white pr-4 mr-4"></p>
         @if (auth()->check())
             <span class="text-opacity-80 mr-4  font-title text-white">{{ auth()->user()->name }}</span>
-            <form method="POST" action="{{ route('logout') }}" class="inline">
+            <form method="POST" action="{{ route('logout') }}" class="hidden md:inline">
                 @csrf
-                <button type="submit" class="text-red-500 hover:text-red-700 transition-colors duration-300">
-                    Logout
-                </button>
+                <button type="submit" class="text-red-500 hover:text-red-700 transition-colors duration-300">Logout</button>
             </form>
         @else
             <a href="{{ route('login') }}" class=" font-title text-white hover:text-opacity-80 transition-colors duration-300"

@@ -35,7 +35,7 @@
             </div>
 
             <!-- Tabs: sub-etnis -->
-            <div id="aksara-tabs" class="mt-6 flex flex-wrap gap-2">
+            <div id="aksara-tabs" class="pt-16 sticky top-0 z-30 flex flex-wrap gap-2 bg-bg-dark border-b border-white/10 py-2">
                 <button type="button" data-tab="all" class="px-3 py-1.5 rounded-full bg-white/20 text-white text-sm">Semua</button>
                 <button type="button" data-tab="toba" class="px-3 py-1.5 rounded-full bg-white/10 hover:bg-white/20 text-white text-sm">Batak Toba</button>
                 <button type="button" data-tab="karo" class="px-3 py-1.5 rounded-full bg-white/10 hover:bg-white/20 text-white text-sm">Batak Karo</button>
@@ -272,11 +272,47 @@
     const pick = (names) => aksaraCharacters.filter(ch => names.includes(ch.latin));
     const datasets = {
         all: aksaraCharacters,
-        toba: pick(['A','I','U','Ha','Ba','Pa','Na','Wa','Ga','Ja','Da','Ra','Ma','Ta (Selatan)','Sa','Ya','Nga','La','Nya','Ca','Nda','Mba']),
-        karo: pick(['A','I','U','Ha','Ba (Karo)','Pa','Na','Wa','Ga','Ja','Da','Ra','Ma','Ta (Utara)','Sa','Ya','Nga','La','Nya','Ca','Nda','Mba']),
-        pakpak: pick(['A','I','U','Ha','Ba','Pa','Na','Wa (Pakpak)','Ga','Ja','Da','Ra','Ma','Ta (Utara)','Sa','Ya','Nga','La','Nya','Ca','Nda','Mba']),
-        mandailing: pick(['A','I','U','Ha (Mandailing)','Ba','Pa','Na (Mandailing)','Wa','Ga','Ja','Da','Ra','Ma','Ta (Selatan)','Sa (Mandailing)','Ya','Nga','La','Nya','Ca','Nda','Mba']),
-        simalungun: pick(['A (Simalungun)','I','U','Ha (Simalungun)','Ba','Pa (Simalungun)','Na','Wa (Simalungun)','Ga (Simalungun)','Ja','Da','Ra (Simalungun)','Ma (Simalungun)','Ta (Selatan)','Sa (Simalungun)','Ya (Simalungun)','Nga','La (Simalungun)','Nya','Ca','Nda','Mba'])
+        // Include dialect-appropriate vowel signs (anak surat), consonant signs, and virama so diacritics render per tab
+        toba: pick([
+            // Letters
+            'A','I','U','Ha','Ba','Pa','Na','Wa','Ga','Ja','Da','Ra','Ma','Ta (Selatan)','Sa','Ya','Nga','La','Nya','Ca','Nda','Mba',
+            // Vowel signs
+            'E (tanda)','EE (tanda)','I (tanda)','O (tanda)','U (tanda)',
+            // Consonant signs & virama
+            'Tanda NG','Tanda H','Pangolat','Panongonan'
+        ]),
+        karo: pick([
+            // Letters
+            'A','I','U','Ha','Ba (Karo)','Pa','Na','Wa','Ga','Ja','Da','Ra','Ma','Ta (Utara)','Sa','Ya','Nga','La','Nya','Ca','Nda','Mba',
+            // Vowel signs (Karo variants)
+            'E (tanda)','EE (tanda)','Karo I (tanda)','Karo O (tanda)','U (tanda)',
+            // Consonant signs & virama
+            'Tanda NG','Tanda H','Pangolat','Panongonan'
+        ]),
+        pakpak: pick([
+            // Letters
+            'A','I','U','Ha','Ba','Pa','Na','Wa (Pakpak)','Ga','Ja','Da','Ra','Ma','Ta (Utara)','Sa','Ya','Nga','La','Nya','Ca','Nda','Mba',
+            // Vowel signs (Pakpak variant for E)
+            'Pakpak E (tanda)','EE (tanda)','I (tanda)','O (tanda)','U (tanda)',
+            // Consonant signs & virama
+            'Tanda NG','Tanda H','Pangolat','Panongonan'
+        ]),
+        mandailing: pick([
+            // Letters
+            'A','I','U','Ha (Mandailing)','Ba','Pa','Na (Mandailing)','Wa','Ga','Ja','Da','Ra','Ma','Ta (Selatan)','Sa (Mandailing)','Ya','Nga','La','Nya','Ca','Nda','Mba',
+            // Vowel signs
+            'E (tanda)','EE (tanda)','I (tanda)','O (tanda)','U (tanda)',
+            // Consonant signs & virama
+            'Tanda NG','Tanda H','Pangolat','Panongonan'
+        ]),
+        simalungun: pick([
+            // Letters
+            'A (Simalungun)','I','U','Ha (Simalungun)','Ba','Pa (Simalungun)','Na','Wa (Simalungun)','Ga (Simalungun)','Ja','Da','Ra (Simalungun)','Ma (Simalungun)','Ta (Selatan)','Sa (Simalungun)','Ya (Simalungun)','Nga','La (Simalungun)','Nya','Ca','Nda','Mba',
+            // Vowel signs (include special U for Simalungun SA)
+            'E (tanda)','EE (tanda)','I (tanda)','O (tanda)','U (tanda)','U untuk Simalungun SA (tanda)',
+            // Consonant signs & virama
+            'Tanda NG','Tanda H','Pangolat','Panongonan'
+        ])
     };
 
     function setActiveTab(tabKey) {

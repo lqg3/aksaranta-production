@@ -38,7 +38,7 @@
                             <button @click="selectOption(index, optIndex)" type="button" :disabled="hasSubmitted"
                                 class="block w-full text-left px-4 py-2 mb-2 border rounded transition"
                                 :class="{
-                                    'bg-green-700 border-red-500 text-white': hasSubmitted && getQuizFeedback(index)
+                                    'bg-green-700 border-green-700 text-white': hasSubmitted && getQuizFeedback(index)
                                         .correctAnswer === option.option_text,
                                     'bg-red-700 border-red-500 text-white': hasSubmitted && quiz.selectedOption ===
                                         optIndex && getQuizFeedback(index).correctAnswer !== option.option_text,
@@ -117,14 +117,14 @@
 
                 <!-- Show correct answer after submission -->
                 <template x-if="feedback.length > 0">
-                    <div class="mt-4 p-4 bg-gray-800 rounded border border-white/10 text-sm text-text-secondary">
+                    <div class="mt-4 p-4 bg-white/10 rounded border border-white/10 text-sm text-text-secondary">
                         <template x-if="quiz.quiz_type === 'multiple_choice'">
-                            <div><strong>Correct answer:</strong> <span
+                            <div><strong>Jawaban yang benar:</strong> <span
                                     x-text="getQuizFeedback(index).correctAnswer"></span></div>
                         </template>
                         <template x-if="quiz.quiz_type === 'drag_and_drop'">
                             <div>
-                                <strong>Correct pairs:</strong>
+                                <strong>Pasangan yang benar:</strong>
                                 <ul class="list-disc ml-5 mt-1">
                                     <template x-for="pair in getQuizFeedback(index).correctAnswer"
                                         :key="pair.target">
@@ -134,7 +134,7 @@
                             </div>
                         </template>
                         <template x-if="quiz.quiz_type === 'fill_in_the_blank'">
-                            <div><strong>Correct answer:</strong> <span
+                            <div><strong>Jawaban yang benar:</strong> <span
                                     x-text="getQuizFeedback(index).correctAnswer"></span></div>
                         </template>
                     </div>
@@ -150,20 +150,20 @@
         <div class="mt-6 flex flex-col md:flex-row md:items-center md:justify-between space-y-4 md:space-y-0">
             <div class="flex space-x-4 justify-center md:justify-start">
                 <button @click="submitAll()" :disabled="hasSubmitted"
-                    class="px-6 py-3 bg-red-800 text-white rounded-max hover:bg-red-600 transition disabled:opacity-50 disabled:cursor-not-allowed">
-                    Submit
+                    class="px-6 py-3 bg-red-800 text-white rounded-lg hover:bg-red-700 transition disabled:opacity-50 disabled:cursor-not-allowed">
+                    Cek
                 </button>
 
                 <button x-show="hasSubmitted" @click="resetQuiz()" type="button"
-                    class="px-6 py-3 bg-red-600 text-white rounded hover:bg-red-700 transition">
-                    Try Again
+                    class="px-6 py-3 bg-red-800 text-white rounded-lg hover:bg-red-700 transition">
+                    Coba lagi
                 </button>
             </div>
 
             <template x-if="hasSubmitted">
                 <div
-                    class="self-end md:self-auto bg-accent-teal text-white px-4 py-2 rounded shadow-lg font-semibold text-lg max-w-max mx-auto md:mx-0">
-                    Score: <span x-text="calculateScore()"></span>%
+                    class="self-end md:self-auto bg-red-800 text-white px-4 py-2 rounded shadow-lg font-semibold text-lg max-w-max mx-auto md:mx-0">
+                    Skor: <span x-text="calculateScore()"></span>%
                 </div>
             </template>
         </div>
