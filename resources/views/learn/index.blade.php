@@ -3,7 +3,7 @@
 @section('title', 'Courses')
 
 @section('content')
-    <h1 class="text-text-primary text-title text-center mt-12 mb-12">Course</h1>
+    <h1 class="text-text-primary text-title text-center mt-24 mb-12 font-title">Pelajari Aksara & Semua Hal Batak</h1>
     <!-- Should be a container listing all courses available -->
 
     <section class="grid gap-4 h-full grid-cols-1 place-items-center w-full">

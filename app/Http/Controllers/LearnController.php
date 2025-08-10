@@ -25,7 +25,8 @@ class LearnController extends Controller
         
     }
     public function index(){
-        $courseData = Course::orderBy('created_at', 'desc')->get();
+        // Sort by last modified date (updated_at)
+        $courseData = Course::orderBy('updated_at', 'desc')->get();
         return view('learn.index', compact('courseData'));
 
     }

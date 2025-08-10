@@ -285,31 +285,31 @@
 @section('content')
         <!-- Hero Section -->
         <div class="header">
-            <h1 class="font-title text-4xl pt-24 md:text-5xl lg:text-7xl font-bold text-center">
+            <h1 class="font-title text-4xl pt-24 md:text-5xl lg:text-5xl font-bold text-center">
                 Pengubah Teks Aksara Batak
             </h1>
             <p class="text-center text-lg mt-4">
-                Ubah teks Latin ke Aksara Batak dan sebaliknya dengan mudah dan cepat
+                Ubah aksara Latin ke Aksara Batak dengan mudah dan cepat
             </p>
         </div>
 
         <!-- Rotating Fun Facts -->
         <section class="max-w-[1440px] mx-auto px-4 mt-8">
             <div id="funFactContainer" class="border border-white/10 bg-white/5 rounded-2xl p-5 flex items-start gap-3">
-                <span class="text-xs text-red-400 font-semibold uppercase tracking-wide shrink-0 mt-1">Fun Fact</span>
+                <span class="font-title text-xs text-red-400 font-semibold uppercase tracking-wide shrink-0 mt-1">Fun Fact</span>
                 <p id="funFactText" role="status" aria-live="polite" class="text-white/80 transition-all duration-500 ease-out"></p>
             </div>
         </section>
 
         <section class="max-w-[1440px] mx-auto my-20 space-y-4 px-4">
-            <h2 class="text-red-400 text-center text-xl font-semibold">Tulis • Baca • Lestarikan</h2>
-            <h1 class="font-bold text-4xl text-center">Aksara Batak untuk Semua</h1>
+            <h2 class="font-title text-red-400 text-center text-xl font-semibold">Tulis • Baca • Lestarikan</h2>
+            <h1 class="font-title font-bold text-4xl text-center">Aksara Batak untuk Semua</h1>
             <p class="pt-4 text-lg text-center">Jelajahi keindahan aksara Batak. Terjemahkan teks dari dan ke aksara
                 Batak dengan cepat dan akurat.</p>
 
             <div class="flex flex-col md:flex-row gap-5 mt-8 items-stretch">
                 <div class="flex md:w-1/2 flex-col shadow-sm overflow-hidden">
-                    <h3 class="text-2xl">Teks Latin</h3>
+                    <h3 class="text-2xl">Aksara Latin</h3>
                     <textarea id="inputLatin" oninput="autoResize(this); debounceTransliterate()"
                         class="grow min-h-[250px] max-h-[1000px] overflow-hidden resize-none border-t border-r border-l p-6 border-[#3C3C3C] rounded-t-3xl focus:outline-0 bg-[#262626] text-white placeholder:text-white/60 caret-white" placeholder="Masukkan teks..."></textarea>
                     <div
