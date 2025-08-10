@@ -6,7 +6,7 @@
 
 @section('content')
     <!-- Simple Header -->
-    <section class="w-full max-w-[1440px] mx-auto px-6 sm:px-12 lg:px-28 my-8">
+    <section class="w-full pt-24 max-w-[1440px] mx-auto px-6 sm:px-12 lg:px-28 my-8">
         <div class="bg-white/5 rounded-3xl p-6 sm:p-8">
             <h1 class="font-bold text-3xl sm:text-4xl md:text-5xl">Blog</h1>
             <p class="font-sans text-sm sm:text-base text-white/80 mt-2">Cerita, wawasan, dan pembaruan seputar budaya Batak.</p>

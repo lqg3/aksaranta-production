@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class BlogController extends Controller
 {
@@ -15,7 +16,12 @@ class BlogController extends Controller
             ->select('id', 'title', 'slug', 'thumbnail', 'published_at');
 
         if ($search = $request->query('search')) {
-            $query->where('title', 'like', "%{$search}%");
+            $driver = DB::getDriverName();
+            if ($driver === 'pgsql') {
+                $query->where('title', 'ILIKE', "%{$search}%");
+            } else {
+                $query->whereRaw('LOWER(title) LIKE ?', ['%' . mb_strtolower($search, 'UTF-8') . '%']);
+            }
         }
 
         $paginator = $query->latest('published_at')->paginate($perPage)->withQueryString();
