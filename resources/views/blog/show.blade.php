@@ -40,7 +40,10 @@
         <section class="w-full max-w-[1440px] mx-auto px-6 sm:px-12 lg:px-20 my-16 sm:my-24">
             <article
                 class="prose prose-invert max-w-none font-opensans prose-lg prose-img:rounded-xl prose-a:text-white prose-a:underline hover:prose-a:text-white/80 prose-pre:bg-gray-900">
-                {!! $post->body !!}
+                
+                <div class="tinymce-content">
+                    {!! $post->body !!}
+                </div>
             </article>
         </section>
 
