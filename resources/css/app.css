@@ -163,5 +163,4 @@
 @plugin "flowbite/plugin";
 @source "../../node_modules/flowbite";
 
-/* Page-specific styles: include virtual keyboard styles in the main build */
-@import "./virtual-keyboard.css";
+/* Page-specific styles are loaded separately via Vite entries */
