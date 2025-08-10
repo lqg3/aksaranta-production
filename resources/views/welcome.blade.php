@@ -346,28 +346,6 @@ body{
                 </button>
             </div>
             
-            <!-- Navigation Item 10: Aksaranta Translator -->
-            <div class="navigation-item font-title font-extralight transition-all ease-in-out duration-100 hidden" 
-                data-index="10" data-image="https://aksara-batak.sgp1.cdn.digitaloceanspaces.com/images/homepage/img29.webp"
-                role="listitem">
-                <button class="nav-control nav-prev hover:underline hover:decoration-2 text-3xl mr-8" 
-                        aria-label="Previous navigation item" 
-                        data-direction="prev">
-                    ←
-                </button>
-                <a class="nav-link hover:underline hover:decoration-2" 
-                @click.prevent="$dispatch('navigate', '{{ route('aksaranta-translator') }}')"
-                href="{{ route('aksaranta-translator') }}" 
-                aria-label="Go to Aksaranta Translator">
-                    Aksaranta Translator
-                </a>
-                <button class="nav-control nav-next hover:underline hover:decoration-2 text-3xl ml-8" 
-                        aria-label="Next navigation item" 
-                        data-direction="next">
-                    →
-                </button>
-            </div>
-
             <!-- Navigation Item 11: Game -->
             <div class="navigation-item font-title font-extralight transition-all ease-in-out duration-100 hidden" 
                 data-index="11" data-image="10"
@@ -378,8 +356,8 @@ body{
                     ←
                 </button>
                 <a class="nav-link hover:underline hover:decoration-2" 
-                @click.prevent="$dispatch('navigate', '{{ route('game') }}')"
-                href="{{ route('game') }}" 
+                @click.prevent="$dispatch('navigate', '{{ route('animasi') }}')"
+                href="{{ route('animasi') }}" 
                 aria-label="Go to Game">
                     Game
                 </a>
@@ -608,18 +586,7 @@ body{
                 >Aksaranta</a>
             </div>
         </div>
-        <!-- Aksaranta Translator (temp image) -->
-        <div class="image-container">
-            <img src="https://aksara-batak.sgp1.cdn.digitaloceanspaces.com/images/homepage/img32.webp" alt="" class="image" data-mouse-down-at="0" draggable="false" data-prev-percentage="0">
-            <div class="image-overlay">
-                <a class="font-title text-md hover:!underline cursor-pointer" 
-                   href="{{ route('aksaranta-translator') }}" 
-                   @click.prevent="$dispatch('navigate', '{{ route('aksaranta-translator') }}')"
-                   style="text-decoration: none; color: inherit; cursor: pointer;"
-                   draggable="false"
-                >Aksaranta Translator</a>
-            </div>
-        </div>
+        
         <!-- Blog -->
         <div class="image-container">
             <img src="https://aksara-batak.sgp1.cdn.digitaloceanspaces.com/images/homepage/img32.webp" alt="" class="image" data-mouse-down-at="0" draggable="false" data-prev-percentage="0">
@@ -644,13 +611,13 @@ body{
                 >Tentang Kami</a>
             </div>
         </div>
-        <!-- Game (temp image reuse) -->
+        <!-- Game (routes to animasi) -->
         <div class="image-container">
             <img src="https://aksara-batak.sgp1.cdn.digitaloceanspaces.com/images/homepage/img10.webp" alt="" class="image" data-mouse-down-at="0" draggable="false" data-prev-percentage="0">
             <div class="image-overlay">
                 <a class="font-title text-md hover:!underline cursor-pointer" 
-                   href="{{ route('game') }}" 
-                   @click.prevent="$dispatch('navigate', '{{ route('game') }}')"
+                   href="{{ route('animasi') }}" 
+                   @click.prevent="$dispatch('navigate', '{{ route('animasi') }}')"
                    style="text-decoration: none; color: inherit; cursor: pointer;"
                    draggable="false"
                 >Game</a>

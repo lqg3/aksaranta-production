@@ -54,11 +54,7 @@ Route::get('culture' , function () {
 // Aksara Translator
 Route::view('/aksara-translator', 'aksara-translator')->name('aksara-translator');
 
-// Aksaranta Translator (placeholder page)
-Route::view('/aksaranta-translator', 'aksaranta-translator')->name('aksaranta-translator');
-
-// Game (placeholder page)
-Route::view('/game', 'game')->name('game');
+// Removed Aksaranta Translator placeholder; using Aksara Translator only
 
 require __DIR__.'/auth.php';
 
