@@ -260,7 +260,7 @@ body{
 
             <!-- Navigation Item 6: Aksara Translator - use CDN image 29.webp -->
             <div class="navigation-item font-title font-extralight transition-all ease-in-out duration-100 hidden" 
-                data-index="6" data-image="https://aksara-batak.sgp1.cdn.digitaloceanspaces.com/images/homepage/img29.webp"
+                data-index="6" data-image="https://aksara-batak.sgp1.cdn.digitaloceanspaces.com/images/translate.webp"
                 role="listitem">
                 <button class="nav-control nav-prev hover:underline hover:decoration-2 text-3xl mr-8" 
                         aria-label="Previous navigation item" 
@@ -348,7 +348,7 @@ body{
             
             <!-- Navigation Item 11: Game -->
             <div class="navigation-item font-title font-extralight transition-all ease-in-out duration-100 hidden" 
-                data-index="11" data-image="10"
+                data-index="11" data-image="https://aksara-batak.sgp1.cdn.digitaloceanspaces.com/images/game-preview.webp"
                 role="listitem">
                 <button class="nav-control nav-prev hover:underline hover:decoration-2 text-3xl mr-8" 
                         aria-label="Previous navigation item" 
@@ -425,7 +425,7 @@ body{
         <a class="block overflow-hidden rounded-lg border border-white/10 bg-white/5 hover:bg-white/10 transition" 
            href="{{ route('aksara-translator') }}"
            @click.prevent="$dispatch('navigate', '{{ route('aksara-translator') }}')">
-            <img src="https://aksara-batak.sgp1.cdn.digitaloceanspaces.com/images/homepage/img29.webp" alt="" style="width:100%; height:48vw; object-fit:cover;">
+            <img src="https://aksara-batak.sgp1.cdn.digitaloceanspaces.com/images/translate.webp" alt="" style="width:100%; height:48vw; object-fit:cover;">
             <div class="p-4 text-white font-title">Aksara Translator</div>
         </a>
 
@@ -460,7 +460,7 @@ body{
         <a class="block overflow-hidden rounded-lg border border-white/10 bg-white/5 hover:bg-white/10 transition" 
            href="{{ route('animasi') }}"
            @click.prevent="$dispatch('navigate', '{{ route('animasi') }}')">
-            <img src="https://aksara-batak.sgp1.cdn.digitaloceanspaces.com/images/homepage/img10.webp" alt="" style="width:100%; height:48vw; object-fit:cover;">
+            <img src="https://aksara-batak.sgp1.cdn.digitaloceanspaces.com/images/game-preview.webp" alt="" style="width:100%; height:48vw; object-fit:cover;">
             <div class="p-4 text-white font-title">Game</div>
         </a>
     </div>
@@ -545,7 +545,7 @@ body{
         </div>
         <!-- Aksara Translator -->
         <div class="image-container">
-            <img src="https://aksara-batak.sgp1.cdn.digitaloceanspaces.com/images/homepage/img29.webp" alt="" class="image" data-mouse-down-at="0" draggable="false" data-prev-percentage="0">
+            <img src="https://aksara-batak.sgp1.cdn.digitaloceanspaces.com/images/translate.webp" alt="" class="image" data-mouse-down-at="0" draggable="false" data-prev-percentage="0">
             <div class="image-overlay">
                 <a class="font-title text-md hover:!underline cursor-pointer" 
                    href="{{ route('aksara-translator') }}" 
