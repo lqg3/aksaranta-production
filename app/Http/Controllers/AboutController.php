@@ -28,6 +28,11 @@ class AboutController extends Controller
         return view('about/animasi');
     }
 
+    // Aksara Translator page controller
+    public function aksaraTranslator()
+    {
+        return view('aksara-translator');
+    }
 
 
 }
