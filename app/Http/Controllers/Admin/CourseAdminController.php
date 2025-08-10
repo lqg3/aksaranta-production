@@ -131,7 +131,7 @@ class CourseAdminController extends Controller
     }
 
     
-   public function destroy(Course $course, DOCdnStorageService $storage)
+   public function destroy(Request $request, Course $course, DOCdnStorageService $storage)
     {
         $imageDeletionWarning = null;
 
@@ -145,6 +145,14 @@ class CourseAdminController extends Controller
         }
 
         $course->delete();
+
+        if ($request->ajax()) {
+            // For AJAX requests, return no content so the client can refresh the table
+            if ($imageDeletionWarning) {
+                return response()->json(['warning' => $imageDeletionWarning], 200);
+            }
+            return response()->noContent();
+        }
 
         $redirect = redirect()->route('admin.course.index')
             ->with('success', 'Course berhasil dihapus.');
