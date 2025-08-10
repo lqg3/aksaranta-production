@@ -458,15 +458,8 @@ body{
         </a>
 
         <a class="block overflow-hidden rounded-lg border border-white/10 bg-white/5 hover:bg-white/10 transition" 
-           href="{{ route('aksaranta-translator') }}"
-           @click.prevent="$dispatch('navigate', '{{ route('aksaranta-translator') }}')">
-            <img src="https://aksara-batak.sgp1.cdn.digitaloceanspaces.com/images/homepage/img29.webp" alt="" style="width:100%; height:48vw; object-fit:cover;">
-            <div class="p-4 text-white font-title">Aksaranta Translator</div>
-        </a>
-
-        <a class="block overflow-hidden rounded-lg border border-white/10 bg-white/5 hover:bg-white/10 transition" 
-           href="{{ route('game') }}"
-           @click.prevent="$dispatch('navigate', '{{ route('game') }}')">
+           href="{{ route('animasi') }}"
+           @click.prevent="$dispatch('navigate', '{{ route('animasi') }}')">
             <img src="https://aksara-batak.sgp1.cdn.digitaloceanspaces.com/images/homepage/img10.webp" alt="" style="width:100%; height:48vw; object-fit:cover;">
             <div class="p-4 text-white font-title">Game</div>
         </a>
