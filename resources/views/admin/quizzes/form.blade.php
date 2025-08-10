@@ -104,33 +104,60 @@
                 container.innerHTML += optionsHTML;
 
             } else if (type === 'drag_and_drop') {
+                // Fungsi untuk escape HTML agar aman dimasukkan ke atribut value
+                function escapeHtml(str) {
+                    if (!str) return '';
+                    return String(str)
+                        .replace(/&/g, '&amp;')
+                        .replace(/"/g, '&quot;')
+                        .replace(/'/g, '&#39;')
+                        .replace(/</g, '&lt;')
+                        .replace(/>/g, '&gt;');
+                }
+
                 const question = isEdit ? (data.question || '') : '';
                 const pairs = isEdit ? (data.pairs || []) : [];
 
+                // Render field instruksi soal
                 container.innerHTML += `
-                <div>
-                    <label class="block font-semibold mb-1 text-accent-teal">Instruksi Soal</label>
-                    <input type="text" name="quiz_content[question]" value="${question}" class="w-full px-4 py-2 bg-[#262626] border border-accent-teal rounded-lg text-white" required>
-                </div>
-            `;
+                    <div>
+                        <label class="block font-semibold mb-1 text-accent-teal">Instruksi Soal</label>
+                        <input type="text" 
+                            name="quiz_content[question]" 
+                            value="${escapeHtml(question)}" 
+                            class="w-full px-4 py-2 bg-[#262626] border border-accent-teal rounded-lg text-white" 
+                            required>
+                    </div>
+                `;
 
-                let pairsHTML = `<div class="space-y-2 mt-4">
-                <label class="block font-semibold text-accent-teal">Item dan Tempat Drop</label>`;
+                // Render field pasangan drag & drop
+                let pairsHTML = `
+                    <div class="space-y-2 mt-4">
+                        <label class="block font-semibold text-accent-teal">Item dan Tempat Drop</label>
+                `;
 
                 for (let i = 0; i < 3; i++) {
                     const item = pairs[i]?.item || '';
                     const target = pairs[i]?.target || '';
+
                     pairsHTML += `
-                    <div class="flex gap-4">
-                        <input type="text" name="quiz_content[pairs][${i}][item]" placeholder="Item" value="${item}" class="flex-1 px-4 py-2 bg-[#262626] border border-gray-600 rounded-lg text-white">
-                        <input type="text" name="quiz_content[pairs][${i}][target]" placeholder="Tempat Drop" value="${target}" class="flex-1 px-4 py-2 bg-[#262626] border border-gray-600 rounded-lg text-white">
-                    </div>
-                `;
+                        <div class="flex gap-4">
+                            <input type="text" 
+                                name="quiz_content[pairs][${i}][item]" 
+                                placeholder="Item" 
+                                value="${escapeHtml(item)}" 
+                                class="flex-1 px-4 py-2 bg-[#262626] border border-gray-600 rounded-lg text-white">
+                            <input type="text" 
+                                name="quiz_content[pairs][${i}][target]" 
+                                placeholder="Tempat Drop" 
+                                value="${escapeHtml(target)}" 
+                                class="flex-1 px-4 py-2 bg-[#262626] border border-gray-600 rounded-lg text-white">
+                        </div>
+                    `;
                 }
 
                 pairsHTML += '</div>';
                 container.innerHTML += pairsHTML;
-
             } else if (type === 'fill_in_the_blank') {
                 const question = isEdit ? (data.question || '') : '';
                 const answer = isEdit ? (data.answer || '') : '';
