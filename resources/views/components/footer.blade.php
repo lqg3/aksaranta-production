@@ -33,6 +33,7 @@
           <li><a href="{{ route('kamus') }}" class="hover:text-red-400 transition-colors">Kamus</a></li>
           <li><a href="{{ route('kamus-aksara') }}" class="hover:text-red-400 transition-colors">Kamus Aksara</a></li>
           <li><a href="{{ route('batak-songs') }}" class="hover:text-red-400 transition-colors">Songs</a></li>
+          <li><a href="{{ route('aksara-translator') }}" class="hover:text-red-400 transition-colors">Aksara Translator</a></li>
         </ul>
       </div>
 

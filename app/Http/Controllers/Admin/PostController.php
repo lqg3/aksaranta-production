@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Post;
-use App\Services\SupabaseStorageService;
+use App\Services\DOCdnStorageService;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -54,13 +54,13 @@ class PostController extends Controller
     /**
      * Store a newly created resource in storage.
     */
-    public function store(Request $request, SupabaseStorageService $storage)
+    public function store(Request $request, DOCdnStorageService $storage)
     {
 
         $request->validate([
             'title' => 'required|string|max:255',
             'body' => 'required|string',
-            'thumbnail' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+            'thumbnail' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
             'is_published' => 'string|in:true,false',
         ]);
         
@@ -77,8 +77,8 @@ class PostController extends Controller
         
         if ($request->hasFile('thumbnail')) {
             $file = $request->file('thumbnail');
-            $url = $storage->upload($file);
-            $post->thumbnail = $url;
+            $url = $storage->upload($file, 'posts/thumbnails');
+            $post->thumbnail = $url; // store CDN URL
         }
         
         
@@ -115,7 +115,7 @@ class PostController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Post $post, SupabaseStorageService $storage)
+    public function update(Request $request, Post $post, DOCdnStorageService $storage)
     {
         $request->validate([
             'title' => 'required|string|max:255',
@@ -142,8 +142,8 @@ class PostController extends Controller
 
             // Upload file baru
             $file = $request->file('thumbnail');
-            $url = $storage->upload($file);
-            $post->thumbnail = $url;
+            $url = $storage->upload($file, 'posts/thumbnails');
+            $post->thumbnail = $url; // store CDN URL
         }
 
         $post->save();
@@ -155,7 +155,7 @@ class PostController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Post $post, SupabaseStorageService $storage)
+    public function destroy(Post $post, DOCdnStorageService $storage)
     {
 
         if ($post->thumbnail) {

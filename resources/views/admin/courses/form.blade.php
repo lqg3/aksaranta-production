@@ -41,7 +41,7 @@
             <div>
                 <label for="course_description" class="block font-semibold mb-1 text-accent-teal">Deskripsi</label>
                 <textarea name="course_description" id="course_description" rows="3"
-                    class="w-full px-4 py-2 bg-[#262626] text-white border border-accent-teal rounded-lg focus:ring focus:ring-accent-teal focus:border-accent-teal">{{ old('course_description', $lessonPart->course_description ?? '') }}</textarea>
+                    class="w-full px-4 py-2 bg-[#262626] text-white border border-accent-teal rounded-lg focus:ring focus:ring-accent-teal focus:border-accent-teal">{{ old('course_description', $course->course_description ?? '') }}</textarea>
             </div>
 
             <!-- Preview Image -->

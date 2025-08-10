@@ -12,6 +12,7 @@
         'blog' => request()->routeIs('blog.*'),
         'songs' => request()->routeIs('batak-songs'),
         'aksaranta' => request()->routeIs('aksaranta'),
+        'aksaraTranslator' => request()->routeIs('aksara-translator'),
         'about' => request()->routeIs('about'),
         'animasi' => request()->routeIs('animasi'),
     ];
@@ -49,6 +50,7 @@
                         <a @click.prevent="navigateTo('{{ route('aksaranta') }}')" href="{{ route('aksaranta') }}" class="text-white px-3 py-2 rounded-lg hover:bg-white/5 {{ $navActive['aksaranta'] ? 'bg-white/10' : '' }}">Aksaranta</a>
                         <a @click.prevent="navigateTo('{{ route('blog.index') }}')" href="{{ route('blog.index') }}" class="text-white px-3 py-2 rounded-lg hover:bg-white/5 {{ $navActive['blog'] ? 'bg-white/10' : '' }}">Blog</a>
                         <a @click.prevent="navigateTo('{{ route('batak-songs') }}')" href="{{ route('batak-songs') }}" class="text-white px-3 py-2 rounded-lg hover:bg-white/5 {{ $navActive['songs'] ? 'bg-white/10' : '' }}">Lagu Batak</a>
+                        <a @click.prevent="navigateTo('{{ route('aksara-translator') }}')" href="{{ route('aksara-translator') }}" class="text-white px-3 py-2 rounded-lg hover:bg-white/5 {{ $navActive['aksaraTranslator'] ? 'bg-white/10' : '' }}">Aksara Translator</a>
                         <a @click.prevent="navigateTo('{{ route('about.index') }}')" href="{{ route('about.index') }}" class="text-white px-3 py-2 rounded-lg hover:bg-white/5 {{ $navActive['about'] ? 'bg-white/10' : '' }}">Kami</a>
                         <a @click.prevent="navigateTo('{{ route('animasi') }}')" href="{{ route('animasi') }}" class="text-white px-3 py-2 rounded-lg hover:bg-white/5 {{ $navActive['animasi'] ? 'bg-white/10' : '' }}">Game</a>
                     </div>
@@ -89,6 +91,7 @@
                             <a @click.prevent="navigateTo('{{ route('aksaranta') }}')" href="{{ route('aksaranta') }}" class="px-3 py-2 rounded-lg hover:bg-white/5 {{ $navActive['aksaranta'] ? 'bg-white/10' : '' }}">Aksaranta</a>
                             <a @click.prevent="navigateTo('{{ route('blog.index') }}')" href="{{ route('blog.index') }}" class="px-3 py-2 rounded-lg hover:bg-white/5 {{ $navActive['blog'] ? 'bg-white/10' : '' }}">Blog</a>
                             <a @click.prevent="navigateTo('{{ route('batak-songs') }}')" href="{{ route('batak-songs') }}" class="px-3 py-2 rounded-lg hover:bg-white/5 {{ $navActive['songs'] ? 'bg-white/10' : '' }}">Lagu Batak</a>
+                             <a @click.prevent="navigateTo('{{ route('aksara-translator') }}')" href="{{ route('aksara-translator') }}" class="px-3 py-2 rounded-lg hover:bg-white/5 {{ $navActive['aksaraTranslator'] ? 'bg-white/10' : '' }}">Aksara Translator</a>
                             <a @click.prevent="navigateTo('{{ route('about.index') }}')" href="{{ route('about.index') }}" class="px-3 py-2 rounded-lg hover:bg-white/5 {{ $navActive['about'] ? 'bg-white/10' : '' }}">Kami</a>
                             <a @click.prevent="navigateTo('{{ route('animasi') }}')" href="{{ route('animasi') }}" class="px-3 py-2 rounded-lg hover:bg-white/5 {{ $navActive['animasi'] ? 'bg-white/10' : '' }}">Game</a>
                             @if (auth()->check())

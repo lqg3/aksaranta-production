@@ -103,7 +103,7 @@
                 <div class="mt-4 w-full">
                     <iframe 
                         class="w-full h-64 sm:h-96 rounded-xl"
-                        src="https://www.youtube.com/embed/7iiawKyA4os?si=3qqFTgmMluETghoK" 
+                        src="https://www.youtube.com/embed/5IOqNbAeItg" 
                         title="YouTube video player" 
                         frameborder="0" 
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 

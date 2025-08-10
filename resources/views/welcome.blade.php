@@ -258,9 +258,31 @@ body{
                 </button>
             </div>
 
-            <!-- Navigation Item 6: Aksaranta - Image 6 -->
+            <!-- Navigation Item 6: Aksara Translator - use CDN image 29.webp -->
             <div class="navigation-item font-title font-extralight transition-all ease-in-out duration-100 hidden" 
-                data-index="6" data-image="30"
+                data-index="6" data-image="https://aksara-batak.sgp1.cdn.digitaloceanspaces.com/images/homepage/img29.webp"
+                role="listitem">
+                <button class="nav-control nav-prev hover:underline hover:decoration-2 text-3xl mr-8" 
+                        aria-label="Previous navigation item" 
+                        data-direction="prev">
+                    ←
+                </button>
+                <a class="nav-link hover:underline hover:decoration-2" 
+                @click.prevent="$dispatch('navigate', '{{ route('aksara-translator') }}')"
+                href="{{ route('aksara-translator') }}" 
+                aria-label="Go to Aksara Translator">
+                    Aksara Translator
+                </a>
+                <button class="nav-control nav-next hover:underline hover:decoration-2 text-3xl ml-8" 
+                        aria-label="Next navigation item" 
+                        data-direction="next">
+                    →
+                </button>
+            </div>
+
+            <!-- Navigation Item 7: Aksaranta - Image 6 -->
+            <div class="navigation-item font-title font-extralight transition-all ease-in-out duration-100 hidden" 
+                data-index="7" data-image="30"
                 role="listitem">
                 <button class="nav-control nav-prev hover:underline hover:decoration-2 text-3xl mr-8" 
                         aria-label="Previous navigation item" 
@@ -280,9 +302,9 @@ body{
                 </button>
             </div>
 
-            <!-- Navigation Item 7: Blog - Image 7 -->
+            <!-- Navigation Item 8: Blog - Image 7 -->
             <div class="navigation-item font-title font-extralight transition-all ease-in-out duration-100 hidden" 
-                data-index="7" data-image="31"
+                data-index="8" data-image="31"
                 role="listitem">
                 <button class="nav-control nav-prev hover:underline hover:decoration-2 text-3xl mr-8" 
                         aria-label="Previous navigation item" 
@@ -302,9 +324,9 @@ body{
                 </button>
             </div>
 
-            <!-- Navigation Item 8: Tentang Kami - Image 14 -->
+            <!-- Navigation Item 9: Tentang Kami - Image 14 -->
             <div class="navigation-item font-title font-extralight transition-all ease-in-out duration-100 hidden" 
-                data-index="8" data-image="32"
+                data-index="9" data-image="32"
                 role="listitem">
                 <button class="nav-control nav-prev hover:underline hover:decoration-2 text-3xl mr-8" 
                         aria-label="Previous navigation item" 
@@ -376,6 +398,13 @@ body{
            @click.prevent="$dispatch('navigate', '{{ route('virtual.index') }}')">
             <img src="https://aksara-batak.sgp1.cdn.digitaloceanspaces.com/images/homepage/img29.webp" alt="" style="width:100%; height:48vw; object-fit:cover;">
             <div class="p-4 text-white font-title">Virtual Tour</div>
+        </a>
+
+        <a class="block overflow-hidden rounded-lg border border-white/10 bg-white/5 hover:bg-white/10 transition" 
+           href="{{ route('aksara-translator') }}"
+           @click.prevent="$dispatch('navigate', '{{ route('aksara-translator') }}')">
+            <img src="https://aksara-batak.sgp1.cdn.digitaloceanspaces.com/images/homepage/img29.webp" alt="" style="width:100%; height:48vw; object-fit:cover;">
+            <div class="p-4 text-white font-title">Aksara Translator</div>
         </a>
 
         <a class="block overflow-hidden rounded-lg border border-white/10 bg-white/5 hover:bg-white/10 transition" 
@@ -483,6 +512,18 @@ body{
                    style="text-decoration: none; color: inherit; cursor: pointer;"
                    draggable="false"
                 >Virtual Tour</a>
+            </div>
+        </div>
+        <!-- Aksara Translator -->
+        <div class="image-container">
+            <img src="https://aksara-batak.sgp1.cdn.digitaloceanspaces.com/images/homepage/img29.webp" alt="" class="image" data-mouse-down-at="0" draggable="false" data-prev-percentage="0">
+            <div class="image-overlay">
+                <a class="font-title text-md hover:!underline cursor-pointer" 
+                   href="{{ route('aksara-translator') }}" 
+                   @click.prevent="$dispatch('navigate', '{{ route('aksara-translator') }}')"
+                   style="text-decoration: none; color: inherit; cursor: pointer;"
+                   draggable="false"
+                >Aksara Translator</a>
             </div>
         </div>
         <!-- Lagu Batak -->

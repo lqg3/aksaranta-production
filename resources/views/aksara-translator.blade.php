@@ -284,24 +284,25 @@
 
 @section('content')
         <!-- Hero Section -->
-        <section class="relative w-full h-[100dvh] max-h-[900px] overflow-hidden flex items-center justify-center">
-            <img src="{{ asset('img/culture/hero-section-bg.svg') }}" alt="Background"
-                class="absolute inset-0 w-full h-full object-cover -z-10 pointer-events-none select-none" />
-            <div class="w-full max-w-[1440px] relative h-full">
-                <div
-                    class="absolute left-4 bottom-6 sm:left-10 sm:bottom-10 md:left-20 md:bottom-12 lg:left-28 lg:bottom-16 xl:bottom-20">
-                    <h1 class="font-bold text-xl sm:text-3xl md:text-6xl lg:text-7xl w-3/4">
-                        Aksara Batak Translator
-                    </h1>
-                    <p class="font-extralight w-full sm:w-5/6 md:w-3/4 text-sm sm:text-base">
-                        Explore the beauty of Batak script. Quickly and accurately translate text to Batak script.
-                    </p>
-                </div>
+        <div class="header">
+            <h1 class="font-title text-4xl pt-24 md:text-5xl lg:text-7xl font-bold text-center">
+                Pengubah Teks Aksara Batak
+            </h1>
+            <p class="text-center text-lg mt-4">
+                Ubah teks Latin ke Aksara Batak dan sebaliknya dengan mudah dan cepat
+            </p>
+        </div>
+
+        <!-- Rotating Fun Facts -->
+        <section class="max-w-[1440px] mx-auto px-4 mt-8">
+            <div id="funFactContainer" class="border border-white/10 bg-white/5 rounded-2xl p-5 flex items-start gap-3">
+                <span class="text-xs text-red-400 font-semibold uppercase tracking-wide shrink-0 mt-1">Fun Fact</span>
+                <p id="funFactText" role="status" aria-live="polite" class="text-white/80 transition-all duration-500 ease-out"></p>
             </div>
         </section>
 
         <section class="max-w-[1440px] mx-auto my-20 space-y-4 px-4">
-            <h2 class="text-[#FCF800] text-center text-xl font-semibold">Tulis • Baca • Lestarikan</h2>
+            <h2 class="text-red-400 text-center text-xl font-semibold">Tulis • Baca • Lestarikan</h2>
             <h1 class="font-bold text-4xl text-center">Aksara Batak untuk Semua</h1>
             <p class="pt-4 text-lg text-center">Jelajahi keindahan aksara Batak. Terjemahkan teks dari dan ke aksara
                 Batak dengan cepat dan akurat.</p>
@@ -310,7 +311,7 @@
                 <div class="flex md:w-1/2 flex-col shadow-sm overflow-hidden">
                     <h3 class="text-2xl">Teks Latin</h3>
                     <textarea id="inputLatin" oninput="autoResize(this); debounceTransliterate()"
-                        class="grow min-h-[250px] max-h-[1000px] overflow-hidden resize-none border-t border-r border-l p-6 border-[#3C3C3C] rounded-t-3xl focus:outline-0" ></textarea>
+                        class="grow min-h-[250px] max-h-[1000px] overflow-hidden resize-none border-t border-r border-l p-6 border-[#3C3C3C] rounded-t-3xl focus:outline-0 bg-[#262626] text-white placeholder:text-white/60 caret-white" placeholder="Masukkan teks..."></textarea>
                     <div
                         class="flex justify-between pt-2 px-4 pb-4 border-l border-r border-b rounded-b-3xl border-[#3C3C3C]">
                         <button onclick="startDictationTo('#inputLatin')" class="cursor-pointer" id="dictation-btn">
@@ -416,5 +417,55 @@
                 const newHeight = Math.max(textarea.scrollHeight, minHeight);
                 textarea.style.height = newHeight + 'px';
             }
+        </script>
+
+        <script>
+            (function initRotatingFunFacts() {
+                const facts = [
+                    'Aksara Batak adalah sistem tulisan abugida: setiap aksara konsonan membawa vokal inheren /a/.',
+                    'Secara tradisional, naskah Batak ditulis pada pustaha dari kulit kayu, bambu, atau tulang kerbau.',
+                    'Aksara Batak memiliki beberapa varian daerah: Toba, Karo, Mandailing, Simalungun, dan Pakpak.',
+                    'Tanda pemati vokal (pangolat) ᯲ digunakan untuk mematikan vokal bawaan pada konsonan.',
+                    'Blok Unicode untuk Aksara Batak berada pada rentang U+1BC0–U+1BFF.',
+                    'Penulisan vokal mandiri memiliki bentuk khusus dan tidak selalu mengikuti pola konsonan + diakritik.',
+                    'Banyak manuskrip Batak berisi ilmu perbintangan, pengobatan tradisional, hingga mantra-mantra.'
+                ];
+
+                const textEl = document.getElementById('funFactText');
+                const container = document.getElementById('funFactContainer');
+                if (!textEl || !container) return;
+
+                let index = 0;
+                let intervalId = null;
+
+                function showNextFact() {
+                    textEl.classList.add('opacity-0', 'translate-y-1');
+                    setTimeout(() => {
+                        textEl.textContent = facts[index];
+                        textEl.classList.remove('opacity-0', 'translate-y-1');
+                        index = (index + 1) % facts.length;
+                    }, 250);
+                }
+
+                function startRotation() {
+                    if (intervalId) return;
+                    showNextFact();
+                    intervalId = setInterval(showNextFact, 6000);
+                }
+
+                function stopRotation() {
+                    if (!intervalId) return;
+                    clearInterval(intervalId);
+                    intervalId = null;
+                }
+
+                container.addEventListener('mouseenter', stopRotation);
+                container.addEventListener('mouseleave', startRotation);
+                document.addEventListener('visibilitychange', () => {
+                    if (document.hidden) stopRotation(); else startRotation();
+                });
+
+                startRotation();
+            })();
         </script>
 @endsection

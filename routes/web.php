@@ -51,6 +51,9 @@ Route::get('culture' , function () {
     return view('culture');
 })->name('culture');
 
+// Aksara Translator
+Route::view('/aksara-translator', 'aksara-translator')->name('aksara-translator');
+
 require __DIR__.'/auth.php';
 
 // Virtual Tour Routes
