@@ -12,7 +12,7 @@
 })" class="space-y-8 bg-bg-dark min-h-screen p-6 text-text-primary">
 
     <template x-if="quizzes.length === 0">
-        <p class="text-center text-gray-400 text-lg">No quizzes available for this lesson part.</p>
+        <p class="text-center text-gray-400 text-lg">Tidak ada quiz untuk bagian ini.</p>
     </template>
 
     <template x-if="quizzes.length > 0">
