@@ -130,7 +130,7 @@ body{
             <div class="navigation-item font-title font-extralight transition-all ease-in-out duration-100 hidden" 
                 data-index="0" data-image="9"
                 role="listitem">
-                <button class="nav-control nav-prev hover:underline hover:decoration-2 text-3xl mr-8" 
+                <button class="nav-control nav-prev hover:underline hover:decoration-2 text-5xl md:text-3xl mr-8" 
                         aria-label="Previous navigation item" 
                         data-direction="prev">
                     ←
@@ -141,7 +141,7 @@ body{
                 aria-label="Go to Budaya Batak">
                     Budaya Batak
                 </a>
-                <button class="nav-control nav-next hover:underline hover:decoration-2 text-3xl ml-8" 
+                <button class="nav-control nav-next hover:underline hover:decoration-2 text-5xl md:text-3xl ml-8" 
                         aria-label="Next navigation item" 
                         data-direction="next">
                     →
@@ -152,7 +152,7 @@ body{
             <div class="navigation-item font-title font-extralight transition-all ease-in-out duration-100 hidden" 
                 data-index="1" data-image="25"
                 role="listitem">
-                <button class="nav-control nav-prev hover:underline hover:decoration-2 text-3xl mr-8" 
+                <button class="nav-control nav-prev hover:underline hover:decoration-2 text-5xl md:text-3xl mr-8" 
                         aria-label="Previous navigation item" 
                         data-direction="prev">
                     ←
@@ -163,7 +163,7 @@ body{
                 aria-label="Go to Sejarah Batak">
                     Sejarah Batak
                 </a>
-                <button class="nav-control nav-next hover:underline hover:decoration-2 text-3xl ml-8" 
+                <button class="nav-control nav-next hover:underline hover:decoration-2 text-5xl md:text-3xl ml-8" 
                         aria-label="Next navigation item" 
                         data-direction="next">
                     →
@@ -174,7 +174,7 @@ body{
             <div class="navigation-item font-title font-extralight transition-all ease-in-out duration-100 hidden" 
                 data-index="2" data-image="27"
                 role="listitem">
-                <button class="nav-control nav-prev hover:underline hover:decoration-2 text-3xl mr-8" 
+                <button class="nav-control nav-prev hover:underline hover:decoration-2 text-5xl md:text-3xl mr-8" 
                         aria-label="Previous navigation item" 
                         data-direction="prev">
                     ←
@@ -185,7 +185,7 @@ body{
                 aria-label="Go to Aksara Batak">
                     Aksara Batak
                 </a>
-                <button class="nav-control nav-next hover:underline hover:decoration-2 text-3xl ml-8" 
+                <button class="nav-control nav-next hover:underline hover:decoration-2 text-5xl md:text-3xl ml-8" 
                         aria-label="Next navigation item" 
                         data-direction="next">
                     →
@@ -196,7 +196,7 @@ body{
             <div class="navigation-item font-title font-extralight transition-all ease-in-out duration-100 hidden" 
                 data-index="3" data-image="26"
                 role="listitem">
-                <button class="nav-control nav-prev hover:underline hover:decoration-2 text-3xl mr-8" 
+                <button class="nav-control nav-prev hover:underline hover:decoration-2 text-5xl md:text-3xl mr-8" 
                         aria-label="Previous navigation item" 
                         data-direction="prev">
                     ←
@@ -207,7 +207,7 @@ body{
                 aria-label="Go to Glosarium & Kamus">
                     Glosarium & Kamus
                 </a>
-                <button class="nav-control nav-next hover:underline hover:decoration-2 text-3xl ml-8" 
+                <button class="nav-control nav-next hover:underline hover:decoration-2 text-5xl md:text-3xl ml-8" 
                         aria-label="Next navigation item" 
                         data-direction="next">
                     →
@@ -218,7 +218,7 @@ body{
             <div class="navigation-item font-title font-extralight transition-all ease-in-out duration-100 hidden" 
                 data-index="4" data-image="28"
                 role="listitem">
-                <button class="nav-control nav-prev hover:underline hover:decoration-2 text-3xl mr-8" 
+                <button class="nav-control nav-prev hover:underline hover:decoration-2 text-5xl md:text-3xl mr-8" 
                         aria-label="Previous navigation item" 
                         data-direction="prev">
                     ←
@@ -229,7 +229,7 @@ body{
                 aria-label="Go to Virtual Tour">
                     Virtual Tour
                 </a>
-                <button class="nav-control nav-next hover:underline hover:decoration-2 text-3xl ml-8" 
+                <button class="nav-control nav-next hover:underline hover:decoration-2 text-5xl md:text-3xl ml-8" 
                         aria-label="Next navigation item" 
                         data-direction="next">
                     →
@@ -240,7 +240,7 @@ body{
             <div class="navigation-item font-title font-extralight transition-all ease-in-out duration-100 hidden" 
                 data-index="5" data-image="29"
                 role="listitem">
-                <button class="nav-control nav-prev hover:underline hover:decoration-2 text-3xl mr-8" 
+                <button class="nav-control nav-prev hover:underline hover:decoration-2 text-5xl md:text-3xl mr-8" 
                         aria-label="Previous navigation item" 
                         data-direction="prev">
                     ←
@@ -251,7 +251,7 @@ body{
                 aria-label="Go to Lagu Batak">
                     Lagu Batak
                 </a>
-                <button class="nav-control nav-next hover:underline hover:decoration-2 text-3xl ml-8" 
+                <button class="nav-control nav-next hover:underline hover:decoration-2 text-5xl md:text-3xl ml-8" 
                         aria-label="Next navigation item" 
                         data-direction="next">
                     →
@@ -262,7 +262,7 @@ body{
             <div class="navigation-item font-title font-extralight transition-all ease-in-out duration-100 hidden" 
                 data-index="6" data-image="https://aksara-batak.sgp1.cdn.digitaloceanspaces.com/images/translate.webp"
                 role="listitem">
-                <button class="nav-control nav-prev hover:underline hover:decoration-2 text-3xl mr-8" 
+                <button class="nav-control nav-prev hover:underline hover:decoration-2 text-5xl md:text-3xl mr-8" 
                         aria-label="Previous navigation item" 
                         data-direction="prev">
                     ←
@@ -273,7 +273,7 @@ body{
                 aria-label="Go to Aksara Translator">
                     Aksara Translator
                 </a>
-                <button class="nav-control nav-next hover:underline hover:decoration-2 text-3xl ml-8" 
+                <button class="nav-control nav-next hover:underline hover:decoration-2 text-5xl md:text-3xl ml-8" 
                         aria-label="Next navigation item" 
                         data-direction="next">
                     →
@@ -284,7 +284,7 @@ body{
             <div class="navigation-item font-title font-extralight transition-all ease-in-out duration-100 hidden" 
                 data-index="7" data-image="30"
                 role="listitem">
-                <button class="nav-control nav-prev hover:underline hover:decoration-2 text-3xl mr-8" 
+                <button class="nav-control nav-prev hover:underline hover:decoration-2 text-5xl md:text-3xl mr-8" 
                         aria-label="Previous navigation item" 
                         data-direction="prev">
                     ←
@@ -295,7 +295,7 @@ body{
                 aria-label="Go to Aksaranta">
                     Aksaranta
                 </a>
-                <button class="nav-control nav-next hover:underline hover:decoration-2 text-3xl ml-8" 
+                <button class="nav-control nav-next hover:underline hover:decoration-2 text-5xl md:text-3xl ml-8" 
                         aria-label="Next navigation item" 
                         data-direction="next">
                     →
@@ -306,7 +306,7 @@ body{
             <div class="navigation-item font-title font-extralight transition-all ease-in-out duration-100 hidden" 
                 data-index="8" data-image="31"
                 role="listitem">
-                <button class="nav-control nav-prev hover:underline hover:decoration-2 text-3xl mr-8" 
+                <button class="nav-control nav-prev hover:underline hover:decoration-2 text-5xl md:text-3xl mr-8" 
                         aria-label="Previous navigation item" 
                         data-direction="prev">
                     ←
@@ -317,7 +317,7 @@ body{
                 aria-label="Go to Blog">
                     Blog
                 </a>
-                <button class="nav-control nav-next hover:underline hover:decoration-2 text-3xl ml-8" 
+                <button class="nav-control nav-next hover:underline hover:decoration-2 text-5xl md:text-3xl ml-8" 
                         aria-label="Next navigation item" 
                         data-direction="next">
                     →
@@ -328,7 +328,7 @@ body{
             <div class="navigation-item font-title font-extralight transition-all ease-in-out duration-100 hidden" 
                 data-index="9" data-image="32"
                 role="listitem">
-                <button class="nav-control nav-prev hover:underline hover:decoration-2 text-3xl mr-8" 
+                <button class="nav-control nav-prev hover:underline hover:decoration-2 text-5xl md:text-3xl mr-8" 
                         aria-label="Previous navigation item" 
                         data-direction="prev">
                     ←
@@ -339,7 +339,7 @@ body{
                 aria-label="Go to Tentang Kami">
                     Tentang Kami
                 </a>
-                <button class="nav-control nav-next hover:underline hover:decoration-2 text-3xl ml-8" 
+                <button class="nav-control nav-next hover:underline hover:decoration-2 text-5xl md:text-3xl ml-8" 
                         aria-label="Next navigation item" 
                         data-direction="next">
                     →
