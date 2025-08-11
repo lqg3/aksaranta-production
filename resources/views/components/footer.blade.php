@@ -70,10 +70,6 @@
     <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
       <p class="text-white/60 text-xs">© {{ $year }} Aksaranta. All rights reserved.</p>
       <div class="flex items-center gap-4 text-xs text-white/60">
-        <a href="#" class="hover:text-red-400 transition-colors">Terms</a>
-        <span class="opacity-30">•</span>
-        <a href="#" class="hover:text-red-400 transition-colors">Privacy</a>
-        <span class="opacity-30">•</span>
         <a href="#top" class="hover:text-red-400 transition-colors scroll-smooth" onclick="event.preventDefault(); window.scrollTo({top: 0, behavior: 'smooth'});">Kembali ke atas</a>
         <span class="opacity-30">•</span>
         <a href="#top" id="credits" class="hover:text-red-400 transition-colors">Credits</a>
