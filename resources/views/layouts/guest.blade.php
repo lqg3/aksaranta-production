@@ -41,14 +41,14 @@
              x-transition:leave="transition ease-out duration-600"
              x-transition:leave-start="opacity-100"
              x-transition:leave-end="opacity-0"
-             class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-bg-dark">
+             class="min-h-screen flex flex-col justify-center items-center gap-4 py-10 sm:py-12 px-4 bg-bg-dark">
             <div>
                 <a href="/">
                     <x-application-logo class="w-20 h-20 fill-white text-gray-500" />
                 </a>
             </div>
 
-            <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-bg-dark border border-red-800 border-opacity-30 shadow-md overflow-hidden sm:rounded-lg">
+            <div class="w-full max-w-md px-6 py-6 bg-bg-dark border border-red-800 border-opacity-30 shadow-md overflow-hidden sm:rounded-lg">
                 {{ $slot }}
             </div>
         </div>
