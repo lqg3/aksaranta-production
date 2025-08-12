@@ -73,7 +73,7 @@
                             <template x-for="target in quiz.targetsShuffled" :key="target">
                                 <div @dragover.prevent="!hasSubmitted"
                                     @drop="hasSubmitted ? null : dropItem(index, target)"
-                                    class="flex items-center justify-center h-12 rounded-lg border-2 border-dashed text-text-primary select-none text-sm font-medium transition-colors duration-200 cursor-pointer"
+                                    class="flex items-center justify-center rounded-lg border-2 border-dashed text-text-primary select-none text-sm font-medium transition-colors duration-200 cursor-pointer min-h-[48px] p-3 break-words whitespace-normal"
                                     :class="{
                                         'border-white/20 bg-white/20': quiz.droppedPairs[target],
                                         'border-white/10 bg-white/5': !quiz.droppedPairs[target],
@@ -83,19 +83,24 @@
                                             getQuizFeedback(index).pairFeedback[target] === false
                                     }"
                                     :title="quiz.droppedPairs[target] ? 'Drag this item to reassign or remove' : 'Drop here'">
+
                                     <template x-if="quiz.droppedPairs[target]">
                                         <div draggable="true"
                                             @dragstart="hasSubmitted ? $event.preventDefault() : dragItem(index, quiz.droppedPairs[target], target)"
-                                            class="cursor-move select-none w-full h-full flex items-center justify-center"
+                                            class="cursor-move select-none w-full flex items-center justify-center px-4 py-3 rounded-lg bg-white/10 border border-white/10 shadow-sm
+            hover:bg-white/50 hover:text-black transition ease-in-out duration-200 break-words whitespace-normal"
                                             x-text="quiz.droppedPairs[target]"
-                                            title="Drag this item to another target or back to left side"></div>
+                                            title="Drag this item to another target or back to left side">
+                                        </div>
                                     </template>
+
                                     <template x-if="!quiz.droppedPairs[target]">
-                                        <span x-text="target"></span>
+                                        <span x-text="target" class="break-words whitespace-normal"></span>
                                     </template>
                                 </div>
                             </template>
                         </div>
+
                     </div>
                 </template>
 
@@ -145,7 +150,7 @@
         <!-- IMPORTANT: Wrap submit button in a real element like div -->
     </template>
 
-    
+
     @if (!empty($quizzes) && count($quizzes) > 0)
         <div class="mt-6 flex flex-col md:flex-row md:items-center md:justify-between space-y-4 md:space-y-0">
             <div class="flex space-x-4 justify-center md:justify-start">
