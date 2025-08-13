@@ -52,57 +52,66 @@
                     </div>
                 </template>
 
-                <!-- Drag and Drop -->
-                <template x-if="quiz.quiz_type === 'drag_and_drop'">
-                    <div class="grid grid-cols-2 gap-6">
-                        <!-- Left side: Available items -->
-                        <div class="space-y-3 border border-white/30 rounded-lg p-4 bg-white/5 min-h-[200px]"
-                            @dragover.prevent="!hasSubmitted"
-                            @drop="hasSubmitted ? null : dropBackToLeft(index, $event)">
-                            <template x-for="item in getAvailableItems(index)" :key="item">
-                                <div draggable="true"
-                                    @dragstart="hasSubmitted ? $event.preventDefault() : dragItem(index, item, null)"
-                                    class="cursor-move rounded-lg bg-white/10 border border-white/10 text-text-primary px-4 py-3 shadow-sm select-none
-                        hover:bg-white/50 hover:text-black transition ease-in-out duration-200"
-                                    x-text="item" title="Drag ke target jawaban"></div>
-                            </template>
-                        </div>
+<!-- Drag and Drop -->
+<template x-if="quiz.quiz_type === 'drag_and_drop'">
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <!-- Left side: Available items -->
+    <div
+      class="space-y-3 border border-white/30 rounded-lg p-4 bg-white/5 min-h-[200px]"
+      @dragover.prevent="!hasSubmitted"
+      @drop="hasSubmitted ? null : dropBackToLeft(index, $event)"
+    >
+      <template x-for="item in getAvailableItems(index)" :key="item">
+        <div
+          draggable="true"
+          @dragstart="hasSubmitted ? $event.preventDefault() : dragItem(index, item, null)"
+          class="cursor-move rounded-lg bg-white/10 border border-white/10 text-text-primary px-4 py-3 shadow-sm select-none
+            hover:bg-white/50 hover:text-black transition ease-in-out duration-200 break-words whitespace-normal
+            text-[clamp(0.75rem,2vw,1rem)]"
+          x-text="item"
+          title="Drag ke target jawaban"
+        ></div>
+      </template>
+    </div>
 
-                        <!-- Right side: Targets -->
-                        <div class="space-y-3">
-                            <template x-for="target in quiz.targetsShuffled" :key="target">
-                                <div @dragover.prevent="!hasSubmitted"
-                                    @drop="hasSubmitted ? null : dropItem(index, target)"
-                                    class="flex items-center justify-center rounded-lg border-2 border-dashed text-text-primary select-none text-sm font-medium transition-colors duration-200 cursor-pointer min-h-[48px] p-3 break-words whitespace-normal"
-                                    :class="{
-                                        'border-white/20 bg-white/20': quiz.droppedPairs[target],
-                                        'border-white/10 bg-white/5': !quiz.droppedPairs[target],
-                                        'bg-white/30 border-white/40': getQuizFeedback(index).pairFeedback &&
-                                            getQuizFeedback(index).pairFeedback[target] === true,
-                                        'bg-red-700 border-red-500': getQuizFeedback(index).pairFeedback &&
-                                            getQuizFeedback(index).pairFeedback[target] === false
-                                    }"
-                                    :title="quiz.droppedPairs[target] ? 'Drag this item to reassign or remove' : 'Drop here'">
+    <!-- Right side: Targets -->
+    <div class="space-y-3">
+      <template x-for="target in quiz.targetsShuffled" :key="target">
+        <div
+          @dragover.prevent="!hasSubmitted"
+          @drop="hasSubmitted ? null : dropItem(index, target)"
+          class="flex items-center justify-center rounded-lg border-2 border-dashed text-text-primary select-none text-sm font-medium
+            transition-colors duration-200 cursor-pointer min-h-[48px] p-3 break-words whitespace-normal
+            text-[clamp(0.7rem,1.8vw,0.95rem)]"
+          :class="{
+            'border-white/20 bg-white/20': quiz.droppedPairs[target],
+            'border-white/10 bg-white/5': !quiz.droppedPairs[target],
+            'bg-white/30 border-white/40': getQuizFeedback(index).pairFeedback && getQuizFeedback(index).pairFeedback[target] === true,
+            'bg-red-700 border-red-500': getQuizFeedback(index).pairFeedback && getQuizFeedback(index).pairFeedback[target] === false
+          }"
+          :title="quiz.droppedPairs[target] ? 'Drag this item to reassign or remove' : 'Drop here'"
+        >
+          <template x-if="quiz.droppedPairs[target]">
+            <div
+              draggable="true"
+              @dragstart="hasSubmitted ? $event.preventDefault() : dragItem(index, quiz.droppedPairs[target], target)"
+              class="cursor-move select-none w-full flex items-center justify-center px-4 py-3 rounded-lg bg-white/10 border border-white/10 shadow-sm
+                hover:bg-white/50 hover:text-black transition ease-in-out duration-200 break-words whitespace-normal
+                text-[clamp(0.75rem,2vw,1rem)]"
+              x-text="quiz.droppedPairs[target]"
+              title="Drag this item to another target or back to left side"
+            ></div>
+          </template>
 
-                                    <template x-if="quiz.droppedPairs[target]">
-                                        <div draggable="true"
-                                            @dragstart="hasSubmitted ? $event.preventDefault() : dragItem(index, quiz.droppedPairs[target], target)"
-                                            class="cursor-move select-none w-full flex items-center justify-center px-4 py-3 rounded-lg bg-white/10 border border-white/10 shadow-sm
-            hover:bg-white/50 hover:text-black transition ease-in-out duration-200 break-words whitespace-normal"
-                                            x-text="quiz.droppedPairs[target]"
-                                            title="Drag this item to another target or back to left side">
-                                        </div>
-                                    </template>
+          <template x-if="!quiz.droppedPairs[target]">
+            <span x-text="target" class="break-words whitespace-normal"></span>
+          </template>
+        </div>
+      </template>
+    </div>
+  </div>
+</template>
 
-                                    <template x-if="!quiz.droppedPairs[target]">
-                                        <span x-text="target" class="break-words whitespace-normal"></span>
-                                    </template>
-                                </div>
-                            </template>
-                        </div>
-
-                    </div>
-                </template>
 
                 <!-- Fill in the Blank -->
                 <template x-if="quiz.quiz_type === 'fill_in_the_blank'">
