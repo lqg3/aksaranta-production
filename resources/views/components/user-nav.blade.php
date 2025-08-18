@@ -53,6 +53,7 @@
                         <a @click.prevent="navigateTo('{{ route('aksara-translator') }}')" href="{{ route('aksara-translator') }}" class="dark:text-white text-black px-3 py-2 rounded-lg hover:bg-black/5 dark:hover:bg-white/5 {{ $navActive['aksaraTranslator'] ? 'bg-black/10 dark:bg-white/10' : '' }}">Aksara Translator</a>
                         <a @click.prevent="navigateTo('{{ route('about.index') }}')" href="{{ route('about.index') }}" class="dark:text-white text-black px-3 py-2 rounded-lg hover:bg-black/5 dark:hover:bg-white/5 {{ $navActive['about'] ? 'bg-black/10 dark:bg-white/10' : '' }}">Kami</a>
                         <a @click.prevent="navigateTo('{{ route('animasi') }}')" href="{{ route('animasi') }}" class="dark:text-white text-black px-3 py-2 rounded-lg hover:bg-black/5 dark:hover:bg-white/5 {{ $navActive['animasi'] ? 'bg-black/10 dark:bg-white/10' : '' }}">Game</a>
+                        <a href="https://chat.aksaranta.id/" target="_blank" rel="noopener noreferrer" class="dark:text-white text-black px-3 py-2 rounded-lg hover:bg-black/5 dark:hover:bg-white/5">Chat</a>
                     </div>
                 </div>
             </li>

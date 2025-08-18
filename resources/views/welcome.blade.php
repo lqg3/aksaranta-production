@@ -632,6 +632,17 @@ body{
                 >Blog</a>
             </div>
         </div>
+        <!-- Chat Link -->
+        <div class="image-container">
+            <img src="https://aksara-batak.sgp1.cdn.digitaloceanspaces.com/images/homepage/img31.webp" alt="" class="image" data-mouse-down-at="0" draggable="false" data-prev-percentage="0">
+            <div class="image-overlay">
+                <a class="font-title text-md hover:!underline cursor-pointer" 
+                   href="https://chat.aksaranta.id/" target="_blank" rel="noopener noreferrer"
+                   style="text-decoration: none; color: white !important; cursor: pointer;"
+                   draggable="false"
+                >Chat</a>
+            </div>
+        </div>
         <!-- Tentang Kami -->
         <div class="image-container">
             <img src="https://aksara-batak.sgp1.cdn.digitaloceanspaces.com/images/homepage/img33.webp" alt="" class="image" data-mouse-down-at="0" draggable="false" data-prev-percentage="0">

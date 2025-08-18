@@ -73,6 +73,8 @@
         <a href="#top" class="hover:text-red-400 transition-colors scroll-smooth" onclick="event.preventDefault(); window.scrollTo({top: 0, behavior: 'smooth'});">Kembali ke atas</a>
         <span class="opacity-30">•</span>
         <a href="#top" id="credits" class="hover:text-red-400 transition-colors">Credits</a>
+        <span class="opacity-30">•</span>
+        <a href="https://chat.aksaranta.id/" target="_blank" rel="noopener noreferrer" class="hover:text-red-400 transition-colors">Chat</a>
       </div>
     </div>
   </div>
