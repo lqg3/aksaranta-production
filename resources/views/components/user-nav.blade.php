@@ -80,8 +80,8 @@
                 <div x-cloak x-show="open" @click.away="open=false" x-transition class="fixed inset-0 z-[999999] bg-black/70">
                     <div class="absolute right-0 top-0 w-72 h-full bg-white dark:bg-bg-dark p-6 overflow-y-auto">
                         <div class="flex justify-between items-center mb-4">
-                            <span class="font-title">Menu</span>
-                            <button @click="open=false" class="text-white/70">✕</button>
+                            <span class="font-title dark:text-white text-black">Menu</span>
+                            <button @click="open=false" class="dark:text-white/70 text-black/60">✕</button>
                         </div>
                         <nav class="flex flex-col gap-2 text-base">
                             <a @click.prevent="navigateTo('{{ route('culture') }}')" href="{{ route('culture') }}" class="px-3 py-2 rounded-lg dark:hover:bg-white/5 hover:bg-black/5 {{ $navActive['culture'] ? 'bg-black/10 dark:bg-white/10' : '' }}">Budaya</a>
@@ -95,11 +95,17 @@
                              <a @click.prevent="navigateTo('{{ route('aksara-translator') }}')" href="{{ route('aksara-translator') }}" class="px-3 py-2 rounded-lg dark:hover:bg-white/5 hover:bg-black/5 {{ $navActive['aksaraTranslator'] ? 'bg-black/10 dark:bg-white/10' : '' }}">Aksara Translator</a>
                             <a @click.prevent="navigateTo('{{ route('about.index') }}')" href="{{ route('about.index') }}" class="px-3 py-2 rounded-lg dark:hover:bg-white/5 hover:bg-black/5 {{ $navActive['about'] ? 'bg-black/10 dark:bg-white/10' : '' }}">Kami</a>
                             <a @click.prevent="navigateTo('{{ route('animasi') }}')" href="{{ route('animasi') }}" class="px-3 py-2 rounded-lg dark:hover:bg-white/5 hover:bg-black/5 {{ $navActive['animasi'] ? 'bg-black/10 dark:bg-white/10' : '' }}">Game</a>
+                            <a href="https://chat.aksaranta.id/" target="_blank" rel="noopener noreferrer" class="px-3 py-2 rounded-lg dark:hover:bg-white/5 hover:bg-black/5">Chat</a>
                             @if (auth()->check())
                                 <form method="POST" action="{{ route('logout') }}" class="mt-1">
                                     @csrf
                                     <button type="submit" class="text-left px-3 py-2 rounded-lg hover:bg-white/5 text-red-400">Logout</button>
                                 </form>
+                            @else
+                                <a @click.prevent="navigateTo('{{ route('login') }}')" href="{{ route('login') }}" class="px-3 py-2 rounded-lg dark:hover:bg-white/5 hover:bg-black/5">Login</a>
+                                @if (Route::has('register'))
+                                    <a @click.prevent="navigateTo('{{ route('register') }}')" href="{{ route('register') }}" class="px-3 py-2 rounded-lg dark:hover:bg-white/5 hover:bg-black/5">Register</a>
+                                @endif
                             @endif
                         </nav>
                     </div>
@@ -135,9 +141,6 @@
                 @csrf
                 <button type="submit" class="text-red-500 hover:text-red-700 transition-colors duration-300">Logout</button>
             </form>
-        @else
-            <a href="{{ route('login') }}" class=" font-title dark:text-white text-black hover:text-opacity-80 transition-colors duration-300"
-               @click.prevent="navigateTo('{{ route('login') }}')">Login</a>
         @endif
     </div>
 </nav>

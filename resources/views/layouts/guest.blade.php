@@ -11,6 +11,20 @@
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
+        <!-- Theme init before styles -->
+        <script>
+            (function() {
+                try {
+                    var stored = localStorage.getItem('theme');
+                    var useDark = stored ? (stored === 'dark') : true; // default dark if unset
+                    if (!stored) {
+                        localStorage.setItem('theme', 'dark');
+                    }
+                    document.documentElement.classList.toggle('dark', useDark);
+                    document.documentElement.classList.toggle('light', !useDark);
+                } catch (e) {}
+            })();
+        </script>
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
