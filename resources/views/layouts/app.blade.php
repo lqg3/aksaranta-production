@@ -16,8 +16,10 @@
             (function() {
                 try {
                     var stored = localStorage.getItem('theme');
-                    var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-                    var useDark = stored ? (stored === 'dark') : prefersDark;
+                    var useDark = stored ? (stored === 'dark') : true; // default dark on first visit
+                    if (!stored) {
+                        localStorage.setItem('theme', 'dark');
+                    }
                     document.documentElement.classList.toggle('dark', useDark);
                     document.documentElement.classList.toggle('light', !useDark);
                 } catch (e) {}
