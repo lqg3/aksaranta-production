@@ -14,7 +14,7 @@
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    <body class="font-sans text-gray-900 antialiased bg-bg-dark" 
+    <body class="font-sans antialiased bg-app text-app" 
           x-data="pageTransition()" 
           x-init="init(); window.currentPageTransition = $data">
         
@@ -29,7 +29,7 @@
              x-transition:leave="transition ease-in duration-600"
              x-transition:leave-start="opacity-100"
              x-transition:leave-end="opacity-0"
-             class="fixed inset-0 bg-bg-dark flex items-center justify-center z-50">
+             class="fixed inset-0 bg-app flex items-center justify-center z-50">
         </div>
 
         <!-- Main content wrapper - only content inside transitions -->
@@ -41,14 +41,14 @@
              x-transition:leave="transition ease-out duration-600"
              x-transition:leave-start="opacity-100"
              x-transition:leave-end="opacity-0"
-             class="min-h-screen flex flex-col justify-center items-center gap-4 py-10 sm:py-12 px-4 bg-bg-dark">
+             class="min-h-screen flex flex-col justify-center items-center gap-4 py-10 sm:py-12 px-4 bg-app">
             <div>
                 <a href="/">
                     <x-application-logo class="w-20 h-20 fill-white text-gray-500" />
                 </a>
             </div>
 
-            <div class="w-full max-w-md px-6 py-6 bg-bg-dark border border-red-800 border-opacity-30 shadow-md overflow-hidden sm:rounded-lg">
+            <div class="w-full max-w-md px-6 py-6 bg-app border border-red-800 border-opacity-30 shadow-md overflow-hidden sm:rounded-lg">
                 {{ $slot }}
             </div>
         </div>
@@ -94,5 +94,7 @@
                 }
             }
         </script>
+        <!-- Theme toast -->
+        <div id="theme-toast" class="fixed bottom-6 left-1/2 -translate-x-1/2 px-4 py-2 rounded-lg bg-black/80 text-white text-sm opacity-0 translate-y-2 transition-all duration-300 pointer-events-none z-[10000]"></div>
     </body>
 </html>

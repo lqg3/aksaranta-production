@@ -11,10 +11,22 @@
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
+        <!-- Theme init before styles -->
+        <script>
+            (function() {
+                try {
+                    var stored = localStorage.getItem('theme');
+                    var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+                    var useDark = stored ? (stored === 'dark') : prefersDark;
+                    document.documentElement.classList.toggle('dark', useDark);
+                    document.documentElement.classList.toggle('light', !useDark);
+                } catch (e) {}
+            })();
+        </script>
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    <body class="font-sans antialiased bg-bg-dark" 
+    <body class="font-sans antialiased bg-app text-app" 
           x-data="pageTransition()" 
           x-init="init(); window.currentPageTransition = $data">
         
@@ -29,7 +41,7 @@
              x-transition:leave="transition ease-in duration-600"
              x-transition:leave-start="opacity-100"
              x-transition:leave-end="opacity-0"
-             class="fixed inset-0 bg-bg-dark flex items-center justify-center z-50">
+             class="fixed inset-0 bg-app flex items-center justify-center z-50">
         </div>
 
         <!-- Main content wrapper - only content inside transitions -->
@@ -41,7 +53,7 @@
              x-transition:leave="transition ease-out duration-600"
              x-transition:leave-start="opacity-100"
              x-transition:leave-end="opacity-0"
-             class="min-h-screen bg-gray-100 dark:bg-gray-900">
+             class="min-h-screen">
 
             <!-- Page Heading -->
             @isset($header)
@@ -102,5 +114,8 @@
 
         <!-- Material Tailwind Ripple Effect Script -->
         <script async src="https://unpkg.com/@material-tailwind/html@latest/scripts/ripple.js"></script>
+
+        <!-- Theme toast -->
+        <div id="theme-toast" class="fixed bottom-6 left-1/2 -translate-x-1/2 px-4 py-2 rounded-lg bg-black/80 text-white text-sm opacity-0 translate-y-2 transition-all duration-300 pointer-events-none z-[10000]"></div>
     </body>
 </html>

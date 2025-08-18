@@ -19,6 +19,57 @@
     font-family: 'Comfortaa', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
 }
 
+/* Theme tokens using CSS variables for easy light/dark switching */
+:root {
+    --app-bg: 27 27 27;            /* #1b1b1b */
+    --app-text: 250 249 246;       /* #FAF9F6 */
+    --app-surface: 255 255 255;    /* base white used with opacity via bg-white/5 */
+}
+
+.light {
+    --app-bg: 250 249 246;         /* #FAF9F6 */
+    --app-text: 27 27 27;          /* #1b1b1b */
+    --app-surface: 0 0 0;          /* for bg-black/5 like effect in light */
+}
+
+.dark {
+    --app-bg: 27 27 27;            /* #1b1b1b */
+    --app-text: 250 249 246;       /* #FAF9F6 */
+    --app-surface: 255 255 255;
+}
+
+/* Global background and text utilities bound to variables */
+.bg-app {
+    background-color: rgb(var(--app-bg) / 1);
+}
+
+.text-app {
+    color: rgb(var(--app-text) / 1);
+}
+
+/* Surface utility: use via bg-white/5 or bg-black/5 based on mode; helper class: */
+.surface-card {
+    /* default to dark mode style equivalent */
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.light .surface-card {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+/* Adjust common surface utility in light mode to maintain contrast */
+.light .bg-white\/5 { background-color: rgba(0,0,0,0.05) !important; }
+
+/* Headings and buttons use Comfortaa */
+h1, h2, h3, h4, h5, h6, .btn, .button, button {
+    font-family: 'Comfortaa', sans-serif;
+}
+
+/* Body text uses Open Sans by default through .font-sans and reset below */
+body {
+    color: rgb(var(--app-text) / 1);
+}
+
 /* Navigation Carousel Styles */
 .navigation-carousel {
     position: fixed;

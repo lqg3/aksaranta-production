@@ -10,7 +10,7 @@
     @yield('head')
 </head>
 
-<body class="bg-bg-dark" 
+<body class="bg-white dark:bg-bg-dark text-app" 
       x-data="pageTransition()" 
       x-init="init(); window.currentPageTransition = $data">
 
@@ -25,7 +25,7 @@
          x-transition:leave="transition ease-in duration-600"
          x-transition:leave-start="opacity-100"
          x-transition:leave-end="opacity-0"
-         class="fixed inset-0 bg-bg-dark flex items-center justify-center z-50">
+         class="fixed inset-0 bg-white dark:bg-bg-dark flex items-center justify-center z-50">
     </div>
 
     <!-- Main content wrapper - only content inside transitions -->

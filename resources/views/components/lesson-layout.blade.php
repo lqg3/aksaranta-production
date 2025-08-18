@@ -8,12 +8,32 @@
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>{{ $lessonName }} - Aksaranta</title>
         <meta name="csrf-token" content="{{ csrf_token() }}">
+        <script>
+            (function() {
+                try {
+                    var stored = localStorage.getItem('theme');
+                    var root = document.documentElement;
+                    if (stored === 'light') {
+                        root.classList.remove('dark');
+                    } else if (stored === 'dark') {
+                        root.classList.add('dark');
+                    } else {
+                        // First visit default: dark mode
+                        root.classList.add('dark');
+                        localStorage.setItem('theme', 'dark');
+                    }
+                } catch (e) {
+                    // Fail-safe: ensure dark by default
+                    document.documentElement.classList.add('dark');
+                }
+            })();
+        </script>
         @vite(['resources/css/app.css', 'resources/js/app.js'])
         <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     </head>
 
-    <body class="bg-bg-dark flex flex-col justify-center items-center text-text-primary" x-data="lessonPage()"
+    <body class="bg-white dark:bg-bg-dark text-app flex flex-col justify-center items-center" x-data="lessonPage()"
         x-init="init()">
 
         <!-- Navigation - outside transition wrapper so it stays static -->
@@ -23,7 +43,7 @@
         <div x-show="isLoading" x-transition:enter="transition ease-out duration-600"
             x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100"
             x-transition:leave="transition ease-in duration-600" x-transition:leave-start="opacity-100"
-            x-transition:leave-end="opacity-0" class="fixed inset-0 bg-bg-dark flex items-center justify-center z-50">
+            x-transition:leave-end="opacity-0" class="fixed inset-0 bg-app flex items-center justify-center z-50">
         </div>
 
         <!-- Main content wrapper -->
@@ -35,44 +55,44 @@
             <section class="mt-24 md:w-[80%] w-[90%]">
                 <!-- Breadcrumbs -->
                 <div class="flex md:flex-col sm:flex-col flex-col lg:flex-row gap-4 lg:justify-between align-middle">
-                    <ul class="text-white/40 flex gap-2">
-                        <li class="hover:text-white/80 cursor-pointer transition-all ease-in-out-100 duration-100">
+                    <ul class="dark:text-white/60 flex gap-2">
+                        <li class="text-black hover:dark:text-white/80 cursor-pointer transition-all ease-in-out-100 duration-100">
                             <a href="#" @click.prevent="navigateTo('/learn')">Learn</a>
                         </li>
-                        <li class="!text-white/40">></li>
-                        <li class="hover:text-white/80 cursor-pointer transition-all ease-in-out-100 duration-100">
+                        <li class="text-black !dark:text-white/40">></li>
+                        <li class="text-black hover:dark:text-white/80 cursor-pointer transition-all ease-in-out-100 duration-100">
                             <a href="#"
                                 @click.prevent="navigateTo('{{ route('learn.course', ['slug' => $course->slug]) }}')">
                                 {{ $course->course_name }} </a>
                         </li>
-                        <li class="!text-white/40">></li>
-                        <li class="hover:text-white/80 cursor-pointer transition-all ease-in-out-100 duration-100">
+                        <li class="text-black !dark:text-white/40">></li>
+                        <li class="text-black hover:dark:text-white/80 cursor-pointer transition-all ease-in-out-100 duration-100">
                             <a href="#"
                                 @click.prevent="navigateTo('{{ route('learn.course', ['slug' => $course->slug]) }}')">
                                 {{ $lessonName }} </a>
                         </li>
-                        <li class="!text-white/40">></li>
-                        <li class="hover:text-white/80 cursor-pointer transition-all ease-in-out-100 duration-100">Video
+                        <li class="text-black !dark:text-white/40">></li>
+                        <li class="text-black hover:dark:text-white/80 cursor-pointer transition-all ease-in-out-100 duration-100">Video
                         </li>
                     </ul>
                 </div>
 
                 <!-- Course Title -->
-                <h1 class="text-text-primary font-semibold lg:text-title md:text-4xl sm:text-4xl mt-4 ">
+                <h1 class="text-black dark:text-white font-semibold lg:text-title md:text-4xl sm:text-4xl mt-4 ">
                     {{ $lessonName }} </h1>
-                <p class="text-white/70 text-lg mt-4"> </p>
+                <p class="dark:text-white/70 text-lg mt-4"> </p>
 
                 <!-- Lesson Progress Tabs -->
-                <div class="bg-bg-card bg-opacity-10 w-100 rounded-lg">
+                <div class="bg-white/5 w-100 rounded-lg">
                     <ul class="flex text-center">
-                        <li class="cursor-pointer hover:bg-bg-card hover:bg-opacity-50 transition-all duration-600 flex-1 py-3 text-center border border-white/20 rounded-l-lg"
-                            :class="{ 'bg-bg-card bg-opacity-30': activeTab === 'video' }"
+                        <li class="text-black dark:text-white cursor-pointer bg-black/10 hover:bg-black/10 dark:bg-white/5 dark:hover:bg-white/10 transition-all duration-600 flex-1 py-3 text-center border border-white/20 rounded-l-lg"
+                            :class="{ 'bg-black/20 dark:bg-white/10': activeTab === 'video' }"
                             @click="switchTab('video')" id="video-button">Video</li>
-                        <li class="cursor-pointer hover:bg-bg-card hover:bg-opacity-50 transition-all duration-600 flex-1 py-3 text-center border border-white/20"
-                            :class="{ 'bg-bg-card bg-opacity-30': activeTab === 'notes' }"
+                        <li class="text-black dark:text-white cursor-pointer bg-black/10 hover:bg-black/10 dark:bg-white/5 dark:hover:bg-white/10 transition-all duration-600 flex-1 py-3 text-center border border-white/20"
+                            :class="{ 'bg-black/20 dark:bg-white/10': activeTab === 'notes' }"
                             @click="switchTab('notes')" id="notes-button">Notes</li>
-                        <li class="cursor-pointer hover:bg-bg-card hover:bg-opacity-50 transition-all duration-600 flex-1 py-3 text-center border border-white/20 rounded-r-lg"
-                            :class="{ 'bg-bg-card bg-opacity-30': activeTab === 'quiz' }" @click="switchTab('quiz')"
+                        <li class="text-black dark:text-white cursor-pointer bg-black/10 hover:bg-black/10 dark:bg-white/5 dark:hover:bg-white/10 transition-all duration-600 flex-1 py-3 text-center border border-white/20 rounded-r-lg"
+                            :class="{ 'bg-black/20 dark:bg-white/10': activeTab === 'quiz' }" @click="switchTab('quiz')"
                             id="quiz-button">Quiz</li>
                     </ul>
                 </div>
@@ -86,11 +106,11 @@
                     <div class="flex gap-3 items-center">
                         @if ($isLogged)
                             <template x-if="completed">
-                                <p class="bg-green-700 bg-opacity-70 p-2 px-4 rounded-full text-white font-semibold">
+                                <p class="bg-green-700 bg-opacity-70 p-2 px-4 rounded-full dark:text-white font-semibold">
                                     Sudah Selesai</p>
                             </template>
                             <template x-if="!completed">
-                                <p class="bg-red-700 bg-opacity-50 p-2 px-4 rounded-full text-white font-semibold">Belum
+                                <p class="bg-red-700 bg-opacity-50 p-2 px-4 rounded-full dark:text-white font-semibold">Belum
                                     Selesai</p>
                             </template>
 
@@ -100,7 +120,7 @@
                                 :class="[
                                     'mt-1 text-xs select-none flex items-center gap-2 cursor-pointer transition',
                                     loading ? 'opacity-50 cursor-not-allowed' : '',
-                                    completed ? 'text-white/60 hover:text-white/80' : 'text-white/60 hover:text-white/80'
+                                    completed ? 'dark:text-white/60 hover:dark:text-white/80' : 'dark:text-white/60 hover:dark:text-white/80'
                                 ]"
                                 style="background: none;"
                                 aria-label="Tandai tugas sebagai selesai atau batalkan status selesai"
@@ -114,7 +134,7 @@
                                             <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
                                         </svg>
                                         Tandai selesai
-                                        <span x-show="loading" class="ml-2 text-xs text-white/60 animate-pulse">Mohon tunggu...</span>
+                                        <span x-show="loading" class="ml-2 text-xs dark:text-white/60 animate-pulse">Mohon tunggu...</span>
                                     </span>
                                 </template>
                                 <template x-if="completed">
@@ -125,7 +145,7 @@
                                             <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
                                         </svg>
                                         Tandai belum selesai
-                                        <span x-show="loading" class="ml-2 text-xs text-white/60 animate-pulse">Mohon tunggu...</span>
+                                        <span x-show="loading" class="ml-2 text-xs dark:text-white/60 animate-pulse">Mohon tunggu...</span>
                                     </span>
                                 </template>
                             </p>
@@ -137,7 +157,7 @@
 
                     <div class="bg-red-800 p-2 px-4 rounded-full flex items-center justify-center gap-2 cursor-pointer hover:bg-opacity-80 transition-all duration-600"
                         @click="navigateToNext()">
-                        <p>Daftar Pelajaran</p>
+                        <p class="!text-white">Daftar Pelajaran</p>
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 fill-white" viewBox="0 0 640 640">
                             <path
                                 d="M566.6 342.6C579.1 330.1 579.1 309.8 566.6 297.3L406.6 137.3C394.1 124.8 373.8 124.8 361.3 137.3C348.8 149.8 348.8 170.1 361.3 182.6L466.7 288L96 288C78.3 288 64 302.3 64 320C64 337.7 78.3 352 96 352L466.7 352L361.3 457.4C348.8 469.9 348.8 490.2 361.3 502.7C373.8 515.2 394.1 515.2 406.6 502.7L566.6 342.7z" />

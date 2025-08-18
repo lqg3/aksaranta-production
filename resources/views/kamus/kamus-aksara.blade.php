@@ -2,7 +2,7 @@
 
 @section('title', 'Aksaranta - Aksara & Ejaan')
 
-@section('body-class', 'font-title bg-bg-dark text-white')
+@section('body-class', 'font-title bg-app text-app')
 
 @section('head')
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Batak&display=swap" rel="stylesheet">
@@ -35,21 +35,21 @@
             </div>
 
             <!-- Tabs: sub-etnis -->
-            <div id="aksara-tabs" class="pt-16 sticky top-0 z-30 flex flex-wrap gap-2 bg-bg-dark border-b border-white/10 py-2">
-                <button type="button" data-tab="all" class="px-3 py-1.5 rounded-full bg-white/20 text-white text-sm">Semua</button>
-                <button type="button" data-tab="toba" class="px-3 py-1.5 rounded-full bg-white/10 hover:bg-white/20 text-white text-sm">Batak Toba</button>
-                <button type="button" data-tab="karo" class="px-3 py-1.5 rounded-full bg-white/10 hover:bg-white/20 text-white text-sm">Batak Karo</button>
-                <button type="button" data-tab="pakpak" class="px-3 py-1.5 rounded-full bg-white/10 hover:bg-white/20 text-white text-sm">Batak Pakpak</button>
-                <button type="button" data-tab="mandailing" class="px-3 py-1.5 rounded-full bg-white/10 hover:bg-white/20 text-white text-sm">Batak Mandailing</button>
-                <button type="button" data-tab="simalungun" class="px-3 py-1.5 rounded-full bg-white/10 hover:bg-white/20 text-white text-sm">Batak Simalungun</button>
+            <div id="aksara-tabs" class="pt-16 sticky top-0 z-30 flex flex-wrap gap-2 bg-app border-b border-white/10 py-2">
+                <button type="button" data-tab="all" class="px-3 py-1.5 rounded-full bg-black/10 dark:bg-white/20 text-app text-black dark:text-white text-sm">Semua</button>
+                <button type="button" data-tab="toba" class="px-3 py-1.5 rounded-full bg-black/10 hover:bg-black/20 dark:bg-white/10 dark:hover:bg-white/20 text-app text-black dark:text-white text-sm">Batak Toba</button>
+                <button type="button" data-tab="karo" class="px-3 py-1.5 rounded-full bg-black/10 hover:bg-black/20 dark:bg-white/10 dark:hover:bg-white/20 text-app text-black dark:text-white text-sm">Batak Karo</button>
+                <button type="button" data-tab="pakpak" class="px-3 py-1.5 rounded-full bg-black/10 hover:bg-black/20 dark:bg-white/10 dark:hover:bg-white/20 text-app text-black dark:text-white text-sm">Batak Pakpak</button>
+                <button type="button" data-tab="mandailing" class="px-3 py-1.5 rounded-full bg-black/10 hover:bg-black/20 dark:bg-white/10 dark:hover:bg-white/20 text-app text-black dark:text-white text-sm">Batak Mandailing</button>
+                <button type="button" data-tab="simalungun" class="px-3 py-1.5 rounded-full bg-black/10 hover:bg-black/20 dark:bg-white/10 dark:hover:bg-white/20 text-app text-black dark:text-white text-sm">Batak Simalungun</button>
             </div>
 
             <!-- Base characters -->
-            <h4 class="mt-8 text-white/80 text-sm tracking-wide">Huruf dasar</h4>
+            <h4 class="mt-8 dark:text-white/80 text-sm tracking-wide">Huruf dasar</h4>
             <div id="aksara-grid-base" class="mt-2 grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 xl:grid-cols-10 gap-3 sm:gap-4"></div>
 
             <!-- Vocals / Diacritics -->
-            <h4 class="mt-8 text-white/80 text-sm tracking-wide">Vokal & diakritik</h4>
+            <h4 class="mt-8 dark:text-white/80 text-sm tracking-wide">Vokal & diakritik</h4>
             <div id="aksara-grid-diacritics" class="mt-2 grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 xl:grid-cols-10 gap-3 sm:gap-4"></div>
             
             <!-- Guide: Usage & Pronunciation -->
@@ -61,7 +61,7 @@
                     <!-- How to write/read -->
                     <div class="bg-white/5 rounded-2xl p-5 border border-white/10">
                         <h4 class="font-semibold text-lg">Cara menggunakan aksara</h4>
-                        <ul class="mt-3 list-disc list-inside space-y-2 text-white/80 font-sans text-sm">
+                        <ul class="mt-3 list-disc list-inside space-y-2 dark:text-white/80 font-sans text-sm">
                             <li>Huruf dasar memiliki vokal inheren <span class="font-semibold">"a"</span> (mis. <span style="font-family: 'Noto Sans Batak', sans-serif" class="text-lg uc" data-cp="1BC5"></span> dibaca <span class="italic">ba</span>).</li>
                             <li>Ubah vokal dengan <span class="font-semibold">tanda vokal</span> (anak surat):
                                 <span class="inline-flex gap-2 pl-1" style="font-family: 'Noto Sans Batak', sans-serif">
@@ -88,22 +88,22 @@
                             <li>Arah tulis: kiri → kanan.</li>
                         </ul>
                         <div class="mt-4 rounded-xl bg-white/5 border border-white/10 p-4">
-                            <p class="text-white/70 text-sm">Contoh merangkai suku kata:</p>
+                            <p class="dark:text-white/70 text-sm">Contoh merangkai suku kata:</p>
                             <div class="mt-2 grid grid-cols-2 gap-3 text-sm">
                                 <div>
-                                    <p class="text-white/60">ba + i</p>
+                                    <p class="dark:text-white/60">ba + i</p>
                                     <p style="font-family: 'Noto Sans Batak', sans-serif" class="text-2xl"><span class="uc" data-cp="1BC5"></span><span class="uc" data-cp="1BEA"></span></p>
                                 </div>
                                 <div>
-                                    <p class="text-white/60">ta + o</p>
+                                    <p class="dark:text-white/60">ta + o</p>
                                     <p style="font-family: 'Noto Sans Batak', sans-serif" class="text-2xl"><span class="uc" data-cp="1BD6"></span><span class="uc" data-cp="1BEC"></span></p>
                                 </div>
                                 <div>
-                                    <p class="text-white/60">ga + pangolat</p>
+                                    <p class="dark:text-white/60">ga + pangolat</p>
                                     <p style="font-family: 'Noto Sans Batak', sans-serif" class="text-2xl"><span class="uc" data-cp="1BCE"></span><span class="uc" data-cp="1BF2"></span></p>
                                 </div>
                                 <div>
-                                    <p class="text-white/60">sa + u</p>
+                                    <p class="dark:text-white/60">sa + u</p>
                                     <p style="font-family: 'Noto Sans Batak', sans-serif" class="text-2xl"><span class="uc" data-cp="1BD8"></span><span class="uc" data-cp="1BEE"></span></p>
                                 </div>
                             </div>
@@ -116,34 +116,34 @@
                         <div class="mt-3 grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm font-sans">
                             <div class="space-y-2">
                                 <div class="flex items-center justify-between gap-3 p-2 rounded-lg bg-white/5">
-                                    <span>Ba</span><span style="font-family: 'Noto Sans Batak', sans-serif" class="text-xl uc" data-cp="1BC5"></span><span class="text-white/60">/ba/</span>
+                                    <span>Ba</span><span style="font-family: 'Noto Sans Batak', sans-serif" class="text-xl uc" data-cp="1BC5"></span><span class="dark:text-white/60">/ba/</span>
                                 </div>
                                 <div class="flex items-center justify-between gap-3 p-2 rounded-lg bg-white/5">
-                                    <span>Pa</span><span style="font-family: 'Noto Sans Batak', sans-serif" class="text-xl uc" data-cp="1BC7"></span><span class="text-white/60">/pa/</span>
+                                    <span>Pa</span><span style="font-family: 'Noto Sans Batak', sans-serif" class="text-xl uc" data-cp="1BC7"></span><span class="dark:text-white/60">/pa/</span>
                                 </div>
                                 <div class="flex items-center justify-between gap-3 p-2 rounded-lg bg-white/5">
-                                    <span>Ga</span><span style="font-family: 'Noto Sans Batak', sans-serif" class="text-xl uc" data-cp="1BCE"></span><span class="text-white/60">/ga/</span>
+                                    <span>Ga</span><span style="font-family: 'Noto Sans Batak', sans-serif" class="text-xl uc" data-cp="1BCE"></span><span class="dark:text-white/60">/ga/</span>
                                 </div>
                                 <div class="flex items-center justify-between gap-3 p-2 rounded-lg bg-white/5">
-                                    <span>Da</span><span style="font-family: 'Noto Sans Batak', sans-serif" class="text-xl uc" data-cp="1BD1"></span><span class="text-white/60">/da/</span>
+                                    <span>Da</span><span style="font-family: 'Noto Sans Batak', sans-serif" class="text-xl uc" data-cp="1BD1"></span><span class="dark:text-white/60">/da/</span>
                                 </div>
                             </div>
                             <div class="space-y-2">
                                 <div class="flex items-center justify-between gap-3 p-2 rounded-lg bg-white/5">
-                                    <span>Sa</span><span style="font-family: 'Noto Sans Batak', sans-serif" class="text-xl uc" data-cp="1BD8"></span><span class="text-white/60">/sa/</span>
+                                    <span>Sa</span><span style="font-family: 'Noto Sans Batak', sans-serif" class="text-xl uc" data-cp="1BD8"></span><span class="dark:text-white/60">/sa/</span>
                                 </div>
                                 <div class="flex items-center justify-between gap-3 p-2 rounded-lg bg-white/5">
-                                    <span>Ta</span><span style="font-family: 'Noto Sans Batak', sans-serif" class="text-xl uc" data-cp="1BD6"></span><span class="text-white/60">/ta/</span>
+                                    <span>Ta</span><span style="font-family: 'Noto Sans Batak', sans-serif" class="text-xl uc" data-cp="1BD6"></span><span class="dark:text-white/60">/ta/</span>
                                 </div>
                                 <div class="flex items-center justify-between gap-3 p-2 rounded-lg bg-white/5">
-                                    <span>La</span><span style="font-family: 'Noto Sans Batak', sans-serif" class="text-xl uc" data-cp="1BDE"></span><span class="text-white/60">/la/</span>
+                                    <span>La</span><span style="font-family: 'Noto Sans Batak', sans-serif" class="text-xl uc" data-cp="1BDE"></span><span class="dark:text-white/60">/la/</span>
                                 </div>
                                 <div class="flex items-center justify-between gap-3 p-2 rounded-lg bg-white/5">
-                                    <span>Ra</span><span style="font-family: 'Noto Sans Batak', sans-serif" class="text-xl uc" data-cp="1BD2"></span><span class="text-white/60">/ra/</span>
+                                    <span>Ra</span><span style="font-family: 'Noto Sans Batak', sans-serif" class="text-xl uc" data-cp="1BD2"></span><span class="dark:text-white/60">/ra/</span>
                                 </div>
                             </div>
                         </div>
-                        <p class="mt-3 text-xs text-white/60">Catatan: simbol IPA disederhanakan. Pelafalan dapat bervariasi antar dialek.</p>
+                        <p class="mt-3 text-xs dark:text-white/60">Catatan: simbol IPA disederhanakan. Pelafalan dapat bervariasi antar dialek.</p>
                     </div>
                 </div>
             </div>
@@ -231,7 +231,7 @@
     function renderGridTo(container, chars) {
         container.innerHTML = '';
         if (!chars.length) {
-            container.innerHTML = '<p class="col-span-full text-center text-white/60">Tidak ada aksara.</p>';
+            container.innerHTML = '<p class="col-span-full text-center dark:text-white/60">Tidak ada aksara.</p>';
                     return;
                 }
         chars.forEach((ch) => {
@@ -250,10 +250,10 @@
             card.innerHTML = `
                 <p style=\"font-family: 'Noto Sans Batak', sans-serif\" class=\"text-3xl sm:text-4xl leading-none\">${ch.aksara}</p>
                 <div class=\"mt-2 flex flex-col items-center justify-center gap-1\">
-                    <h3 class=\"text-white text-sm sm:text-base font-semibold break-words whitespace-normal\" title=\"${ch.latin}\">${baseLabel}</h3>
-                    ${variantLabel ? `<span class=\"px-2 py-0.5 rounded-full text-[10px] bg-white/10 border border-white/10 text-white/80\">${variantLabel}</span>` : ''}
+                    <h3 class=\"dark:text-white text-sm sm:text-base font-semibold break-words whitespace-normal\" title=\"${ch.latin}\">${baseLabel}</h3>
+                    ${variantLabel ? `<span class=\"px-2 py-0.5 rounded-full text-[10px] bg-white/10 border border-white/10 dark:text-white/80\">${variantLabel}</span>` : ''}
                 </div>
-                <p class=\"text-white/70 text-[10px] sm:text-xs mt-0.5\" title=\"${ch.type}\">${ch.type}</p>
+                <p class=\"dark:text-white/70 text-[10px] sm:text-xs mt-0.5\" title=\"${ch.type}\">${ch.type}</p>
             `;
             container.appendChild(card);
         });
@@ -317,12 +317,13 @@
 
     function setActiveTab(tabKey) {
         const buttons = tabsContainer.querySelectorAll('button[data-tab]');
+        const baseBtn = 'px-3 py-1.5 rounded-full text-sm text-app text-black dark:text-white transition-colors';
+        const inactiveBg = 'bg-black/10 hover:bg-black/20 dark:bg-white/10 dark:hover:bg-white/20';
+        const activeBg = 'bg-black/20 hover:bg-black/30 dark:bg-white/20 dark:hover:bg-white/30';
+
         buttons.forEach(btn => {
-            if (btn.getAttribute('data-tab') === tabKey) {
-                btn.className = 'px-3 py-1.5 rounded-full bg-white/20 text-white text-sm';
-                    } else {
-                btn.className = 'px-3 py-1.5 rounded-full bg-white/10 hover:bg-white/20 text-white text-sm';
-            }
+            const isActive = btn.getAttribute('data-tab') === tabKey;
+            btn.className = `${baseBtn} ${isActive ? activeBg : inactiveBg}`;
         });
         renderSections(datasets[tabKey] || aksaraCharacters);
     }

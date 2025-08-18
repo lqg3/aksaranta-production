@@ -2,7 +2,7 @@
 
 @section('title', 'Sejarah Aksara Batak')
 
-@section('body-class', 'font-title bg-bg-dark text-white')
+@section('body-class', 'font-title bg-app text-app')
 
 @section('content')
 

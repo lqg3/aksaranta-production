@@ -2,7 +2,7 @@
 
 @section('title', 'Batak Culture')
 
-@section('body-class', 'font-title bg-bg-dark text-white')
+@section('body-class', 'font-title bg-app text-app')
 
 @section('content')
   <head>
@@ -19,7 +19,7 @@
       body {
         font-family: "Open Sans", sans-serif;
         /* background: linear-gradient(135deg, #fff8dc 0%, #ffe4e1 100%); */
-        background-color: #1b1b1b;
+        background-color: rgb(var(--app-bg) / 1);
         min-height: 100vh;
         padding: 20px;
       }
@@ -126,6 +126,10 @@
         transform: translateY(-2px);
         box-shadow: 0 4px 12px rgba(220, 20, 60, 0.3);
       }
+      .category-tab.active:hover {
+        background: #dc143c;
+        color: white;
+      }
 
 
       .clothing-items {
@@ -219,7 +223,7 @@
 
       .cultural-info {
         margin-top: 30px;
-        background-color: #1b1b1b;
+        background-color: rgb(var(--app-bg) / 1);
         padding: 25px;
         border-radius: 15px;
         box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
@@ -327,8 +331,8 @@
     <div class="container pt-24 max-w-[1440px] mx-auto px-6 sm:px-12 lg:px-28">
       <!-- Header -->
       <div class="header">
-        <h1>Pakaian Adat Batak</h1>
-        <p>
+        <h1 class="dark:!text-white !text-black">Pakaian Adat Batak</h1>
+        <p class="dark:!text-white !text-black">
           Ganti pakaian karakter dengan pakaian tradisional Batak yang indah
         </p>
       </div>
@@ -351,16 +355,17 @@
           <div class="category-tabs ">
             <button
               class="category-tab active bg-white/10 hover:bg-white/20 text-white"
-              onclick="selectCategory('head')"
+              data-category="head"
+              onclick="selectCategory('head', this)"
             >
-              <div style="font-size: 1.5rem; margin-bottom: 5px bg-white/10 hover:bg-white/20">👑</div>
+              <div class="!text-black dark:!text-white" style="font-size: 1.5rem; margin-bottom: 5px bg-white/10 hover:bg-white/20">👑</div>
               Kepala
             </button>
-            <button class="category-tab bg-white/10 hover:bg-white/20 " onclick="selectCategory('shirt')">
+            <button class="category-tab bg-white/10 hover:bg-white/20 " data-category="shirt" onclick="selectCategory('shirt', this)">
               <div style="font-size: 1.5rem; margin-bottom: 5px bg-white/10 hover:bg-white/20">👕</div>
               Baju
             </button>
-            <button class="category-tab bg-white/10 hover:bg-white/20 " onclick="selectCategory('pants')">
+            <button class="category-tab bg-white/10 hover:bg-white/20 " data-category="pants" onclick="selectCategory('pants', this)">
               <div style="font-size: 1.5rem; margin-bottom: 5px bg-white/10 hover:bg-white/20">👖</div>
               Celana
             </button>
@@ -408,7 +413,7 @@
         <div class="info-grid">
           <div class="info-item">
             <h4 class="!text-red-600">🧵 Ulos - Kain Suci Batak</h4>
-            <p>
+            <p class="!text-black dark:!text-white">
               Ulos adalah kain tenun tradisional Batak yang dianggap suci dan
               memiliki kekuatan magis. Terdapat berbagai jenis Ulos seperti Ragi
               Hotang (Pohon Kehidupan), Sibolang (Kadal), Bintang Maratur
@@ -419,7 +424,7 @@
           </div>
           <div class="info-item">
             <h4>🎨 Motif Gorga - Seni Ukir Batak</h4>
-            <p>
+            <p class="!text-black dark:!text-white">
               Gorga adalah seni ukir dan motif hias tradisional Batak yang
               berbeda antara sub-suku. Gorga Toba memiliki pola spiral yang
               lebih rumit, sedangkan Gorga Simalungun lebih sederhana. Motif ini
@@ -429,18 +434,18 @@
           </div>
           <div class="info-item">
             <h4>🌈 Makna Warna dalam Budaya Batak</h4>
-            <p>
+            <p class="!text-black dark:!text-white">
               Setiap warna dalam pakaian adat Batak memiliki makna sakral: Merah
               (marmerah) melambangkan keberanian dan semangat juang, Hitam
               (maitom) melambangkan kebijaksanaan dan kematangan, Putih (marbun)
               melambangkan kesucian dan kedamaian, Emas/Kuning melambangkan
               kemakmuran dan keagungan, serta warna-warna alam lainnya yang
               mencerminkan hubungan harmonis dengan alam.
-            </p>
+            </p class="!text-black dark:!text-white">
           </div>
           <div class="info-item">
             <h4>🎭 Penggunaan dalam Upacara Adat</h4>
-            <p>
+            <p class="!text-black dark:!text-white">
               Pakaian adat Batak digunakan dalam berbagai upacara sakral seperti
               Horja (pesta), Mangokkal Holi (pemindahan tulang belulang),
               Martutuaon (pernikahan), dan upacara adat lainnya. Ulos Ragi
@@ -1255,14 +1260,18 @@
       }
 
       // Select category
-      function selectCategory(category) {
+      function selectCategory(category, buttonEl) {
         currentCategory = category;
 
         // Update tab appearance
         document.querySelectorAll(".category-tab").forEach((tab) => {
           tab.classList.remove("active");
         });
-        event.target.classList.add("active");
+        const targetButton =
+          buttonEl || document.querySelector(`.category-tab[data-category="${category}"]`);
+        if (targetButton) {
+          targetButton.classList.add("active");
+        }
 
         // Update category name
         document.getElementById("categoryName").textContent =

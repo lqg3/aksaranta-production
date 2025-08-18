@@ -2,6 +2,46 @@
 
 @section('content')
 
+<script>
+// Force dark mode on this page only (do not change saved preference)
+(function(){
+    try {
+        const html = document.documentElement;
+        let enforcing = false;
+        let observer;
+
+        const enforceDark = () => {
+            if (enforcing) return;
+            const needsDark = !html.classList.contains('dark');
+            const hasLight = html.classList.contains('light');
+            if (!needsDark && !hasLight) return; // already correct
+            enforcing = true;
+            if (observer) observer.disconnect();
+            if (hasLight) html.classList.remove('light');
+            if (needsDark) html.classList.add('dark');
+            enforcing = false;
+            if (observer) observer.observe(html, { attributes: true, attributeFilter: ['class'] });
+        };
+
+        // Initial enforce
+        enforceDark();
+
+        // Observe and re-enforce if any script toggles theme
+        observer = new MutationObserver(() => {
+            // Debounce via rAF to coalesce rapid mutations
+            requestAnimationFrame(enforceDark);
+        });
+        observer.observe(html, { attributes: true, attributeFilter: ['class'] });
+
+        // Intercept theme toggle clicks to immediately re-assert
+        document.addEventListener('click', (e) => {
+            const btn = e.target.closest('[aria-label="Toggle theme"]');
+            if (btn) setTimeout(enforceDark, 0);
+        }, true);
+    } catch(e) {}
+})();
+</script>
+
 <style>
 body{
     height: 100%;
@@ -35,7 +75,7 @@ body{
     bottom: 0;
     left: 0;
     right: 0;
-    color: white;
+    color: white !important;
     padding: 2rem;
     opacity: 0.5;
     transition: opacity 0.3s ease;
@@ -121,7 +161,7 @@ body{
             x-transition:leave="transition ease-in duration-300"
             x-transition:leave-start="opacity-100"
             x-transition:leave-end="opacity-0"
-            class="z-[2500] fixed inset-0 bg-bg-dark flex items-center justify-center">
+            class="z-[2500] fixed inset-0 bg-app flex items-center justify-center">
         </div>
 
         <nav class="navigation-carousel text-center text-5xl pointer-events-auto" role="navigation" aria-label="Main navigation">
@@ -383,7 +423,7 @@ body{
         x-transition:leave="transition ease-in duration-300"
         x-transition:leave-start="opacity-100"
         x-transition:leave-end="opacity-0"
-        class="z-[2500] fixed inset-0 bg-bg-dark flex items-center justify-center">
+        class="z-[2500] fixed inset-0 bg-app flex items-center justify-center">
     </div>
 
 <div class="max-w-md mx-auto px-4 space-y-4">
@@ -391,77 +431,77 @@ body{
            href="{{ route('culture') }}"
            @click.prevent="$dispatch('navigate', '{{ route('culture') }}')">
             <img src="https://aksara-batak.sgp1.cdn.digitaloceanspaces.com/images/homepage/img10.webp" alt="" style="width:100%; height:48vw; object-fit:cover;">
-            <div class="p-4 text-white font-title">Budaya Batak</div>
+            <div class="p-4 !text-white font-title">Budaya Batak</div>
         </a>
 
         <a class="block overflow-hidden rounded-lg border border-white/10 bg-white/5 hover:bg-white/10 transition" 
            href="{{ route('history') }}"
            @click.prevent="$dispatch('navigate', '{{ route('history') }}')">
             <img src="https://aksara-batak.sgp1.cdn.digitaloceanspaces.com/images/homepage/img26.webp" alt="" style="width:100%; height:48vw; object-fit:cover;">
-            <div class="p-4 text-white font-title">Sejarah Batak</div>
+            <div class="p-4 !text-white font-title">Sejarah Batak</div>
         </a>
 
         <a class="block overflow-hidden rounded-lg border border-white/10 bg-white/5 hover:bg-white/10 transition" 
            href="{{ route('kamus-aksara') }}"
            @click.prevent="$dispatch('navigate', '{{ route('kamus-aksara') }}')">
             <img src="https://aksara-batak.sgp1.cdn.digitaloceanspaces.com/images/homepage/img28.webp" alt="" style="width:100%; height:48vw; object-fit:cover;">
-            <div class="p-4 text-white font-title">Aksara Batak</div>
+            <div class="p-4 !text-white font-title">Aksara Batak</div>
         </a>
 
         <a class="block overflow-hidden rounded-lg border border-white/10 bg-white/5 hover:bg-white/10 transition" 
            href="{{ route('kamus') }}"
            @click.prevent="$dispatch('navigate', '{{ route('kamus') }}')">
             <img src="https://aksara-batak.sgp1.cdn.digitaloceanspaces.com/images/homepage/img27.webp" alt="" style="width:100%; height:48vw; object-fit:cover;">
-            <div class="p-4 text-white font-title">Glosarium & Kamus</div>
+            <div class="p-4 !text-white font-title">Glosarium & Kamus</div>
         </a>
 
         <a class="block overflow-hidden rounded-lg border border-white/10 bg-white/5 hover:bg-white/10 transition" 
            href="{{ route('virtual.index') }}"
            @click.prevent="$dispatch('navigate', '{{ route('virtual.index') }}')">
             <img src="https://aksara-batak.sgp1.cdn.digitaloceanspaces.com/images/homepage/img29.webp" alt="" style="width:100%; height:48vw; object-fit:cover;">
-            <div class="p-4 text-white font-title">Virtual Tour</div>
+            <div class="p-4 !text-white font-title">Virtual Tour</div>
         </a>
 
         <a class="block overflow-hidden rounded-lg border border-white/10 bg-white/5 hover:bg-white/10 transition" 
            href="{{ route('aksara-translator') }}"
            @click.prevent="$dispatch('navigate', '{{ route('aksara-translator') }}')">
             <img src="https://aksara-batak.sgp1.cdn.digitaloceanspaces.com/images/translate.webp" alt="" style="width:100%; height:48vw; object-fit:cover;">
-            <div class="p-4 text-white font-title">Aksara Translator</div>
+            <div class="p-4 !text-white font-title">Aksara Translator</div>
         </a>
 
         <a class="block overflow-hidden rounded-lg border border-white/10 bg-white/5 hover:bg-white/10 transition" 
            href="{{ route('batak-songs') }}"
            @click.prevent="$dispatch('navigate', '{{ route('batak-songs') }}')">
             <img src="https://aksara-batak.sgp1.cdn.digitaloceanspaces.com/images/homepage/img30.webp" alt="" style="width:100%; height:48vw; object-fit:cover;">
-            <div class="p-4 text-white font-title">Lagu Batak</div>
+            <div class="p-4 !text-white font-title">Lagu Batak</div>
         </a>
 
         <a class="block overflow-hidden rounded-lg border border-white/10 bg-white/5 hover:bg-white/10 transition" 
            href="{{ route('aksaranta') }}"
            @click.prevent="$dispatch('navigate', '{{ route('aksaranta') }}')">
             <img src="https://aksara-batak.sgp1.cdn.digitaloceanspaces.com/images/homepage/img31.webp" alt="" style="width:100%; height:48vw; object-fit:cover;">
-            <div class="p-4 text-white font-title">Aksaranta</div>
+            <div class="p-4 !text-white font-title">Aksaranta</div>
         </a>
 
         <a class="block overflow-hidden rounded-lg border border-white/10 bg-white/5 hover:bg-white/10 transition" 
            href="{{ route('blog.index') }}"
            @click.prevent="$dispatch('navigate', '{{ route('blog.index') }}')">
             <img src="https://aksara-batak.sgp1.cdn.digitaloceanspaces.com/images/homepage/img32.webp" alt="" style="width:100%; height:48vw; object-fit:cover;">
-            <div class="p-4 text-white font-title">Blog</div>
+            <div class="p-4 !text-white font-title">Blog</div>
         </a>
 
         <a class="block overflow-hidden rounded-lg border border-white/10 bg-white/5 hover:bg-white/10 transition" 
            href="{{ route('about.index') }}"
            @click.prevent="$dispatch('navigate', '{{ route('about.index') }}')">
             <img src="https://aksara-batak.sgp1.cdn.digitaloceanspaces.com/images/homepage/img33.webp" alt="" style="width:100%; height:48vw; object-fit:cover;">
-            <div class="p-4 text-white font-title">Tentang Kami</div>
+            <div class="p-4 !text-white font-title">Tentang Kami</div>
         </a>
 
         <a class="block overflow-hidden rounded-lg border border-white/10 bg-white/5 hover:bg-white/10 transition" 
            href="{{ route('animasi') }}"
            @click.prevent="$dispatch('navigate', '{{ route('animasi') }}')">
             <img src="https://aksara-batak.sgp1.cdn.digitaloceanspaces.com/images/game-preview.webp" alt="" style="width:100%; height:48vw; object-fit:cover;">
-            <div class="p-4 text-white font-title">Game</div>
+            <div class="p-4 !text-white font-title">Game</div>
         </a>
     </div>
 </div>
@@ -479,7 +519,7 @@ body{
         x-transition:leave="transition ease-in duration-300"
         x-transition:leave-start="opacity-100"
         x-transition:leave-end="opacity-0"
-        class="z-[2500] fixed inset-0 bg-bg-dark flex items-center justify-center">
+        class="z-[2500] fixed inset-0 bg-app flex items-center justify-center">
     </div>
     
     <div id="image-track">
@@ -490,7 +530,7 @@ body{
                 <a class="font-title text-md hover:!underline cursor-pointer" 
                    href="{{ route('culture') }}" 
                    @click.prevent="$dispatch('navigate', '{{ route('culture') }}')"
-                   style="text-decoration: none; color: inherit; cursor: pointer;"
+                   style="text-decoration: none; color: white !important; cursor: pointer;"
                    draggable="false"
                 >Budaya Batak</a>
             </div>
@@ -502,7 +542,7 @@ body{
                 <a class="font-title text-md hover:!underline cursor-pointer" 
                    href="{{ route('history') }}" 
                    @click.prevent="$dispatch('navigate', '{{ route('history') }}')"
-                   style="text-decoration: none; color: inherit; cursor: pointer;"
+                   style="text-decoration: none; color: white !important; cursor: pointer;"
                    draggable="false"
                 >Sejarah Batak</a>
             </div>
@@ -514,7 +554,7 @@ body{
                 <a class="font-title text-md hover:!underline cursor-pointer" 
                    href="{{ route('kamus-aksara') }}" 
                    @click.prevent="$dispatch('navigate', '{{ route('kamus-aksara') }}')"
-                   style="text-decoration: none; color: inherit; cursor: pointer;"
+                   style="text-decoration: none; color: white !important; cursor: pointer;"
                    draggable="false"
                 >Aksara Batak</a>
             </div>
@@ -526,7 +566,7 @@ body{
                 <a class="font-title text-md hover:!underline cursor-pointer" 
                    href="{{ route('kamus') }}" 
                    @click.prevent="$dispatch('navigate', '{{ route('kamus') }}')"
-                   style="text-decoration: none; color: inherit; cursor: pointer;"
+                   style="text-decoration: none; color: white !important; cursor: pointer;"
                    draggable="false"
                 >Glosarium & Kamus</a>
             </div>
@@ -538,7 +578,7 @@ body{
                 <a class="font-title text-md hover:!underline cursor-pointer" 
                    href="{{ route('virtual.index') }}" 
                    @click.prevent="$dispatch('navigate', '{{ route('virtual.index') }}')"
-                   style="text-decoration: none; color: inherit; cursor: pointer;"
+                   style="text-decoration: none; color: white !important; cursor: pointer;"
                    draggable="false"
                 >Virtual Tour</a>
             </div>
@@ -550,7 +590,7 @@ body{
                 <a class="font-title text-md hover:!underline cursor-pointer" 
                    href="{{ route('aksara-translator') }}" 
                    @click.prevent="$dispatch('navigate', '{{ route('aksara-translator') }}')"
-                   style="text-decoration: none; color: inherit; cursor: pointer;"
+                   style="text-decoration: none; color: white !important; cursor: pointer;"
                    draggable="false"
                 >Aksara Translator</a>
             </div>
@@ -562,7 +602,7 @@ body{
                 <a class="font-title text-md hover:!underline cursor-pointer" 
                    href="{{ route('batak-songs') }}" 
                    @click.prevent="$dispatch('navigate', '{{ route('batak-songs') }}')"
-                   style="text-decoration: none; color: inherit; cursor: pointer;"
+                   style="text-decoration: none; color: white !important; cursor: pointer;"
                    draggable="false"
                 >Lagu Batak</a>
             </div>
@@ -574,7 +614,7 @@ body{
                 <a class="font-title text-md hover:!underline cursor-pointer" 
                    href="{{ route('kamus-aksara') }}" 
                    @click.prevent="$dispatch('navigate', '{{ route('kamus-aksara') }}')"
-                   style="text-decoration: none; color: inherit; cursor: pointer;"
+                   style="text-decoration: none; color: white !important; cursor: pointer;"
                    draggable="false"
                 >Aksaranta</a>
             </div>
@@ -587,7 +627,7 @@ body{
                 <a class="font-title text-md hover:!underline cursor-pointer" 
                    href="{{ route('blog.index') }}" 
                    @click.prevent="$dispatch('navigate', '{{ route('blog.index') }}')"
-                   style="text-decoration: none; color: inherit; cursor: pointer;"
+                   style="text-decoration: none; color: white !important; cursor: pointer;"
                    draggable="false"
                 >Blog</a>
             </div>
@@ -599,7 +639,7 @@ body{
                 <a class="font-title text-md hover:!underline cursor-pointer" 
                    href="{{ route('about.index') }}" 
                    @click.prevent="$dispatch('navigate', '{{ route('about.index') }}')"
-                   style="text-decoration: none; color: inherit; cursor: pointer;"
+                   style="text-decoration: none; color: white !important; cursor: pointer;"
                    draggable="false"
                 >Tentang Kami</a>
             </div>
@@ -611,7 +651,7 @@ body{
                 <a class="font-title text-md hover:!underline cursor-pointer" 
                    href="{{ route('animasi') }}" 
                    @click.prevent="$dispatch('navigate', '{{ route('animasi') }}')"
-                   style="text-decoration: none; color: inherit; cursor: pointer;"
+                   style="text-decoration: none; color: white !important; cursor: pointer;"
                    draggable="false"
                 >Game</a>
             </div>

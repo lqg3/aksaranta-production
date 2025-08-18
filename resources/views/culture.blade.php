@@ -2,7 +2,7 @@
 
 @section('title', 'Batak Culture')
 
-@section('body-class', 'font-title bg-bg-dark text-white')
+@section('body-class', 'bg-app text-app font-sans')
 
 @section('content')
 
@@ -38,7 +38,7 @@
 
 <section 
     name="culture-navigation" 
-    class="sticky top-0 z-30 pt-20 sm:px-4 scroll-smooth sm:!text-sm bg-bg-dark bg-opacity-50"
+    class="sticky top-0 z-30 pt-20 sm:px-4 scroll-smooth sm:!text-sm bg-app/50 bg-white dark:bg-bg-dark"
     x-data="{
         active: '',
         links: [
@@ -69,14 +69,29 @@
                 <a 
                     :href="'#' + link.id"
                     :class="active === link.id 
-                        ? 'block text-center text-white text-opacity-80 hover:text-opacity-100 cursor-pointer transition-colors duration-150 scroll-smooth py-2 px-3 rounded-lg sm:text-base text-sm'
-                        : 'block text-center text-white text-opacity-50 hover:text-opacity-100 cursor-pointer transition-colors duration-150 scroll-smooth py-2 px-3 rounded-lg sm:text-base text-sm'"
+                        ? 'block text-center text-black dark:text-white text-opacity-80 hover:text-opacity-100 cursor-pointer transition-colors duration-150 scroll-smooth py-2 px-3 rounded-lg sm:text-base text-sm'
+                        : 'block text-center text-black dark:text-white text-opacity-50 hover:text-opacity-100 cursor-pointer transition-colors duration-150 scroll-smooth py-2 px-3 rounded-lg sm:text-base text-sm'"
                     x-text="link.label"
                 ></a>
             </li>
         </template>
     </ul>
 </section>
+<script>
+    // Auto-index headings to populate navigation links
+    document.addEventListener('DOMContentLoaded', function() {
+        const navSection = document.querySelector('section[name="culture-navigation"]');
+        if (!navSection) return;
+        const headings = Array.from(document.querySelectorAll('h2[id], h3[id]'));
+        const map = headings.map(h => ({ id: h.id, label: h.textContent.trim() }));
+        const alpineRoot = navSection.__x?.$data;
+        if (alpineRoot && Array.isArray(alpineRoot.links) && map.length) {
+            alpineRoot.links = map;
+            alpineRoot.onScroll();
+        }
+    });
+    // Theme-aware anchor underline color default via Tailwind classes already set
+</script>
 <style>
     html {
         scroll-behavior: smooth;
@@ -395,7 +410,7 @@
 
             <!-- Kutipan / callout -->
             <div class="bg-white/5 rounded-3xl p-6 sm:p-10">
-                <p class="font-sans text-base sm:text-lg italic text-white/90">
+                <p class="font-sans text-base sm:text-lg italic text-black dark:text-white/90">
                     “Adat do na nioloi, ugamo do na niatur”: adat menuntun pergaulan, agama mengatur batin; keduanya berjalan serasi.
                 </p>
             </div>

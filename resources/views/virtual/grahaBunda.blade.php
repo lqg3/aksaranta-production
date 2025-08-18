@@ -2,12 +2,12 @@
 
 @section('title', 'Graha Bunda Maria Annai Velangkanni')
 
-@section('body-class', 'font-title bg-bg-dark text-white')
+@section('body-class', 'bg-app text-app')
 
 @section('content')
     <section class="w-full max-w-[1440px] mx-auto px-6 sm:px-12 lg:px-28 pt-24">
         <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold">Graha Bunda Maria Annai Velangkanni</h1>
-        <p class="mt-3 text-white/80 font-sans max-w-3xl">Gereja Katolik berarsitektur unik di Medan Tuntungan.</p>
+        <p class="mt-3 dark:text-white/80 font-sans max-w-3xl">Gereja Katolik berarsitektur unik di Medan Tuntungan.</p>
     </section>
 
     <section id="detail-section" class="w-full max-w-[1440px] mx-auto px-6 sm:px-12 lg:px-28 py-16">
@@ -19,22 +19,22 @@
             <img src="{{ asset('img/gereja.jpg') }}" alt="Graha Bunda Maria Annai Velangkanni" class="w-full rounded-2xl shadow-lg object-cover" />
             <div>
                 <h3 class="text-2xl sm:text-3xl md:text-4xl font-bold">Graha Bunda Maria Annai Velangkanni</h3>
-                <p class="mt-4 text-white/80 font-sans">Terletak di Jalan Sakura III No. 7-10, Tanjung Selamat, gereja ini dibangun pada 2005 dan didedikasikan untuk Bunda Maria sebagai Annai Velangkanni (Our Lady of Good Health). Arsitekturnya memadukan gaya Indo-Mughal dan unsur lokal, menyerupai kuil dengan menara tinggi dan ornamen kaya. Tujuh tingkat bangunan melambangkan tujuh sakramen.</p>
+                <p class="mt-4 dark:text-white/80 font-sans">Terletak di Jalan Sakura III No. 7-10, Tanjung Selamat, gereja ini dibangun pada 2005 dan didedikasikan untuk Bunda Maria sebagai Annai Velangkanni (Our Lady of Good Health). Arsitekturnya memadukan gaya Indo-Mughal dan unsur lokal, menyerupai kuil dengan menara tinggi dan ornamen kaya. Tujuh tingkat bangunan melambangkan tujuh sakramen.</p>
             </div>
         </div>
 
         <div class="mt-10 bg-white/5 rounded-2xl p-6">
             <span class="text-red-400 font-semibold">Referensi</span>
-            <p class="mt-2 text-white/80 font-sans">Wisata.app. (2023, September 20). Wisata religi Graha Maria Annai Velangkanni. <a class="text-red-400 underline" href="https://wisata.app/diary/259371?utm_source" target="_blank" rel="noopener">tautan</a>.</p>
+            <p class="mt-2 dark:text-white/80 font-sans">Wisata.app. (2023, September 20). Wisata religi Graha Maria Annai Velangkanni. <a class="text-red-400 underline" href="https://wisata.app/diary/259371?utm_source" target="_blank" rel="noopener">tautan</a>.</p>
         </div>
 
         <nav class="mt-12 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-            <a href="{{ route('virtual.index') }}" class="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white px-4 py-2 rounded-lg transition-colors">
+            <a href="{{ route('virtual.index') }}" class="inline-flex items-center gap-2 bg-black/10 hover:bg-black/20 dark:bg-white/10 dark:hover:bg-white/20 dark:text-white px-4 py-2 rounded-lg transition-colors">
                 <span>←</span><span>Kembali ke Virtual Tour</span>
             </a>
             <div class="flex items-center gap-3">
-                <a href="{{ route('virtual.arrasyid') }}" class="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white/90 hover:text-white px-4 py-2 rounded-lg transition-colors">← Prev: Arrasyiid</a>
-                <a href="{{ route('virtual.funland') }}" class="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white/90 hover:text-white px-4 py-2 rounded-lg transition-colors">Next: Mikie Funland →</a>
+                <a href="{{ route('virtual.arrasyid') }}" class="inline-flex items-center gap-2 bg-black/10 hover:bg-black/20 dark:bg-white/10 dark:hover:bg-white/20 dark:text-white px-4 py-2 rounded-lg transition-colors">← Prev: Arrasyiid</a>
+                <a href="{{ route('virtual.funland') }}" class="inline-flex items-center gap-2 bg-black/10 hover:bg-black/20 dark:bg-white/10 dark:hover:bg-white/20 dark:text-white px-4 py-2 rounded-lg transition-colors">Next: Mikie Funland →</a>
             </div>
         </nav>
     </section>
@@ -44,16 +44,16 @@
     </a>
 
     <nav class="w-full max-w-[1440px] mx-auto px-6 sm:px-12 lg:px-28 pb-8">
-    <h2 class="text-2xl text-bold text-white"> Virtual Tour Lainnya </h2>
+    <h2 class="text-2xl text-bold dark:text-white"> Virtual Tour Lainnya </h2>
         <div class="mt-8 flex flex-wrap gap-3">
-            <a href="{{ route('virtual.bukit-holbung') }}" class="bg-white/10 hover:bg-white/20 text-white/90 hover:text-white px-4 py-2 rounded-lg transition-colors">Bukit Holbung</a>
-            <a href="{{ route('virtual.air-terjun-piso') }}" class="bg-white/10 hover:bg-white/20 text-white/90 hover:text-white px-4 py-2 rounded-lg transition-colors">Air Terjun Sipiso-piso</a>
-            <a href="{{ route('virtual.danau-toba') }}" class="bg-white/10 hover:bg-white/20 text-white/90 hover:text-white px-4 py-2 rounded-lg transition-colors">Danau Toba</a>
-            <a href="{{ route('virtual.sibeabea') }}" class="bg-white/10 hover:bg-white/20 text-white/90 hover:text-white px-4 py-2 rounded-lg transition-colors">Sibea-bea</a>
-            <a href="{{ route('virtual.taman-alam-lubini') }}" class="bg-white/10 hover:bg-white/20 text-white/90 hover:text-white px-4 py-2 rounded-lg transition-colors">Taman Alam Lumbini</a>
-            <a href="{{ route('virtual.arrasyid') }}" class="bg-white/10 hover:bg-white/20 text-white/90 hover:text-white px-4 py-2 rounded-lg transition-colors">Arrasyiid</a>
-            <a href="{{ route('virtual.graha-bunda') }}" class="bg-white/20 hover:bg-white/20 text-white/90 hover:text-white px-4 py-2 rounded-lg transition-colors">Graha Bunda</a>
-            <a href="{{ route('virtual.funland') }}" class="bg-white/10 hover:bg-white/20 text-white/90 hover:text-white px-4 py-2 rounded-lg transition-colors">Mikie Funland</a>
+            <a href="{{ route('virtual.bukit-holbung') }}" class=" bg-black/10 dark:bg-white/10 hover:bg-black/20 dark:hover:bg-white/20 dark:text-white/90 hover:text-black/80 dark:hover:text-white px-4 py-2 rounded-lg transition-colors">Bukit Holbung</a>
+            <a href="{{ route('virtual.air-terjun-piso') }}" class=" bg-black/10 dark:bg-white/10 hover:bg-black/20 dark:hover:bg-white/20 dark:text-white/90  hover:text-black/80 dark:hover:text-white px-4 py-2 rounded-lg transition-colors">Air Terjun Sipiso-piso</a>
+            <a href="{{ route('virtual.danau-toba') }}" class=" bg-black/10 dark:bg-white/10 hover:bg-black/20 dark:hover:bg-white/20 dark:text-white/90  hover:text-black/80 dark:hover:text-white px-4 py-2 rounded-lg transition-colors">Danau Toba</a>
+            <a href="{{ route('virtual.sibeabea') }}" class=" bg-black/10 dark:bg-white/10 hover:bg-black/20 dark:hover:bg-white/20 dark:text-white/90  hover:text-black/80 dark:hover:text-white px-4 py-2 rounded-lg transition-colors">Sibea-bea</a>
+            <a href="{{ route('virtual.taman-alam-lubini') }}" class=" bg-black/10 dark:bg-white/20 hover:bg-black/20 dark:hover:bg-white/20 dark:text-white/90  hover:text-black/80 dark:hover:text-white px-4 py-2 rounded-lg transition-colors">Taman Alam Lumbini</a>
+            <a href="{{ route('virtual.arrasyid') }}" class=" bg-black/10 dark:bg-white/10 hover:bg-black/20 dark:hover:bg-white/20 dark:text-white/90  hover:text-black/80 dark:hover:text-white px-4 py-2 rounded-lg transition-colors">Arrasyiid</a>
+            <a href="{{ route('virtual.graha-bunda') }}" class=" bg-black/20 dark:bg-white/10 hover:bg-black/20 dark:hover:bg-white/20 dark:text-white/90  hover:text-black/80 dark:hover:text-white px-4 py-2 rounded-lg transition-colors">Graha Bunda</a>
+            <a href="{{ route('virtual.funland') }}" class=" bg-black/10 dark:bg-white/10 hover:bg-black/20 dark:hover:bg-white/20 dark:text-white/90  hover:text-black/80 dark:hover:text-white px-4 py-2 rounded-lg transition-colors">Mikie Funland</a>
         </div>
     </nav>
 @endsection

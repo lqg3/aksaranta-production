@@ -2,13 +2,13 @@
 
 @section('title', 'Virtual Tour')
 
-@section('body-class', 'font-title bg-bg-dark text-white')
+@section('body-class', 'font-title bg-app text-app')
 
 @section('content')
 
     <section class="w-full max-w-[1440px] mx-auto px-6 sm:px-12 lg:px-28 pt-24">
         <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold">Virtual Tour</h1>
-        <p class="mt-3 text-white/80 font-sans max-w-3xl">Jelajahi keindahan alam Sumatera Utara melalui pengalaman interaktif, dari Danau Toba yang megah hingga Air Terjun Sipiso-piso yang menakjubkan.</p>
+        <p class="mt-3 dark:text-white/80 font-sans max-w-3xl">Jelajahi keindahan alam Sumatera Utara melalui pengalaman interaktif, dari Danau Toba yang megah hingga Air Terjun Sipiso-piso yang menakjubkan.</p>
     </section>
 
     <section id="detail-section" class="w-full max-w-[1440px] mx-auto px-6 sm:px-12 lg:px-28 py-16">

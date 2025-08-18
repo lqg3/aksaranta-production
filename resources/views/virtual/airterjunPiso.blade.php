@@ -2,12 +2,12 @@
 
 @section('title', 'Air Terjun Sipiso-piso')
 
-@section('body-class', 'font-title bg-bg-dark text-white')
+@section('body-class', 'bg-app text-app')
 
 @section('content')
     <section class="w-full max-w-[1440px] mx-auto px-6 sm:px-12 lg:px-28 pt-24">
         <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold">Air Terjun Sipiso-piso</h1>
-        <p class="mt-3 text-white/80 font-sans max-w-3xl">Salah satu air terjun tertinggi di Indonesia dengan panorama Danau Toba yang megah.</p>
+        <p class="mt-3 dark:text-white/80 font-sans max-w-3xl">Salah satu air terjun tertinggi di Indonesia dengan panorama Danau Toba yang megah.</p>
     </section>
 
     <main id="main-content" class="w-full max-w-[1440px] mx-auto px-6 sm:px-12 lg:px-28 py-16">
@@ -19,28 +19,28 @@
             <img src="{{ asset('img/airterjunpiso.jpg') }}" alt="Air Terjun Sipiso-piso" class="w-full rounded-2xl shadow-lg object-cover" />
             <div>
                 <h3 class="text-2xl sm:text-3xl md:text-4xl font-bold">Air Terjun Sipiso-piso</h3>
-                <p class="mt-4 text-white/80 font-sans">Air Terjun Sipiso-piso, terletak di Desa Tongging, Kecamatan Merek, Kabupaten Karo, Sumatera Utara, merupakan salah satu air terjun tertinggi di Indonesia dengan ketinggian mencapai 120 meter. Nama "Sipiso-piso" dalam bahasa Batak berarti "seperti pisau", menggambarkan bentuk air terjun yang sempit dan tajam, mirip dengan bilah pisau. Air terjun ini terbentuk dari aliran Sungai Pajanabolon yang mengalir melalui gua di sisi kawah Danau Toba, menciptakan pemandangan alam yang memukau.</p>
+                <p class="mt-4 dark:text-white/80 font-sans">Air Terjun Sipiso-piso, terletak di Desa Tongging, Kecamatan Merek, Kabupaten Karo, Sumatera Utara, merupakan salah satu air terjun tertinggi di Indonesia dengan ketinggian mencapai 120 meter. Nama "Sipiso-piso" dalam bahasa Batak berarti "seperti pisau", menggambarkan bentuk air terjun yang sempit dan tajam, mirip dengan bilah pisau. Air terjun ini terbentuk dari aliran Sungai Pajanabolon yang mengalir melalui gua di sisi kawah Danau Toba, menciptakan pemandangan alam yang memukau.</p>
             </div>
         </section>
 
-        <p class="mt-8 text-white/80 font-sans leading-7">Untuk mencapai lokasi ini, pengunjung dapat menempuh perjalanan sekitar 70 km dari Medan ke Kota Kabanjahe, kemudian melanjutkan perjalanan sekitar 30 menit menuju Desa Tongging. Jalan menuju Air Terjun Sipiso-piso sudah diaspal dengan baik, memudahkan akses bagi wisatawan. Setibanya di lokasi, pengunjung dapat menikmati pemandangan dari gardu pandang yang menawarkan panorama indah Danau Toba dan sekitarnya. Bagi yang ingin merasakan sensasi lebih dekat dengan alam, tersedia jalur tangga yang menurun menuju dasar air terjun. Perjalanan ini cukup menantang, dengan sekitar 651 anak tangga yang harus dilalui. Namun, usaha tersebut akan terbayar dengan pemandangan spektakuler dari dekat air terjun, serta cipratan air yang menyegarkan.</p>
-        <p class="mt-6 text-white/80 font-sans leading-7">Di sekitar lokasi, tersedia berbagai fasilitas untuk kenyamanan pengunjung, seperti area parkir yang luas, warung makan, toko suvenir, dan fasilitas umum lainnya. Harga tiket masuk ke Air Terjun Sipiso-piso cukup terjangkau, menjadikannya destinasi wisata yang ramah di kantong. Pengunjung juga dapat menikmati kuliner khas Batak di warung-warung sekitar, menambah pengalaman wisata yang menyenangkan. Air Terjun Sipiso-piso bukan hanya menawarkan keindahan alam, tetapi juga pengalaman petualangan yang memuaskan.</p>
+        <p class="mt-8 dark:text-white/80 font-sans leading-7">Untuk mencapai lokasi ini, pengunjung dapat menempuh perjalanan sekitar 70 km dari Medan ke Kota Kabanjahe, kemudian melanjutkan perjalanan sekitar 30 menit menuju Desa Tongging. Jalan menuju Air Terjun Sipiso-piso sudah diaspal dengan baik, memudahkan akses bagi wisatawan. Setibanya di lokasi, pengunjung dapat menikmati pemandangan dari gardu pandang yang menawarkan panorama indah Danau Toba dan sekitarnya. Bagi yang ingin merasakan sensasi lebih dekat dengan alam, tersedia jalur tangga yang menurun menuju dasar air terjun. Perjalanan ini cukup menantang, dengan sekitar 651 anak tangga yang harus dilalui. Namun, usaha tersebut akan terbayar dengan pemandangan spektakuler dari dekat air terjun, serta cipratan air yang menyegarkan.</p>
+        <p class="mt-6 dark:text-white/80 font-sans leading-7">Di sekitar lokasi, tersedia berbagai fasilitas untuk kenyamanan pengunjung, seperti area parkir yang luas, warung makan, toko suvenir, dan fasilitas umum lainnya. Harga tiket masuk ke Air Terjun Sipiso-piso cukup terjangkau, menjadikannya destinasi wisata yang ramah di kantong. Pengunjung juga dapat menikmati kuliner khas Batak di warung-warung sekitar, menambah pengalaman wisata yang menyenangkan. Air Terjun Sipiso-piso bukan hanya menawarkan keindahan alam, tetapi juga pengalaman petualangan yang memuaskan.</p>
 
         <div class="mt-10 bg-white/5 rounded-2xl p-6">
             <span class="text-red-400 font-semibold">Referensi</span>
-            <p class="mt-2 text-white/80 font-sans">
+            <p class="mt-2 dark:text-white/80 font-sans">
                 Antautamaofficial. (2017, December 2). Air Terjun Sipiso-piso. Antautama Official. Retrieved from
                 <a class="text-red-400 underline" href="https://antautamaofficial.wordpress.com/2017/12/02/air-terjun-sipiso-piso/" target="_blank" rel="noopener">tautan ini</a>.
             </p>
         </div>
 
         <nav class="mt-12 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-            <a href="{{ route('virtual.index') }}" class="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white px-4 py-2 rounded-lg transition-colors">
+            <a href="{{ route('virtual.index') }}" class="inline-flex items-center gap-2 bg-black/10 hover:bg-black/20 dark:bg-white/10 dark:hover:bg-white/20 dark:text-white px-4 py-2 rounded-lg transition-colors">
                 <span>←</span><span>Kembali ke Virtual Tour</span>
             </a>
             <div class="flex items-center gap-3">
-                <a href="{{ route('virtual.bukit-holbung') }}" class="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white/90 hover:text-white px-4 py-2 rounded-lg transition-colors">← Prev: Bukit Holbung</a>
-                <a href="{{ route('virtual.danau-toba') }}" class="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white/90 hover:text-white px-4 py-2 rounded-lg transition-colors">Next: Danau Toba →</a>
+                <a href="{{ route('virtual.bukit-holbung') }}" class="inline-flex items-center gap-2 bg-black/10 hover:bg-black/20 dark:bg-white/10 dark:hover:bg-white/20 dark:text-white px-4 py-2 rounded-lg transition-colors">← Prev: Bukit Holbung</a>
+                <a href="{{ route('virtual.danau-toba') }}" class="inline-flex items-center gap-2 bg-black/10 hover:bg-black/20 dark:bg-white/10 dark:hover:bg-white/20 dark:text-white px-4 py-2 rounded-lg transition-colors">Next: Danau Toba →</a>
             </div>
         </nav>
     </main>
@@ -49,17 +49,18 @@
         <img src="{{ asset('img/top.png') }}" alt="Top" class="w-6 h-6 invert" />
     </a>
 
+    
     <nav class="w-full max-w-[1440px] mx-auto px-6 sm:px-12 lg:px-28 pb-8">
-    <h2 class="text-2xl text-bold text-white"> Virtual Tour Lainnya </h2>
+    <h2 class="text-2xl text-bold dark:text-white"> Virtual Tour Lainnya </h2>
         <div class="mt-8 flex flex-wrap gap-3">
-            <a href="{{ route('virtual.bukit-holbung') }}" class="bg-white/10 hover:bg-white/20 text-white/90 hover:text-white px-4 py-2 rounded-lg transition-colors">Bukit Holbung</a>
-            <a href="{{ route('virtual.air-terjun-piso') }}" class="bg-white/20 hover:bg-white/20 text-white/90 hover:text-white px-4 py-2 rounded-lg transition-colors">Air Terjun Sipiso-piso</a>
-            <a href="{{ route('virtual.danau-toba') }}" class="bg-white/10 hover:bg-white/20 text-white/90 hover:text-white px-4 py-2 rounded-lg transition-colors">Danau Toba</a>
-            <a href="{{ route('virtual.sibeabea') }}" class="bg-white/10 hover:bg-white/20 text-white/90 hover:text-white px-4 py-2 rounded-lg transition-colors">Sibea-bea</a>
-            <a href="{{ route('virtual.taman-alam-lubini') }}" class="bg-white/10 hover:bg-white/20 text-white/90 hover:text-white px-4 py-2 rounded-lg transition-colors">Taman Alam Lumbini</a>
-            <a href="{{ route('virtual.arrasyid') }}" class="bg-white/10 hover:bg-white/20 text-white/90 hover:text-white px-4 py-2 rounded-lg transition-colors">Arrasyiid</a>
-            <a href="{{ route('virtual.graha-bunda') }}" class="bg-white/10 hover:bg-white/20 text-white/90 hover:text-white px-4 py-2 rounded-lg transition-colors">Graha Bunda</a>
-            <a href="{{ route('virtual.funland') }}" class="bg-white/10 hover:bg-white/20 text-white/90 hover:text-white px-4 py-2 rounded-lg transition-colors">Mikie Funland</a>
+            <a href="{{ route('virtual.bukit-holbung') }}" class=" bg-black/10 dark:bg-white/20 hover:bg-black/20 dark:hover:bg-white/20 dark:text-white/90 hover:text-black/80 dark:hover:text-white px-4 py-2 rounded-lg transition-colors">Bukit Holbung</a>
+            <a href="{{ route('virtual.air-terjun-piso') }}" class=" bg-black/20 dark:bg-white/10 hover:bg-black/20 dark:hover:bg-white/20 dark:text-white/90  hover:text-black/80 dark:hover:text-white px-4 py-2 rounded-lg transition-colors">Air Terjun Sipiso-piso</a>
+            <a href="{{ route('virtual.danau-toba') }}" class=" bg-black/10 dark:bg-white/10 hover:bg-black/20 dark:hover:bg-white/20 dark:text-white/90  hover:text-black/80 dark:hover:text-white px-4 py-2 rounded-lg transition-colors">Danau Toba</a>
+            <a href="{{ route('virtual.sibeabea') }}" class=" bg-black/10 dark:bg-white/10 hover:bg-black/20 dark:hover:bg-white/20 dark:text-white/90  hover:text-black/80 dark:hover:text-white px-4 py-2 rounded-lg transition-colors">Sibea-bea</a>
+            <a href="{{ route('virtual.taman-alam-lubini') }}" class=" bg-black/10 dark:bg-white/10 hover:bg-black/20 dark:hover:bg-white/20 dark:text-white/90  hover:text-black/80 dark:hover:text-white px-4 py-2 rounded-lg transition-colors">Taman Alam Lumbini</a>
+            <a href="{{ route('virtual.arrasyid') }}" class=" bg-black/10 dark:bg-white/10 hover:bg-black/20 dark:hover:bg-white/20 dark:text-white/90  hover:text-black/80 dark:hover:text-white px-4 py-2 rounded-lg transition-colors">Arrasyiid</a>
+            <a href="{{ route('virtual.graha-bunda') }}" class=" bg-black/10 dark:bg-white/10 hover:bg-black/20 dark:hover:bg-white/20 dark:text-white/90  hover:text-black/80 dark:hover:text-white px-4 py-2 rounded-lg transition-colors">Graha Bunda</a>
+            <a href="{{ route('virtual.funland') }}" class=" bg-black/10 dark:bg-white/10 hover:bg-black/20 dark:hover:bg-white/20 dark:text-white/90  hover:text-black/80 dark:hover:text-white px-4 py-2 rounded-lg transition-colors">Mikie Funland</a>
         </div>
     </nav>
 @endsection

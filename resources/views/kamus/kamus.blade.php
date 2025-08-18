@@ -2,7 +2,7 @@
 
 @section('title', 'Glosarium & Kamus')
 
-@section('body-class', 'font-title bg-bg-dark text-white')
+@section('body-class', 'bg-app text-app')
 
 @section('content')
 
@@ -20,7 +20,7 @@
         <div class="w-full max-w-[1440px] mx-auto px-6 sm:px-12 lg:px-28">
 
             <div class="mt-6 bg-white/5 rounded-3xl p-6 sm:p-8 mb-8">
-                <p class="text-sm text-white/70">
+                <p class="text-sm dark:text-white/70">
                     Karena keterbatasan data, bahasa Batak Toba memiliki jumlah kata yang paling banyak. Proyek
                     <a class="text-red-400 underline" href="https://github.com/IndoNLP/nusax" target="_blank" rel="noopener">NusaX</a>
                     digunakan untuk mendapatkan kata-kata Batak Toba.
@@ -32,25 +32,25 @@
                 <h3 class="text-red-400 text-center my-2 text-sm sm:text-base">Cari Kata</h3>
                 <h2 class="text-center text-2xl sm:text-3xl md:text-4xl">Kamus <span class="text-red-400">Bahasa Batak</span></h2>
                 <div class="mt-6 flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
-                    <input id="searchInput" type="text" placeholder="Ketik kata Indonesia atau Batak..." class="w-full sm:w-2/3 max-w-xl px-4 py-3 rounded-xl bg-white/10 border border-white/10 outline-none focus:border-red-400 font-sans placeholder-white/40" />
-                    <select id="dialekFilter" class="w-full sm:w-64 px-4 py-3 rounded-xl bg-white/10 border border-white/10 focus:border-red-400 font-sans">
-                        <option class="bg-bg-card font-sans" value="all">Semua Dialek</option>
-                        <option class="bg-bg-card font-sans" value="Toba">Batak Toba</option>
-                        <option class="bg-bg-card font-sans" value="Simalungun">Batak Simalungun</option>
-                        <option class="bg-bg-card font-sans" value="Angkola-Mandailing">Batak Angkola–Mandailing</option>
-                        <option class="bg-bg-card font-sans" value="Karo">Batak Karo</option>
-                        <option class="bg-bg-card font-sans" value="Pakpak-Dairi">Batak Pakpak–Dairi</option>
+                    <input id="searchInput" type="text" placeholder="Ketik kata Indonesia atau Batak..." class="w-full sm:w-2/3 max-w-xl px-4 py-3 rounded-xl dark:bg-white/10 border border-white/10 outline-none focus:border-red-400 font-sans dark:placeholder-white/40" />
+                    <select id="dialekFilter" class="w-full sm:w-64 px-4 py-3 rounded-xl dark:bg-white/10 border border-white/10 focus:border-red-400 font-sans">
+                        <option class="dark:bg-bg-card font-sans" value="all">Semua Dialek</option>
+                        <option class="dark:bg-bg-card font-sans" value="Toba">Batak Toba</option>
+                        <option class="dark:bg-bg-card font-sans" value="Simalungun">Batak Simalungun</option>
+                        <option class="dark:bg-bg-card font-sans" value="Angkola-Mandailing">Batak Angkola–Mandailing</option>
+                        <option class="dark:bg-bg-card font-sans" value="Karo">Batak Karo</option>
+                        <option class="dark:bg-bg-card font-sans" value="Pakpak-Dairi">Batak Pakpak–Dairi</option>
                 </select>
                     <button id="searchButton" class="px-5 py-3 rounded-xl bg-red-500 hover:bg-red-600 transition-colors font-sans">Cari</button>
                 </div>
             </div>
             <!-- Letter filter A-Z below search -->
             <div id="letter-filter" class="mt-4 overflow-x-auto scroll-smooth pb-2">
-                <div class="inline-flex gap-2 whitespace-nowrap text-sm text-white/80"></div>
+                <div class="inline-flex gap-2 whitespace-nowrap text-sm dark:text-white/80"></div>
         </div>
 
             <section id="dictionary-results" class="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6"></section>
-            <div id="loadingIndicator" class="hidden text-white/60 text-sm mt-6 text-center">Memuat...</div>
+            <div id="loadingIndicator" class="hidden dark:text-white/60 text-sm mt-6 text-center">Memuat...</div>
 
 
             <div class="mt-12 bg-white/5 rounded-3xl p-6 sm:p-10">
@@ -376,7 +376,7 @@
             dictionaryResultsContainer.innerHTML = '';
                 }
                 if (results.length === 0 && !append) {
-            dictionaryResultsContainer.innerHTML = '<p class="col-span-full text-center text-white/60">Kata tidak ditemukan. Coba kata lain!</p>';
+            dictionaryResultsContainer.innerHTML = '<p class="col-span-full text-center dark:text-white/60">Kata tidak ditemukan. Coba kata lain!</p>';
                     return;
                 }
 
@@ -396,9 +396,9 @@
             card.className = 'bg-white/5 rounded-xl p-4 border border-white/10 hover:bg-white/10 transition';
                     card.innerHTML = `
                 <h3 class="font-bold text-red-400 text-lg">${term.indo}</h3>
-                <p class="text-white mt-1">${term.batak}</p>
-                <p class="text-white/60 text-sm mt-1 italic">${term.dialek}</p>
-                <p class="text-white/80 text-sm mt-2">${term.desc}</p>
+                <p class="dark:text-white mt-1">${term.batak}</p>
+                <p class="dark:text-white/60 text-sm mt-1 italic">${term.dialek}</p>
+                <p class="dark:text-white/80 text-sm mt-2">${term.desc}</p>
                     `;
                     dictionaryResultsContainer.appendChild(card);
                 });
@@ -493,7 +493,7 @@
         alphabet.forEach(letter => {
             const btn = document.createElement('button');
             btn.textContent = letter;
-            btn.className = `px-3 py-1 rounded-full ${currentLetter === letter ? 'bg-red-500 text-white' : 'bg-white/10 hover:bg-white/20'}`;
+            btn.className = `px-3 py-1 rounded-full ${currentLetter === letter ? 'bg-red-500 dark:text-white' : 'bg-white/10 hover:bg-white/20'}`;
             btn.addEventListener('click', () => { currentLetter = letter; performSearch(false); });
             letterFilterContainer.appendChild(btn);
         });
