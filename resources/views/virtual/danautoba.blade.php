@@ -2,12 +2,12 @@
 
 @section('title', 'Danau Toba')
 
-@section('body-class', 'font-title bg-bg-dark text-white')
+@section('body-class', 'bg-app text-app')
 
 @section('content')
     <section class="w-full max-w-[1440px] mx-auto px-6 sm:px-12 lg:px-28 pt-24">
         <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold">Danau Toba</h1>
-        <p class="mt-3 text-white/80 font-sans max-w-3xl">Danau vulkanik terbesar di dunia dengan warisan budaya Batak yang kaya.</p>
+        <p class="mt-3 dark:text-white/80 font-sans max-w-3xl">Danau vulkanik terbesar di dunia dengan warisan budaya Batak yang kaya.</p>
     </section>
 
     <section id="detail-section" class="w-full max-w-[1440px] mx-auto px-6 sm:px-12 lg:px-28 py-16">
@@ -19,23 +19,23 @@
             <img src="{{ asset('img/danautoba2.jpg') }}" alt="Danau Toba" class="w-full rounded-2xl shadow-lg object-cover" />
             <div>
                 <h3 class="text-2xl sm:text-3xl md:text-4xl font-bold">Danau Toba</h3>
-                <p class="mt-4 text-white/80 font-sans">Danau Toba, di Sumatera Utara, adalah danau vulkanik terbesar di dunia dan salah satu destinasi wisata paling terkenal di Asia Tenggara. Terbentuk akibat letusan besar gunung berapi sekitar 74.000 tahun lalu, dikelilingi pegunungan hijau yang menawan.</p>
-                <p class="mt-4 text-white/80 font-sans">Pulau Samosir di tengah danau menyimpan budaya Batak yang hidup. Wisatawan dapat berkunjung ke desa tradisional, museum, serta menikmati panorama danau dari berbagai titik.</p>
+                <p class="mt-4 dark:text-white/80 font-sans">Danau Toba, di Sumatera Utara, adalah danau vulkanik terbesar di dunia dan salah satu destinasi wisata paling terkenal di Asia Tenggara. Terbentuk akibat letusan besar gunung berapi sekitar 74.000 tahun lalu, dikelilingi pegunungan hijau yang menawan.</p>
+                <p class="mt-4 dark:text-white/80 font-sans">Pulau Samosir di tengah danau menyimpan budaya Batak yang hidup. Wisatawan dapat berkunjung ke desa tradisional, museum, serta menikmati panorama danau dari berbagai titik.</p>
             </div>
         </div>
 
         <div class="mt-10 bg-white/5 rounded-2xl p-6">
             <span class="text-red-400 font-semibold">Referensi</span>
-            <p class="mt-2 text-white/80 font-sans">Aprinawati, & Prayogo, R. R. (2022). Smart tourism destination model development in Danau Toba, Indonesia. International Journal of Research in Business and Social Science, 11(6), 430–437. <a class="text-red-400 underline" href="https://doi.org/10.20525/ijrbs.v11i6.1966" target="_blank" rel="noopener">tautan</a>.</p>
+            <p class="mt-2 dark:text-white/80 font-sans">Aprinawati, & Prayogo, R. R. (2022). Smart tourism destination model development in Danau Toba, Indonesia. International Journal of Research in Business and Social Science, 11(6), 430–437. <a class="text-red-400 underline" href="https://doi.org/10.20525/ijrbs.v11i6.1966" target="_blank" rel="noopener">tautan</a>.</p>
         </div>
 
         <nav class="mt-12 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-            <a href="{{ route('virtual.index') }}" class="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white px-4 py-2 rounded-lg transition-colors">
+            <a href="{{ route('virtual.index') }}" class="inline-flex items-center gap-2 bg-black/10 hover:bg-black/20 dark:bg-white/10 dark:hover:bg-white/20 dark:text-white px-4 py-2 rounded-lg transition-colors">
                 <span>←</span><span>Kembali ke Virtual Tour</span>
             </a>
             <div class="flex items-center gap-3">
-                <a href="{{ route('virtual.air-terjun-piso') }}" class="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white/90 hover:text-white px-4 py-2 rounded-lg transition-colors">← Prev: Air Terjun Sipiso-piso</a>
-                <a href="{{ route('virtual.sibeabea') }}" class="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white/90 hover:text-white px-4 py-2 rounded-lg transition-colors">Next: Sibea-bea →</a>
+                <a href="{{ route('virtual.air-terjun-piso') }}" class="inline-flex items-center gap-2 bg-black/10 hover:bg-black/20 dark:bg-white/10 dark:hover:bg-white/20 dark:text-white px-4 py-2 rounded-lg transition-colors">← Prev: Air Terjun Sipiso-piso</a>
+                <a href="{{ route('virtual.sibeabea') }}" class="inline-flex items-center gap-2 bg-black/10 hover:bg-black/20 dark:bg-white/10 dark:hover:bg-white/20 dark:text-white px-4 py-2 rounded-lg transition-colors">Next: Sibea-bea →</a>
             </div>
         </nav>
     </section>
@@ -45,16 +45,16 @@
     </a>
 
     <nav class="w-full max-w-[1440px] mx-auto px-6 sm:px-12 lg:px-28 pb-8">
-    <h2 class="text-2xl text-bold text-white"> Virtual Tour Lainnya </h2>
+    <h2 class="text-2xl text-bold dark:text-white"> Virtual Tour Lainnya </h2>
         <div class="mt-8 flex flex-wrap gap-3">
-            <a href="{{ route('virtual.bukit-holbung') }}" class="bg-white/10 hover:bg-white/20 text-white/90 hover:text-white px-4 py-2 rounded-lg transition-colors">Bukit Holbung</a>
-            <a href="{{ route('virtual.air-terjun-piso') }}" class="bg-white/10 hover:bg-white/20 text-white/90 hover:text-white px-4 py-2 rounded-lg transition-colors">Air Terjun Sipiso-piso</a>
-            <a href="{{ route('virtual.danau-toba') }}" class="bg-white/20 hover:bg-white/20 text-white/90 hover:text-white px-4 py-2 rounded-lg transition-colors">Danau Toba</a>
-            <a href="{{ route('virtual.sibeabea') }}" class="bg-white/10 hover:bg-white/20 text-white/90 hover:text-white px-4 py-2 rounded-lg transition-colors">Sibea-bea</a>
-            <a href="{{ route('virtual.taman-alam-lubini') }}" class="bg-white/10 hover:bg-white/20 text-white/90 hover:text-white px-4 py-2 rounded-lg transition-colors">Taman Alam Lumbini</a>
-            <a href="{{ route('virtual.arrasyid') }}" class="bg-white/10 hover:bg-white/20 text-white/90 hover:text-white px-4 py-2 rounded-lg transition-colors">Arrasyiid</a>
-            <a href="{{ route('virtual.graha-bunda') }}" class="bg-white/10 hover:bg-white/20 text-white/90 hover:text-white px-4 py-2 rounded-lg transition-colors">Graha Bunda</a>
-            <a href="{{ route('virtual.funland') }}" class="bg-white/10 hover:bg-white/20 text-white/90 hover:text-white px-4 py-2 rounded-lg transition-colors">Mikie Funland</a>
+            <a href="{{ route('virtual.bukit-holbung') }}" class=" bg-black/10 dark:bg-white/20 hover:bg-black/20 dark:hover:bg-white/20 dark:text-white/90 hover:text-black/80 dark:hover:text-white px-4 py-2 rounded-lg transition-colors">Bukit Holbung</a>
+            <a href="{{ route('virtual.air-terjun-piso') }}" class=" bg-black/10 dark:bg-white/10 hover:bg-black/20 dark:hover:bg-white/20 dark:text-white/90  hover:text-black/80 dark:hover:text-white px-4 py-2 rounded-lg transition-colors">Air Terjun Sipiso-piso</a>
+            <a href="{{ route('virtual.danau-toba') }}" class=" bg-black/20 dark:bg-white/10 hover:bg-black/20 dark:hover:bg-white/20 dark:text-white/90  hover:text-black/80 dark:hover:text-white px-4 py-2 rounded-lg transition-colors">Danau Toba</a>
+            <a href="{{ route('virtual.sibeabea') }}" class=" bg-black/10 dark:bg-white/10 hover:bg-black/20 dark:hover:bg-white/20 dark:text-white/90  hover:text-black/80 dark:hover:text-white px-4 py-2 rounded-lg transition-colors">Sibea-bea</a>
+            <a href="{{ route('virtual.taman-alam-lubini') }}" class=" bg-black/10 dark:bg-white/10 hover:bg-black/20 dark:hover:bg-white/20 dark:text-white/90  hover:text-black/80 dark:hover:text-white px-4 py-2 rounded-lg transition-colors">Taman Alam Lumbini</a>
+            <a href="{{ route('virtual.arrasyid') }}" class=" bg-black/10 dark:bg-white/10 hover:bg-black/20 dark:hover:bg-white/20 dark:text-white/90  hover:text-black/80 dark:hover:text-white px-4 py-2 rounded-lg transition-colors">Arrasyiid</a>
+            <a href="{{ route('virtual.graha-bunda') }}" class=" bg-black/10 dark:bg-white/10 hover:bg-black/20 dark:hover:bg-white/20 dark:text-white/90  hover:text-black/80 dark:hover:text-white px-4 py-2 rounded-lg transition-colors">Graha Bunda</a>
+            <a href="{{ route('virtual.funland') }}" class=" bg-black/10 dark:bg-white/10 hover:bg-black/20 dark:hover:bg-white/20 dark:text-white/90  hover:text-black/80 dark:hover:text-white px-4 py-2 rounded-lg transition-colors">Mikie Funland</a>
         </div>
     </nav>
 @endsection

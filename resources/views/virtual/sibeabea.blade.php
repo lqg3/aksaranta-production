@@ -2,12 +2,12 @@
 
 @section('title', 'Sibea-bea')
 
-@section('body-class', 'font-title bg-bg-dark text-white')
+@section('body-class', 'bg-app text-app')
 
 @section('content')
     <section class="w-full max-w-[1440px] mx-auto px-6 sm:px-12 lg:px-28 pt-24">
         <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold">Sibea-bea</h1>
-        <p class="mt-3 text-white/80 font-sans max-w-3xl">Ikon tangga berliku dengan lanskap Danau Toba.</p>
+        <p class="mt-3 dark:text-white/80 font-sans max-w-3xl">Ikon tangga berliku dengan lanskap Danau Toba.</p>
     </section>
 
     <section id="detail-section" class="w-full max-w-[1440px] mx-auto px-6 sm:px-12 lg:px-28 py-16">
@@ -19,25 +19,25 @@
             <img src="{{ asset('img/sibeabea2.jpg') }}" alt="Sibea-bea" class="w-full rounded-2xl shadow-lg object-cover" />
             <div>
                 <h3 class="text-2xl sm:text-3xl md:text-4xl font-bold">Sibea-bea</h3>
-                <p class="mt-4 text-white/80 font-sans">Sibea-bea terkenal dengan jalur tangga berliku yang menurun ke arah Danau Toba, memberikan sudut pandang yang indah untuk menikmati lanskap perbukitan dan danau. Lokasi ini menjadi tempat populer untuk berswafoto dan menikmati panorama.</p>
+                <p class="mt-4 dark:text-white/80 font-sans">Sibea-bea terkenal dengan jalur tangga berliku yang menurun ke arah Danau Toba, memberikan sudut pandang yang indah untuk menikmati lanskap perbukitan dan danau. Lokasi ini menjadi tempat populer untuk berswafoto dan menikmati panorama.</p>
             </div>
         </div>
 
         <div class="mt-10 bg-white/5 rounded-2xl p-6">
             <span class="text-red-400 font-semibold">Referensi</span>
-            <p class="mt-2 text-white/80 font-sans">
+            <p class="mt-2 dark:text-white/80 font-sans">
                 IDN Times. Wisata Bukit Sibea-bea, Samosir, Sumatra Utara.
                 <a class="text-red-400 underline" href="https://www.idntimes.com/travel/destination/wisata-bukit-sibea-bea-sumatra-utara-00-819v4-4xpbtd?utm_source" target="_blank" rel="noopener">tautan</a>.
             </p>
         </div>
 
         <nav class="mt-12 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-            <a href="{{ route('virtual.index') }}" class="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white px-4 py-2 rounded-lg transition-colors">
+            <a href="{{ route('virtual.index') }}" class="inline-flex items-center gap-2 bg-black/10 hover:bg-black/20 dark:bg-white/10 dark:hover:bg-white/20 dark:text-white px-4 py-2 rounded-lg transition-colors">
                 <span>←</span><span>Kembali ke Virtual Tour</span>
             </a>
             <div class="flex items-center gap-3">
-                <a href="{{ route('virtual.danau-toba') }}" class="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white/90 hover:text-white px-4 py-2 rounded-lg transition-colors">← Prev: Danau Toba</a>
-                <a href="{{ route('virtual.taman-alam-lubini') }}" class="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white/90 hover:text-white px-4 py-2 rounded-lg transition-colors">Next: Taman Alam Lumbini →</a>
+                <a href="{{ route('virtual.danau-toba') }}" class="inline-flex items-center gap-2 bg-black/10 hover:bg-black/20 dark:bg-white/10 dark:hover:bg-white/20 dark:text-white px-4 py-2 rounded-lg transition-colors">← Prev: Danau Toba</a>
+                <a href="{{ route('virtual.taman-alam-lubini') }}" class="inline-flex items-center gap-2 bg-black/10 hover:bg-black/20 dark:bg-white/10 dark:hover:bg-white/20 dark:text-white px-4 py-2 rounded-lg transition-colors">Next: Taman Alam Lumbini →</a>
         </div>
         </nav>
     </section>
@@ -47,17 +47,16 @@
     </a>
 
     <nav class="w-full max-w-[1440px] mx-auto px-6 sm:px-12 lg:px-28 pb-8">
-    <h2 class="text-2xl text-bold text-white"> Virtual Tour Lainnya </h2>
+    <h2 class="text-2xl text-bold dark:text-white"> Virtual Tour Lainnya </h2>
         <div class="mt-8 flex flex-wrap gap-3">
-            <a href="{{ route('virtual.bukit-holbung') }}" class="bg-white/10 hover:bg-white/20 text-white/90 hover:text-white px-4 py-2 rounded-lg transition-colors">Bukit Holbung</a>
-            <a href="{{ route('virtual.air-terjun-piso') }}" class="bg-white/10 hover:bg-white/20 text-white/90 hover:text-white px-4 py-2 rounded-lg transition-colors">Air Terjun Sipiso-piso</a>
-            <a href="{{ route('virtual.danau-toba') }}" class="bg-white/10 hover:bg-white/20 text-white/90 hover:text-white px-4 py-2 rounded-lg transition-colors">Danau Toba</a>
-            <a href="{{ route('virtual.sibeabea') }}" class="bg-white/20 hover:bg-white/20 text-white/90 hover:text-white px-4 py-2 rounded-lg transition-colors">Sibea-bea</a>
-            <a href="{{ route('virtual.taman-alam-lubini') }}" class="bg-white/10 hover:bg-white/20 text-white/90 hover:text-white px-4 py-2 rounded-lg transition-colors">Taman Alam Lumbini</a>
-            <a href="{{ route('virtual.arrasyid') }}" class="bg-white/10 hover:bg-white/20 text-white/90 hover:text-white px-4 py-2 rounded-lg transition-colors">Arrasyiid</a>
-            <a href="{{ route('virtual.graha-bunda') }}" class="bg-white/10 hover:bg-white/20 text-white/90 hover:text-white px-4 py-2 rounded-lg transition-colors">Graha Bunda</a>
-            <a href="{{ route('virtual.funland') }}" class="bg-white/10 hover:bg-white/20 text-white/90 hover:text-white px-4 py-2 rounded-lg transition-colors">Mikie Funland</a>
+            <a href="{{ route('virtual.bukit-holbung') }}" class=" bg-black/10 dark:bg-white/20 hover:bg-black/20 dark:hover:bg-white/20 dark:text-white/90 hover:text-black/80 dark:hover:text-white px-4 py-2 rounded-lg transition-colors">Bukit Holbung</a>
+            <a href="{{ route('virtual.air-terjun-piso') }}" class=" bg-black/10 dark:bg-white/10 hover:bg-black/20 dark:hover:bg-white/20 dark:text-white/90  hover:text-black/80 dark:hover:text-white px-4 py-2 rounded-lg transition-colors">Air Terjun Sipiso-piso</a>
+            <a href="{{ route('virtual.danau-toba') }}" class=" bg-black/10 dark:bg-white/10 hover:bg-black/20 dark:hover:bg-white/20 dark:text-white/90  hover:text-black/80 dark:hover:text-white px-4 py-2 rounded-lg transition-colors">Danau Toba</a>
+            <a href="{{ route('virtual.sibeabea') }}" class=" bg-black/20 dark:bg-white/10 hover:bg-black/20 dark:hover:bg-white/20 dark:text-white/90  hover:text-black/80 dark:hover:text-white px-4 py-2 rounded-lg transition-colors">Sibea-bea</a>
+            <a href="{{ route('virtual.taman-alam-lubini') }}" class=" bg-black/10 dark:bg-white/10 hover:bg-black/20 dark:hover:bg-white/20 dark:text-white/90  hover:text-black/80 dark:hover:text-white px-4 py-2 rounded-lg transition-colors">Taman Alam Lumbini</a>
+            <a href="{{ route('virtual.arrasyid') }}" class=" bg-black/10 dark:bg-white/10 hover:bg-black/20 dark:hover:bg-white/20 dark:text-white/90  hover:text-black/80 dark:hover:text-white px-4 py-2 rounded-lg transition-colors">Arrasyiid</a>
+            <a href="{{ route('virtual.graha-bunda') }}" class=" bg-black/10 dark:bg-white/10 hover:bg-black/20 dark:hover:bg-white/20 dark:text-white/90  hover:text-black/80 dark:hover:text-white px-4 py-2 rounded-lg transition-colors">Graha Bunda</a>
+            <a href="{{ route('virtual.funland') }}" class=" bg-black/10 dark:bg-white/10 hover:bg-black/20 dark:hover:bg-white/20 dark:text-white/90  hover:text-black/80 dark:hover:text-white px-4 py-2 rounded-lg transition-colors">Mikie Funland</a>
         </div>
     </nav>
-
 @endsection

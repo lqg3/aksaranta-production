@@ -6,7 +6,7 @@
 
 @endsection
 
-@section('body-class', 'font-title bg-bg-dark text-white')
+@section('body-class', 'font-title bg-app text-app')
 
 @section('content')
     <!-- Hero / Intro -->
@@ -17,7 +17,7 @@
             <h3 class="font-bold text-2xl sm:text-3xl md:text-4xl leading-snug tracking-wider">
                 Tim <span class="text-red-400">Aksaranta</span>
             </h3>
-            <p class="font-sans text-sm sm:text-base md:text-lg text-white/90">
+            <p class="font-sans text-sm sm:text-base md:text-lg dark:text-white/90">
                 Kami adalah empat mahasiswa dari <strong>Universitas Pendidikan Indonesia</strong> —
                 <strong>Kampus Daerah Cibiru</strong>. Aksaranta lahir dari ketertarikan kami terhadap aksara dan budaya
                 Batak, dengan misi membuatnya mudah diakses, dipelajari, dan dicintai oleh generasi masa kini.
@@ -43,7 +43,7 @@
                     <img src="https://aksara-batak.sgp1.cdn.digitaloceanspaces.com/persons/jovanka.webp"
                          alt="Jovanka" class="w-32 h-32 rounded-full object-cover mb-4 border-4 border-white/10" />
                     <h4 class="text-lg font-semibold">Jovanka</h4>
-                    <p class="font-sans text-sm mt-1 text-white/70">Rekayasa Perangkat Lunak<div class="p-1 bg-red-800 bg-opacity/80 rounded-2xl px-2 text-sm">Ketua Tim</div></p>
+                    <p class="font-sans text-sm mt-1 dark:text-white/70">Rekayasa Perangkat Lunak<div class="p-1 bg-red-800 bg-opacity/80 rounded-2xl px-2 text-sm text-white">Ketua Tim</div></p>
                 </div>
 
                 <!-- Steven -->
@@ -51,7 +51,7 @@
                     <img src="https://aksara-batak.sgp1.cdn.digitaloceanspaces.com/persons/stevenn.webp"
                          alt="Steven" class="w-32 h-32 rounded-full object-cover mb-4 border-4 border-white/10" />
                     <h4 class="text-lg font-semibold">Steven</h4>
-                    <p class="font-sans text-sm mt-1 text-white/70">Rekayasa Perangkat Lunak<div class="p-1 bg-red-800 bg-opacity/80 rounded-2xl px-2 text-sm">Front End Developer</div></p>
+                    <p class="font-sans text-sm mt-1 dark:text-white/70">Rekayasa Perangkat Lunak<div class="p-1 bg-red-800 bg-opacity/80 rounded-2xl px-2 text-sm text-white">Front End Developer</div></p>
                 </div>
 
                 <!-- Ryan -->
@@ -59,7 +59,7 @@
                     <img src="https://aksara-batak.sgp1.cdn.digitaloceanspaces.com/persons/ryan.webp"
                          alt="Ryan" class="w-32 h-32 rounded-full object-cover mb-4 border-4 border-white/10" />
                     <h4 class="text-lg font-semibold">Ryan</h4>
-                    <p class="font-sans text-sm mt-1 text-white/70">Mahasiswa UPI Kampus Daerah Cibiru<div class="p-1 bg-red-800 bg-opacity/80 rounded-2xl px-2 text-sm">Back End Developer</div></p>
+                    <p class="font-sans text-sm mt-1 dark:text-white/70">Mahasiswa UPI Kampus Daerah Cibiru<div class="p-1 bg-red-800 bg-opacity/80 rounded-2xl px-2 text-sm text-white">Back End Developer</div></p>
                 </div>
 
                 <!-- Sofia -->
@@ -67,7 +67,7 @@
                     <img src="https://aksara-batak.sgp1.cdn.digitaloceanspaces.com/persons/sofia.webp"
                          alt="Sofia" class="w-32 h-32 rounded-full object-cover mb-4 border-4 border-white/10" />
                     <h4 class="text-lg font-semibold">Sofia</h4>
-                    <p class="font-sans text-sm mt-1 text-white/70">Mahasiswa UPI KDCibiru<div class="p-1 bg-red-800 bg-opacity/80 rounded-2xl px-2 text-sm">Instructor & Research</div></p>
+                    <p class="font-sans text-sm mt-1 dark:text-white/70">Mahasiswa UPI KDCibiru<div class="p-1 bg-red-800 bg-opacity/80 rounded-2xl px-2 text-sm text-white">Instructor & Research</div></p>
                 </div>
             </div>
 

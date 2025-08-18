@@ -9,15 +9,15 @@
     courseId: @json($course_id),
     lessonId: @json($lesson_id),
     lessonPartId: @json($lesson_part_id)
-})" class="space-y-8 bg-bg-dark min-h-screen p-6 text-text-primary">
+})" class="space-y-8 bg-white dark:bg-bg-dark min-h-screen p-6 text-app">
 
     <template x-if="quizzes.length === 0">
-        <p class="text-center text-gray-400 text-lg">Tidak ada quiz untuk bagian ini.</p>
+        <p class="text-center text-gray-700 dark:text-gray-400 text-lg">Tidak ada quiz untuk bagian ini.</p>
     </template>
 
     <template x-if="quizzes.length > 0">
         <template x-for="(quiz, index) in quizzes" :key="index">
-            <div class="relative p-6 border border-bg-card shadow rounded-lg"
+            <div class="relative p-6 border shadow rounded-lg bg-white border-gray-200 dark:bg-transparent dark:border-bg-card"
                 :class="hasSubmitted
                     ?
                     (getQuizFeedback(index).correct ? 'border-green-700' : 'border-red-600') :
@@ -29,23 +29,19 @@
                         x-text="getQuizFeedback(index).correct ? 'Correct' : 'Wrong'"></div>
                 </template>
 
-                <h3 class="font-bold text-lg mb-4" x-text="quiz.quiz_content.question"></h3>
+                <h3 class="font-bold text-lg mb-4 text-black dark:text-white" x-text="quiz.quiz_content.question"></h3>
 
                 <!-- Multiple Choice -->
                 <template x-if="quiz.quiz_type === 'multiple_choice'">
                     <div>
                         <template x-for="(option, optIndex) in quiz.quiz_content.options" :key="optIndex">
                             <button @click="selectOption(index, optIndex)" type="button" :disabled="hasSubmitted"
-                                class="block w-full text-left px-4 py-2 mb-2 border rounded transition"
+                                class="block w-full text-left px-4 py-2 mb-2 border rounded transition bg-white text-gray-900 border-gray-300 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-red-500/30 focus:border-red-500/30 dark:bg-transparent dark:text-text-primary dark:border-white/20 dark:hover:bg-white/10 dark:focus:ring-red-800/50"
                                 :class="{
-                                    'bg-green-700 border-green-700 text-white': hasSubmitted && getQuizFeedback(index)
-                                        .correctAnswer === option.option_text,
-                                    'bg-red-700 border-red-500 text-white': hasSubmitted && quiz.selectedOption ===
-                                        optIndex && getQuizFeedback(index).correctAnswer !== option.option_text,
-                                    'border-2 border-red-800 bg-white/10 text-white': !hasSubmitted && quiz
-                                        .selectedOption === optIndex,
-                                    'border-white/20': !hasSubmitted && quiz.selectedOption !== optIndex,
-                                    'hover:bg-white/10': !hasSubmitted
+                                    'bg-green-100 border-green-600 text-green-900 dark:bg-green-700 dark:border-green-700 dark:text-white': hasSubmitted && getQuizFeedback(index).correctAnswer === option.option_text,
+                                    'bg-red-100 border-red-500 text-red-900 dark:bg-red-700 dark:border-red-500 dark:text-white': hasSubmitted && quiz.selectedOption === optIndex && getQuizFeedback(index).correctAnswer !== option.option_text,
+                                    'border-2 border-red-600 bg-red-50 text-red-900 dark:border-red-800 dark:bg-white/10 dark:text-white': !hasSubmitted && quiz.selectedOption === optIndex,
+                                    'border-gray-300 dark:border-white/20': !hasSubmitted && quiz.selectedOption !== optIndex
                                 }"
                                 x-text="option.option_text"></button>
                         </template>
@@ -56,15 +52,13 @@
                 <template x-if="quiz.quiz_type === 'drag_and_drop'">
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <!-- Left side: Available items -->
-                        <div class="space-y-3 border border-white/30 rounded-lg p-4 bg-white/5 min-h-[200px]"
+                        <div class="space-y-3 border rounded-lg p-4 min-h-[200px] bg-white border-gray-200 dark:bg-white/5 dark:border-white/30"
                             @dragover.prevent="!hasSubmitted"
                             @drop="hasSubmitted ? null : dropBackToLeft(index, $event)">
                             <template x-for="item in getAvailableItems(index)" :key="item">
                                 <div draggable="true"
                                     @dragstart="hasSubmitted ? $event.preventDefault() : dragItem(index, item, null)"
-                                    class="cursor-move rounded-lg bg-white/10 border border-white/10 text-text-primary px-4 py-3 shadow-sm select-none
-            hover:bg-white/50 hover:text-black transition ease-in-out duration-200 break-words whitespace-normal
-            text-[clamp(0.75rem,2vw,1rem)]"
+                                    class="cursor-move rounded-lg px-4 py-3 shadow-sm select-none transition ease-in-out duration-200 break-words whitespace-normal text-[clamp(0.75rem,2vw,1rem)] bg-gray-100 border border-gray-200 text-gray-900 hover:bg-gray-200 hover:text-black dark:bg-white/10 dark:border-white/10 dark:text-text-primary dark:hover:bg-white/50"
                                     x-text="item" title="Drag ke target jawaban"></div>
                             </template>
                         </div>
@@ -74,24 +68,18 @@
                             <template x-for="target in quiz.targetsShuffled" :key="target">
                                 <div @dragover.prevent="!hasSubmitted"
                                     @drop="hasSubmitted ? null : dropItem(index, target)"
-                                    class="flex items-center justify-center rounded-lg border-2 border-dashed text-text-primary select-none text-sm font-medium
-            transition-colors duration-200 cursor-pointer min-h-[48px] p-3 break-words whitespace-normal
-            text-[clamp(0.7rem,1.8vw,0.95rem)]"
+                                    class="flex items-center justify-center rounded-lg border-2 border-dashed select-none text-sm font-medium transition-colors duration-200 cursor-pointer min-h-[48px] p-3 break-words whitespace-normal text-[clamp(0.7rem,1.8vw,0.95rem)] bg-gray-50 border-gray-300 text-gray-900 dark:text-text-primary dark:border-white/10 dark:bg-white/5"
                                     :class="{
-                                        'border-white/20 bg-white/20': quiz.droppedPairs[target],
-                                        'border-white/10 bg-white/5': !quiz.droppedPairs[target],
-                                        'bg-white/30 border-white/40': getQuizFeedback(index).pairFeedback &&
-                                            getQuizFeedback(index).pairFeedback[target] === true,
-                                        'bg-red-700 border-red-500': getQuizFeedback(index).pairFeedback &&
-                                            getQuizFeedback(index).pairFeedback[target] === false
+                                        'bg-white border-gray-400 dark:bg-white/20 dark:border-white/20': quiz.droppedPairs[target],
+                                        'bg-gray-50 border-gray-300 dark:bg-white/5 dark:border-white/10': !quiz.droppedPairs[target],
+                                        'bg-green-100 border-green-400 dark:bg-white/30 dark:border-white/40': getQuizFeedback(index).pairFeedback && getQuizFeedback(index).pairFeedback[target] === true,
+                                        'bg-red-100 border-red-400 dark:bg-red-700 dark:border-red-500': getQuizFeedback(index).pairFeedback && getQuizFeedback(index).pairFeedback[target] === false
                                     }"
                                     :title="quiz.droppedPairs[target] ? 'Drag this item to reassign or remove' : 'Drop here'">
                                     <template x-if="quiz.droppedPairs[target]">
                                         <div draggable="true"
                                             @dragstart="hasSubmitted ? $event.preventDefault() : dragItem(index, quiz.droppedPairs[target], target)"
-                                            class="cursor-move select-none w-full flex items-center justify-center px-4 py-3 rounded-lg bg-white/10 border border-white/10 shadow-sm
-                hover:bg-white/50 hover:text-black transition ease-in-out duration-200 break-words whitespace-normal
-                text-[clamp(0.75rem,2vw,1rem)]"
+                                            class="cursor-move select-none w-full flex items-center justify-center px-4 py-3 rounded-lg shadow-sm transition ease-in-out duration-200 break-words whitespace-normal text-[clamp(0.75rem,2vw,1rem)] bg-gray-100 border border-gray-200 text-gray-900 hover:bg-gray-200 hover:text-black dark:bg-white/10 dark:border-white/10 dark:text-text-primary dark:hover:bg-white/50"
                                             x-text="quiz.droppedPairs[target]"
                                             title="Drag this item to another target or back to left side"></div>
                                     </template>
@@ -112,19 +100,17 @@
                         <input type="text" x-model="quiz.userAnswer" :disabled="hasSubmitted"
                             placeholder="Type your answer..."
                             :class="{
-                                'bg-green-700 border-green-500 text-white placeholder-gray-300': hasSubmitted &&
-                                    getQuizFeedback(index).correct,
-                                'bg-red-700 border-red-500 text-white placeholder-gray-300': hasSubmitted && !
-                                    getQuizFeedback(index).correct,
-                                'bg-white/10 border-white/20 text-text-primary placeholder-gray-500': !hasSubmitted
+                                'bg-green-100 border-green-500 text-green-900 placeholder-gray-700 dark:bg-green-700 dark:border-green-500 dark:text-white dark:placeholder-gray-300': hasSubmitted && getQuizFeedback(index).correct,
+                                'bg-red-100 border-red-500 text-red-900 placeholder-gray-700 dark:bg-red-700 dark:border-red-500 dark:text-white dark:placeholder-gray-300': hasSubmitted && !getQuizFeedback(index).correct,
+                                'bg-white border-gray-300 text-gray-900 placeholder-gray-500 dark:bg-white/10 dark:border-white/20 dark:text-text-primary dark:placeholder-gray-500': !hasSubmitted
                             }"
-                            class="rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-red-800 focus:border-red-800 transition duration-200" />
+                            class="rounded-md px-4 py-2 border focus:outline-none focus:ring-2 focus:ring-red-500/30 focus:border-red-500/30 transition duration-200" />
                     </div>
                 </template>
 
                 <!-- Show correct answer after submission -->
                 <template x-if="feedback.length > 0">
-                    <div class="mt-4 p-4 bg-white/10 rounded border border-white/10 text-sm text-text-secondary">
+                    <div class="mt-4 p-4 rounded border text-sm bg-gray-50 border-gray-200 text-gray-700 dark:bg-white/10 dark:border-white/10 dark:text-text-secondary">
                         <template x-if="quiz.quiz_type === 'multiple_choice'">
                             <div><strong>Jawaban yang benar:</strong> <span
                                     x-text="getQuizFeedback(index).correctAnswer"></span></div>
@@ -157,19 +143,19 @@
         <div class="mt-6 flex flex-col md:flex-row md:items-center md:justify-between space-y-4 md:space-y-0">
             <div class="flex space-x-4 justify-center md:justify-start">
                 <button @click="submitAll()" :disabled="hasSubmitted"
-                    class="px-6 py-3 bg-red-800 text-white rounded-lg hover:bg-red-700 transition disabled:opacity-50 disabled:cursor-not-allowed">
+                    class="px-6 py-3 bg-red-500 text-white rounded-lg hover:bg-red-600 transition disabled:opacity-50 disabled:cursor-not-allowed">
                     Cek
                 </button>
 
                 <button x-show="hasSubmitted" @click="resetQuiz()" type="button"
-                    class="px-6 py-3 bg-red-800 text-white rounded-lg hover:bg-red-700 transition">
+                    class="px-6 py-3 bg-red-500 text-white rounded-lg hover:bg-red-600 transition">
                     Coba lagi
                 </button>
             </div>
 
             <template x-if="hasSubmitted">
                 <div
-                    class="self-end md:self-auto bg-red-800 text-white px-4 py-2 rounded shadow-lg font-semibold text-lg max-w-max mx-auto md:mx-0">
+                    class="self-end md:self-auto bg-red-500 text-white px-4 py-2 rounded shadow-lg font-semibold text-lg max-w-max mx-auto md:mx-0">
                     Skor: <span x-text="calculateScore()"></span>%
                 </div>
             </template>

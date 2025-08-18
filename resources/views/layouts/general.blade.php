@@ -6,13 +6,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'Aksaranta')</title>
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <script>
+        (function() {
+            try {
+                var stored = localStorage.getItem('theme');
+                var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+                var useDark = stored ? (stored === 'dark') : prefersDark;
+                document.documentElement.classList.toggle('dark', useDark);
+                document.documentElement.classList.toggle('light', !useDark);
+            } catch (e) {}
+        })();
+    </script>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <!-- Global icons: Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     @yield('head')
 </head>
 
-<body class="@yield('body-class', 'bg-bg-dark')" 
+<body class="@yield('body-class', 'bg-app text-app font-sans')" 
       x-data="pageTransition()" 
       x-init="init(); window.currentPageTransition = $data">
 
@@ -27,7 +38,7 @@
          x-transition:leave="transition ease-in duration-600"
          x-transition:leave-start="opacity-100"
          x-transition:leave-end="opacity-0"
-         class="fixed inset-0 bg-bg-dark flex items-center justify-center z-50">
+         class="fixed inset-0 bg-app flex items-center justify-center z-50">
     </div>
 
     <!-- Main content wrapper - only content inside transitions -->
@@ -43,6 +54,9 @@
 
         @yield('content')
     </div>
+
+    <!-- Theme toast -->
+    <div id="theme-toast" class="fixed bottom-6 left-1/2 -translate-x-1/2 px-4 py-2 rounded-lg bg-black/80 text-white text-sm opacity-0 translate-y-2 transition-all duration-300 pointer-events-none z-[10000]"></div>
 
     <script>
         function pageTransition() {

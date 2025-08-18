@@ -8,7 +8,7 @@
             x-transition:leave-end="opacity-0" class="w-full" id="video">
 
             <template x-if="!videoLoaded">
-                <div class="w-full aspect-video flex items-center justify-center bg-bg-card bg-opacity-20 rounded-lg">
+                <div class="w-full aspect-video flex items-center justify-center bg-black/5 dark:bg-bg-card dark:bg-opacity-20 rounded-lg">
                 </div>
             </template>
 
@@ -27,13 +27,13 @@
             x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100"
             x-transition:leave="transition ease-in duration-600" x-transition:leave-start="opacity-100"
             x-transition:leave-end="opacity-0" id="notes">
-            <h1 class="text-2xl font-bold">{{ $lessonPart->part_title }}</h1>
+            <h1 class="text-2xl font-bold text-black dark:text-white">{{ $lessonPart->part_title }}</h1>
             @if (!empty($lessonPart->part_content))
-                <div class="tinymce-content">
+                <div class="tinymce-content text-black dark:text-white">
                     {!! $lessonPart->part_content !!}
                 </div>
             @else
-                <p>Tidak ada catatan untuk bagian ini.</p>
+                <p class="text-gray-700 dark:text-gray-300">Tidak ada catatan untuk bagian ini.</p>
             @endif
         </div>
 
@@ -42,11 +42,11 @@
             x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100"
             x-transition:leave="transition ease-in duration-600" x-transition:leave-start="opacity-100"
             x-transition:leave-end="opacity-0" id="quiz">
-            <h1 class="text-2xl font-bold">Quiz</h1>
+            <h1 class="text-2xl font-bold text-black dark:text-white">Quiz</h1>
             @if (!empty($lessonPart->quiz_content))
                 <x-quizzes :quizzes="$lessonPart->quiz_content" :course_id="$course->id" :lesson_id="$lesson->id" :lesson_part_id="$lessonPart->id" />
             @else
-                <p>Akan datang...</p>
+                <p class="text-gray-700 dark:text-gray-300">Akan datang...</p>
             @endif
         </div>
     </div>

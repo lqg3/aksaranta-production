@@ -280,7 +280,7 @@
         </script>
 @endsection
 
-@section('body-class', 'bg-bg-dark text-white font-poppins')
+@section('body-class', 'bg-app text-app font-poppins')
 
 @section('content')
         <!-- Hero Section -->
@@ -297,7 +297,7 @@
         <section class="max-w-[1440px] mx-auto px-4 mt-8">
             <div id="funFactContainer" class="border border-white/10 bg-white/5 rounded-2xl p-5 flex items-start gap-3">
                 <span class="font-title text-xs text-red-400 font-semibold uppercase tracking-wide shrink-0 mt-1">Fun Fact</span>
-                <p id="funFactText" role="status" aria-live="polite" class="text-white/80 transition-all duration-500 ease-out"></p>
+                <p id="funFactText" role="status" aria-live="polite" class="dark:text-white/80 transition-all duration-500 ease-out"></p>
             </div>
         </section>
 
@@ -311,7 +311,7 @@
                 <div class="flex md:w-1/2 flex-col shadow-sm overflow-hidden">
                     <h3 class="text-2xl">Aksara Latin</h3>
                     <textarea id="inputLatin" oninput="autoResize(this); debounceTransliterate()"
-                        class="grow min-h-[250px] max-h-[1000px] overflow-hidden resize-none border-t border-r border-l p-6 border-[#3C3C3C] rounded-t-3xl focus:outline-0 bg-[#262626] text-white placeholder:text-white/60 caret-white" placeholder="Masukkan teks..."></textarea>
+                        class="grow min-h-[250px] max-h-[1000px] overflow-hidden resize-none border-t border-r border-l p-6 border-[#3C3C3C] rounded-t-3xl focus:outline-0 dark:bg-[#262626] dark:text-white text-black/60 placeholder:text-black/30 dark:placeholder:text-white/60 dark:caret-white" placeholder="Masukkan teks..."></textarea>
                     <div
                         class="flex justify-between pt-2 px-4 pb-4 border-l border-r border-b rounded-b-3xl border-[#3C3C3C]">
                         <button onclick="startDictationTo('#inputLatin')" class="cursor-pointer" id="dictation-btn">
@@ -331,10 +331,10 @@
                 <div class="flex md:w-1/2 flex-col shadow-sm overflow-hidden">
                     <h3 class="text-2xl">Aksara Batak</h3>
                     <div id="outputBatak"
-                        class="min-h-[250px] border-t border-r border-l p-6 border-[#262626] bg-[#262626] rounded-t-3xl break-words">
+                        class="min-h-[250px] border-t border-r border-l p-6 border-[#262626] dark:bg-[#262626] rounded-t-3xl break-words">
                     </div>
                     <div
-                        class="flex justify-end gap-5 p-4 pt-2 border-l border-r border-b border-[#3C3C3C] bg-[#262626] rounded-b-3xl">
+                        class="flex justify-end gap-5 p-4 pt-2 border-l border-r border-b border-[#3C3C3C] dark:bg-[#262626] rounded-b-3xl">
                         <button onclick="speakTextFromInput('#inputLatin')" class="cursor-pointer">
                             <i class="fa-solid fa-volume-high text-[#7D7D7D] text-xl"></i>
                         </button>

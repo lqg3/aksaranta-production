@@ -12,7 +12,7 @@
         @yield('head-scripts')
     </head>
 
-    <body class="flex bg-[#1b1b1b] text-white font-opensans">
+    <body class="flex bg-app text-app font-opensans">
         @include('components.admin-sidebar')
         
         <main class="sm:ml-72 mt-8 sm:mt-0 p-4 w-full">
