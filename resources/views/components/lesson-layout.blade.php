@@ -12,20 +12,12 @@
             (function() {
                 try {
                     var stored = localStorage.getItem('theme');
+                    var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+                    var useDark = stored ? (stored === 'dark') : prefersDark;
                     var root = document.documentElement;
-                    if (stored === 'light') {
-                        root.classList.remove('dark');
-                    } else if (stored === 'dark') {
-                        root.classList.add('dark');
-                    } else {
-                        // First visit default: dark mode
-                        root.classList.add('dark');
-                        localStorage.setItem('theme', 'dark');
-                    }
-                } catch (e) {
-                    // Fail-safe: ensure dark by default
-                    document.documentElement.classList.add('dark');
-                }
+                    root.classList.toggle('dark', useDark);
+                    root.classList.toggle('light', !useDark);
+                } catch (e) {}
             })();
         </script>
         @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -33,7 +25,7 @@
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     </head>
 
-    <body class="bg-white dark:bg-bg-dark text-app flex flex-col justify-center items-center" x-data="lessonPage()"
+    <body class="bg-app text-app flex flex-col justify-center items-center" x-data="lessonPage()"
         x-init="init()">
 
         <!-- Navigation - outside transition wrapper so it stays static -->
@@ -56,23 +48,23 @@
                 <!-- Breadcrumbs -->
                 <div class="flex md:flex-col sm:flex-col flex-col lg:flex-row gap-4 lg:justify-between align-middle">
                     <ul class="dark:text-white/60 flex gap-2">
-                        <li class="text-black hover:dark:text-white/80 cursor-pointer transition-all ease-in-out-100 duration-100">
+                        <li class="text-black/40 hover:text-black/60 dark:text-white/70 hover:dark:text-white/80 cursor-pointer transition-all ease-in-out-100 duration-100">
                             <a href="#" @click.prevent="navigateTo('/learn')">Learn</a>
                         </li>
-                        <li class="text-black !dark:text-white/40">></li>
-                        <li class="text-black hover:dark:text-white/80 cursor-pointer transition-all ease-in-out-100 duration-100">
+                        <li class="text-black/40 hover:text-black/60 dark:text-white/70 !dark:text-white/40">></li>
+                        <li class="text-black/40 hover:text-black/60 dark:text-white/70 hover:dark:text-white/80 cursor-pointer transition-all ease-in-out-100 duration-100">
                             <a href="#"
                                 @click.prevent="navigateTo('{{ route('learn.course', ['slug' => $course->slug]) }}')">
                                 {{ $course->course_name }} </a>
                         </li>
-                        <li class="text-black !dark:text-white/40">></li>
-                        <li class="text-black hover:dark:text-white/80 cursor-pointer transition-all ease-in-out-100 duration-100">
+                        <li class="text-black/40 hover:text-black/60 dark:text-white/70 !dark:text-white/40">></li>
+                        <li class="text-black/40 hover:text-black/60 dark:text-white/70 hover:dark:text-white/80 cursor-pointer transition-all ease-in-out-100 duration-100">
                             <a href="#"
                                 @click.prevent="navigateTo('{{ route('learn.course', ['slug' => $course->slug]) }}')">
                                 {{ $lessonName }} </a>
                         </li>
-                        <li class="text-black !dark:text-white/40">></li>
-                        <li class="text-black hover:dark:text-white/80 cursor-pointer transition-all ease-in-out-100 duration-100">Video
+                        <li class="text-black/40 hover:text-black/60 dark:text-white/70 !dark:text-white/40">></li>
+                        <li class="text-black/40 hover:text-black/60 dark:text-white/70 hover:dark:text-white/80 cursor-pointer transition-all ease-in-out-100 duration-100">Video
                         </li>
                     </ul>
                 </div>
@@ -85,14 +77,14 @@
                 <!-- Lesson Progress Tabs -->
                 <div class="bg-white/5 w-100 rounded-lg">
                     <ul class="flex text-center">
-                        <li class="text-black dark:text-white cursor-pointer bg-black/10 hover:bg-black/10 dark:bg-white/5 dark:hover:bg-white/10 transition-all duration-600 flex-1 py-3 text-center border border-white/20 rounded-l-lg"
-                            :class="{ 'bg-black/20 dark:bg-white/10': activeTab === 'video' }"
+                        <li class="text-black dark:text-white cursor-pointer bg-black/10 hover:bg-black/20 dark:bg-white/5 dark:hover:bg-white/10 transition-all duration-600 flex-1 py-3 text-center border border-white/20 rounded-l-lg"
+                            :class="{ 'bg-black/20 dark:bg-black/30': activeTab === 'video' }"
                             @click="switchTab('video')" id="video-button">Video</li>
-                        <li class="text-black dark:text-white cursor-pointer bg-black/10 hover:bg-black/10 dark:bg-white/5 dark:hover:bg-white/10 transition-all duration-600 flex-1 py-3 text-center border border-white/20"
-                            :class="{ 'bg-black/20 dark:bg-white/10': activeTab === 'notes' }"
+                        <li class="text-black dark:text-white cursor-pointer bg-black/10 hover:bg-black/20 dark:bg-white/5 dark:hover:bg-white/10 transition-all duration-600 flex-1 py-3 text-center border border-white/20"
+                            :class="{ 'bg-black/20 dark:bg-black/30': activeTab === 'notes' }"
                             @click="switchTab('notes')" id="notes-button">Notes</li>
-                        <li class="text-black dark:text-white cursor-pointer bg-black/10 hover:bg-black/10 dark:bg-white/5 dark:hover:bg-white/10 transition-all duration-600 flex-1 py-3 text-center border border-white/20 rounded-r-lg"
-                            :class="{ 'bg-black/20 dark:bg-white/10': activeTab === 'quiz' }" @click="switchTab('quiz')"
+                        <li class="text-black dark:text-white cursor-pointer bg-black/10 hover:bg-black/20 dark:bg-white/5 dark:hover:bg-white/10 transition-all duration-600 flex-1 py-3 text-center border border-white/20 rounded-r-lg"
+                            :class="{ 'bg-black/20 dark:bg-black/30': activeTab === 'quiz' }" @click="switchTab('quiz')"
                             id="quiz-button">Quiz</li>
                     </ul>
                 </div>
