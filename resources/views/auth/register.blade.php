@@ -5,14 +5,14 @@
         <!-- Name -->
         <div>
             <x-input-label for="name" :value="__('Username')" />
-            <x-text-input id="name" class="block mt-1 w-full focus:!ring-red-800 focus:!border-red-800 dark:focus:!ring-red-800 dark:focus:!border-red-800" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
+            <x-text-input id="name" class="block mt-1 w-full focus:!ring-red-800 focus:!border-red-800 dark:focus:!ring-red-800 dark:focus:!border-red-800" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" placeholder="hotman"/>
             <x-input-error :messages="$errors->get('name')" class="mt-2" />
         </div>
 
         <!-- Email Address -->
         <div class="mt-4">
             <x-input-label for="email" :value="__('Alamat Email')" />
-            <x-text-input id="email" class="block mt-1 w-full focus:!ring-red-800 focus:!border-red-800 dark:focus:!ring-red-800 dark:focus:!border-red-800" type="email" name="email" :value="old('email')" required autocomplete="username" />
+            <x-text-input id="email" class="block mt-1 w-full focus:!ring-red-800 focus:!border-red-800 dark:focus:!ring-red-800 dark:focus:!border-red-800" type="email" name="email" :value="old('email')" required autocomplete="username" placeholder="hotman@aksaranta.id"/>
             <x-input-error :messages="$errors->get('email')" class="mt-2" />
         </div>
 
@@ -23,7 +23,8 @@
             <x-text-input id="password" class="block mt-1 w-full focus:!ring-red-800 focus:!border-red-800 dark:focus:!ring-red-800 dark:focus:!border-red-800"
                             type="password"
                             name="password"
-                            required autocomplete="new-password" />
+                            required autocomplete="new-password"
+                            placeholder="Password, minimal 8 karakter" />
 
             <x-input-error :messages="$errors->get('password')" class="mt-2" />
         </div>
@@ -34,13 +35,15 @@
 
             <x-text-input id="password_confirmation" class="block mt-1 w-full focus:!ring-red-800 focus:!border-red-800 dark:focus:!ring-red-800 dark:focus:!border-red-800"
                             type="password"
-                            name="password_confirmation" required autocomplete="new-password" />
+                            name="password_confirmation" 
+                            required autocomplete="new-password" 
+                            placeholder="Konfirmasi password"/>
 
             <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
         </div>
 
         <div class="flex items-center justify-end mt-4">
-            <a class="underline text-sm text-red-200 hover:text-white rounded-md focus:outline-none focus:ring-2 focus:!ring-red-800 focus:ring-offset-2 dark:focus:ring-offset-gray-800" href="{{ route('login') }}">
+            <a class="underline text-sm text-red-300 hover:text-red-500 transition-colors duration-300 dark:hover:text-white rounded-md focus:outline-none focus:ring-2 focus:!ring-red-800 focus:ring-offset-2 dark:focus:ring-offset-gray-800" href="{{ route('login') }}">
                 {{ __('Sudah daftar?') }}
             </a>
 

@@ -8,7 +8,7 @@
         <!-- Email Address -->
         <div>
             <x-input-label for="email" :value="__('Alamat Email')" />
-            <x-text-input id="email" class="block mt-1 w-full focus:!ring-red-800 focus:!border-red-800 dark:focus:!ring-red-800 dark:focus:!border-red-800" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
+            <x-text-input id="email" class="block mt-1 w-full focus:!ring-red-800 focus:!border-red-800 dark:focus:!ring-red-800 dark:focus:!border-red-800" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" placeholder="verycool@aksaranta.id"/>
             <x-input-error :messages="$errors->get('email')" class="mt-2" />
         </div>
 
@@ -19,7 +19,8 @@
             <x-text-input id="password" class="block mt-1 w-full focus:!ring-red-800 focus:!border-red-800 dark:focus:!ring-red-800 dark:focus:!border-red-800"
                             type="password"
                             name="password"
-                            required autocomplete="current-password" />
+                            required autocomplete="current-password"
+                            placeholder="Masukkan password (8 karakter)" />
 
             <x-input-error :messages="$errors->get('password')" class="mt-2" />
         </div>
@@ -27,8 +28,8 @@
         <!-- Remember Me -->
         <div class="block mt-4">
             <label for="remember_me" class="inline-flex items-center">
-                <input id="remember_me" type="checkbox" class="rounded dark:bg-red-800 !bg-opacity-30 text-red-600 shadow-sm focus:ring-red-500 dark:focus:ring-red-600 dark:focus:ring-offset-gray-800" name="remember">
-                <span class="ms-2 text-sm text-white">{{ __('Ingat saya') }}</span>
+                <input id="remember_me" type="checkbox" class="rounded dark:bg-white/5 !bg-opacity-30 text-red-600 shadow-sm focus:ring-red-500 dark:focus:ring-red-600 dark:focus:ring-offset-gray-800" name="remember">
+                <span class="ms-2 text-sm dark:text-white">{{ __('Ingat saya') }}</span>
             </label>
         </div>
 
@@ -40,7 +41,7 @@
             @endif
 
             <a href="{{ route('register') }}"
-               class="ms-3 inline-flex items-center px-4 py-2 bg-transparent border border-red-800 rounded-md font-semibold text-xs text-red-200 uppercase tracking-widest shadow-sm hover:bg-red-800/10 focus:outline-none focus:ring-2 focus:!ring-red-800 focus:ring-offset-2 dark:focus:ring-offset-gray-800 disabled:opacity-25 transition ease-in-out duration-150">
+               class="ms-3 inline-flex items-center px-4 py-2 bg-transparent border border-red-800 rounded-md font-semibold text-xs hover:text-red-500 text-red-300 uppercase tracking-widest shadow-sm hover:bg-red-800/10 focus:outline-none focus:ring-2 focus:!ring-red-800 focus:ring-offset-2 dark:focus:ring-offset-gray-800 disabled:opacity-25 transition ease-in-out duration-150">
                 {{ __('Daftar akun') }}
             </a>
 

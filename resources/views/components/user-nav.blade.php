@@ -117,24 +117,15 @@
     <!-- Right Nav -->
     <div class="flex items-center dark:text-white text-black h-full">
         <p class="dark:text-white text-black text-opacity-50 font-title border-r border-black/20 dark:border-white pr-4 mr-4"></p>
-        <!-- Theme toggle with SVG icons -->
-        <div x-data="{ toast:null, toastTimer:null, init(){ this.toast = document.getElementById('theme-toast'); }, toggle(){ const html = document.documentElement; const isDark = html.classList.contains('dark'); html.classList.toggle('dark', !isDark); html.classList.toggle('light', isDark); try { localStorage.setItem('theme', !isDark ? 'dark' : 'light'); } catch(e) {} try { const toast = this.toast || document.getElementById('theme-toast'); if (toast){ const on = !isDark; toast.textContent = on ? 'Dark mode dinyalakan' : 'Dark mode dimatikan'; // show
-                toast.classList.remove('opacity-0','translate-y-2','pointer-events-none');
-                toast.classList.add('opacity-100');
-                // schedule hide
-                if (this.toastTimer) clearTimeout(this.toastTimer);
-                this.toastTimer = setTimeout(()=>{
-                    toast.classList.remove('opacity-100');
-                    toast.classList.add('opacity-0','translate-y-2','pointer-events-none');
-                }, 2000);
-            } } catch(e) {} } }" class="mr-4">
+        <!-- Theme toggle with SVG icons (hidden on home/welcome) -->
+        @unless ($navActive['home'])
+        <div x-data="{ toast:null, toastTimer:null, init(){ this.toast = document.getElementById('theme-toast'); }, toggle(){ const html = document.documentElement; const isDark = html.classList.contains('dark'); html.classList.toggle('dark', !isDark); html.classList.toggle('light', isDark); try { localStorage.setItem('theme', !isDark ? 'dark' : 'light'); } catch(e) {} try { const toast = this.toast || document.getElementById('theme-toast'); if (toast){ const on = !isDark; toast.textContent = on ? 'Dark mode dinyalakan' : 'Dark mode dimatikan'; toast.classList.remove('opacity-0','translate-y-2','pointer-events-none'); toast.classList.add('opacity-100'); if (this.toastTimer) clearTimeout(this.toastTimer); this.toastTimer = setTimeout(()=>{ toast.classList.remove('opacity-100'); toast.classList.add('opacity-0','translate-y-2','pointer-events-none'); }, 2000); } } catch(e) {} } }" class="mr-4">
             <button @click="toggle()" class="px-3 py-1 rounded-lg hover:bg-black/10 dark:hover:bg-white/10 focus:outline-none" aria-label="Toggle theme">
-                <!-- Sun icon for light mode target -->
                 <svg class="w-5 h-5 inline dark:hidden" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path d="M10 3a1 1 0 011 1v1a1 1 0 11-2 0V4a1 1 0 011-1zm0 11a4 4 0 100-8 4 4 0 000 8zm7-4a1 1 0 01-1 1h-1a1 1 0 110-2h1a1 1 0 011 1zM5 10a1 1 0 01-1 1H3a1 1 0 110-2h1a1 1 0 011 1zm9.071 4.071a1 1 0 010 1.414l-.707.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM6.05 5.636a1 1 0 010 1.414L5.343 7.757a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zm9.9-1.414a1 1 0 010 1.414l-.707.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM6.05 14.364l-.707.707A1 1 0 113.93 13.657l.707-.707a1 1 0 111.414 1.414z"/></svg>
-                <!-- Moon icon for dark mode target -->
                 <svg class="w-5 h-5 hidden dark:inline" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path d="M17.293 13.293A8 8 0 016.707 2.707a8 8 0 1010.586 10.586z"/></svg>
             </button>
         </div>
+        @endunless
         @if (auth()->check())
             <span class="text-opacity-80 mr-4 font-title dark:text-white text-black">{{ auth()->user()->name }}</span>
             <form method="POST" action="{{ route('logout') }}" class="hidden md:inline">
@@ -142,6 +133,10 @@
                 <button type="submit" class="text-red-500 hover:text-red-700 transition-colors duration-300">Logout</button>
             </form>
         @endif
+        @unless (auth()->check())
+            <a href="{{ route('login') }}" class="hidden md:inline font-title dark:text-white text-black hover:text-opacity-80 transition-colors duration-300"
+               @click.prevent="navigateTo('{{ route('login') }}')">Login</a>
+        @endunless
     </div>
 </nav>
 
